@@ -231,19 +231,19 @@
         var raw = rangeInput.value;
         if(!raw.trim()){
           preview.textContent = '';
-          if(goBtn){ goBtn.disabled = true; }
+          if(goBtn){ goBtn.disabled = true; goBtn.setAttribute('aria-busy', 'true'); }
           return;
         }
         var r = parseRanges(raw, pageCount);
         if(r.error){
           preview.textContent = '';
           setStatus(r.error, true);
-          if(goBtn){ goBtn.disabled = true; }
+          if(goBtn){ goBtn.disabled = true; goBtn.setAttribute('aria-busy', 'true'); }
         } else {
           setStatus('');
           var shown = r.pages.slice(0, 20).join(', ') + (r.pages.length > 20 ? ', …' : '');
           preview.textContent = 'Selected pages: ' + shown + ' (' + r.pages.length + ' page' + (r.pages.length === 1 ? '' : 's') + ')';
-          if(goBtn){ goBtn.disabled = false; }
+          if(goBtn){ goBtn.disabled = false; goBtn.removeAttribute('aria-busy'); }
         }
       }
 
@@ -333,7 +333,7 @@
           }
           setStatus('Extracting ' + r.pages.length + ' page' + (r.pages.length === 1 ? '' : 's') + '…');
           pShow({ title: 'Splitting PDF…', stage: 'Extracting ' + r.pages.length + ' page' + (r.pages.length === 1 ? '' : 's') + '…', percent: 50 });
-          goBtn.disabled = true;
+          goBtn.disabled = true; goBtn.setAttribute('aria-busy', 'true');
           if(progress){ progress.hidden = false; progress.value = 50; }
           (async function(){
             try{
@@ -354,7 +354,7 @@
               setStatus('Could not split the PDF: ' + (err && err.message ? err.message : 'unknown error'), true);
             }
             pHide();
-            goBtn.disabled = false;
+            goBtn.disabled = false; goBtn.removeAttribute('aria-busy');
             if(progress){ progress.hidden = true; }
           })();
         });

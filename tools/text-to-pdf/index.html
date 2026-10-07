@@ -198,7 +198,7 @@ var LOGIC={wrapLines:(text, maxChars) => {
         }
         var title = titleEl && titleEl.value.trim() ? titleEl.value.trim() : 'Document';
         pShow({ title: 'Creating PDF…', stage: 'Building PDF…' });
-        go.disabled = true;
+        go.disabled = true; go.setAttribute('aria-busy', 'true');
         /* Deferred so the overlay paints before the synchronous PDF build. */
         setTimeout(function(){
         pUpd(40, 'Laying out pages…');
@@ -235,15 +235,15 @@ var LOGIC={wrapLines:(text, maxChars) => {
             setStatus('<p>PDF generated and downloaded.</p>');
             pSum(out, '<strong>PDF created</strong> — ' + pageCount + ' page' + (pageCount === 1 ? '' : 's') + ' • ' + fmtSize(u8.length));
             pHide();
-            go.disabled = false;
+            go.disabled = false; go.removeAttribute('aria-busy');
           }).catch(function(){
             pHide();
-            go.disabled = false;
+            go.disabled = false; go.removeAttribute('aria-busy');
             setStatus('<p class="error">Could not build the PDF: the text could not be rendered or the download was blocked. Try shorter text or reload the page.</p>');
           });
         } catch (e) {
           pHide();
-          go.disabled = false;
+          go.disabled = false; go.removeAttribute('aria-busy');
           setStatus('<p class="error">Could not build the PDF: the text could not be rendered or the download was blocked. Try shorter text or reload the page.</p>');
         }
         }, 40);
