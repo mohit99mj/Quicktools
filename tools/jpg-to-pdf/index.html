@@ -6,11 +6,11 @@
 <title>JPG to PDF — Convert Images to PDF Free</title>
 <meta name="description" content="Free JPG to PDF converter: turn JPG and PNG images into a PDF online. Reorder pages, choose fit-to-image or A4 sizing — files never leave your device.">
 <meta name="keywords" content="jpg to pdf, convert jpg to pdf, image to pdf, png to pdf, photos to pdf">
-<link rel="canonical" href="https://www.example.com/tools/jpg-to-pdf/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/jpg-to-pdf/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="JPG to PDF — Convert Images to PDF Free">
 <meta property="og:description" content="Free JPG to PDF converter: turn JPG and PNG images into a PDF online. Reorder pages, choose fit-to-image or A4 sizing — files never leave your device.">
-<meta property="og:url" content="https://www.example.com/tools/jpg-to-pdf/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/jpg-to-pdf/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JPG to PDF — Convert Images to PDF Free">
 <meta name="twitter:description" content="Free JPG to PDF converter: turn JPG and PNG images into a PDF online. Reorder pages, choose fit-to-image or A4 sizing — files never leave your device.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-jpg-to-pdf .file-list{list-style:none;margin:1rem 0;padding:0;display:grid;gap:.5rem}
 .tool-jpg-to-pdf .file-row{display:flex;align-items:center;gap:.75rem;padding:.6rem .8rem;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface)}
@@ -120,9 +122,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JPG to PDF","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/jpg-to-pdf/","description":"Free JPG to PDF converter: turn JPG and PNG images into a PDF online. Reorder pages, choose fit-to-image or A4 sizing — files never leave your device.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JPG to PDF","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/jpg-to-pdf/","description":"Free JPG to PDF converter: turn JPG and PNG images into a PDF online. Reorder pages, choose fit-to-image or A4 sizing — files never leave your device.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will my images lose quality when converted to PDF?","acceptedAnswer":{"@type":"Answer","text":"No. JPG and PNG images are embedded directly without re-encoding, so the conversion itself does not reduce image quality."}},{"@type":"Question","name":"What is the difference between Fit image and A4 page sizes?","acceptedAnswer":{"@type":"Answer","text":"Fit image makes each PDF page match the dimensions of its photo. A4 creates standard A4 pages and scales each image to fit inside, centered on the page."}},{"@type":"Question","name":"Which image formats are supported?","acceptedAnswer":{"@type":"Answer","text":"JPG/JPEG and PNG. Other formats such as GIF or WebP are skipped with a notice — convert them to JPG or PNG first."}},{"@type":"Question","name":"Are my photos uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Your files never leave your device — the entire conversion runs locally in your browser."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://www.example.com/#cat-pdf-tools"},{"@type":"ListItem","position":3,"name":"JPG to PDF","item":"https://www.example.com/tools/jpg-to-pdf/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-pdf-tools"},{"@type":"ListItem","position":3,"name":"JPG to PDF","item":"https://mohit99mj.github.io/Quicktools/tools/jpg-to-pdf/"}]}</script>
 <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
 <script>
 
@@ -135,6 +139,11 @@
         el.textContent = msg || '';
         el.className = isError ? 'result error' : 'result';
       }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       function fmtSize(bytes){
         if(bytes < 1024){ return bytes + ' B'; }
         var kb = bytes / 1024;
@@ -271,9 +280,12 @@
         createBtn.addEventListener('click', function(){
           if(!files.length){ return; }
           setStatus('Loading PDF engine…');
+          pShow({ title: 'Creating PDF…', stage: 'Loading PDF engine…' });
           waitForLibs(['PDFLib'], function(){
             createBtn.disabled = true;
             if(progress){ progress.hidden = false; progress.value = 0; }
+            var inTotal = files.reduce(function(s, it){ return s + it.file.size; }, 0);
+            pShow({ title: 'Creating PDF…', stage: 'Processing image 1 of ' + files.length + '…', percent: 0 });
             var mode = 'fit';
             var sizeSel = $('jpg-size');
             if(sizeSel){ mode = sizeSel.value; }
@@ -283,6 +295,7 @@
                 var pdf = await PDFLib.PDFDocument.create();
                 for(var i = 0; i < total; i++){
                   setStatus('Processing image ' + (i + 1) + ' of ' + total + '…');
+                  pUpd(Math.round(((i + 1) / total) * 90), 'Processing image ' + (i + 1) + ' of ' + total + '…');
                   var buf = await files[i].file.arrayBuffer();
                   var bytes = new Uint8Array(buf);
                   var img;
@@ -308,16 +321,23 @@
                   }
                   if(progress){ progress.value = Math.round(((i + 1) / total) * 100); }
                 }
+                pUpd(95, 'Building download…');
                 var out = await pdf.save();
+                pUpd(100, 'Building download…');
                 downloadBlob(new Blob([out], { type: 'application/pdf' }), 'images.pdf');
+                pSum($('jpg-status'), '<strong>PDF created</strong> — ' + total + ' page' + (total === 1 ? '' : 's') + ' • ' + fmtSize(inTotal) + ' → ' + fmtSize(out.length));
+                pHide();
                 setStatus('Done — images.pdf downloaded (' + total + ' page' + (total === 1 ? '' : 's') + ').');
               } catch(err){
+                pHide();
                 setStatus('Could not create the PDF: ' + (err && err.message ? err.message : 'unknown error'), true);
               }
+              pHide();
               createBtn.disabled = false;
               if(progress){ progress.hidden = true; }
             })();
           }, function(){
+            pHide();
             setStatus('The PDF library failed to load. Check your connection and reload the page.', true);
           });
         });
