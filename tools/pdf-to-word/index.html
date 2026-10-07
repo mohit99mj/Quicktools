@@ -37,7 +37,7 @@
 <a href="../../index.html#all-tools">All Tools</a>
 <a href="../../index.html#categories">Categories</a>
 </nav>
-<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
 <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
 </div>
 <nav class="nav-panel" data-nav-panel aria-label="Mobile">
@@ -128,6 +128,11 @@
 
     (function(){
       'use strict';
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       var WORKER = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.worker.min.js';
       function $(id){ return document.getElementById(id); }
       function setStatus(msg, isError){
@@ -184,6 +189,7 @@
 
       async function buildDocx(blocks, fileName, doneMsg){
         setStatus('Building Word document…');
+        pUpd(90, 'Building Word document…');
         if(progress){ progress.value = 90; }
         var paras = blocks.map(function(b){
           if(b === '\f'){
@@ -212,6 +218,9 @@
         var blob = await zip.generateAsync({ type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
         downloadBlob(blob, baseName(fileName) + '.docx');
         if(progress){ progress.value = 100; }
+        pUpd(100, 'Building download…');
+        pSum($('wtw-status'), '<strong>Word document ready</strong> — ' + fmtSize(blob.size));
+        pHide();
         setStatus(doneMsg);
       }
 
@@ -270,12 +279,14 @@
         goBtn.addEventListener('click', function(){
           if(!pdfFile){ return; }
           setStatus('Loading libraries…');
+          pShow({ title: 'Extracting PDF to Word…', stage: 'Loading libraries…' });
           waitForLibs(['pdfjsLib', 'JSZip'], function(){
             goBtn.disabled = true;
             if(ocrWrap){ ocrWrap.hidden = true; }
             if(progress){ progress.hidden = false; progress.value = 0; }
             pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER;
             var fileName = pdfFile.name;
+            pShow({ title: 'Extracting PDF to Word…', stage: 'Reading pages…', percent: 5 });
             (async function(){
               try{
                 var buf = await pdfFile.arrayBuffer();
@@ -286,6 +297,7 @@
                 var blocks = [];
                 for(var p = 1; p <= total; p++){
                   setStatus('Reading text from page ' + p + ' of ' + total + '…');
+                  pUpd(Math.round((p / total) * 70), 'Reading text from page ' + p + ' of ' + total + '…');
                   var page = await pdf.getPage(p);
                   var tc = await page.getTextContent();
                   var rows = {};
@@ -306,6 +318,7 @@
                 }
                 var hasText = blocks.some(function(b){ return b !== '\f'; });
                 if(!hasText){
+                  pHide();
                   setStatus('No extractable text was found in this PDF — it looks like a scanned document.', true);
                   if(ocrWrap){ ocrWrap.hidden = false; }
                   goBtn.disabled = false;
@@ -314,12 +327,15 @@
                 }
                 await buildDocx(blocks, fileName, 'Done — "' + baseName(fileName) + '.docx" downloaded with text from ' + total + ' page' + (total === 1 ? '' : 's') + '.');
               } catch(err){
+                pHide();
                 setStatus('Could not read this PDF: ' + (err && err.message ? err.message : 'the file may be corrupted or password-protected.'), true);
               }
+              pHide();
               goBtn.disabled = false;
               if(progress){ progress.hidden = true; }
             })();
           }, function(){
+            pHide();
             setStatus('The required libraries failed to load. Check your connection and reload the page.', true);
           });
         });
@@ -330,14 +346,14 @@
           ocrBtn.disabled = true;
           if(ocrWrap){ ocrWrap.hidden = true; }
           setStatus('Loading OCR engine (one-time download, about 15 MB)…');
-          if(window.QTProgress){ QTProgress.show({ title: 'Scanning PDF with OCR…', stage: 'Loading OCR engine…' }); }
+          pShow({ title: 'Scanning PDF with OCR…', stage: 'Loading OCR engine…' });
           if(progress){ progress.hidden = false; progress.value = 5; }
           loadScript(TESS_URL, function(ok){
             if(!ok || !window.Tesseract){
               setStatus('Could not load the OCR engine. Check your connection and try again.', true);
               ocrBtn.disabled = false;
               if(progress){ progress.hidden = true; }
-              if(window.QTProgress){ QTProgress.hide(); }
+              pHide();
               return;
             }
             (async function(){
@@ -347,7 +363,7 @@
                 for(var p = 1; p <= total; p++){
                   var stage = 'Recognizing text on page ' + p + ' of ' + total + '…';
                   setStatus(stage);
-                  if(window.QTProgress){ QTProgress.update(Math.round(((p - 1) / total) * 90), stage); }
+                  pUpd(Math.round(((p - 1) / total) * 90), stage);
                   if(progress){ progress.value = Math.round(((p - 1) / total) * 90); }
                   var page = await lastPdf.getPage(p);
                   var viewport = page.getViewport({ scale: 2 });
@@ -367,11 +383,11 @@
                   await buildDocx(blocks, lastFileName, 'Done — OCR text from ' + total + ' page' + (total === 1 ? '' : 's') + ' saved to "' + baseName(lastFileName) + '.docx".');
                 }
               } catch(err){
-                setStatus('OCR failed: ' + (err && err.message ? err.message : 'unknown error.'), true);
+                setStatus('OCR failed: ' + (err && err.message ? err.message : 'the scan could not be read — try a clearer, upright image.'), true);
               }
               ocrBtn.disabled = false;
               if(progress){ progress.hidden = true; }
-              if(window.QTProgress){ QTProgress.hide(); }
+              pHide();
             })();
           });
         });

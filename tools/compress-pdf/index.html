@@ -51,7 +51,7 @@
 <a href="../../index.html#all-tools">All Tools</a>
 <a href="../../index.html#categories">Categories</a>
 </nav>
-<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
 <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
 </div>
 <nav class="nav-panel" data-nav-panel aria-label="Mobile">
@@ -351,6 +351,10 @@
       var goBtn = $('cp-go'), progress = $('cp-progress'), nameEl = $('cp-name');
 
       function setFile(f){
+        if(f && f.type && f.type !== 'application/pdf' && !/\.pdf$/i.test(f.name || '')){
+          setStatus('"' + f.name + '" is not a PDF file. Please choose a .pdf file.', true);
+          return;
+        }
         pdfFile = f;
         if(nameEl){
           nameEl.textContent = '';
@@ -406,7 +410,11 @@
       var cpQualityField = $('cp-quality-field');
       var cpTargetBlock = $('cp-target-block');
       var cpCustomKb = $('cp-custom-kb');
-      function cpQt(){ return (typeof window.QTProgress !== 'undefined' && window.QTProgress) ? window.QTProgress : null; }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       function cpSetMode(m){
         cpMode = m;
         var isTarget = (m === 'target');
@@ -446,8 +454,7 @@
           if(progress){ progress.hidden = false; progress.value = 0; }
           pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER;
           var fileName = pdfFile.name;
-          var qp = cpQt();
-          if(qp && qp.show) qp.show({ title: 'Compressing PDF to target size', stage: 'Starting…', percent: 0 });
+          pShow({ title: 'Compressing PDF to target size', stage: 'Starting…', percent: 0 });
           (async function(){
             try{
               var buf = await pdfFile.arrayBuffer();
@@ -500,8 +507,7 @@
                   if(progress) progress.value = Math.round(r * 100);
                   var msg = 'Trying quality ' + q.toFixed(2) + '… (' + i + '/' + n + ') — est. ' + fmtSize(bytes);
                   setStatus(msg);
-                  var p3 = cpQt();
-                  if(p3 && p3.update) p3.update(Math.round(r * 100), msg);
+                  pUpd(Math.round(r * 100), msg);
                 }
               });
               setStatus('Final render at quality ' + res.quality.toFixed(2) + '…');
@@ -522,10 +528,10 @@
               }
               downloadBlob(new Blob([finalBytes], { type: 'application/pdf' }), dlName);
               setStatus(msg, !ok && finalSize > targetBytes);
-              var p4 = cpQt(); if(p4 && p4.hide) p4.hide();
+              pHide();
             } catch(err){
               setStatus('Could not compress this PDF: ' + (err && err.message ? err.message : 'the file may be corrupted or password-protected.'), true);
-              var p5 = cpQt(); if(p5 && p5.hide) p5.hide();
+              pHide();
             }
             cpTargetRunning = false;
             goBtn.disabled = false;
@@ -570,6 +576,7 @@
           waitForLibs(['pdfjsLib', 'PDFLib'], function(){
             goBtn.disabled = true;
             if(progress){ progress.hidden = false; progress.value = 0; }
+            pShow({ title: 'Compressing PDF…', stage: 'Reading pages…', percent: 0 });
             pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER;
             var quality = 0.6;
             var qSel = $('cp-quality');
@@ -584,6 +591,7 @@
                 var out = await PDFLib.PDFDocument.create();
                 for(var p = 1; p <= total; p++){
                   setStatus('Compressing page ' + p + ' of ' + total + '…');
+                  pUpd(Math.round((p / total) * 90), 'Compressing page ' + p + ' of ' + total + '…');
                   var page = await src.getPage(p);
                   var v0 = page.getViewport({ scale: 1 });
                   var scale = Math.min(2, 1200 / v0.width);
@@ -604,14 +612,20 @@
                 var newSize = bytes.length;
                 var saved = originalSize > 0 ? Math.round((1 - newSize / originalSize) * 100) : 0;
                 downloadBlob(new Blob([bytes], { type: 'application/pdf' }), baseName(fileName) + '-compressed.pdf');
+                pUpd(100, 'Building download…');
+                pSum($('cp-status'), '<strong>PDF compressed</strong> — ' + fmtSize(originalSize) + ' → ' + fmtSize(newSize) + ' (' + saved + '% smaller)');
+                pHide();
                 setStatus('Done — original ' + fmtSize(originalSize) + ' → compressed ' + fmtSize(newSize) + ' (' + saved + '% smaller). "' + baseName(fileName) + '-compressed.pdf" downloaded.');
               } catch(err){
+                pHide();
                 setStatus('Could not compress this PDF: ' + (err && err.message ? err.message : 'the file may be corrupted or password-protected.'), true);
               }
+              pHide();
               goBtn.disabled = false;
               if(progress){ progress.hidden = true; }
             })();
           }, function(){
+            pHide();
             setStatus('The required libraries failed to load. Check your connection and reload the page.', true);
           });
         });
