@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>URL to Text — Extract Article Text from a Link (Free)</title>
+<meta name="description" content="Paste any article link and get clean, readable text. Free URL to text extractor that strips menus, ads and clutter — no sign-up, no uploads.">
+<meta name="keywords" content="url to text, extract text from url, article extractor, webpage to text, link to text converter, readability">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/url-to-text/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="URL to Text — Extract Article Text from a Link (Free)">
+<meta property="og:description" content="Paste any article link and get clean, readable text. Free URL to text extractor that strips menus, ads and clutter — no sign-up, no uploads.">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/url-to-text/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="URL to Text — Extract Article Text from a Link (Free)">
+<meta name="twitter:description" content="Paste any article link and get clean, readable text. Free URL to text extractor that strips menus, ads and clutter — no sign-up, no uploads.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
+<style>
+.tool-url-text .ut-row{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;}
+.tool-url-text .ut-row .field{flex:1 1 260px;margin-bottom:0;}
+.tool-url-text .ut-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+.tool-url-text .ut-output{min-height:200px;max-height:480px;overflow-y:auto;border:1px solid var(--line);border-radius:var(--radius-sm);padding:.875rem;background:var(--surface);font-size:1rem;line-height:1.7;white-space:pre-wrap;word-wrap:break-word;}
+.tool-url-text .ut-meta{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;margin:.75rem 0 .5rem;}
+.tool-url-text .ut-title{font-family:var(--font-display);font-weight:700;font-size:1.125rem;}
+.tool-url-text .ut-words{color:var(--muted);font-size:.9375rem;}
+.tool-url-text #ut-err{margin-top:14px;}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li aria-current="page">URL to Text</li></ol></nav>
+<h1>URL to Text</h1>
+<div class="tool-body-intro">
+<p>Paste the link to a news article or blog post and get back clean, readable text — menus, ads, sidebars and popups stripped away. Perfect for saving articles or reading without clutter.</p><p class="privacy-note">The page is fetched through a public proxy and processed in your browser. Nothing is stored on QuickTools servers.</p>
+</div>
+<section class="tool-section tool-url-text" aria-label="URL to Text">
+<div class="card tool-panel">
+<div class="ut-row">
+<div class="field">
+<label class="label" for="ut-url">Article URL</label>
+<input class="input" id="ut-url" type="url" inputmode="url" placeholder="https://example.org/some-article" autocomplete="off" spellcheck="false">
+</div>
+<button class="btn btn-primary" id="ut-go" type="button"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#file-text"></use></svg>Extract text</button>
+</div>
+<div class="alert alert-danger" id="ut-err" role="alert" hidden></div>
+<div id="ut-out-wrap" hidden>
+<div class="ut-meta">
+<span class="ut-title" id="ut-title"></span>
+<span class="ut-words" id="ut-words" aria-live="polite"></span>
+</div>
+<div class="ut-output" id="ut-out" aria-live="polite"></div>
+<div class="ut-actions">
+<button class="btn btn-primary" id="ut-copy" type="button"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#text"></use></svg>Copy</button>
+<button class="btn btn-ghost" id="ut-dl" type="button"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#download"></use></svg>Download .txt</button>
+<button class="btn btn-ghost" id="ut-clear" type="button"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#x"></use></svg>Clear</button>
+</div>
+</div>
+</div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Paste the full URL of a news article or blog post (it must start with <code>http://</code> or <code>https://</code>).</li>
+<li>Click <strong>Extract text</strong> and wait a few seconds while the page is fetched and cleaned.</li>
+<li>Read the clean article text, then copy it or download it as a <code>.txt</code> file.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>How does URL to Text work?</summary><div class="faq-a"><p>The tool fetches the page through a public proxy (browsers block direct cross-site fetching), removes scripts, menus, ads and sidebars, then picks the largest article-like text block — similar to a reader mode — and shows it as clean paragraphs.</p></div></details>
+<details><summary>Which pages work best?</summary><div class="faq-a"><p>News articles, blog posts and other long-form pages with a clear article body. Homepages, app dashboards and video pages usually don't have extractable article text.</p></div></details>
+<details><summary>Why did extraction fail for my link?</summary><div class="faq-a"><p>Some sites block automated fetching, require a login, sit behind a paywall, or render content with JavaScript that a plain fetch can't see. Try another link, or open the page in your browser and copy the text manually.</p></div></details>
+<details><summary>Is the page content sent anywhere?</summary><div class="faq-a"><p>The page is downloaded through a public CORS proxy so your browser can read it, then cleaned locally on the page. QuickTools doesn't save the URL or the extracted text.</p></div></details>
+<details><summary>Can it extract text from PDFs, images or videos?</summary><div class="faq-a"><p>No — this tool only reads web article pages (HTML). For PDFs try the PDF tools on QuickTools instead.</p></div></details>
+<details><summary>Does it bypass paywalls?</summary><div class="faq-a"><p>No. It only reads what the site serves to an anonymous visitor, the same as opening the link yourself. Paywalled or login-only content can't be extracted.</p></div></details>
+<details><summary>The result still has some menu text or ads — why?</summary><div class="faq-a"><p>Extraction is heuristic: every site structures its HTML differently. If a site uses unusual markup, a stray heading or link can slip through — just copy the paragraphs you need.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../speed-test/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#gauge"></use></svg><span class="tl-name">Internet Speed Test</span><span class="tl-desc">Internet Tools</span></a>
+<a class="tool-card" href="../ip-lookup/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#globe"></use></svg><span class="tl-name">What's My IP</span><span class="tl-desc">Internet Tools</span></a>
+<a class="tool-card" href="../dns-lookup/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#network"></use></svg><span class="tl-name">DNS Lookup</span><span class="tl-desc">Internet Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"URL to Text","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/url-to-text/","description":"Paste any article link and get clean, readable text. Free URL to text extractor that strips menus, ads and clutter — no sign-up, no uploads.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does URL to Text work?","acceptedAnswer":{"@type":"Answer","text":"The tool fetches the page through a public proxy (browsers block direct cross-site fetching), removes scripts, menus, ads and sidebars, then picks the largest article-like text block — similar to a reader mode — and shows it as clean paragraphs."}},{"@type":"Question","name":"Which pages work best?","acceptedAnswer":{"@type":"Answer","text":"News articles, blog posts and other long-form pages with a clear article body. Homepages, app dashboards and video pages usually don't have extractable article text."}},{"@type":"Question","name":"Why did extraction fail for my link?","acceptedAnswer":{"@type":"Answer","text":"Some sites block automated fetching, require a login, sit behind a paywall, or render content with JavaScript that a plain fetch can't see. Try another link, or open the page in your browser and copy the text manually."}},{"@type":"Question","name":"Is the page content sent anywhere?","acceptedAnswer":{"@type":"Answer","text":"The page is downloaded through a public CORS proxy so your browser can read it, then cleaned locally on the page. QuickTools doesn't save the URL or the extracted text."}},{"@type":"Question","name":"Can it extract text from PDFs, images or videos?","acceptedAnswer":{"@type":"Answer","text":"No — this tool only reads web article pages (HTML). For PDFs try the PDF tools on QuickTools instead."}},{"@type":"Question","name":"Does it bypass paywalls?","acceptedAnswer":{"@type":"Answer","text":"No. It only reads what the site serves to an anonymous visitor, the same as opening the link yourself. Paywalled or login-only content can't be extracted."}},{"@type":"Question","name":"The result still has some menu text or ads — why?","acceptedAnswer":{"@type":"Answer","text":"Extraction is heuristic: every site structures its HTML differently. If a site uses unusual markup, a stray heading or link can slip through — just copy the paragraphs you need."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Internet Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-internet-tools"},{"@type":"ListItem","position":3,"name":"URL to Text","item":"https://mohit99mj.github.io/Quicktools/tools/url-to-text/"}]}</script>
+<script>
+/* Pure, DOM-free logic lives in LOGIC so it can be unit-tested in Node.
+ * Browser glue (DOMParser, fetch) is in the IIFE below. */
+var LOGIC = {
+  MIN_ARTICLE_CHARS: 200,
+
+  // Returns { ok:true, url } or { ok:false, error:'empty'|'invalid'|'protocol' }
+  normalizeUrl: function(raw){
+    var s = String(raw == null ? '' : raw).trim();
+    if(!s) return { ok: false, error: 'empty' };
+    var u;
+    try{ u = new URL(s); }
+    catch(e){ return { ok: false, error: 'invalid' }; }
+    if(u.protocol !== 'http:' && u.protocol !== 'https:'){
+      return { ok: false, error: 'protocol' };
+    }
+    return { ok: true, url: u.href };
+  },
+
+  countWords: function(text){
+    return (String(text == null ? '' : text).match(/\S+/g) || []).length;
+  },
+
+  // Collapse all whitespace runs to single spaces and trim.
+  cleanText: function(raw){
+    return String(raw == null ? '' : raw).replace(/\s+/g, ' ').trim();
+  },
+
+  // Readability-style scoring over precomputed metrics:
+  // c = { textLength, pCount, linkTextLength }
+  scoreCandidate: function(c){
+    var textLength = Number(c && c.textLength) || 0;
+    if(textLength < 25) return 0;
+    var score = textLength;
+    score += (Number(c.pCount) || 0) * 50;          // paragraphs are strong signal
+    score -= (Number(c.linkTextLength) || 0) * 2;   // penalize link farms / nav
+    return Math.max(0, Math.round(score));
+  },
+
+  // cands: array of metric objects. Returns best index, or -1 if none usable.
+  pickBest: function(cands){
+    var best = -1, bestScore = 0;
+    for(var i = 0; i < cands.length; i++){
+      if(!cands[i]) continue;
+      var s = LOGIC.scoreCandidate(cands[i]);
+      if(s > bestScore){ bestScore = s; best = i; }
+    }
+    return best;
+  },
+
+  // Build request URLs for the proxy chain (verified 2026-10-07).
+  proxyUrl: function(kind, targetUrl){
+    var enc = encodeURIComponent(targetUrl);
+    if(kind === 'raw') return 'https://api.allorigins.win/raw?url=' + enc;
+    if(kind === 'json') return 'https://api.allorigins.win/get?url=' + enc;
+    return null;
+  },
+
+  // Fallback: chunk plain sentences into paragraphs when no block markup exists.
+  chunkSentences: function(text, perPara){
+    var clean = LOGIC.cleanText(text);
+    if(!clean) return [];
+    var sentences = clean.match(/[^.!?…]+[.!?…]+["'”)]?/g) || [clean];
+    var out = [], buf = [];
+    for(var i = 0; i < sentences.length; i++){
+      var s = sentences[i].trim();
+      if(!s) continue;
+      buf.push(s);
+      if(buf.length >= (perPara || 4)){ out.push(buf.join(' ')); buf = []; }
+    }
+    if(buf.length) out.push(buf.join(' '));
+    return out;
+  },
+
+  REMOVE_SEL: 'script,style,noscript,template,nav,header,footer,aside,form,' +
+    'select,button,input,textarea,iframe,canvas,svg,video,audio,figure,' +
+    '[role="banner"],[role="navigation"],[role="complementary"],[role="contentinfo"],[role="search"],' +
+    '.ad,.ads,.advert,.advertisement,.sponsored,.sidebar,.widget,.widgets,' +
+    '.comments,.comment,.share,.sharing,.social,.social-share,.newsletter,.subscribe,' +
+    '.popup,.modal,.related,.related-posts,.read-more,.breadcrumb,.byline,.author-bio,' +
+    '.tags,.pagination,.cookie,.gdpr,.promo,.banner,.topbar,.site-header,.site-footer',
+  CANDIDATE_SEL: 'article,main,[role="main"],[itemprop="articleBody"],' +
+    '.post-content,.article-body,.article-content,.entry-content,.post-body,.story-body,div,section',
+  BOILERPLATE_RE: /\b(ad|ads|advert|sidebar|footer|header|navbar|nav|comment|widget|popup|modal|cookie|newsletter|subscribe|share|social|related|breadcrumb|pagination|banner|topbar|menu|toolbar)\b/i,
+
+  _metricsFor: function(el){
+    var text = LOGIC.cleanText(el.textContent);
+    var pCount = 0, linkLen = 0;
+    try{
+      pCount = el.querySelectorAll('p').length;
+      var as = el.querySelectorAll('a');
+      for(var i = 0; i < as.length; i++){
+        linkLen += LOGIC.cleanText(as[i].textContent).length;
+      }
+    }catch(e){}
+    return { textLength: text.length, pCount: pCount, linkTextLength: linkLen };
+  },
+
+  _isBoilerplate: function(el){
+    var cls = (el.className && typeof el.className === 'string') ? el.className : '';
+    var id = el.id || '';
+    return LOGIC.BOILERPLATE_RE.test(cls) || LOGIC.BOILERPLATE_RE.test(id);
+  },
+
+  _isHidden: function(el){
+    if(el.hasAttribute && el.hasAttribute('hidden')) return true;
+    var st = el.getAttribute ? (el.getAttribute('style') || '') : '';
+    return /display\s*:\s*none/i.test(st) || /visibility\s*:\s*hidden/i.test(st);
+  },
+
+  _paragraphsFrom: function(el){
+    var out = [], seen = {};
+    var blocks;
+    try{ blocks = el.querySelectorAll('p,h1,h2,h3,h4,li,blockquote,pre'); }
+    catch(e){ blocks = []; }
+    for(var i = 0; i < blocks.length; i++){
+      var t = LOGIC.cleanText(blocks[i].textContent);
+      if(t.length < 2 || seen[t]) continue;
+      seen[t] = true;
+      out.push(t);
+    }
+    if(out.join(' ').length < LOGIC.MIN_ARTICLE_CHARS){
+      var chunks = LOGIC.chunkSentences(el.textContent, 4);
+      if(chunks.join(' ').length > out.join(' ').length) return chunks;
+    }
+    return out;
+  },
+
+  // Readability-style extraction. Takes a parsed Document, returns
+  // { ok:true, text, title } or { ok:false, error:'parse'|'no-article' }.
+  extractArticle: function(doc){
+    if(!doc || !doc.querySelectorAll) return { ok: false, error: 'parse' };
+    try{
+      var dead = doc.querySelectorAll(LOGIC.REMOVE_SEL);
+      for(var d = 0; d < dead.length; d++){
+        if(dead[d].parentNode) dead[d].parentNode.removeChild(dead[d]);
+      }
+    }catch(e){}
+    var nodes;
+    try{ nodes = doc.querySelectorAll(LOGIC.CANDIDATE_SEL); }
+    catch(e){ return { ok: false, error: 'parse' }; }
+    var cands = [], els = [];
+    for(var i = 0; i < nodes.length; i++){
+      var el = nodes[i];
+      if(LOGIC._isHidden(el) || LOGIC._isBoilerplate(el)) continue;
+      cands.push(LOGIC._metricsFor(el));
+      els.push(el);
+    }
+    var best = LOGIC.pickBest(cands);
+    if(best < 0 || cands[best].textLength < LOGIC.MIN_ARTICLE_CHARS){
+      return { ok: false, error: 'no-article' };
+    }
+    var paras = LOGIC._paragraphsFrom(els[best]);
+    var text = paras.join('\n\n').trim();
+    if(LOGIC.cleanText(text).length < LOGIC.MIN_ARTICLE_CHARS){
+      return { ok: false, error: 'no-article' };
+    }
+    var title = '';
+    try{
+      var og = doc.querySelector('meta[property="og:title"]');
+      if(og && og.getAttribute('content')) title = LOGIC.cleanText(og.getAttribute('content'));
+      if(!title){
+        var t = doc.querySelector('title');
+        if(t) title = LOGIC.cleanText(t.textContent);
+      }
+    }catch(e){}
+    return { ok: true, text: text, title: title };
+  }
+};
+
+(function(){
+  'use strict';
+  function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+  function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+  function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+  function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
+
+  function $(id){ return document.getElementById(id); }
+
+  var urlEl = $('ut-url'), goBtn = $('ut-go'), errEl = $('ut-err');
+  var outWrap = $('ut-out-wrap'), outEl = $('ut-out'), titleEl = $('ut-title'), wordsEl = $('ut-words');
+  var copyBtn = $('ut-copy'), dlBtn = $('ut-dl'), clearBtn = $('ut-clear');
+  var lastText = '', working = false;
+
+  function showError(msg){
+    if(errEl){ errEl.textContent = msg; errEl.hidden = false; }
+    if(outWrap) outWrap.hidden = true;
+  }
+  function clearError(){
+    if(errEl){ errEl.textContent = ''; errEl.hidden = true; }
+  }
+
+  function looksLikeHtml(html, contentType){
+    if(contentType && !/html|text|xml/i.test(contentType)) return false;
+    return /<\s*html|<\s*article|<\s*p[\s>]/i.test(html);
+  }
+
+  function fetchText(targetUrl, onStage){
+    var enc = encodeURIComponent(targetUrl);
+    var attempts = [
+      { stage: 'Fetching page…',            pct: 12, url: LOGIC.proxyUrl('raw', targetUrl), kind: 'text' },
+      { stage: 'Trying proxy 2…',           pct: 38, url: LOGIC.proxyUrl('json', targetUrl), kind: 'json' },
+      { stage: 'Trying direct connection…', pct: 62, url: targetUrl, kind: 'text' }
+    ];
+    var chain = Promise.resolve(null);
+    attempts.forEach(function(a){
+      chain = chain.then(function(found){
+        if(found) return found;
+        onStage(a.pct, a.stage);
+        return fetch(a.url, { mode: 'cors', credentials: 'omit' }).then(function(r){
+          if(!r.ok) throw new Error('HTTP ' + r.status);
+          if(a.kind === 'json'){
+            return r.json().then(function(j){
+              if(!j || typeof j.contents !== 'string' || !j.contents) throw new Error('empty');
+              return { html: j.contents, ct: '' };
+            });
+          }
+          var ct = r.headers ? (r.headers.get('content-type') || '') : '';
+          return r.text().then(function(t){
+            if(!t) throw new Error('empty');
+            return { html: t, ct: ct };
+          });
+        }).catch(function(){
+          return null; // try next
+        });
+      });
+    });
+    return chain;
+  }
+
+  function setWorking(on){
+    working = on;
+    if(goBtn){
+      goBtn.disabled = on;
+      goBtn.setAttribute('aria-busy', on ? 'true' : 'false');
+    }
+    if(urlEl) urlEl.disabled = on;
+  }
+
+  function run(){
+    if(working) return;
+    clearError();
+    var norm = LOGIC.normalizeUrl(urlEl ? urlEl.value : '');
+    if(!norm.ok){
+      if(norm.error === 'empty'){
+        showError('Please paste a URL first — for example https://example.org/article.');
+      }else if(norm.error === 'protocol'){
+        showError('That URL must start with http:// or https://. Copy the full link from your browser\'s address bar and try again.');
+      }else{
+        showError('That doesn\'t look like a valid URL. Check for typos and try again.');
+      }
+      if(urlEl) urlEl.focus();
+      return;
+    }
+    setWorking(true);
+    if(outWrap) outWrap.hidden = true;
+    lastText = '';
+    pShow({ title: 'Extracting article text…', stage: 'Fetching page…', percent: 5 });
+
+    fetchText(norm.url, function(pct, stage){ pUpd(pct, stage); }).then(function(found){
+      if(!found){
+        pHide(); setWorking(false);
+        showError('Couldn\'t fetch that page — the site may block extraction (or be offline). Try another link.');
+        return;
+      }
+      pUpd(80, 'Extracting article text…');
+      // Small yield so the stage text paints before the heavy DOM parse.
+      setTimeout(function(){
+        try{
+          if(!looksLikeHtml(found.html, found.ct)){
+            pHide(); setWorking(false);
+            showError('That URL doesn\'t point to a web article (it looks like a file download). Try a news or blog article link.');
+            return;
+          }
+          var doc;
+          try{
+            doc = new DOMParser().parseFromString(found.html, 'text/html');
+          }catch(pe){
+            pHide(); setWorking(false);
+            showError('Couldn\'t read that page\'s content. Try another link.');
+            return;
+          }
+          var res = LOGIC.extractArticle(doc);
+          if(!res.ok){
+            pHide(); setWorking(false);
+            if(res.error === 'no-article'){
+              showError('No article text found — this looks like a homepage or app page, not an article. Try a news or blog post link.');
+            }else{
+              showError('Couldn\'t read that page\'s content. Try another link.');
+            }
+            return;
+          }
+          lastText = res.text;
+          var words = LOGIC.countWords(lastText);
+          if(titleEl) titleEl.textContent = res.title || 'Extracted text';
+          if(wordsEl) wordsEl.textContent = words.toLocaleString('en-IN') + (words === 1 ? ' word' : ' words');
+          if(outEl) outEl.textContent = lastText;
+          if(outWrap) outWrap.hidden = false;
+          pUpd(100, 'Done');
+          pSum(outEl, '<strong>Extraction complete</strong> — ' + words.toLocaleString('en-IN') + (words === 1 ? ' word' : ' words') + ' of clean article text');
+          pHide();
+          setWorking(false);
+        }catch(e){
+          pHide(); setWorking(false);
+          showError('Couldn\'t clean that page\'s text (' + (e && e.message ? e.message : 'unknown error') + '). Try another link.');
+        }
+      }, 30);
+    });
+  }
+
+  function flash(btn, label){
+    var old = btn.textContent;
+    btn.textContent = label;
+    setTimeout(function(){ btn.textContent = old; }, 1600);
+  }
+
+  if(goBtn) goBtn.addEventListener('click', run);
+  if(urlEl) urlEl.addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){ e.preventDefault(); run(); }
+  });
+
+  if(copyBtn) copyBtn.addEventListener('click', function(){
+    if(!lastText){ showError('Nothing to copy yet — extract an article first.'); return; }
+    function legacy(){
+      try{
+        var ta = document.createElement('textarea');
+        ta.value = lastText;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'absolute'; ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        var okd = false;
+        try{ okd = document.execCommand('copy'); }catch(e){}
+        document.body.removeChild(ta);
+        if(okd){ flash(copyBtn, 'Copied ✓'); }
+        else{ showError('Copy failed — select the text above and copy it manually.'); }
+      }catch(e){ showError('Copy failed — select the text above and copy it manually.'); }
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(lastText).then(function(){ flash(copyBtn, 'Copied ✓'); }, legacy);
+    }else{ legacy(); }
+  });
+
+  if(dlBtn) dlBtn.addEventListener('click', function(){
+    if(!lastText){ showError('Nothing to download yet — extract an article first.'); return; }
+    try{
+      var blob = new Blob([lastText], { type: 'text/plain;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'article-text.txt';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function(){
+        try{ URL.revokeObjectURL(a.href); }catch(e){}
+        if(a.parentNode) a.parentNode.removeChild(a);
+      }, 500);
+      flash(dlBtn, 'Downloaded ✓');
+    }catch(e){
+      showError('Download failed in this browser — copy the text instead.');
+    }
+  });
+
+  if(clearBtn) clearBtn.addEventListener('click', function(){
+    lastText = '';
+    if(urlEl) urlEl.value = '';
+    if(outWrap) outWrap.hidden = true;
+    if(outEl) outEl.textContent = '';
+    clearError();
+    if(urlEl) urlEl.focus();
+  });
+})();
+</script>
+</body>
+</html>
