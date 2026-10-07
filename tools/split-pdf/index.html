@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Split PDF — Extract Pages from PDF Free</title>
+<meta name="description" content="Free PDF splitter: extract page ranges like 1-3, 5, 8-9 into a new PDF online. Your files never leave your device.">
+<meta name="keywords" content="split pdf, extract pages from pdf, pdf splitter, separate pdf pages">
+<link rel="canonical" href="https://www.example.com/tools/split-pdf/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Split PDF — Extract Pages from PDF Free">
+<meta property="og:description" content="Free PDF splitter: extract page ranges like 1-3, 5, 8-9 into a new PDF online. Your files never leave your device.">
+<meta property="og:url" content="https://www.example.com/tools/split-pdf/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Split PDF — Extract Pages from PDF Free">
+<meta name="twitter:description" content="Free PDF splitter: extract page ranges like 1-3, 5, 8-9 into a new PDF online. Your files never leave your device.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-split-pdf .file-name{font-weight:600;margin:1rem 0 .25rem}
+.tool-split-pdf .dropzone.drag-over{outline:2px dashed var(--accent);outline-offset:4px}
+.tool-split-pdf .progress{width:100%;margin-top:1rem}
+.tool-split-pdf .selection-preview{font-weight:600;color:var(--accent-strong);margin:.75rem 0;min-height:1.5em}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li aria-current="page">Split PDF</li></ol></nav>
+<h1>Split PDF</h1>
+<div class="tool-body-intro">
+<p>Only need a few pages? <strong>Split PDF</strong> extracts exactly the pages you want into a new PDF — pull out a chapter, a single invoice, or any custom selection of pages.</p><p>Type page ranges like <span class="kbd">1-3, 5, 8-9</span> (pages are numbered from 1), preview your selection, and download the new file. The original PDF is never changed.</p>
+</div>
+<section class="tool-section tool-split-pdf" aria-label="Split PDF">
+
+    <div class="card tool-panel">
+      <div class="dropzone" id="sp-drop" tabindex="0" role="button" aria-label="Drop a PDF file here, or press Enter to browse for a file">
+        <svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#scissors"/></svg>
+        <p><strong>Drag &amp; drop your PDF here</strong></p>
+        <p><button type="button" class="btn btn-ghost" id="sp-browse">Browse files</button></p>
+        <p class="hint">One PDF file at a time.</p>
+        <input type="file" id="sp-file" class="visually-hidden" accept="application/pdf,.pdf" aria-label="Choose a PDF file">
+      </div>
+      <p class="file-name" id="sp-name" aria-live="polite"></p>
+      <div class="field">
+        <label class="label" for="sp-range">Pages to extract</label>
+        <input class="input" id="sp-range" type="text" inputmode="text" placeholder="e.g. 1-3, 5, 8-9" autocomplete="off" spellcheck="false">
+        <p class="hint">Page numbers start at 1. Extracted in ascending order, duplicates removed.</p>
+      </div>
+      <p class="selection-preview" id="sp-preview" aria-live="polite"></p>
+      <button class="btn btn-primary" id="sp-go" disabled>Extract pages</button>
+      <progress class="progress" id="sp-progress" max="100" value="0" hidden></progress>
+      <div class="result" id="sp-status" aria-live="polite"></div>
+      <p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Drop your PDF into the upload area, or click Browse files to select it.</li>
+<li>Enter the pages to extract, e.g. 1-3, 5, 8-9. Pages are numbered from 1.</li>
+<li>Check the preview of your selection for mistakes.</li>
+<li>Click Extract pages and save the downloaded file.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>How do I write a page range?</summary><div class="faq-a"><p>Use numbers and dashes separated by commas, for example &quot;1-3, 5, 8-9&quot;. Single pages and ranges can be mixed freely. Pages are numbered from 1.</p></div></details>
+<details><summary>What order will the extracted pages be in?</summary><div class="faq-a"><p>Pages are always extracted in ascending numerical order, with duplicates removed — even if you type them in a different order.</p></div></details>
+<details><summary>Does splitting change my original PDF?</summary><div class="faq-a"><p>No. Your original file is never modified; the extracted pages are saved as a separate new PDF.</p></div></details>
+<details><summary>Are my files uploaded to a server?</summary><div class="faq-a"><p>No. Your files never leave your device — the entire split runs locally in your browser.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../merge-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#layers"></use></svg><span class="tl-name">Merge PDF</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../compress-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#minimize-2"></use></svg><span class="tl-name">Compress PDF</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../pdf-editor/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#pencil"></use></svg><span class="tl-name">PDF Editor</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../pdf-to-word/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#file-text"></use></svg><span class="tl-name">PDF to Word</span><span class="tl-desc">PDF Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Split PDF","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/split-pdf/","description":"Free PDF splitter: extract page ranges like 1-3, 5, 8-9 into a new PDF online. Your files never leave your device.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I write a page range?","acceptedAnswer":{"@type":"Answer","text":"Use numbers and dashes separated by commas, for example \"1-3, 5, 8-9\". Single pages and ranges can be mixed freely. Pages are numbered from 1."}},{"@type":"Question","name":"What order will the extracted pages be in?","acceptedAnswer":{"@type":"Answer","text":"Pages are always extracted in ascending numerical order, with duplicates removed — even if you type them in a different order."}},{"@type":"Question","name":"Does splitting change my original PDF?","acceptedAnswer":{"@type":"Answer","text":"No. Your original file is never modified; the extracted pages are saved as a separate new PDF."}},{"@type":"Question","name":"Are my files uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Your files never leave your device — the entire split runs locally in your browser."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://www.example.com/#cat-pdf-tools"},{"@type":"ListItem","position":3,"name":"Split PDF","item":"https://www.example.com/tools/split-pdf/"}]}</script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
+<script>
+
+    (function(){
+      'use strict';
+      function $(id){ return document.getElementById(id); }
+      function setStatus(msg, isError){
+        var el = $('sp-status');
+        if(!el){ return; }
+        el.textContent = msg || '';
+        el.className = isError ? 'result error' : 'result';
+      }
+      function downloadBlob(blob, name){
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = name;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 10000);
+      }
+      function waitForLibs(names, ready, onMissing){
+        var tries = 0;
+        (function check(){
+          var ok = true;
+          for(var k = 0; k < names.length; k++){
+            if(!window[names[k]]){ ok = false; break; }
+          }
+          if(ok){ ready(); return; }
+          if(tries++ > 100){ onMissing(); return; }
+          setTimeout(check, 100);
+        })();
+      }
+      function baseName(name){
+        var n = name.replace(/\.pdf$/i, '').replace(/[\\/]/g, '');
+        return n || 'document';
+      }
+      function parseRanges(raw, pageCount){
+        var result = { pages: [], error: '' };
+        var parts = raw.split(',');
+        var seen = {};
+        for(var i = 0; i < parts.length; i++){
+          var part = parts[i].trim();
+          if(!part){ continue; }
+          var m = part.match(/^(\d+)\s*-\s*(\d+)$/);
+          var nums = [];
+          if(m){
+            var a = parseInt(m[1], 10), b = parseInt(m[2], 10);
+            if(a > b){
+              result.error = 'Invalid range "' + part + '": the start is larger than the end.';
+              return result;
+            }
+            if(a < 1 || b > pageCount){
+              result.error = 'Range "' + part + '" is out of bounds — this PDF has ' + pageCount + ' page' + (pageCount === 1 ? '' : 's') + '.';
+              return result;
+            }
+            for(var n = a; n <= b; n++){ nums.push(n); }
+          } else if(/^\d+$/.test(part)){
+            var p = parseInt(part, 10);
+            if(p < 1 || p > pageCount){
+              result.error = 'Page ' + p + ' is out of range — this PDF has ' + pageCount + ' page' + (pageCount === 1 ? '' : 's') + '.';
+              return result;
+            }
+            nums.push(p);
+          } else {
+            result.error = 'Could not understand "' + part + '". Use numbers and ranges like 1-3, 5, 8-9.';
+            return result;
+          }
+          for(var j = 0; j < nums.length; j++){ seen[nums[j]] = true; }
+        }
+        var pages = Object.keys(seen).map(function(k){ return parseInt(k, 10); }).sort(function(x, y){ return x - y; });
+        if(!pages.length){
+          result.error = 'Enter at least one page number or range, e.g. 1-3, 5, 8-9.';
+        }
+        result.pages = pages;
+        return result;
+      }
+
+      var pdfBytes = null;
+      var pdfName = '';
+      var pageCount = 0;
+      var drop = $('sp-drop'), input = $('sp-file'), browse = $('sp-browse');
+      var rangeInput = $('sp-range'), preview = $('sp-preview');
+      var goBtn = $('sp-go'), progress = $('sp-progress'), nameEl = $('sp-name');
+
+      function updatePreview(){
+        if(!preview){ return; }
+        if(!pageCount || !rangeInput){
+          preview.textContent = '';
+          return;
+        }
+        var raw = rangeInput.value;
+        if(!raw.trim()){
+          preview.textContent = '';
+          if(goBtn){ goBtn.disabled = true; }
+          return;
+        }
+        var r = parseRanges(raw, pageCount);
+        if(r.error){
+          preview.textContent = '';
+          setStatus(r.error, true);
+          if(goBtn){ goBtn.disabled = true; }
+        } else {
+          setStatus('');
+          var shown = r.pages.slice(0, 20).join(', ') + (r.pages.length > 20 ? ', …' : '');
+          preview.textContent = 'Selected pages: ' + shown + ' (' + r.pages.length + ' page' + (r.pages.length === 1 ? '' : 's') + ')';
+          if(goBtn){ goBtn.disabled = false; }
+        }
+      }
+
+      function loadFile(f){
+        setStatus('Loading PDF engine…');
+        waitForLibs(['PDFLib'], function(){
+          if(progress){ progress.hidden = false; progress.value = 20; }
+          (async function(){
+            try{
+              var buf = await f.arrayBuffer();
+              var bytes = new Uint8Array(buf);
+              var doc = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true });
+              pdfBytes = bytes;
+              pdfName = f.name;
+              pageCount = doc.getPageCount();
+              if(nameEl){
+                nameEl.textContent = '';
+                var label = document.createElement('span');
+                label.textContent = 'Selected: ' + f.name + ' (' + pageCount + ' page' + (pageCount === 1 ? '' : 's') + ')';
+                nameEl.appendChild(label);
+              }
+              setStatus('PDF loaded with ' + pageCount + ' page' + (pageCount === 1 ? '' : 's') + '. Enter the pages to extract.');
+              updatePreview();
+            } catch(err){
+              setStatus('Could not open this PDF: ' + (err && err.message ? err.message : 'the file may be corrupted or password-protected.'), true);
+            }
+            if(progress){ progress.hidden = true; }
+          })();
+        }, function(){
+          setStatus('The PDF library failed to load. Check your connection and reload the page.', true);
+        });
+      }
+
+      if(drop && input){
+        drop.addEventListener('click', function(e){
+          if(e.target === input){ return; }
+          input.click();
+        });
+        drop.addEventListener('keydown', function(e){
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            input.click();
+          }
+        });
+        drop.addEventListener('dragover', function(e){
+          e.preventDefault();
+          drop.classList.add('drag-over');
+        });
+        drop.addEventListener('dragleave', function(){
+          drop.classList.remove('drag-over');
+        });
+        drop.addEventListener('drop', function(e){
+          e.preventDefault();
+          drop.classList.remove('drag-over');
+          if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length){
+            loadFile(e.dataTransfer.files[0]);
+          }
+        });
+        input.addEventListener('change', function(){
+          if(input.files && input.files.length){ loadFile(input.files[0]); }
+          input.value = '';
+        });
+      }
+      if(browse && input){
+        browse.addEventListener('click', function(e){
+          e.stopPropagation();
+          input.click();
+        });
+      }
+      if(rangeInput){
+        rangeInput.addEventListener('input', updatePreview);
+      }
+
+      if(goBtn){
+        goBtn.addEventListener('click', function(){
+          if(!pdfBytes || !pageCount || !rangeInput){ return; }
+          var r = parseRanges(rangeInput.value, pageCount);
+          if(r.error){
+            setStatus(r.error, true);
+            return;
+          }
+          setStatus('Extracting ' + r.pages.length + ' page' + (r.pages.length === 1 ? '' : 's') + '…');
+          goBtn.disabled = true;
+          if(progress){ progress.hidden = false; progress.value = 50; }
+          (async function(){
+            try{
+              var src = await PDFLib.PDFDocument.load(pdfBytes.slice(), { ignoreEncryption: true });
+              var out = await PDFLib.PDFDocument.create();
+              var indices = r.pages.map(function(p){ return p - 1; });
+              var copied = await out.copyPages(src, indices);
+              copied.forEach(function(p){ out.addPage(p); });
+              var bytes = await out.save();
+              downloadBlob(new Blob([bytes], { type: 'application/pdf' }), baseName(pdfName) + '-split.pdf');
+              if(progress){ progress.value = 100; }
+              setStatus('Done — "' + baseName(pdfName) + '-split.pdf" downloaded (' + r.pages.length + ' page' + (r.pages.length === 1 ? '' : 's') + ').');
+            } catch(err){
+              setStatus('Could not split the PDF: ' + (err && err.message ? err.message : 'unknown error'), true);
+            }
+            goBtn.disabled = false;
+            if(progress){ progress.hidden = true; }
+          })();
+        });
+      }
+    })();
+</script>
+</body>
+</html>

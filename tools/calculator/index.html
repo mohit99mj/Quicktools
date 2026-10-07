@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online Calculator — Free Scientific Calculator</title>
+<meta name="description" content="Free online calculator with scientific functions, parentheses and keyboard support. Fast, private, works offline.">
+<meta name="keywords" content="calculator, online calculator, scientific calculator, free calculator, expression calculator">
+<link rel="canonical" href="https://www.example.com/tools/calculator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Online Calculator — Free Scientific Calculator">
+<meta property="og:description" content="Free online calculator with scientific functions, parentheses and keyboard support. Fast, private, works offline.">
+<meta property="og:url" content="https://www.example.com/tools/calculator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Online Calculator — Free Scientific Calculator">
+<meta name="twitter:description" content="Free online calculator with scientific functions, parentheses and keyboard support. Fast, private, works offline.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+
+    .tool-calculator .calc-display{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;min-height:84px}
+    .tool-calculator .calc-expr{font-size:1.6rem;font-weight:600;word-break:break-all;text-align:right}
+    .tool-calculator .calc-live{font-size:1.1rem;color:var(--accent-strong);text-align:right;min-height:1.6em;font-weight:600}
+    .tool-calculator .calc-keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+    .tool-calculator .calc-sci{grid-template-columns:repeat(5,1fr)}
+    .tool-calculator .calc-key{min-height:52px;font-size:1.1rem}
+    .tool-calculator .calc-fn{font-weight:600}
+    .tool-calculator .calc-op{font-size:1.3rem}
+    .tool-calculator #calc-sci-toggle{width:100%;margin-bottom:12px}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li aria-current="page">Calculator</li></ol></nav>
+<h1>Calculator</h1>
+<div class="tool-body-intro">
+<p>A fast, free online calculator that handles full expressions — not just one operation at a time. Type <strong>2*(3+4)^2</strong> or tap the keypad; it follows standard order of operations with parentheses, powers and scientific functions.</p><p>Everything is computed instantly on your device. There is no sign-up, no history stored and no network request — your calculations stay private.</p>
+</div>
+<section class="tool-section tool-calculator" aria-label="Calculator">
+
+    <div class="card tool-panel">
+      <div class="calc-display" role="status" aria-live="polite" aria-label="Calculator display">
+        <div class="calc-expr" id="calc-expr">0</div>
+        <div class="calc-live" id="calc-live"></div>
+      </div>
+      <div class="calc-keys" role="group" aria-label="Standard keypad">
+        <button type="button" class="btn calc-key calc-fn" data-act="clear" aria-label="All clear">AC</button>
+        <button type="button" class="btn calc-key calc-fn" data-act="neg" aria-label="Toggle sign">+/-</button>
+        <button type="button" class="btn calc-key calc-fn" data-ch="%" aria-label="Percent">%</button>
+        <button type="button" class="btn calc-key calc-op" data-ch="/" aria-label="Divide">&divide;</button>
+        <button type="button" class="btn calc-key" data-ch="7">7</button>
+        <button type="button" class="btn calc-key" data-ch="8">8</button>
+        <button type="button" class="btn calc-key" data-ch="9">9</button>
+        <button type="button" class="btn calc-key calc-op" data-ch="*" aria-label="Multiply">&times;</button>
+        <button type="button" class="btn calc-key" data-ch="4">4</button>
+        <button type="button" class="btn calc-key" data-ch="5">5</button>
+        <button type="button" class="btn calc-key" data-ch="6">6</button>
+        <button type="button" class="btn calc-key calc-op" data-ch="-" aria-label="Minus">&minus;</button>
+        <button type="button" class="btn calc-key" data-ch="1">1</button>
+        <button type="button" class="btn calc-key" data-ch="2">2</button>
+        <button type="button" class="btn calc-key" data-ch="3">3</button>
+        <button type="button" class="btn calc-key calc-op" data-ch="+" aria-label="Plus">+</button>
+        <button type="button" class="btn calc-key" data-ch="0">0</button>
+        <button type="button" class="btn calc-key" data-ch="." aria-label="Decimal point">.</button>
+        <button type="button" class="btn calc-key calc-fn" data-act="back" aria-label="Backspace">&#9003;</button>
+        <button type="button" class="btn btn-primary calc-key calc-eq" data-act="eq" aria-label="Equals">=</button>
+      </div>
+      <button type="button" class="btn btn-ghost" id="calc-sci-toggle" aria-expanded="false" aria-controls="calc-sci">Scientific functions</button>
+      <div class="calc-keys calc-sci" id="calc-sci" role="group" aria-label="Scientific keypad" hidden>
+        <button type="button" class="btn calc-key calc-fn" data-ch="sqrt(" aria-label="Square root">&radic;</button>
+        <button type="button" class="btn calc-key calc-fn" data-ch="sin(" aria-label="Sine">sin</button>
+        <button type="button" class="btn calc-key calc-fn" data-ch="cos(" aria-label="Cosine">cos</button>
+        <button type="button" class="btn calc-key calc-fn" data-ch="tan(" aria-label="Tangent">tan</button>
+        <button type="button" class="btn calc-key calc-fn" data-ch="log(" aria-label="Log base 10">log</button>
+        <button type="button" class="btn calc-key calc-fn" data-ch="ln(" aria-label="Natural log">ln</button>
+        <button type="button" class="btn calc-key calc-fn" data-ch="pi" aria-label="Pi">&pi;</button>
+        <button type="button" class="btn calc-key calc-fn" data-ch="e" aria-label="Euler's number">e</button>
+        <button type="button" class="btn calc-key calc-fn" data-ch="^" aria-label="Power">x&#696;</button>
+        <button type="button" class="btn calc-key calc-fn" data-ch="(" aria-label="Open parenthesis">(</button>
+        <button type="button" class="btn calc-key calc-fn" data-ch=")" aria-label="Close parenthesis">)</button>
+      </div>
+      <p class="hint">% is percent: 50% = 0.5, so 200*50% = 100. Trig uses degrees. Keys show &divide; and &times; but enter / and *.</p>
+      <p class="privacy-note">Your inputs never leave your device — everything runs in your browser.</p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Type an expression with your keyboard or tap the keypad buttons.</li>
+<li>Use parentheses for grouping, ^ for powers, and % for percent (50% = 0.5).</li>
+<li>Open the scientific panel for sqrt, sin, cos, tan, log, ln, pi and e.</li>
+<li>Press = or Enter to lock in the result; keep typing to continue calculating.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>What does the % button do?</summary><div class="faq-a"><p>It works as a percent operator: 50% becomes 0.5. So 200*50% equals 100, and 50+10% equals 50.1.</p></div></details>
+<details><summary>Are the trig functions in degrees or radians?</summary><div class="faq-a"><p>Degrees. sin(30) equals 0.5, cos(60) equals 0.5, and tan(45) equals 1.</p></div></details>
+<details><summary>What is the difference between log and ln?</summary><div class="faq-a"><p>log() is the base-10 logarithm (log(100) = 2) and ln() is the natural logarithm (ln(e) = 1).</p></div></details>
+<details><summary>Why does the calculator show &quot;Invalid expression&quot;?</summary><div class="faq-a"><p>The expression has a typo, unbalanced parentheses, an unknown word, or an impossible operation such as dividing by zero or taking the square root of a negative number.</p></div></details>
+<details><summary>Is my calculation history saved anywhere?</summary><div class="faq-a"><p>No. All evaluation happens in your browser and nothing is sent to a server or stored.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../percentage-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#percent"></use></svg><span class="tl-name">Percentage Calculator</span><span class="tl-desc">Calculators</span></a>
+<a class="tool-card" href="../age-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#calendar"></use></svg><span class="tl-name">Age Calculator</span><span class="tl-desc">Calculators</span></a>
+<a class="tool-card" href="../bmi-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#activity"></use></svg><span class="tl-name">BMI Calculator</span><span class="tl-desc">Calculators</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/calculator/","description":"Free online calculator with scientific functions, parentheses and keyboard support. Fast, private, works offline.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does the % button do?","acceptedAnswer":{"@type":"Answer","text":"It works as a percent operator: 50% becomes 0.5. So 200*50% equals 100, and 50+10% equals 50.1."}},{"@type":"Question","name":"Are the trig functions in degrees or radians?","acceptedAnswer":{"@type":"Answer","text":"Degrees. sin(30) equals 0.5, cos(60) equals 0.5, and tan(45) equals 1."}},{"@type":"Question","name":"What is the difference between log and ln?","acceptedAnswer":{"@type":"Answer","text":"log() is the base-10 logarithm (log(100) = 2) and ln() is the natural logarithm (ln(e) = 1)."}},{"@type":"Question","name":"Why does the calculator show \"Invalid expression\"?","acceptedAnswer":{"@type":"Answer","text":"The expression has a typo, unbalanced parentheses, an unknown word, or an impossible operation such as dividing by zero or taking the square root of a negative number."}},{"@type":"Question","name":"Is my calculation history saved anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. All evaluation happens in your browser and nothing is sent to a server or stored."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Calculators","item":"https://www.example.com/#cat-calculators"},{"@type":"ListItem","position":3,"name":"Calculator","item":"https://www.example.com/tools/calculator/"}]}</script>
+<script>
+var LOGIC={evaluate:function (expr) {
+    'use strict';
+    if (typeof expr !== 'string') throw new Error('Invalid expression');
+    var src = expr.replace(/\s+/g, '');
+    if (!src) throw new Error('Invalid expression');
+
+    // ---------- tokenizer ----------
+    var tokens = [];
+    var i = 0;
+    function isDigit(ch) { return ch >= '0' && ch <= '9'; }
+    function isLetter(ch) {
+      return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
+    }
+    while (i < src.length) {
+      var ch = src[i];
+      if (isDigit(ch) || ch === '.') {
+        var j = i, dots = 0;
+        while (j < src.length && (isDigit(src[j]) || src[j] === '.')) {
+          if (src[j] === '.') dots++;
+          j++;
+        }
+        if (dots > 1) throw new Error('Invalid expression');
+        var num = src.slice(i, j);
+        if (num === '.') throw new Error('Invalid expression');
+        tokens.push({ t: 'num', v: parseFloat(num) });
+        i = j;
+      } else if (isLetter(ch)) {
+        var k = i;
+        while (k < src.length && isLetter(src[k])) k++;
+        tokens.push({ t: 'word', v: src.slice(i, k).toLowerCase() });
+        i = k;
+      } else if ('+-*/^%()'.indexOf(ch) !== -1) {
+        tokens.push({ t: 'op', v: ch });
+        i++;
+      } else {
+        throw new Error('Invalid expression');
+      }
+    }
+
+    var FUNCS = { sqrt: 1, sin: 1, cos: 1, tan: 1, log: 1, ln: 1 };
+    var CONSTS = { pi: Math.PI, e: Math.E };
+
+    // ---------- recursive-descent parser ----------
+    // grammar: expr := term (('+'|'-') term)*
+    //          term := factor (('*'|'/') factor)*
+    //          factor := unary ('^' factor)?        (right-associative)
+    //          unary := ('+'|'-') unary | postfix
+    //          postfix := primary ('%')*            (% is postfix percent: 50% -> 0.5)
+    //          primary := number | const | func '(' expr ')' | '(' expr ')'
+    var pos = 0;
+    function peek() { return tokens[pos]; }
+    function next() { return tokens[pos++]; }
+    function expectOp(v) {
+      var tk = next();
+      if (!tk || tk.t !== 'op' || tk.v !== v) throw new Error('Invalid expression');
+    }
+    function parseExpression() {
+      var v = parseTerm();
+      for (;;) {
+        var tk = peek();
+        if (tk && tk.t === 'op' && (tk.v === '+' || tk.v === '-')) {
+          next();
+          var r = parseTerm();
+          v = tk.v === '+' ? v + r : v - r;
+        } else return v;
+      }
+    }
+    function parseTerm() {
+      var v = parseFactor();
+      for (;;) {
+        var tk = peek();
+        if (tk && tk.t === 'op' && (tk.v === '*' || tk.v === '/')) {
+          next();
+          var r = parseFactor();
+          if (tk.v === '*') v = v * r;
+          else {
+            if (r === 0) throw new Error('Invalid expression');
+            v = v / r;
+          }
+        } else return v;
+      }
+    }
+    function parseFactor() {
+      var base = parseUnary();
+      var tk = peek();
+      if (tk && tk.t === 'op' && tk.v === '^') {
+        next();
+        var v = Math.pow(base, parseFactor());
+        if (!isFinite(v)) throw new Error('Invalid expression');
+        return v;
+      }
+      return base;
+    }
+    function parseUnary() {
+      var tk = peek();
+      if (tk && tk.t === 'op' && (tk.v === '-' || tk.v === '+')) {
+        next();
+        var v = parseUnary();
+        return tk.v === '-' ? -v : v;
+      }
+      return parsePostfix();
+    }
+    function parsePostfix() {
+      var v = parsePrimary();
+      for (;;) {
+        var tk = peek();
+        if (tk && tk.t === 'op' && tk.v === '%') { next(); v = v / 100; }
+        else return v;
+      }
+    }
+    function applyFunc(name, arg) {
+      var rad = arg * Math.PI / 180; // trig functions use degrees
+      if (name === 'sqrt') {
+        if (arg < 0) throw new Error('Invalid expression');
+        return Math.sqrt(arg);
+      }
+      if (name === 'sin') return Math.sin(rad);
+      if (name === 'cos') return Math.cos(rad);
+      if (name === 'tan') {
+        if (Math.abs(Math.cos(rad)) < 1e-15) throw new Error('Invalid expression');
+        return Math.tan(rad);
+      }
+      if (name === 'log') {
+        if (arg <= 0) throw new Error('Invalid expression');
+        return Math.log10(arg);
+      }
+      if (name === 'ln') {
+        if (arg <= 0) throw new Error('Invalid expression');
+        return Math.log(arg);
+      }
+      throw new Error('Invalid expression');
+    }
+    function parsePrimary() {
+      var tk = next();
+      if (!tk) throw new Error('Invalid expression');
+      if (tk.t === 'num') return tk.v;
+      if (tk.t === 'op' && tk.v === '(') {
+        var v = parseExpression();
+        expectOp(')');
+        return v;
+      }
+      if (tk.t === 'word') {
+        if (Object.prototype.hasOwnProperty.call(CONSTS, tk.v)) return CONSTS[tk.v];
+        if (FUNCS[tk.v]) {
+          expectOp('(');
+          var a = parseExpression();
+          expectOp(')');
+          return applyFunc(tk.v, a);
+        }
+      }
+      throw new Error('Invalid expression');
+    }
+
+    var out = parseExpression();
+    if (pos !== tokens.length) throw new Error('Invalid expression');
+    if (typeof out !== 'number' || !isFinite(out)) throw new Error('Invalid expression');
+    return out;
+  }};
+
+    (function(){
+      'use strict';
+      var exprEl = document.getElementById('calc-expr');
+      var liveEl = document.getElementById('calc-live');
+      var sci = document.getElementById('calc-sci');
+      var sciToggle = document.getElementById('calc-sci-toggle');
+      if (!exprEl || !liveEl) return;
+      var expr = '';
+
+      function fmt(v){
+        if (Object.is(v, -0)) v = 0;
+        return String(parseFloat(v.toPrecision(12)));
+      }
+      function render(){ exprEl.textContent = expr === '' ? '0' : expr; }
+      function live(){
+        liveEl.textContent = '';
+        if (expr === '' || /[+\-*/^(.]$/.test(expr)) return;
+        try {
+          var v = LOGIC.evaluate(expr);
+          liveEl.textContent = '= ' + fmt(v);
+        } catch (e) { /* incomplete or invalid: stay silent until = is pressed */ }
+      }
+      function insert(ch){ expr += ch; render(); live(); }
+      function clearAll(){ expr = ''; liveEl.textContent = ''; render(); }
+      function back(){ expr = expr.slice(0, -1); render(); live(); }
+      function negate(){
+        if (expr.charAt(0) === '-') expr = expr.slice(1);
+        else expr = '-' + expr;
+        render(); live();
+      }
+      function equals(){
+        if (expr === '') return;
+        try {
+          var v = LOGIC.evaluate(expr);
+          liveEl.textContent = '';
+          expr = fmt(v);
+          render();
+        } catch (e) {
+          liveEl.textContent = 'Invalid expression';
+        }
+      }
+      function handleButton(btn){
+        if (btn.hasAttribute('data-ch')) { insert(btn.getAttribute('data-ch')); return; }
+        var act = btn.getAttribute('data-act');
+        if (act === 'clear') clearAll();
+        else if (act === 'back') back();
+        else if (act === 'neg') negate();
+        else if (act === 'eq') equals();
+      }
+
+      document.querySelectorAll('.tool-calculator .calc-keys').forEach(function(group){
+        group.addEventListener('click', function(ev){
+          var btn = ev.target.closest('button');
+          if (btn) handleButton(btn);
+        });
+      });
+
+      if (sci && sciToggle) {
+        sciToggle.addEventListener('click', function(){
+          var open = sci.hasAttribute('hidden');
+          if (open) { sci.removeAttribute('hidden'); }
+          else { sci.setAttribute('hidden', ''); }
+          sciToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+
+      document.addEventListener('keydown', function(ev){
+        if (ev.target && /^(INPUT|TEXTAREA|SELECT)$/.test(ev.target.tagName)) return;
+        var k = ev.key;
+        if (/^[0-9]$/.test(k) || k === '.' || k === '+' || k === '-' || k === '*' || k === '/' || k === '^' || k === '%' || k === '(' || k === ')') {
+          insert(k); ev.preventDefault();
+        } else if (k === 'Enter' || k === '=') {
+          equals(); ev.preventDefault();
+        } else if (k === 'Backspace') {
+          back(); ev.preventDefault();
+        } else if (k === 'Escape') {
+          clearAll(); ev.preventDefault();
+        }
+      });
+
+      render();
+    })();
+</script>
+</body>
+</html>

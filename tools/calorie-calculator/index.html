@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calorie Calculator — Daily BMR &amp; TDEE Needs</title>
+<meta name="description" content="Free calorie calculator: estimate daily calorie needs (BMR and TDEE) by age, sex, weight, height and activity level.">
+<meta name="keywords" content="calorie calculator, tdee calculator, bmr calculator, daily calorie needs, calorie deficit calculator">
+<link rel="canonical" href="https://www.example.com/tools/calorie-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calorie Calculator — Daily BMR &amp; TDEE Needs">
+<meta property="og:description" content="Free calorie calculator: estimate daily calorie needs (BMR and TDEE) by age, sex, weight, height and activity level.">
+<meta property="og:url" content="https://www.example.com/tools/calorie-calculator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Calorie Calculator — Daily BMR &amp; TDEE Needs">
+<meta name="twitter:description" content="Free calorie calculator: estimate daily calorie needs (BMR and TDEE) by age, sex, weight, height and activity level.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li aria-current="page">Calorie Calculator</li></ol></nav>
+<h1>Calorie Calculator</h1>
+<div class="tool-body-intro">
+<p>How many calories do you need per day? This free calorie calculator uses the <strong>Mifflin-St Jeor equation</strong> — the most widely used formula for estimating Basal Metabolic Rate (BMR) — then multiplies by your activity level to give your Total Daily Energy Expenditure (TDEE).</p><p>It also shows guideline targets: roughly TDEE minus 500 kcal per day for steady fat loss (about 0.5 kg per week) and TDEE plus 500 for gaining. These are estimates, not medical advice — individual needs vary.</p>
+</div>
+<section class="tool-section tool-calorie-calculator" aria-label="Calorie Calculator">
+
+    <div class="card tool-panel">
+      <div class="field">
+        <label class="label" for="cal-sex">Sex</label>
+        <select class="select" id="cal-sex">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label" for="cal-age">Age (years)</label>
+        <input class="input" id="cal-age" type="number" inputmode="numeric" min="5" max="120" placeholder="e.g. 30">
+      </div>
+      <div class="field">
+        <label class="label" for="cal-w">Weight (kg)</label>
+        <input class="input" id="cal-w" type="number" inputmode="decimal" min="20" max="400" step="0.1" placeholder="e.g. 70">
+      </div>
+      <div class="field">
+        <label class="label" for="cal-h">Height (cm)</label>
+        <input class="input" id="cal-h" type="number" inputmode="decimal" min="80" max="250" step="0.1" placeholder="e.g. 175">
+      </div>
+      <div class="field">
+        <label class="label" for="cal-act">Activity level</label>
+        <select class="select" id="cal-act">
+          <option value="sedentary">Sedentary — desk job, little exercise</option>
+          <option value="light">Light — light exercise 1–3 days/week</option>
+          <option value="moderate">Moderate — moderate exercise 3–5 days/week</option>
+          <option value="active">Active — hard exercise 6–7 days/week</option>
+          <option value="very">Very active — physical job + daily training</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" id="cal-go" type="button">Calculate calories</button>
+      <div class="result" id="cal-out" aria-live="polite"></div>
+      <p class="hint">Estimates only — not medical advice. Individual needs vary.</p>
+      <p class="privacy-note">Your inputs never leave your device — everything runs in your browser.</p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Select your sex, then enter your age, weight and height.</li>
+<li>Choose the activity level closest to your typical week.</li>
+<li>Press Calculate calories to see your BMR, TDEE and guideline targets.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>What is the difference between BMR and TDEE?</summary><div class="faq-a"><p>BMR (Basal Metabolic Rate) is what your body burns at complete rest. TDEE (Total Daily Energy Expenditure) adds the calories burned through activity and exercise on top of BMR.</p></div></details>
+<details><summary>Which formula does this calculator use?</summary><div class="faq-a"><p>The Mifflin-St Jeor equation: for men, 10 x weight(kg) + 6.25 x height(cm) - 5 x age + 5; for women the same with -161 instead of +5. Activity multipliers range from 1.2 (sedentary) to 1.9 (very active).</p></div></details>
+<details><summary>How many calories should I eat to lose weight?</summary><div class="faq-a"><p>A common guideline is about 500 kcal below your TDEE per day, which typically leads to around 0.5 kg of fat loss per week. Do not go below safe minimums without professional guidance.</p></div></details>
+<details><summary>How accurate is this estimate?</summary><div class="faq-a"><p>It is a population-average estimate and can be off by 10% or more for any individual. Track your weight trend over a few weeks and adjust based on real results.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../bmi-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#activity"></use></svg><span class="tl-name">BMI Calculator</span><span class="tl-desc">Calculators</span></a>
+<a class="tool-card" href="../age-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#calendar"></use></svg><span class="tl-name">Age Calculator</span><span class="tl-desc">Calculators</span></a>
+<a class="tool-card" href="../salary-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#briefcase"></use></svg><span class="tl-name">Salary Calculator</span><span class="tl-desc">Calculators</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Calorie Calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/calorie-calculator/","description":"Free calorie calculator: estimate daily calorie needs (BMR and TDEE) by age, sex, weight, height and activity level.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between BMR and TDEE?","acceptedAnswer":{"@type":"Answer","text":"BMR (Basal Metabolic Rate) is what your body burns at complete rest. TDEE (Total Daily Energy Expenditure) adds the calories burned through activity and exercise on top of BMR."}},{"@type":"Question","name":"Which formula does this calculator use?","acceptedAnswer":{"@type":"Answer","text":"The Mifflin-St Jeor equation: for men, 10 x weight(kg) + 6.25 x height(cm) - 5 x age + 5; for women the same with -161 instead of +5. Activity multipliers range from 1.2 (sedentary) to 1.9 (very active)."}},{"@type":"Question","name":"How many calories should I eat to lose weight?","acceptedAnswer":{"@type":"Answer","text":"A common guideline is about 500 kcal below your TDEE per day, which typically leads to around 0.5 kg of fat loss per week. Do not go below safe minimums without professional guidance."}},{"@type":"Question","name":"How accurate is this estimate?","acceptedAnswer":{"@type":"Answer","text":"It is a population-average estimate and can be off by 10% or more for any individual. Track your weight trend over a few weeks and adjust based on real results."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Calculators","item":"https://www.example.com/#cat-calculators"},{"@type":"ListItem","position":3,"name":"Calorie Calculator","item":"https://www.example.com/tools/calorie-calculator/"}]}</script>
+<script>
+var LOGIC={calories:function (input) {
+    'use strict';
+    var FACTORS = { sedentary: 1.2, light: 1.375, moderate: 1.55, active: 1.725, very: 1.9 };
+    var o = input || {};
+    if (o.sex !== 'male' && o.sex !== 'female') throw new Error('Sex must be "male" or "female".');
+    if (!FACTORS[o.activity]) throw new Error('Unknown activity level.');
+    if (!(o.ageYears > 0) || !(o.weightKg > 0) || !(o.heightCm > 0)) {
+      throw new Error('Age, weight and height must be positive numbers.');
+    }
+    // Mifflin-St Jeor equation
+    var bmr = 10 * o.weightKg + 6.25 * o.heightCm - 5 * o.ageYears + (o.sex === 'male' ? 5 : -161);
+    var bmrR = Math.round(bmr);
+    var tdee = Math.round(bmr * FACTORS[o.activity]);
+    return {
+      bmr: bmrR,
+      tdee: tdee,
+      loseHalfKg: tdee - 500,
+      tdeePlus500: tdee + 500
+    };
+  }};
+
+    (function(){
+      'use strict';
+      function $(id){ return document.getElementById(id); }
+      var sex = $('cal-sex'), age = $('cal-age'), w = $('cal-w'),
+          h = $('cal-h'), act = $('cal-act'), go = $('cal-go'), out = $('cal-out');
+      if (!sex || !age || !w || !h || !act || !go || !out) return;
+      function num(n){ return n.toLocaleString('en-US'); }
+      function showError(msg){
+        out.textContent = '';
+        var p = document.createElement('p');
+        p.className = 'error';
+        p.textContent = msg;
+        out.appendChild(p);
+      }
+      go.addEventListener('click', function(){
+        var a = parseFloat(age.value), wt = parseFloat(w.value), ht = parseFloat(h.value);
+        if (!(a > 0) || !(wt > 0) || !(ht > 0)) {
+          showError('Please enter a valid age, weight and height.');
+          return;
+        }
+        var r = LOGIC.calories({ sex: sex.value, ageYears: a, weightKg: wt, heightCm: ht, activity: act.value });
+        out.textContent = '';
+        var big = document.createElement('p');
+        big.className = 'result-big';
+        big.textContent = num(r.tdee) + ' kcal/day';
+        out.appendChild(big);
+        var rows = [
+          ['BMR (at rest)', num(r.bmr) + ' kcal/day'],
+          ['TDEE (with activity)', num(r.tdee) + ' kcal/day'],
+          ['Guideline to lose ~0.5 kg/week', num(r.loseHalfKg) + ' kcal/day'],
+          ['Guideline to gain weight', num(r.tdeePlus500) + ' kcal/day']
+        ];
+        rows.forEach(function(row){
+          var p = document.createElement('p');
+          var label = document.createElement('strong');
+          label.textContent = row[0] + ': ';
+          p.appendChild(label);
+          p.appendChild(document.createTextNode(row[1]));
+          out.appendChild(p);
+        });
+      });
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Age Calculator — Exact Age in Years, Months, Days</title>
+<meta name="description" content="Free age calculator: enter your date of birth to get your exact age in years, months and days, plus total days and next birthday.">
+<meta name="keywords" content="age calculator, calculate age, age in days, date of birth calculator, how old am i">
+<link rel="canonical" href="https://www.example.com/tools/age-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Age Calculator — Exact Age in Years, Months, Days">
+<meta property="og:description" content="Free age calculator: enter your date of birth to get your exact age in years, months and days, plus total days and next birthday.">
+<meta property="og:url" content="https://www.example.com/tools/age-calculator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Age Calculator — Exact Age in Years, Months, Days">
+<meta name="twitter:description" content="Free age calculator: enter your date of birth to get your exact age in years, months and days, plus total days and next birthday.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li aria-current="page">Age Calculator</li></ol></nav>
+<h1>Age Calculator</h1>
+<div class="tool-body-intro">
+<p>Find out your exact age from your date of birth — in years, months and days, not just a rounded number. The calculator also shows your total days, weeks and months alive, and counts down to your next birthday.</p><p>It handles leap years and month lengths correctly, so 29 February birthdays and edge cases like month-end dates come out right. Everything is computed in your browser; no data is stored or sent anywhere.</p>
+</div>
+<section class="tool-section tool-age-calculator" aria-label="Age Calculator">
+
+    <div class="card tool-panel">
+      <div class="field">
+        <label class="label" for="age-dob">Date of birth</label>
+        <input class="input" id="age-dob" type="date" required>
+      </div>
+      <div class="field">
+        <label class="label" for="age-asof">Calculate age as of</label>
+        <input class="input" id="age-asof" type="date">
+        <p class="hint">Defaults to today. Set any date after the date of birth.</p>
+      </div>
+      <button class="btn btn-primary" id="age-go" type="button">Calculate age</button>
+      <div class="result" id="age-out" aria-live="polite"></div>
+      <p class="privacy-note">Your inputs never leave your device — everything runs in your browser.</p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Enter your date of birth using the date picker.</li>
+<li>Pick the &quot;as of&quot; date (defaults to today) to calculate age at any point in time.</li>
+<li>Press Calculate age to see the full breakdown and your next birthday countdown.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>How is age in years, months and days calculated?</summary><div class="faq-a"><p>Full years are counted first, then the remaining full months, then the leftover days — borrowing days from the previous month when needed, which is why month lengths and leap years matter.</p></div></details>
+<details><summary>What happens for a 29 February birthday in a non-leap year?</summary><div class="faq-a"><p>The next birthday is shown on 28 February, the common convention used by most age calculators.</p></div></details>
+<details><summary>Can I calculate someone&#39;s age on a past or future date?</summary><div class="faq-a"><p>Yes. Change the &quot;as of&quot; date to any date after the date of birth to see the age on that day.</p></div></details>
+<details><summary>Is my date of birth stored anywhere?</summary><div class="faq-a"><p>No. The calculation runs entirely in your browser and your dates never leave your device.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../date-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#calendar"></use></svg><span class="tl-name">Date Calculator</span><span class="tl-desc">Calculators</span></a>
+<a class="tool-card" href="../bmi-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#activity"></use></svg><span class="tl-name">BMI Calculator</span><span class="tl-desc">Calculators</span></a>
+<a class="tool-card" href="../calorie-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#flame"></use></svg><span class="tl-name">Calorie Calculator</span><span class="tl-desc">Calculators</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Age Calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/age-calculator/","description":"Free age calculator: enter your date of birth to get your exact age in years, months and days, plus total days and next birthday.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is age in years, months and days calculated?","acceptedAnswer":{"@type":"Answer","text":"Full years are counted first, then the remaining full months, then the leftover days — borrowing days from the previous month when needed, which is why month lengths and leap years matter."}},{"@type":"Question","name":"What happens for a 29 February birthday in a non-leap year?","acceptedAnswer":{"@type":"Answer","text":"The next birthday is shown on 28 February, the common convention used by most age calculators."}},{"@type":"Question","name":"Can I calculate someone's age on a past or future date?","acceptedAnswer":{"@type":"Answer","text":"Yes. Change the \"as of\" date to any date after the date of birth to see the age on that day."}},{"@type":"Question","name":"Is my date of birth stored anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The calculation runs entirely in your browser and your dates never leave your device."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Calculators","item":"https://www.example.com/#cat-calculators"},{"@type":"ListItem","position":3,"name":"Age Calculator","item":"https://www.example.com/tools/age-calculator/"}]}</script>
+<script>
+var LOGIC={age:function (dobISO, asOfISO) {
+    'use strict';
+    function pad(n, w) {
+      var s = String(n);
+      while (s.length < w) s = '0' + s;
+      return s;
+    }
+    function parse(iso, label) {
+      if (typeof iso !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) {
+        throw new Error('Invalid date: ' + label);
+      }
+      var y = parseInt(iso.slice(0, 4), 10);
+      var m = parseInt(iso.slice(5, 7), 10);
+      var d = parseInt(iso.slice(8, 10), 10);
+      var t = Date.UTC(y, m - 1, d);
+      var chk = new Date(t);
+      if (chk.getUTCFullYear() !== y || chk.getUTCMonth() !== m - 1 || chk.getUTCDate() !== d) {
+        throw new Error('Invalid date: ' + label);
+      }
+      return { y: y, m: m, d: d, t: t };
+    }
+    function isLeap(y) { return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0; }
+
+    var d1 = parse(dobISO, 'dob');
+    var d2 = parse(asOfISO, 'asOf');
+    if (d2.t < d1.t) throw new Error('The as-of date is before the date of birth.');
+
+    var years = d2.y - d1.y;
+    var months = d2.m - d1.m;
+    var days = d2.d - d1.d;
+    if (days < 0) {
+      months -= 1;
+      var prevMonthLen = new Date(Date.UTC(d2.y, d2.m - 1, 0)).getUTCDate();
+      days += prevMonthLen;
+    }
+    if (months < 0) { years -= 1; months += 12; }
+
+    var totalDays = Math.round((d2.t - d1.t) / 86400000);
+
+    function birthdayIn(year) {
+      var mm = d1.m, dd = d1.d;
+      if (mm === 2 && dd === 29 && !isLeap(year)) dd = 28; // Feb 29 -> Feb 28 in non-leap years
+      return { t: Date.UTC(year, mm - 1, dd), iso: pad(year, 4) + '-' + pad(mm, 2) + '-' + pad(dd, 2) };
+    }
+    var next = birthdayIn(d2.y);
+    if (next.t < d2.t) next = birthdayIn(d2.y + 1);
+    var nextBirthdayInDays = Math.round((next.t - d2.t) / 86400000);
+
+    return {
+      years: years,
+      months: months,
+      days: days,
+      totalDays: totalDays,
+      totalMonths: years * 12 + months,
+      totalWeeks: Math.floor(totalDays / 7),
+      nextBirthdayInDays: nextBirthdayInDays,
+      nextBirthdayISO: next.iso
+    };
+  }};
+
+    (function(){
+      'use strict';
+      function $(id){ return document.getElementById(id); }
+      var dob = $('age-dob'), asof = $('age-asof'), out = $('age-out'), go = $('age-go');
+      if (!dob || !asof || !out || !go) return;
+      function todayISO(){
+        var d = new Date();
+        function p(n){ return (n < 10 ? '0' : '') + n; }
+        return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+      }
+      asof.value = todayISO();
+      function fmtDate(iso){
+        var parts = iso.split('-');
+        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        return parseInt(parts[2], 10) + ' ' + months[parseInt(parts[1], 10) - 1] + ' ' + parts[0];
+      }
+      function num(n){ return n.toLocaleString('en-US'); }
+      go.addEventListener('click', function(){
+        out.textContent = '';
+        if (!dob.value) {
+          var e1 = document.createElement('p');
+          e1.className = 'error';
+          e1.textContent = 'Please enter a date of birth.';
+          out.appendChild(e1);
+          return;
+        }
+        var asOfVal = asof.value || todayISO();
+        var r;
+        try {
+          r = LOGIC.age(dob.value, asOfVal);
+        } catch (err) {
+          var e2 = document.createElement('p');
+          e2.className = 'error';
+          e2.textContent = err && err.message ? err.message : 'Invalid dates.';
+          out.appendChild(e2);
+          return;
+        }
+        var big = document.createElement('p');
+        big.className = 'result-big';
+        big.textContent = r.years + ' years, ' + r.months + ' months, ' + r.days + ' days';
+        out.appendChild(big);
+        var rows = [
+          ['Total days alive', num(r.totalDays)],
+          ['Total weeks alive', num(r.totalWeeks)],
+          ['Total months alive', num(r.totalMonths)],
+          ['Next birthday', fmtDate(r.nextBirthdayISO) + ' (in ' + num(r.nextBirthdayInDays) + ' days)']
+        ];
+        rows.forEach(function(row){
+          var p = document.createElement('p');
+          var label = document.createElement('strong');
+          label.textContent = row[0] + ': ';
+          p.appendChild(label);
+          p.appendChild(document.createTextNode(row[1]));
+          out.appendChild(p);
+        });
+      });
+    })();
+</script>
+</body>
+</html>
