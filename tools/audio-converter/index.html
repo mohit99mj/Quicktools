@@ -177,7 +177,8 @@
         bar.style.width = Math.round(p * 100) + '%';
       }
       function status(t){ statusEl.textContent = t; statusEl.hidden = !t; }
-      function showError(t){ errEl.textContent = t; errEl.hidden = false; }
+      function dbg(e){ var m=(e&&e.message)?String(e.message):''; return m?m.slice(0,220):'the file may be corrupt or in an unsupported format. Try a different file.'; }
+function showError(t){ errEl.textContent = t; errEl.hidden = false; }
       function hideError(){ errEl.textContent = ''; errEl.hidden = true; }
       /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
       var qpStage = '';
@@ -282,7 +283,7 @@
           if(/memory/i.test(msg)){
             showError('Ran out of memory while processing — try a smaller audio file.');
           } else {
-            showError('Conversion failed — the file may be corrupt or in an unsupported format. Try a different file.');
+            showError('Conversion failed: ' + dbg(e));
           }
         }).then(function(){
           pHide();
