@@ -6,11 +6,11 @@
 <title>Speed Test — Internet Speed Test Online</title>
 <meta name="description" content="Free internet speed test: measure ping, jitter and download speed to our CDN in your browser. Honest estimates — no upload test.">
 <meta name="keywords" content="speed test, internet speed test, check internet speed, download speed test">
-<link rel="canonical" href="https://www.example.com/tools/speed-test/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/speed-test/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Speed Test — Internet Speed Test Online">
 <meta property="og:description" content="Free internet speed test: measure ping, jitter and download speed to our CDN in your browser. Honest estimates — no upload test.">
-<meta property="og:url" content="https://www.example.com/tools/speed-test/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/speed-test/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Speed Test — Internet Speed Test Online">
 <meta name="twitter:description" content="Free internet speed test: measure ping, jitter and download speed to our CDN in your browser. Honest estimates — no upload test.">
@@ -19,8 +19,48 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
-.tool-speed-test .tool-speed-test-honest{border-left:4px solid var(--warn);padding:.75rem 1rem;background:var(--surface);}.tool-speed-test .tool-speed-test-progress{height:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:1rem 0;}.tool-speed-test .progress-bar{height:100%;background:var(--accent);transition:width .2s;}.tool-speed-test .result-big{font-size:1.5rem;}
+.tool-speed-test .tool-speed-test-honest{border-left:4px solid var(--warn);padding:.75rem 1rem;background:var(--surface);}
+/* --- Live gauge experience --- */
+.st-phases{list-style:none;margin:0 0 1.25rem;padding:0;display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;}
+.st-phases li{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .95rem;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--muted);font-weight:600;font-size:.9rem;transition:border-color .2s,background-color .2s,color .2s;}
+.st-pip{width:14px;height:14px;border-radius:50%;background:var(--line);flex:none;position:relative;}
+.st-phases li.is-active{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-strong);}
+.st-phases li.is-active .st-pip{background:var(--accent);animation:st-pip-pulse 1s ease-in-out infinite;}
+.st-phases li.is-done{border-color:var(--accent);color:var(--accent-strong);}
+.st-phases li.is-done .st-pip{background:var(--accent);}
+.st-phases li.is-done .st-pip::after{content:'\2713';color:#fff;font-size:9px;line-height:14px;display:block;text-align:center;font-weight:700;}
+@keyframes st-pip-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.45;transform:scale(.82);}}
+.st-gauge-wrap{position:relative;max-width:360px;margin:0 auto;}
+.st-gauge{display:block;width:100%;height:auto;}
+.st-ticks line{stroke:#9aa5b1;stroke-width:2;}
+.st-ticklabels{font-size:12px;fill:#5b6470;}
+.st-readout{position:absolute;left:0;right:0;top:52%;transform:translateY(-50%);text-align:center;pointer-events:none;}
+.st-bigval{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;font-size:clamp(2.4rem,13vw,3.2rem);line-height:1;color:var(--ink);font-variant-numeric:tabular-nums;}
+.st-bigunit{font-weight:700;color:var(--muted);font-size:1rem;margin-top:.25rem;letter-spacing:.04em;text-transform:uppercase;}
+.st-shimmer{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:0;transition:opacity .3s;border-radius:12px;}
+.st-gauge-wrap.is-measuring .st-shimmer{opacity:1;}
+.st-shimmer::before{content:'';position:absolute;top:-20%;bottom:-20%;left:0;width:35%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:translateX(-130%) skewX(-12deg);animation:st-sweep 1.6s ease-in-out infinite;}
+@keyframes st-sweep{to{transform:translateX(430%) skewX(-12deg);}}
+.st-micro{min-height:1.6em;text-align:center;font-size:.9rem;color:var(--muted);margin:.75rem 0 .25rem;font-variant-numeric:tabular-nums;}
+.st-phase{text-align:center;min-height:1.5em;}
+.st-actions{text-align:center;margin:1rem 0 .25rem;}
+.st-actions .btn{width:100%;max-width:320px;}
+.st-actions .btn:disabled{opacity:.75;cursor:wait;}
+.st-result{margin-top:1.25rem;}
+.st-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1rem;}
+.st-stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:.7rem .5rem;text-align:center;}
+.st-stat .hint{display:block;margin-bottom:.25rem;}
+.st-stat strong{font-size:1.15rem;font-variant-numeric:tabular-nums;}
+.st-verdict{border-left:4px solid var(--accent);background:var(--accent-soft);padding:.75rem 1rem;border-radius:var(--radius-sm);font-weight:600;color:var(--accent-strong);}
+.st-error{border-left:4px solid #b91c1c;background:#fef2f2;padding:.75rem 1rem;border-radius:var(--radius-sm);color:#7f1d1d;}
+@media (prefers-reduced-motion: reduce){
+  .st-shimmer{display:none;}
+  .st-phases li.is-active .st-pip,.st-shimmer::before{animation:none;}
+  .st-phases li,.st-phases li.is-active{transition:none;}
+}
 </style>
 </head>
 <body>
@@ -49,15 +89,66 @@
 <p>Run a quick <strong>speed test</strong>: we measure round-trip ping and jitter to this site and to our CDN, then download a real file to estimate your download throughput. Results appear in seconds.</p><p>This is a browser-based estimate of your connection to our CDN (jsDelivr), not a lab-grade test — other servers may be faster or slower.</p>
 </div>
 <section class="tool-section tool-speed-test" aria-label="Internet Speed Test">
-
     <div class="card tool-panel">
       <p class="alert tool-speed-test-honest"><strong>Browser-based estimate</strong> of your connection to our CDN (jsDelivr). Not a lab-grade test. Upload speed is <strong>not measured</strong> — there is no server to upload to.</p>
-      <button class="btn btn-primary" id="st-go">Start test</button>
-      <div class="progress tool-speed-test-progress" id="st-progress" hidden>
-        <div class="progress-bar" id="st-bar" style="width:0%"></div>
+
+      <ol class="st-phases" id="st-phases" aria-label="Test phases">
+        <li data-phase="ping"><span class="st-pip" aria-hidden="true"></span><span>Ping</span></li>
+        <li data-phase="download"><span class="st-pip" aria-hidden="true"></span><span>Download</span></li>
+        <li data-phase="result"><span class="st-pip" aria-hidden="true"></span><span>Result</span></li>
+      </ol>
+
+      <div class="st-gauge-wrap" id="st-gauge-wrap">
+        <svg class="st-gauge" viewBox="0 0 320 190" role="img" aria-label="Live speed gauge">
+          <defs>
+            <linearGradient id="st-grad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#0e7c66"/>
+              <stop offset="1" stop-color="#2dd4a7"/>
+            </linearGradient>
+          </defs>
+          <path d="M 35 160 A 125 125 0 0 1 285 160" fill="none" stroke="#e4e8ec" stroke-width="14" stroke-linecap="round"/>
+          <path id="st-gauge-fill" d="M 35 160 A 125 125 0 0 1 285 160" fill="none" stroke="url(#st-grad)" stroke-width="14" stroke-linecap="round" stroke-dasharray="392.7" stroke-dashoffset="392.7"/>
+          <g class="st-ticks" aria-hidden="true">
+            <line x1="50" y1="160" x2="38" y2="160"/>
+            <line x1="82.2" y1="82.2" x2="73.7" y2="73.7"/>
+            <line x1="160" y1="50" x2="160" y2="38"/>
+            <line x1="237.8" y1="82.2" x2="246.3" y2="73.7"/>
+            <line x1="270" y1="160" x2="282" y2="160"/>
+          </g>
+          <g class="st-ticklabels" text-anchor="middle" aria-hidden="true">
+            <text x="72" y="164">0</text>
+            <text x="160" y="76" id="st-tick-mid">12.5</text>
+            <text x="248" y="164" id="st-tick-max">25</text>
+          </g>
+          <g id="st-needle" transform="rotate(0 160 160)">
+            <line x1="160" y1="160" x2="62" y2="160" stroke="#0d6e5f" stroke-width="4" stroke-linecap="round"/>
+          </g>
+          <circle cx="160" cy="160" r="10" fill="#0d6e5f"/>
+          <circle cx="160" cy="160" r="4" fill="#ffffff"/>
+        </svg>
+        <div class="st-shimmer" aria-hidden="true"></div>
+        <div class="st-readout">
+          <div class="st-bigval" id="st-bigval">&mdash;</div>
+          <div class="st-bigunit" id="st-bigunit">Mbps</div>
+        </div>
       </div>
-      <p class="hint" id="st-phase" aria-live="polite"></p>
-      <div class="result" id="st-out" aria-live="polite"></div>
+
+      <p class="st-micro" id="st-micro">Tap &ldquo;Start test&rdquo; to measure your connection.</p>
+      <p class="hint st-phase" id="st-phase" role="status"></p>
+
+      <div class="st-actions">
+        <button class="btn btn-primary" id="st-go">Start test</button>
+      </div>
+
+      <div class="st-result" id="st-result" hidden>
+        <div class="st-stats">
+          <div class="st-stat"><span class="hint">Ping</span><strong id="st-r-ping">&mdash;</strong></div>
+          <div class="st-stat"><span class="hint">Jitter</span><strong id="st-r-jitter">&mdash;</strong></div>
+          <div class="st-stat"><span class="hint">Download</span><strong id="st-r-dl">&mdash;</strong></div>
+        </div>
+        <p class="st-verdict" id="st-verdict"></p>
+        <p class="hint">Median of samples; download measured against jsDelivr CDN files. Upload speed is not measured — this is an estimate, not a professional test.</p>
+      </div>
     </div>
 </section>
 <div class="steps">
@@ -104,20 +195,41 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Internet Speed Test","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/speed-test/","description":"Free internet speed test: measure ping, jitter and download speed to our CDN in your browser. Honest estimates — no upload test.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Internet Speed Test","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/speed-test/","description":"Free internet speed test: measure ping, jitter and download speed to our CDN in your browser. Honest estimates — no upload test.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does this speed test measure?","acceptedAnswer":{"@type":"Answer","text":"Ping (median round-trip latency over 10 samples), jitter (average variation between consecutive samples), and download throughput measured by fetching a real CDN file three times and taking the median."}},{"@type":"Question","name":"Why is there no upload speed test?","acceptedAnswer":{"@type":"Answer","text":"Upload speed requires a server to receive the data, and this site has no backend — everything runs in your browser. The test honestly reports download and latency only."}},{"@type":"Question","name":"Why is my download speed lower than my plan advertises?","acceptedAnswer":{"@type":"Answer","text":"Browser-based tests add overhead from encryption, the JavaScript runtime, and shared network paths. It is an estimate of real-world CDN throughput, not a lab measurement. Wi-Fi and other devices on the network also affect it."}},{"@type":"Question","name":"Should I trust a single result?","acceptedAnswer":{"@type":"Answer","text":"Run the test two or three times and compare. Speed varies with network congestion, time of day, and what else is using your connection."}},{"@type":"Question","name":"Does the test use my data allowance?","acceptedAnswer":{"@type":"Answer","text":"Yes, a little: the download phase fetches a library file three times. Each run uses only a few megabytes."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Internet Tools","item":"https://www.example.com/#cat-internet-tools"},{"@type":"ListItem","position":3,"name":"Internet Speed Test","item":"https://www.example.com/tools/speed-test/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Internet Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-internet-tools"},{"@type":"ListItem","position":3,"name":"Internet Speed Test","item":"https://mohit99mj.github.io/Quicktools/tools/speed-test/"}]}</script>
 <script>
-
     (function(){
       'use strict';
+      /* ---- Live gauge: semicircle r=125, arc length = PI*r, fraction -> dashoffset & needle rotate(frac*180deg) ---- */
+      var ARC = Math.PI * 125;
       var go = document.getElementById('st-go');
-      var out = document.getElementById('st-out');
-      var phase = document.getElementById('st-phase');
-      var progress = document.getElementById('st-progress');
-      var bar = document.getElementById('st-bar');
-      function setPhase(t){ if (phase) phase.textContent = t; }
-      function setBar(p){ if (bar) bar.style.width = Math.round(p) + '%'; if (progress) progress.hidden = false; }
+      var phaseLine = document.getElementById('st-phase');
+      var micro = document.getElementById('st-micro');
+      var resultPanel = document.getElementById('st-result');
+      var gaugeWrap = document.getElementById('st-gauge-wrap');
+      var gaugeFill = document.getElementById('st-gauge-fill');
+      var needle = document.getElementById('st-needle');
+      var bigVal = document.getElementById('st-bigval');
+      var bigUnit = document.getElementById('st-bigunit');
+      var tickMid = document.getElementById('st-tick-mid');
+      var tickMax = document.getElementById('st-tick-max');
+      var rPing = document.getElementById('st-r-ping');
+      var rJitter = document.getElementById('st-r-jitter');
+      var rDl = document.getElementById('st-r-dl');
+      var verdictEl = document.getElementById('st-verdict');
+      var pills = Array.prototype.slice.call(document.querySelectorAll('#st-phases li'));
+      var reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      var testing = false, mode = 'idle';
+      var rafId = 0, loopTimer = 0;
+      var lastNumPaint = 0, lastMicroPaint = 0;
+      var smooth = 0, scaleMax = 25;
+      var pingSamples = [], dlRuns = [];
+      var totalBytes = 0, history = [], lastSnap = 0;
+      var currentRun = 0, totalRuns = 3;
+
       function median(a){
         var s = a.slice().sort(function(x, y){ return x - y; });
         var m = s.length >> 1;
@@ -136,48 +248,127 @@
             .catch(function(){ resolve(null); });
         });
       }
-      function render(pingMs, jitMs, downMbps){
-        if (!out) return;
-        out.innerHTML = '';
-        var items = [
-          ['Ping', pingMs === null ? '—' : pingMs.toFixed(0) + ' ms'],
-          ['Jitter', jitMs === null ? '—' : jitMs.toFixed(0) + ' ms'],
-          ['Download', downMbps === null ? '—' : downMbps.toFixed(1) + ' Mbps']
-        ];
-        for (var i = 0; i < items.length; i += 1){
-          var p = document.createElement('p');
-          var label = document.createElement('span');
-          label.className = 'hint';
-          label.textContent = items[i][0] + ': ';
-          var val = document.createElement('strong');
-          val.className = 'result-big';
-          val.textContent = items[i][1];
-          p.appendChild(label);
-          p.appendChild(val);
-          out.appendChild(p);
-        }
-        var note = document.createElement('p');
-        note.className = 'hint';
-        note.textContent = 'Median of samples; download measured against jsDelivr CDN files. Upload speed is not measured.';
-        out.appendChild(note);
+      function fmtMB(b){ return (b / 1048576).toFixed(1) + ' MB'; }
+      function fmtScale(v){ return (v % 1 === 0) ? String(v) : v.toFixed(1); }
+      function setPhase(t){ if (phaseLine) phaseLine.textContent = t; }
+      function setPillState(idx, cls){
+        var li = pills[idx];
+        if (!li) return;
+        li.classList.remove('is-active', 'is-done');
+        if (cls) li.classList.add(cls);
       }
-      function downloadRun(runIdx, totalRuns){
+      function updateScaleLabels(){
+        tickMid.textContent = fmtScale(scaleMax / 2);
+        tickMax.textContent = fmtScale(scaleMax);
+      }
+      function paintGauge(frac){
+        frac = Math.max(0, Math.min(1, frac));
+        gaugeFill.style.strokeDashoffset = (ARC * (1 - frac)).toFixed(1);
+        needle.setAttribute('transform', 'rotate(' + (frac * 180).toFixed(1) + ' 160 160)');
+      }
+      function windowedMbps(){
+        var n = history.length;
+        if (n < 2) return smooth;
+        var now = history[n - 1].t, cut = now - 1200, base = history[n - 1], i;
+        for (i = n - 2; i >= 0; i -= 1){
+          if (history[i].t < cut) break;
+          base = history[i];
+        }
+        var dt = (now - base.t) / 1000;
+        if (dt < 0.25) return smooth;
+        return ((history[n - 1].bytes - base.bytes) * 8) / (dt * 1000000);
+      }
+      function tick(now){
+        if (!testing) return;
+        if (mode === 'ping' && pingSamples.length){
+          var last = pingSamples[pingSamples.length - 1];
+          smooth = reduced ? last : smooth + (last - smooth) * 0.3;
+          paintGauge(Math.min(smooth / 200, 1));
+          if (reduced || now - lastNumPaint > 250){
+            bigVal.textContent = smooth.toFixed(0);
+            bigUnit.textContent = 'ms';
+            lastNumPaint = now;
+          }
+        } else if (mode === 'download'){
+          var inst = windowedMbps();
+          smooth = reduced ? inst : smooth + (inst - smooth) * 0.25;
+          if (smooth > scaleMax * 0.85){ scaleMax *= 2; updateScaleLabels(); }
+          paintGauge(Math.min(smooth / scaleMax, 1));
+          if (reduced || now - lastNumPaint > 250){
+            bigVal.textContent = smooth.toFixed(1);
+            bigUnit.textContent = 'Mbps';
+            lastNumPaint = now;
+          }
+          if (now - lastMicroPaint > 500){
+            micro.textContent = 'Run ' + (currentRun + 1) + '/' + totalRuns + ' \u00B7 ' + fmtMB(totalBytes) + ' downloaded';
+            lastMicroPaint = now;
+          }
+        }
+      }
+      function startLoop(){
+        stopLoop();
+        if (reduced){
+          loopTimer = setInterval(function(){ tick(performance.now()); }, 1000);
+        } else {
+          var step = function(now){
+            if (!testing) return;
+            tick(now || performance.now());
+            rafId = requestAnimationFrame(step);
+          };
+          rafId = requestAnimationFrame(step);
+        }
+      }
+      function stopLoop(){
+        cancelAnimationFrame(rafId);
+        clearInterval(loopTimer);
+        rafId = 0; loopTimer = 0;
+      }
+      function verdictText(dl){
+        if (dl === null) return 'Download could not be measured \u2014 check your connection and try again.';
+        if (dl < 3) return 'Basic browsing and SD video should work; HD streaming and video calls may struggle.';
+        if (dl < 10) return 'Good for HD streaming, video calls, and everyday browsing.';
+        if (dl < 50) return 'Good for 4K streaming, online gaming, and large downloads.';
+        return 'Excellent \u2014 fast enough for 4K streaming, gaming, and big file downloads.';
+      }
+      function showResult(pingMs, jitMs, downMbps){
+        rPing.textContent = pingMs === null ? '\u2014' : pingMs.toFixed(0) + ' ms';
+        rJitter.textContent = jitMs === null ? '\u2014' : jitMs.toFixed(0) + ' ms';
+        rDl.textContent = downMbps === null ? '\u2014' : downMbps.toFixed(1) + ' Mbps';
+        verdictEl.textContent = 'Verdict: ' + verdictText(downMbps);
+        resultPanel.hidden = false;
+      }
+      function fail(msg){
+        testing = false; stopLoop();
+        go.disabled = false;
+        go.textContent = 'Try again';
+        gaugeWrap.classList.remove('is-measuring');
+        setPillState(0, null); setPillState(1, null); setPillState(2, null);
+        setPhase(msg || 'Network test failed. Check your connection and try again.');
+        micro.textContent = '';
+      }
+      function downloadRun(runIdx){
         var url = 'https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js?dl=' + Math.random().toString(36).slice(2);
         var t0 = performance.now();
         return fetch(url, { cache: 'no-store' }).then(function(res){
           if (!res.ok || !res.body) throw new Error('bad response');
           var reader = res.body.getReader();
-          var total = Number(res.headers.get('content-length')) || 0;
           var received = 0;
+          history.push({ t: performance.now(), bytes: totalBytes });
           function pump(){
             return reader.read().then(function(r){
               if (r.done){
                 var secs = (performance.now() - t0) / 1000;
                 return { bytes: received, secs: secs };
               }
-              received += (r.value ? r.value.length : 0);
-              var frac = total ? Math.min(received / total, 1) : 0.5;
-              setBar(50 + ((runIdx + frac) / totalRuns) * 50);
+              var chunk = r.value ? r.value.length : 0;
+              received += chunk;
+              totalBytes += chunk;
+              var t = performance.now();
+              if (t - lastSnap > 100){
+                history.push({ t: t, bytes: totalBytes });
+                if (history.length > 80) history.splice(0, history.length - 80);
+                lastSnap = t;
+              }
               return pump();
             });
           }
@@ -186,59 +377,80 @@
       }
       if (!go) return;
       go.addEventListener('click', function(){
+        if (testing) return;
+        /* reset */
+        testing = true; mode = 'ping';
+        smooth = 0; scaleMax = 25; updateScaleLabels();
+        pingSamples = []; dlRuns = [];
+        totalBytes = 0; history = []; lastSnap = 0; currentRun = 0;
+        paintGauge(0);
+        bigVal.textContent = '\u2014'; bigUnit.textContent = 'Mbps';
+        resultPanel.hidden = true;
+        setPillState(0, 'is-active'); setPillState(1, null); setPillState(2, null);
+        gaugeWrap.classList.add('is-measuring');
         go.disabled = true;
-        setBar(0);
-        setPhase('Measuring ping…');
-        if (out) out.innerHTML = '';
+        go.textContent = 'Testing\u2026';
+        setPhase('Phase 1 of 3 \u2014 Measuring ping\u2026');
+        micro.textContent = 'Ping 0/10';
+        startLoop();
         var urls = [
           '../../assets/css/main.css?ping=' + Math.random().toString(36).slice(2),
           'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1/package.json?ping=' + Math.random().toString(36).slice(2)
         ];
-        var samples = [];
         var seq = Promise.resolve();
         urls.forEach(function(u){
           for (var i = 0; i < 5; i += 1){
             (function(url){
               seq = seq.then(function(){
                 return pingOnce(url).then(function(ms){
-                  if (ms !== null) samples.push(ms);
-                  setBar((samples.length / 10) * 50);
+                  if (ms !== null){
+                    pingSamples.push(ms);
+                    micro.textContent = 'Ping ' + pingSamples.length + '/10 \u00B7 ' + ms.toFixed(0) + ' ms';
+                  }
                 });
               });
             })(u);
           }
         });
         seq.then(function(){
-          if (samples.length < 3) throw new Error('ping failed');
-          var pingMs = median(samples);
-          var jitMs = jitter(samples);
-          setPhase('Measuring download speed (3 runs)…');
-          var runs = [];
+          if (pingSamples.length < 3) throw new Error('ping failed');
+          var pingMs = median(pingSamples);
+          var jitMs = jitter(pingSamples);
+          setPillState(0, 'is-done');
+          setPillState(1, 'is-active');
+          mode = 'download';
+          smooth = 0;
+          setPhase('Phase 2 of 3 \u2014 Measuring download speed\u2026');
           var chain = Promise.resolve();
-          for (var r = 0; r < 3; r += 1){
+          for (var r = 0; r < totalRuns; r += 1){
             (function(idx){
               chain = chain.then(function(){
-                setPhase('Measuring download speed (run ' + (idx + 1) + ' of 3)…');
-                return downloadRun(idx, 3).then(function(res){
+                currentRun = idx;
+                micro.textContent = 'Run ' + (idx + 1) + '/' + totalRuns + ' \u00B7 ' + fmtMB(totalBytes) + ' downloaded';
+                return downloadRun(idx).then(function(res){
                   var mbps = (res.bytes * 8) / (res.secs * 1000000);
-                  runs.push(mbps);
-                  setBar(50 + ((idx + 1) / 3) * 50);
+                  dlRuns.push(mbps);
                 });
               });
             })(r);
           }
           return chain.then(function(){
-            go.disabled = false;
-            if (progress) progress.hidden = true;
+            var downMbps = dlRuns.length ? median(dlRuns) : null;
+            testing = false; stopLoop();
+            setPillState(1, 'is-done');
+            setPillState(2, 'is-done');
+            gaugeWrap.classList.remove('is-measuring');
+            var finalFrac = downMbps === null ? 0 : Math.min(downMbps / scaleMax, 1);
+            paintGauge(finalFrac);
+            bigVal.textContent = downMbps === null ? '\u2014' : downMbps.toFixed(1);
+            bigUnit.textContent = 'Mbps';
             setPhase('Done.');
-            render(pingMs, jitMs, median(runs));
+            micro.textContent = fmtMB(totalBytes) + ' downloaded across ' + dlRuns.length + ' runs';
+            showResult(pingMs, jitMs, downMbps);
+            go.disabled = false;
+            go.textContent = 'Run again';
           });
-        }).catch(function(){
-          go.disabled = false;
-          if (progress) progress.hidden = true;
-          setPhase('');
-          if (out) out.innerHTML = '<p class="error">Network test failed. Check your connection and try again.</p>';
-        });
+        }).catch(function(){ fail(); });
       });
     })();
 </script>

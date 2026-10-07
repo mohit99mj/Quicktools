@@ -6,11 +6,11 @@
 <title>Text to PDF — Convert Text to PDF Online</title>
 <meta name="description" content="Turn plain text into a formatted PDF document free online. Paste text or upload a .txt file, set a title, download — private, in your browser.">
 <meta name="keywords" content="text to pdf, txt to pdf, convert text to pdf, plain text pdf">
-<link rel="canonical" href="https://www.example.com/tools/text-to-pdf/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/text-to-pdf/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Text to PDF — Convert Text to PDF Online">
 <meta property="og:description" content="Turn plain text into a formatted PDF document free online. Paste text or upload a .txt file, set a title, download — private, in your browser.">
-<meta property="og:url" content="https://www.example.com/tools/text-to-pdf/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/text-to-pdf/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Text to PDF — Convert Text to PDF Online">
 <meta name="twitter:description" content="Turn plain text into a formatted PDF document free online. Paste text or upload a .txt file, set a title, download — private, in your browser.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 </head>
 <body>
 <a class="visually-hidden" href="#main">Skip to content</a>
@@ -109,9 +111,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Text to PDF","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/text-to-pdf/","description":"Turn plain text into a formatted PDF document free online. Paste text or upload a .txt file, set a title, download — private, in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Text to PDF","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/text-to-pdf/","description":"Turn plain text into a formatted PDF document free online. Paste text or upload a .txt file, set a title, download — private, in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this text-to-PDF converter free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free with no sign-up. The PDF is generated on your device by the pdf-lib library."}},{"@type":"Question","name":"Can I convert a .txt file to PDF?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use the file picker to load a .txt file — its contents fill the text box, then generate the PDF as usual."}},{"@type":"Question","name":"What formatting does the PDF have?","acceptedAnswer":{"@type":"Answer","text":"A title heading, body text in Helvetica at 11pt on A4 pages, with automatic word wrapping and page breaks. Blank lines between paragraphs are preserved."}},{"@type":"Question","name":"Does it keep rich formatting like bold or tables?","acceptedAnswer":{"@type":"Answer","text":"No — this tool works with plain text only. Styling such as bold, italics or tables is not preserved."}},{"@type":"Question","name":"Is my text uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The PDF is assembled entirely in your browser, so your text never leaves your device."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"File Converters","item":"https://www.example.com/#cat-file-converters"},{"@type":"ListItem","position":3,"name":"Text to PDF","item":"https://www.example.com/tools/text-to-pdf/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"File Converters","item":"https://mohit99mj.github.io/Quicktools/#cat-file-converters"},{"@type":"ListItem","position":3,"name":"Text to PDF","item":"https://mohit99mj.github.io/Quicktools/tools/text-to-pdf/"}]}</script>
 <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
 <script>
 var LOGIC={wrapLines:(text, maxChars) => {
@@ -159,6 +163,16 @@ var LOGIC={wrapLines:(text, maxChars) => {
       var out = document.getElementById('ttp-out');
       function setStatus(html){ if (out) out.innerHTML = html; }
       function escapeForName(s){ return s.replace(/[^a-z0-9-_ ]/gi, '').trim() || 'document'; }
+      function fmtSize(bytes){
+        if(bytes < 1024){ return bytes + ' B'; }
+        var kb = bytes / 1024;
+        if(kb < 1024){ return kb.toFixed(1) + ' KB'; }
+        return (kb / 1024).toFixed(2) + ' MB';
+      }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       if (fileEl && textEl){
         fileEl.addEventListener('change', function(){
           var f = fileEl.files && fileEl.files[0];
@@ -182,8 +196,12 @@ var LOGIC={wrapLines:(text, maxChars) => {
           return;
         }
         var title = titleEl && titleEl.value.trim() ? titleEl.value.trim() : 'Document';
+        pShow({ title: 'Creating PDF…', stage: 'Building PDF…' });
+        /* Deferred so the overlay paints before the synchronous PDF build. */
+        setTimeout(function(){
         try {
           var doc = PDFLib.PDFDocument.create();
+          var pageCount = 1;
           var font = doc.embedStandardFont(PDFLib.StandardFonts.Helvetica);
           var bold = doc.embedStandardFont(PDFLib.StandardFonts.HelveticaBold);
           var pageW = 595.28, pageH = 841.89, margin = 56;
@@ -196,7 +214,7 @@ var LOGIC={wrapLines:(text, maxChars) => {
           y -= titleSize + 18;
           for (var i = 0; i < lines.length; i += 1){
             var lh = bodySize + lineGap;
-            if (y - lh < margin){ page = doc.addPage([pageW, pageH]); y = pageH - margin; }
+            if (y - lh < margin){ page = doc.addPage([pageW, pageH]); y = pageH - margin; pageCount++; }
             if (lines[i]) page.drawText(lines[i], { x: margin, y: y - lh, size: bodySize, font: font, maxWidth: pageW - margin * 2 });
             y -= lh;
           }
@@ -212,12 +230,17 @@ var LOGIC={wrapLines:(text, maxChars) => {
             a.remove();
             setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
             setStatus('<p>PDF generated and downloaded.</p>');
+            pSum(out, '<strong>PDF created</strong> — ' + pageCount + ' page' + (pageCount === 1 ? '' : 's') + ' • ' + fmtSize(u8.length));
+            pHide();
           }).catch(function(){
+            pHide();
             setStatus('<p class="error">Something went wrong while building the PDF.</p>');
           });
         } catch (e) {
+          pHide();
           setStatus('<p class="error">Something went wrong while building the PDF.</p>');
         }
+        }, 40);
       });
     })();
 </script>

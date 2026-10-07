@@ -6,11 +6,11 @@
 <title>ZIP Files Online — Compress Files to ZIP</title>
 <meta name="description" content="Bundle files into a ZIP archive free online. Add multiple files, see live progress, and download your .zip — all in your browser.">
 <meta name="keywords" content="zip files online, create zip online, zip file maker, compress files to zip">
-<link rel="canonical" href="https://www.example.com/tools/files-to-zip/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/files-to-zip/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ZIP Files Online — Compress Files to ZIP">
 <meta property="og:description" content="Bundle files into a ZIP archive free online. Add multiple files, see live progress, and download your .zip — all in your browser.">
-<meta property="og:url" content="https://www.example.com/tools/files-to-zip/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/files-to-zip/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ZIP Files Online — Compress Files to ZIP">
 <meta name="twitter:description" content="Bundle files into a ZIP archive free online. Add multiple files, see live progress, and download your .zip — all in your browser.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-files-to-zip .tool-files-to-zip-list{list-style:none;padding:0;margin:0 0 1rem;}.tool-files-to-zip .tool-files-to-zip-list li{padding:.4rem 0;border-bottom:1px solid var(--line);word-break:break-all;}.tool-files-to-zip .tool-files-to-zip-progress{height:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:1rem 0;}.tool-files-to-zip .progress-bar{height:100%;background:var(--accent);transition:width .15s;}.tool-files-to-zip #zip-status{margin:.5rem 0;}
 </style>
@@ -113,9 +115,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ZIP Files Online","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/files-to-zip/","description":"Bundle files into a ZIP archive free online. Add multiple files, see live progress, and download your .zip — all in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ZIP Files Online","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/files-to-zip/","description":"Bundle files into a ZIP archive free online. Add multiple files, see live progress, and download your .zip — all in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I zip files online for free?","acceptedAnswer":{"@type":"Answer","text":"Select your files above and click \"Create ZIP\". The archive is built entirely in your browser with no sign-up and no file-size upsells."}},{"@type":"Question","name":"Are my files uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Compression happens locally on your device, so your files never leave your browser."}},{"@type":"Question","name":"Is there a limit on the number or size of files?","acceptedAnswer":{"@type":"Answer","text":"There is no artificial limit, but very large archives are limited by your device’s memory and speed — a few hundred megabytes usually works fine on modern devices."}},{"@type":"Question","name":"What compression is used?","acceptedAnswer":{"@type":"Answer","text":"Standard ZIP DEFLATE compression. Text files and documents shrink a lot; already-compressed files like JPGs, MP4s and PDFs shrink very little, which is normal."}},{"@type":"Question","name":"Can I add folders?","acceptedAnswer":{"@type":"Answer","text":"Add the files inside the folder individually — folder structure is flattened. Nested folder paths are not preserved in this version."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"File Converters","item":"https://www.example.com/#cat-file-converters"},{"@type":"ListItem","position":3,"name":"ZIP Files Online","item":"https://www.example.com/tools/files-to-zip/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"File Converters","item":"https://mohit99mj.github.io/Quicktools/#cat-file-converters"},{"@type":"ListItem","position":3,"name":"ZIP Files Online","item":"https://mohit99mj.github.io/Quicktools/tools/files-to-zip/"}]}</script>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>
 <script>
 
@@ -137,6 +141,11 @@
         var v = n / Math.pow(1024, i);
         return (v >= 100 ? Math.round(v) : Math.round(v * 10) / 10) + ' ' + units[i];
       }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       function renderList(){
         if (!list) return;
         list.innerHTML = '';
@@ -179,13 +188,16 @@
           return;
         }
         var zip = new JSZip();
+        var inTotal = files.reduce(function(s, f){ return s + f.size; }, 0);
         for (var i = 0; i < files.length; i += 1) zip.file(files[i].name, files[i]);
         if (progress) progress.hidden = false;
         if (bar) bar.style.width = '0%';
         go.disabled = true;
+        pShow({ title: 'Creating ZIP…', stage: 'Adding files…', percent: 0 });
         zip.generateAsync({ type: 'blob' }, function(meta){
           if (bar) bar.style.width = Math.round(meta.percent) + '%';
           if (status) status.textContent = 'Compressing… ' + Math.round(meta.percent) + '%';
+          pUpd(meta.percent, 'Compressing… ' + Math.round(meta.percent) + '%');
         }).then(function(blob){
           var name = (nameEl && nameEl.value.trim()) || 'archive';
           name = name.replace(/[^a-z0-9-_ ]/gi, '').trim() || 'archive';
@@ -197,11 +209,14 @@
           a.click();
           a.remove();
           setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+          pSum(out, '<strong>ZIP created</strong> — ' + files.length + (files.length === 1 ? ' file' : ' files') + ' • ' + fmtBytes(inTotal) + ' → ' + fmtBytes(blob.size));
+          pHide();
           go.disabled = false;
           if (progress) progress.hidden = true;
           if (out) out.innerHTML = '<p>ZIP created and downloaded.</p>';
           renderList();
         }).catch(function(){
+          pHide();
           go.disabled = false;
           if (progress) progress.hidden = true;
           if (out) out.innerHTML = '<p class="error">Could not create the ZIP. Try fewer or smaller files.</p>';
