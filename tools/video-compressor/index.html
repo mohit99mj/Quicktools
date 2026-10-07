@@ -601,8 +601,10 @@
           var msg = (e && e.message) ? String(e.message) : '';
           if(/memory/i.test(msg)){
             showError('Ran out of memory while processing — try a smaller video file.');
+          } else if(msg){
+            showError('Processing failed: ' + msg.slice(0, 220));
           } else {
-            showError('Compression failed — the file may be corrupt or in an unsupported format. Try a different file.');
+            showError('Processing failed — the file may be corrupt or in an unsupported format. Try a different file.');
           }
         }).then(function(){
           try{ ffmpeg.FS('unlink', inName); }catch(x){}
