@@ -335,7 +335,8 @@
       function hideError(){ errEl.textContent = ''; errEl.hidden = true; }
 
       function ensureEngine(progressCb){
-        if(ffmpeg) return Promise.resolve(ffmpeg);
+        if(ffmpeg && ffmpeg.isLoaded && ffmpeg.isLoaded()) return Promise.resolve(ffmpeg);
+        ffmpeg = null;
         var FF = window.FFmpeg;
         if(!FF || typeof FF.createFFmpeg !== 'function' || typeof FF.fetchFile !== 'function'){
           return Promise.reject(new Error('Engine library did not load. Check your connection and reload the page.'));
@@ -378,7 +379,8 @@
           loadBtn.textContent = 'Load video engine (one-time ~25MB)';
           progressEl.hidden = true;
           status('');
-          showError('Engine failed to load — check your connection and retry.');
+          ffmpeg = null;
+            showError('Engine failed to load — check your connection and retry.');
         });
       });
 
@@ -603,6 +605,7 @@
           if(/memory/i.test(msg)){
             showError('Ran out of memory while processing — try a smaller video file.');
           } else if(msg){
+            ffmpeg = null;
             showError('Processing failed: ' + msg.slice(0, 220));
           } else {
             showError('Processing failed — the file may be corrupt or in an unsupported format. Try a different file.');
