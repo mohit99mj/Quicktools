@@ -240,15 +240,17 @@ var LOGIC={wrapLines:(text, maxChars) => {
             pSum(out, '<strong>PDF created</strong> — ' + pageCount + ' page' + (pageCount === 1 ? '' : 's') + ' • ' + fmtSize(u8.length));
             pHide();
             go.disabled = false; go.removeAttribute('aria-busy');
-          }).catch(function(){
+          }).catch(function(e){
             pHide();
             go.disabled = false; go.removeAttribute('aria-busy');
-            setStatus('<p class="error">Could not build the PDF: the text could not be rendered or the download was blocked. Try shorter text or reload the page.</p>');
+            var why = e && e.message ? ' (' + String(e.message).slice(0,120) + ')' : '';
+            setStatus('<p class="error">Could not build the PDF' + why + '. Try shorter text or reload the page.</p>');
           });
         } catch (e) {
           pHide();
           go.disabled = false; go.removeAttribute('aria-busy');
-          setStatus('<p class="error">Could not build the PDF: the text could not be rendered or the download was blocked. Try shorter text or reload the page.</p>');
+          var why2 = e && e.message ? ' (' + String(e.message).slice(0,120) + ')' : '';
+          setStatus('<p class="error">Could not build the PDF' + why2 + '. Try shorter text or reload the page.</p>');
         }
         }, 40);
       });
