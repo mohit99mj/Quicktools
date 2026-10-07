@@ -207,7 +207,7 @@ var LOGIC={wrapLines:(text, maxChars) => {
         setTimeout(async function(){
         pUpd(40, 'Laying out pages…');
         try {
-          var doc = PDFLib.PDFDocument.create();
+          var doc = await PDFLib.PDFDocument.create();
           var pageCount = 1;
           var font = await doc.embedStandardFont(PDFLib.StandardFonts.Helvetica);
           var bold = await doc.embedStandardFont(PDFLib.StandardFonts.HelveticaBold);
