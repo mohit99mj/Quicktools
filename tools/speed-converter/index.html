@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speed Converter — km/h, mph, m/s &amp; Knots</title>
+<meta name="description" content="Free speed converter: convert m/s, km/h, mph, ft/s and knots instantly, with exact formulas. Runs entirely in your browser.">
+<meta name="keywords" content="speed converter, kmh to mph, mph to kmh, knots to kmh, ms to kmh">
+<link rel="canonical" href="https://www.example.com/tools/speed-converter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Speed Converter — km/h, mph, m/s &amp; Knots">
+<meta property="og:description" content="Free speed converter: convert m/s, km/h, mph, ft/s and knots instantly, with exact formulas. Runs entirely in your browser.">
+<meta property="og:url" content="https://www.example.com/tools/speed-converter/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Speed Converter — km/h, mph, m/s &amp; Knots">
+<meta name="twitter:description" content="Free speed converter: convert m/s, km/h, mph, ft/s and knots instantly, with exact formulas. Runs entirely in your browser.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+
+    .tool-speed-converter .conv-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .tool-speed-converter .conv-swap{ grid-column:1 / -1; }
+    .tool-speed-converter .conv-swap .btn{ width:100%; }
+    @media (min-width:640px){
+      .tool-speed-converter .conv-grid{ grid-template-columns:1fr 1fr auto 1fr; align-items:end; }
+      .tool-speed-converter .conv-swap{ grid-column:auto; }
+      .tool-speed-converter .conv-swap .btn{ width:auto; }
+    }
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li aria-current="page">Speed Converter</li></ol></nav>
+<h1>Speed Converter</h1>
+<div class="tool-body-intro">
+<p>Convert speeds between meters per second, kilometers per hour, miles per hour, feet per second and knots. Useful for driving, cycling, running, aviation and sailing — results update live with the exact rate.</p><p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+</div>
+<section class="tool-section tool-speed-converter" aria-label="Speed Converter">
+
+    <div class="card tool-panel">
+      <div class="conv-grid">
+        <div class="field">
+          <label class="label" for="sc-value">Value</label>
+          <input class="input" id="sc-value" type="number" inputmode="decimal" step="any" value="100">
+        </div>
+        <div class="field">
+          <label class="label" for="sc-from">From</label>
+          <select class="select" id="sc-from"></select>
+        </div>
+        <div class="field conv-swap">
+          <button class="btn btn-ghost" id="sc-swap" type="button">Swap units</button>
+        </div>
+        <div class="field">
+          <label class="label" for="sc-to">To</label>
+          <select class="select" id="sc-to"></select>
+        </div>
+      </div>
+      <div class="result" id="sc-out" aria-live="polite"></div>
+      <p class="hint" id="sc-formula" aria-live="polite"></p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Type the speed value you want to convert.</li>
+<li>Choose the unit to convert from and the unit to convert to.</li>
+<li>Read the live result and the exact conversion formula below it.</li>
+<li>Use the swap button to flip the conversion direction.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>How do I convert km/h to mph?</summary><div class="faq-a"><p>Multiply km/h by 0.621371. So 100 km/h = 62.1371 mph. Select km/h → mph in the converter to do it instantly.</p></div></details>
+<details><summary>How fast is 1 knot in km/h?</summary><div class="faq-a"><p>One knot equals exactly 1.852 km/h (one nautical mile per hour). It is the standard speed unit in aviation and maritime navigation.</p></div></details>
+<details><summary>What is the speed of sound in km/h?</summary><div class="faq-a"><p>About 1,235 km/h at sea level (343 m/s), though it varies with temperature and altitude.</p></div></details>
+<details><summary>Is this speed converter free?</summary><div class="faq-a"><p>Yes — free, no sign-up, and every conversion runs locally in your browser.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../length-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#ruler"></use></svg><span class="tl-name">Length Converter</span><span class="tl-desc">Unit Converters</span></a>
+<a class="tool-card" href="../weight-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#scale"></use></svg><span class="tl-name">Weight Converter</span><span class="tl-desc">Unit Converters</span></a>
+<a class="tool-card" href="../data-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#database"></use></svg><span class="tl-name">Data Storage Converter</span><span class="tl-desc">Unit Converters</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Speed Converter","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/speed-converter/","description":"Free speed converter: convert m/s, km/h, mph, ft/s and knots instantly, with exact formulas. Runs entirely in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I convert km/h to mph?","acceptedAnswer":{"@type":"Answer","text":"Multiply km/h by 0.621371. So 100 km/h = 62.1371 mph. Select km/h → mph in the converter to do it instantly."}},{"@type":"Question","name":"How fast is 1 knot in km/h?","acceptedAnswer":{"@type":"Answer","text":"One knot equals exactly 1.852 km/h (one nautical mile per hour). It is the standard speed unit in aviation and maritime navigation."}},{"@type":"Question","name":"What is the speed of sound in km/h?","acceptedAnswer":{"@type":"Answer","text":"About 1,235 km/h at sea level (343 m/s), though it varies with temperature and altitude."}},{"@type":"Question","name":"Is this speed converter free?","acceptedAnswer":{"@type":"Answer","text":"Yes — free, no sign-up, and every conversion runs locally in your browser."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Unit Converters","item":"https://www.example.com/#cat-unit-converters"},{"@type":"ListItem","position":3,"name":"Speed Converter","item":"https://www.example.com/tools/speed-converter/"}]}</script>
+<script>
+var LOGIC={units:() => ['m/s', 'km/h', 'mph', 'ft/s', 'kn'],convert:(v, from, to) => {
+    // Base unit: meters per second.
+    var F = { 'm/s': 1, 'km/h': 1000 / 3600, mph: 0.44704, 'ft/s': 0.3048, kn: 1852 / 3600 };
+    if (typeof v !== 'number' || !isFinite(v)) return NaN;
+    if (F[from] === undefined || F[to] === undefined) return NaN;
+    return (v * F[from]) / F[to];
+  }};
+
+    (function(){
+      'use strict';
+      function $(s){ return document.querySelector(s); }
+      var vEl = $('#sc-value'), fEl = $('#sc-from'), tEl = $('#sc-to'),
+          outEl = $('#sc-out'), fmEl = $('#sc-formula'), swBtn = $('#sc-swap');
+      if(!vEl || !fEl || !tEl || !outEl || !fmEl || !swBtn) return;
+      function fmt(x){
+        if(typeof x !== 'number' || !isFinite(x)) return '—';
+        if(x === 0) return '0';
+        return String(Number(x.toPrecision(6)));
+      }
+      function fill(sel, val){
+        sel.textContent = '';
+        LOGIC.units().forEach(function(u){
+          var o = document.createElement('option');
+          o.value = u; o.textContent = u;
+          if(u === val) o.selected = true;
+          sel.appendChild(o);
+        });
+      }
+      function render(){
+        var v = parseFloat(vEl.value);
+        var from = fEl.value, to = tEl.value;
+        outEl.textContent = '';
+        fmEl.textContent = '';
+        if(!isFinite(v)){ outEl.textContent = 'Enter a number to convert.'; return; }
+        var r = LOGIC.convert(v, from, to);
+        var p = document.createElement('p');
+        p.className = 'result-big';
+        p.textContent = fmt(v) + ' ' + from + ' = ' + fmt(r) + ' ' + to;
+        outEl.appendChild(p);
+        fmEl.textContent = 'Formula: 1 ' + from + ' = ' + fmt(LOGIC.convert(1, from, to)) + ' ' + to;
+      }
+      fill(fEl, 'km/h'); fill(tEl, 'mph');
+      vEl.addEventListener('input', render);
+      fEl.addEventListener('change', render);
+      tEl.addEventListener('change', render);
+      swBtn.addEventListener('click', function(){
+        var a = fEl.value; fEl.value = tEl.value; tEl.value = a; render();
+      });
+      render();
+    })();
+</script>
+</body>
+</html>

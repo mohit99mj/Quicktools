@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>URL Encoder &amp; Decoder — Percent-Encode URLs</title>
+<meta name="description" content="Free URL encoder: percent-encode or decode full URLs and components. Runs entirely in your browser.">
+<meta name="keywords" content="url encode, url decode, percent encoding, encodeuricomponent, url encoder online">
+<link rel="canonical" href="https://www.example.com/tools/url-encoder/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="URL Encoder &amp; Decoder — Percent-Encode URLs">
+<meta property="og:description" content="Free URL encoder: percent-encode or decode full URLs and components. Runs entirely in your browser.">
+<meta property="og:url" content="https://www.example.com/tools/url-encoder/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="URL Encoder &amp; Decoder — Percent-Encode URLs">
+<meta name="twitter:description" content="Free URL encoder: percent-encode or decode full URLs and components. Runs entirely in your browser.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+
+    .tool-url-encoder .ue-area{ min-height:120px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; }
+    .tool-url-encoder .ue-actions{ display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li><li aria-current="page">URL Encoder</li></ol></nav>
+<h1>URL Encoder</h1>
+<div class="tool-body-intro">
+<p>Percent-encode URLs for safe use in links, query strings and APIs — or decode encoded URLs back to readable text. Choose "Full URL" to keep the URL structure intact, or "Component" to encode a single value such as a query parameter.</p><p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+</div>
+<section class="tool-section tool-url-encoder" aria-label="URL Encoder">
+
+    <div class="card tool-panel">
+      <div class="field">
+        <label class="label" for="ue-in">Input</label>
+        <textarea class="textarea ue-area" id="ue-in" spellcheck="false" placeholder="Paste a URL or text here"></textarea>
+      </div>
+      <div class="field">
+        <label class="label" for="ue-mode">Mode</label>
+        <select class="select" id="ue-mode">
+          <option value="component">Component — encode a single value (query param)</option>
+          <option value="full">Full URL — keep : / ? # structure</option>
+        </select>
+      </div>
+      <div class="ue-actions">
+        <button class="btn btn-primary" id="ue-encode" type="button">Encode</button>
+        <button class="btn btn-ghost" id="ue-decode" type="button">Decode</button>
+        <button class="btn btn-ghost" id="ue-copy" type="button">Copy output</button>
+      </div>
+      <div class="field">
+        <label class="label" for="ue-out">Output</label>
+        <textarea class="textarea ue-area" id="ue-out" spellcheck="false" readonly placeholder="Result appears here"></textarea>
+      </div>
+      <div class="result" id="ue-msg" aria-live="polite"></div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Paste the URL or text into the input box.</li>
+<li>Pick Full URL (keeps : / ? #) or Component (encodes everything) mode.</li>
+<li>Click Encode or Decode.</li>
+<li>Copy the result with one click.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>What is the difference between Full URL and Component mode?</summary><div class="faq-a"><p>Full URL mode uses encodeURI, which leaves structural characters like : / ? # intact. Component mode uses encodeURIComponent, which also encodes those — use it for a single query-string value that may itself contain &amp; or =.</p></div></details>
+<details><summary>Which characters get percent-encoded?</summary><div class="faq-a"><p>Spaces become %20, and reserved or non-ASCII characters become %XX sequences based on their UTF-8 bytes. Unreserved characters (A–Z, a–z, 0–9, - _ . ~) are never encoded.</p></div></details>
+<details><summary>Why did decoding fail with &quot;URI malformed&quot;?</summary><div class="faq-a"><p>The input contains a % not followed by two hex digits, or a lone % at the end. Check for stray percent signs and try again.</p></div></details>
+<details><summary>Is my URL sent to a server?</summary><div class="faq-a"><p>No. Encoding and decoding run locally in your browser — your URLs never leave your device.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../base64/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#binary"></use></svg><span class="tl-name">Base64 Encoder</span><span class="tl-desc">Developer Tools</span></a>
+<a class="tool-card" href="../json-formatter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#braces"></use></svg><span class="tl-name">JSON Formatter</span><span class="tl-desc">Developer Tools</span></a>
+<a class="tool-card" href="../regex-tester/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#regex"></use></svg><span class="tl-name">Regex Tester</span><span class="tl-desc">Developer Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"URL Encoder","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/url-encoder/","description":"Free URL encoder: percent-encode or decode full URLs and components. Runs entirely in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between Full URL and Component mode?","acceptedAnswer":{"@type":"Answer","text":"Full URL mode uses encodeURI, which leaves structural characters like : / ? # intact. Component mode uses encodeURIComponent, which also encodes those — use it for a single query-string value that may itself contain & or =."}},{"@type":"Question","name":"Which characters get percent-encoded?","acceptedAnswer":{"@type":"Answer","text":"Spaces become %20, and reserved or non-ASCII characters become %XX sequences based on their UTF-8 bytes. Unreserved characters (A–Z, a–z, 0–9, - _ . ~) are never encoded."}},{"@type":"Question","name":"Why did decoding fail with \"URI malformed\"?","acceptedAnswer":{"@type":"Answer","text":"The input contains a % not followed by two hex digits, or a lone % at the end. Check for stray percent signs and try again."}},{"@type":"Question","name":"Is my URL sent to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Encoding and decoding run locally in your browser — your URLs never leave your device."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://www.example.com/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"URL Encoder","item":"https://www.example.com/tools/url-encoder/"}]}</script>
+<script>
+var LOGIC={urlEncode:(str, full) => {
+    // full=true: encode a whole URL (encodeURI keeps :/?#[]@!$&'()*+,;=).
+    // full=false: encode a single component (encodeURIComponent encodes those too).
+    return full ? encodeURI(String(str)) : encodeURIComponent(String(str));
+  },urlDecode:(str) => {
+    try {
+      return { ok: true, text: decodeURIComponent(String(str)) };
+    } catch (e) {
+      return { ok: false, error: 'Invalid percent-encoding: ' + (e && e.message ? e.message : 'could not decode') };
+    }
+  }};
+
+    (function(){
+      'use strict';
+      function $(s){ return document.querySelector(s); }
+      var inEl = $('#ue-in'), outEl = $('#ue-out'), modeEl = $('#ue-mode'), msgEl = $('#ue-msg');
+      var bEnc = $('#ue-encode'), bDec = $('#ue-decode'), bCopy = $('#ue-copy');
+      if(!inEl || !outEl || !modeEl || !msgEl || !bEnc || !bDec || !bCopy) return;
+      function note(text, isErr){
+        msgEl.textContent = '';
+        if(!text) return;
+        var p = document.createElement('p');
+        p.className = isErr ? 'error' : 'hint';
+        p.textContent = text;
+        msgEl.appendChild(p);
+      }
+      bEnc.addEventListener('click', function(){
+        var full = modeEl.value === 'full';
+        outEl.value = LOGIC.urlEncode(inEl.value, full);
+        note(full ? 'Encoded as a full URL (structure kept).' : 'Encoded as a URL component.', false);
+      });
+      bDec.addEventListener('click', function(){
+        var r = LOGIC.urlDecode(inEl.value);
+        if(r.ok){ outEl.value = r.text; note('Decoded successfully.', false); }
+        else { outEl.value = ''; note(r.error, true); }
+      });
+      bCopy.addEventListener('click', function(){
+        if(!outEl.value){ note('Nothing to copy yet.', true); return; }
+        function done(ok){
+          bCopy.textContent = ok ? 'Copied!' : 'Copy failed';
+          setTimeout(function(){ bCopy.textContent = 'Copy output'; }, 1500);
+        }
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(outEl.value).then(function(){ done(true); }, function(){ done(false); });
+        } else {
+          outEl.select();
+          var ok = false;
+          try{ ok = document.execCommand('copy'); }catch(e){}
+          done(ok);
+        }
+      });
+    })();
+</script>
+</body>
+</html>

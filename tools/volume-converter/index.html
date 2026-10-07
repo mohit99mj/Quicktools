@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Volume Converter — Liters, Gallons, Cups &amp; ml</title>
+<meta name="description" content="Free volume converter: convert ml, liters, m³, tsp, tbsp, fl oz, cups, pints, quarts and gallons instantly. Runs in your browser.">
+<meta name="keywords" content="volume converter, liters to gallons, cups to ml, fl oz to ml, gallon to liter">
+<link rel="canonical" href="https://www.example.com/tools/volume-converter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Volume Converter — Liters, Gallons, Cups &amp; ml">
+<meta property="og:description" content="Free volume converter: convert ml, liters, m³, tsp, tbsp, fl oz, cups, pints, quarts and gallons instantly. Runs in your browser.">
+<meta property="og:url" content="https://www.example.com/tools/volume-converter/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Volume Converter — Liters, Gallons, Cups &amp; ml">
+<meta name="twitter:description" content="Free volume converter: convert ml, liters, m³, tsp, tbsp, fl oz, cups, pints, quarts and gallons instantly. Runs in your browser.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+
+    .tool-volume-converter .conv-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .tool-volume-converter .conv-swap{ grid-column:1 / -1; }
+    .tool-volume-converter .conv-swap .btn{ width:100%; }
+    @media (min-width:640px){
+      .tool-volume-converter .conv-grid{ grid-template-columns:1fr 1fr auto 1fr; align-items:end; }
+      .tool-volume-converter .conv-swap{ grid-column:auto; }
+      .tool-volume-converter .conv-swap .btn{ width:auto; }
+    }
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li aria-current="page">Volume Converter</li></ol></nav>
+<h1>Volume Converter</h1>
+<div class="tool-body-intro">
+<p>Convert volume between metric units (milliliters, liters, cubic meters) and US customary kitchen units (teaspoons, tablespoons, fluid ounces, cups, pints, quarts, gallons). Handy for recipes, fuel and lab work — results update live.</p><p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+</div>
+<section class="tool-section tool-volume-converter" aria-label="Volume Converter">
+
+    <div class="card tool-panel">
+      <div class="conv-grid">
+        <div class="field">
+          <label class="label" for="vc-value">Value</label>
+          <input class="input" id="vc-value" type="number" inputmode="decimal" step="any" value="1">
+        </div>
+        <div class="field">
+          <label class="label" for="vc-from">From</label>
+          <select class="select" id="vc-from"></select>
+        </div>
+        <div class="field conv-swap">
+          <button class="btn btn-ghost" id="vc-swap" type="button">Swap units</button>
+        </div>
+        <div class="field">
+          <label class="label" for="vc-to">To</label>
+          <select class="select" id="vc-to"></select>
+        </div>
+      </div>
+      <div class="result" id="vc-out" aria-live="polite"></div>
+      <p class="hint" id="vc-formula" aria-live="polite"></p>
+      <p class="hint">US customary units: cup = 236.588 ml, fl oz = 29.5735 ml, gal = 3785.41 ml.</p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Type the volume value you want to convert.</li>
+<li>Choose the unit to convert from and the unit to convert to.</li>
+<li>Read the live result and the exact conversion formula below it.</li>
+<li>Use the swap button to flip the conversion direction.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>How many liters are in a gallon?</summary><div class="faq-a"><p>One US gallon equals 3.78541 liters. (The UK imperial gallon is larger at 4.54609 liters — this converter uses US gallons.)</p></div></details>
+<details><summary>How many cups are in a liter?</summary><div class="faq-a"><p>One liter equals 4.22675 US cups. One US cup is 236.588 ml.</p></div></details>
+<details><summary>How many tablespoons are in a cup?</summary><div class="faq-a"><p>There are 16 US tablespoons in one US cup, and 3 teaspoons in one tablespoon.</p></div></details>
+<details><summary>Are these US or imperial units?</summary><div class="faq-a"><p>US customary units: the teaspoon (4.92892 ml), tablespoon, fluid ounce, cup, pint, quart and gallon used here are the US definitions common in American recipes.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../weight-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#scale"></use></svg><span class="tl-name">Weight Converter</span><span class="tl-desc">Unit Converters</span></a>
+<a class="tool-card" href="../length-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#ruler"></use></svg><span class="tl-name">Length Converter</span><span class="tl-desc">Unit Converters</span></a>
+<a class="tool-card" href="../data-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#database"></use></svg><span class="tl-name">Data Storage Converter</span><span class="tl-desc">Unit Converters</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Volume Converter","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/volume-converter/","description":"Free volume converter: convert ml, liters, m³, tsp, tbsp, fl oz, cups, pints, quarts and gallons instantly. Runs in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many liters are in a gallon?","acceptedAnswer":{"@type":"Answer","text":"One US gallon equals 3.78541 liters. (The UK imperial gallon is larger at 4.54609 liters — this converter uses US gallons.)"}},{"@type":"Question","name":"How many cups are in a liter?","acceptedAnswer":{"@type":"Answer","text":"One liter equals 4.22675 US cups. One US cup is 236.588 ml."}},{"@type":"Question","name":"How many tablespoons are in a cup?","acceptedAnswer":{"@type":"Answer","text":"There are 16 US tablespoons in one US cup, and 3 teaspoons in one tablespoon."}},{"@type":"Question","name":"Are these US or imperial units?","acceptedAnswer":{"@type":"Answer","text":"US customary units: the teaspoon (4.92892 ml), tablespoon, fluid ounce, cup, pint, quart and gallon used here are the US definitions common in American recipes."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Unit Converters","item":"https://www.example.com/#cat-unit-converters"},{"@type":"ListItem","position":3,"name":"Volume Converter","item":"https://www.example.com/tools/volume-converter/"}]}</script>
+<script>
+var LOGIC={units:() => ['ml', 'l', 'm³', 'tsp', 'tbsp', 'fl oz', 'cup', 'pt', 'qt', 'gal'],convert:(v, from, to) => {
+    // Base unit: liters. US customary: tsp=4.92892ml, tbsp=14.7868ml, fl oz=29.5735ml,
+    // cup=236.588ml, pt=473.176ml, qt=946.353ml, gal=3785.41ml.
+    var F = {
+      ml: 0.001, l: 1, 'm³': 1000,
+      tsp: 0.00492892, tbsp: 0.0147868, 'fl oz': 0.0295735,
+      cup: 0.236588, pt: 0.473176, qt: 0.946353, gal: 3.78541,
+    };
+    if (typeof v !== 'number' || !isFinite(v)) return NaN;
+    if (F[from] === undefined || F[to] === undefined) return NaN;
+    return (v * F[from]) / F[to];
+  }};
+
+    (function(){
+      'use strict';
+      function $(s){ return document.querySelector(s); }
+      var vEl = $('#vc-value'), fEl = $('#vc-from'), tEl = $('#vc-to'),
+          outEl = $('#vc-out'), fmEl = $('#vc-formula'), swBtn = $('#vc-swap');
+      if(!vEl || !fEl || !tEl || !outEl || !fmEl || !swBtn) return;
+      function fmt(x){
+        if(typeof x !== 'number' || !isFinite(x)) return '—';
+        if(x === 0) return '0';
+        return String(Number(x.toPrecision(6)));
+      }
+      function fill(sel, val){
+        sel.textContent = '';
+        LOGIC.units().forEach(function(u){
+          var o = document.createElement('option');
+          o.value = u; o.textContent = u;
+          if(u === val) o.selected = true;
+          sel.appendChild(o);
+        });
+      }
+      function render(){
+        var v = parseFloat(vEl.value);
+        var from = fEl.value, to = tEl.value;
+        outEl.textContent = '';
+        fmEl.textContent = '';
+        if(!isFinite(v)){ outEl.textContent = 'Enter a number to convert.'; return; }
+        var r = LOGIC.convert(v, from, to);
+        var p = document.createElement('p');
+        p.className = 'result-big';
+        p.textContent = fmt(v) + ' ' + from + ' = ' + fmt(r) + ' ' + to;
+        outEl.appendChild(p);
+        fmEl.textContent = 'Formula: 1 ' + from + ' = ' + fmt(LOGIC.convert(1, from, to)) + ' ' + to;
+      }
+      fill(fEl, 'l'); fill(tEl, 'gal');
+      vEl.addEventListener('input', render);
+      fEl.addEventListener('change', render);
+      tEl.addEventListener('change', render);
+      swBtn.addEventListener('click', function(){
+        var a = fEl.value; fEl.value = tEl.value; tEl.value = a; render();
+      });
+      render();
+    })();
+</script>
+</body>
+</html>
