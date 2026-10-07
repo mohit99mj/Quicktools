@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tip Calculator — Split Bill &amp; Tip Per Person</title>
+<meta name="description" content="Free tip calculator: tip amount, total bill and per-person split for any bill, tip percent and party size.">
+<meta name="keywords" content="tip calculator, split bill calculator, tip per person, gratuity calculator, restaurant tip">
+<link rel="canonical" href="https://www.example.com/tools/tip-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tip Calculator — Split Bill &amp; Tip Per Person">
+<meta property="og:description" content="Free tip calculator: tip amount, total bill and per-person split for any bill, tip percent and party size.">
+<meta property="og:url" content="https://www.example.com/tools/tip-calculator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tip Calculator — Split Bill &amp; Tip Per Person">
+<meta name="twitter:description" content="Free tip calculator: tip amount, total bill and per-person split for any bill, tip percent and party size.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+
+    .tool-tip-calculator .tip-presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+    .tool-tip-calculator .tip-presets .btn{min-height:44px}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li aria-current="page">Tip Calculator</li></ol></nav>
+<h1>Tip Calculator</h1>
+<div class="tool-body-intro">
+<p>No more mental math at the table. Enter the bill, pick a tip percentage and this free tip calculator instantly shows the <strong>tip amount, the total bill and what each person pays</strong> when you split it.</p><p>Quick-select buttons cover the usual 10%, 15% and 20%, or type any custom percentage. Everything runs in your browser — no data stored, no sign-up.</p>
+</div>
+<section class="tool-section tool-tip-calculator" aria-label="Tip Calculator">
+
+    <div class="card tool-panel">
+      <div class="field">
+        <label class="label" for="tip-bill">Bill amount</label>
+        <input class="input" id="tip-bill" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 85.50">
+      </div>
+      <div class="field">
+        <span class="label" id="tip-pct-label">Tip percentage</span>
+        <div class="tip-presets" role="group" aria-labelledby="tip-pct-label">
+          <button type="button" class="btn" data-tip="10">10%</button>
+          <button type="button" class="btn" data-tip="15">15%</button>
+          <button type="button" class="btn" data-tip="18">18%</button>
+          <button type="button" class="btn" data-tip="20">20%</button>
+          <button type="button" class="btn" data-tip="25">25%</button>
+        </div>
+        <input class="input" id="tip-pct" type="number" inputmode="decimal" min="0" max="100" step="any" value="15" aria-label="Custom tip percentage">
+      </div>
+      <div class="field">
+        <label class="label" for="tip-people">Split between (people)</label>
+        <input class="input" id="tip-people" type="number" inputmode="numeric" min="1" max="100" step="1" value="1">
+      </div>
+      <button class="btn btn-primary" id="tip-go" type="button">Calculate tip</button>
+      <div class="result" id="tip-out" aria-live="polite"></div>
+      <p class="privacy-note">Your inputs never leave your device — everything runs in your browser.</p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Enter the bill amount before tip.</li>
+<li>Choose a tip percentage (or type a custom one).</li>
+<li>Set the number of people splitting the bill.</li>
+<li>Press Calculate tip to see the tip, total and per-person share.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>What is a standard tip percentage?</summary><div class="faq-a"><p>In the US, 15–20% is standard for sit-down restaurants, with 20% common for great service. This calculator accepts any percentage you prefer.</p></div></details>
+<details><summary>Should I tip on the pre-tax or post-tax amount?</summary><div class="faq-a"><p>Custom varies, but tipping on the pre-tax subtotal is the common convention. Either way, enter the bill figure you want the tip based on.</p></div></details>
+<details><summary>How is the per-person amount calculated?</summary><div class="faq-a"><p>The total bill (bill + tip) is divided evenly by the number of people. If shares are uneven, use the total and split manually.</p></div></details>
+<details><summary>Can I use a custom tip like 18%?</summary><div class="faq-a"><p>Yes — type any percentage into the tip field instead of using the quick-select buttons.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../percentage-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#percent"></use></svg><span class="tl-name">Percentage Calculator</span><span class="tl-desc">Calculators</span></a>
+<a class="tool-card" href="../calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#calculator"></use></svg><span class="tl-name">Calculator</span><span class="tl-desc">Calculators</span></a>
+<a class="tool-card" href="../salary-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#briefcase"></use></svg><span class="tl-name">Salary Calculator</span><span class="tl-desc">Calculators</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Tip Calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/tip-calculator/","description":"Free tip calculator: tip amount, total bill and per-person split for any bill, tip percent and party size.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a standard tip percentage?","acceptedAnswer":{"@type":"Answer","text":"In the US, 15–20% is standard for sit-down restaurants, with 20% common for great service. This calculator accepts any percentage you prefer."}},{"@type":"Question","name":"Should I tip on the pre-tax or post-tax amount?","acceptedAnswer":{"@type":"Answer","text":"Custom varies, but tipping on the pre-tax subtotal is the common convention. Either way, enter the bill figure you want the tip based on."}},{"@type":"Question","name":"How is the per-person amount calculated?","acceptedAnswer":{"@type":"Answer","text":"The total bill (bill + tip) is divided evenly by the number of people. If shares are uneven, use the total and split manually."}},{"@type":"Question","name":"Can I use a custom tip like 18%?","acceptedAnswer":{"@type":"Answer","text":"Yes — type any percentage into the tip field instead of using the quick-select buttons."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Calculators","item":"https://www.example.com/#cat-calculators"},{"@type":"ListItem","position":3,"name":"Tip Calculator","item":"https://www.example.com/tools/tip-calculator/"}]}</script>
+<script>
+var LOGIC={tip:function (bill, tipPct, people) {
+    'use strict';
+    function r2(x) { var v = Math.round(x * 100) / 100; return v === 0 ? 0 : v; }
+    if (!(bill >= 0)) throw new Error('Bill must be zero or more.');
+    if (!(tipPct >= 0)) throw new Error('Tip percent cannot be negative.');
+    if (!(people >= 1)) throw new Error('Split between at least one person.');
+    var tip = r2(bill * tipPct / 100);
+    var total = r2(bill + tip);
+    return { tip: tip, total: total, perPerson: r2(total / people) };
+  }};
+
+    (function(){
+      'use strict';
+      function $(id){ return document.getElementById(id); }
+      var bill = $('tip-bill'), pct = $('tip-pct'), people = $('tip-people'),
+          go = $('tip-go'), out = $('tip-out');
+      if (!bill || !pct || !people || !go || !out) return;
+      function money(n){
+        return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+      function showError(msg){
+        out.textContent = '';
+        var p = document.createElement('p');
+        p.className = 'error';
+        p.textContent = msg;
+        out.appendChild(p);
+      }
+      document.querySelectorAll('.tool-tip-calculator .tip-presets button').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          pct.value = btn.getAttribute('data-tip');
+        });
+      });
+      go.addEventListener('click', function(){
+        var b = parseFloat(bill.value), t = parseFloat(pct.value), n = parseInt(people.value, 10);
+        if (!(b >= 0) || !(t >= 0) || !(n >= 1)) {
+          showError('Please enter a valid bill, tip percent and number of people.');
+          return;
+        }
+        var r = LOGIC.tip(b, t, n);
+        out.textContent = '';
+        var big = document.createElement('p');
+        big.className = 'result-big';
+        big.textContent = 'Total: ' + money(r.total);
+        out.appendChild(big);
+        [['Tip amount', r.tip], ['Per person', r.perPerson]].forEach(function(row){
+          var p = document.createElement('p');
+          var label = document.createElement('strong');
+          label.textContent = row[0] + ': ';
+          p.appendChild(label);
+          p.appendChild(document.createTextNode(money(row[1])));
+          out.appendChild(p);
+        });
+      });
+    })();
+</script>
+</body>
+</html>

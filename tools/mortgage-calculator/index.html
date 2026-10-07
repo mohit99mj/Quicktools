@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mortgage Calculator — Monthly Payment Estimate</title>
+<meta name="description" content="Free mortgage calculator: monthly payment with principal, interest, property tax and insurance estimates.">
+<meta name="keywords" content="mortgage calculator, monthly mortgage payment, home loan calculator, mortgage payment estimator">
+<link rel="canonical" href="https://www.example.com/tools/mortgage-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mortgage Calculator — Monthly Payment Estimate">
+<meta property="og:description" content="Free mortgage calculator: monthly payment with principal, interest, property tax and insurance estimates.">
+<meta property="og:url" content="https://www.example.com/tools/mortgage-calculator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mortgage Calculator — Monthly Payment Estimate">
+<meta name="twitter:description" content="Free mortgage calculator: monthly payment with principal, interest, property tax and insurance estimates.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li aria-current="page">Mortgage Calculator</li></ol></nav>
+<h1>Mortgage Calculator</h1>
+<div class="tool-body-intro">
+<p>Your real monthly housing cost is more than principal and interest. This free mortgage calculator combines <strong>P&amp;I with estimated property tax and home insurance</strong> so you see the full monthly payment before you fall in love with a listing.</p><p>Enter the home price, down payment, rate and term, plus yearly tax and insurance figures, to get an instant estimate. All math happens in your browser — nothing is stored or shared.</p>
+</div>
+<section class="tool-section tool-mortgage-calculator" aria-label="Mortgage Calculator">
+
+    <div class="card tool-panel">
+      <div class="field">
+        <label class="label" for="mtg-price">Home price</label>
+        <input class="input" id="mtg-price" type="number" inputmode="decimal" min="1" step="any" placeholder="e.g. 350000">
+      </div>
+      <div class="field">
+        <label class="label" for="mtg-down">Down payment (%)</label>
+        <input class="input" id="mtg-down" type="number" inputmode="decimal" min="0" max="99" step="any" placeholder="e.g. 20">
+      </div>
+      <div class="field">
+        <label class="label" for="mtg-rate">Annual interest rate (%)</label>
+        <input class="input" id="mtg-rate" type="number" inputmode="decimal" min="0" max="30" step="any" placeholder="e.g. 6.5">
+      </div>
+      <div class="field">
+        <label class="label" for="mtg-years">Loan term (years)</label>
+        <input class="input" id="mtg-years" type="number" inputmode="decimal" min="1" max="50" step="any" placeholder="e.g. 30">
+      </div>
+      <div class="field">
+        <label class="label" for="mtg-tax">Annual property tax</label>
+        <input class="input" id="mtg-tax" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 4200">
+      </div>
+      <div class="field">
+        <label class="label" for="mtg-ins">Annual home insurance</label>
+        <input class="input" id="mtg-ins" type="number" inputmode="decimal" min="0" step="any" placeholder="e.g. 1500">
+      </div>
+      <button class="btn btn-primary" id="mtg-go" type="button">Calculate mortgage</button>
+      <div class="result" id="mtg-out" aria-live="polite"></div>
+      <p class="hint">Estimate only — excludes HOA fees and mortgage insurance.</p>
+      <p class="privacy-note">Your inputs never leave your device — everything runs in your browser.</p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Enter the home price and your down payment percentage.</li>
+<li>Enter the annual interest rate and loan term in years.</li>
+<li>Add yearly property tax and home insurance estimates.</li>
+<li>Press Calculate to see the monthly breakdown and total interest.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>What does PITI mean?</summary><div class="faq-a"><p>PITI stands for Principal, Interest, Taxes and Insurance — the four parts of a typical monthly mortgage payment. This calculator shows each part separately.</p></div></details>
+<details><summary>How does the down payment affect my monthly payment?</summary><div class="faq-a"><p>A bigger down payment means a smaller loan, which lowers both the monthly P&amp;I and the total interest paid. It can also remove the need for private mortgage insurance.</p></div></details>
+<details><summary>Are property tax and insurance exact?</summary><div class="faq-a"><p>No — they are estimates you provide, since both vary by location and property. Enter your best yearly figures for a realistic total.</p></div></details>
+<details><summary>Does this include HOA fees or PMI?</summary><div class="faq-a"><p>No. Add HOA dues or private mortgage insurance to the monthly total yourself if they apply to you.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../emi-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#wallet"></use></svg><span class="tl-name">EMI Calculator</span><span class="tl-desc">Calculators</span></a>
+<a class="tool-card" href="../percentage-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#percent"></use></svg><span class="tl-name">Percentage Calculator</span><span class="tl-desc">Calculators</span></a>
+<a class="tool-card" href="../salary-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#briefcase"></use></svg><span class="tl-name">Salary Calculator</span><span class="tl-desc">Calculators</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Mortgage Calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/mortgage-calculator/","description":"Free mortgage calculator: monthly payment with principal, interest, property tax and insurance estimates.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does PITI mean?","acceptedAnswer":{"@type":"Answer","text":"PITI stands for Principal, Interest, Taxes and Insurance — the four parts of a typical monthly mortgage payment. This calculator shows each part separately."}},{"@type":"Question","name":"How does the down payment affect my monthly payment?","acceptedAnswer":{"@type":"Answer","text":"A bigger down payment means a smaller loan, which lowers both the monthly P&I and the total interest paid. It can also remove the need for private mortgage insurance."}},{"@type":"Question","name":"Are property tax and insurance exact?","acceptedAnswer":{"@type":"Answer","text":"No — they are estimates you provide, since both vary by location and property. Enter your best yearly figures for a realistic total."}},{"@type":"Question","name":"Does this include HOA fees or PMI?","acceptedAnswer":{"@type":"Answer","text":"No. Add HOA dues or private mortgage insurance to the monthly total yourself if they apply to you."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Calculators","item":"https://www.example.com/#cat-calculators"},{"@type":"ListItem","position":3,"name":"Mortgage Calculator","item":"https://www.example.com/tools/mortgage-calculator/"}]}</script>
+<script>
+var LOGIC={mortgage:function (input) {
+    'use strict';
+    function r2(x) { var v = Math.round(x * 100) / 100; return v === 0 ? 0 : v; }
+    var o = input || {};
+    var price = o.price, downPct = o.downPct, annualRatePct = o.annualRatePct,
+        years = o.years, annualTax = o.annualTax, annualInsurance = o.annualInsurance;
+    if (!(price > 0)) throw new Error('Price must be positive.');
+    if (!(downPct >= 0) || downPct >= 100) throw new Error('Down payment must be between 0 and 100%.');
+    if (!(annualRatePct >= 0)) throw new Error('Interest rate cannot be negative.');
+    if (!(years > 0)) throw new Error('Term must be positive.');
+    if (!(annualTax >= 0) || !(annualInsurance >= 0)) throw new Error('Tax and insurance cannot be negative.');
+    var loan = price * (1 - downPct / 100);
+    var n = Math.round(years * 12);
+    var r = annualRatePct / 1200;
+    var pi = r > 0
+      ? loan * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1)
+      : loan / n;
+    if (!isFinite(pi)) throw new Error('Invalid input.');
+    pi = r2(pi);
+    var monthlyTax = r2(annualTax / 12);
+    var monthlyIns = r2(annualInsurance / 12);
+    return {
+      monthlyPI: pi,
+      monthlyTax: monthlyTax,
+      monthlyIns: monthlyIns,
+      monthlyTotal: r2(pi + monthlyTax + monthlyIns),
+      totalInterest: r2(pi * n - loan)
+    };
+  }};
+
+    (function(){
+      'use strict';
+      function $(id){ return document.getElementById(id); }
+      var els = ['mtg-price','mtg-down','mtg-rate','mtg-years','mtg-tax','mtg-ins','mtg-go','mtg-out'].map($);
+      var price = els[0], down = els[1], rate = els[2], years = els[3],
+          tax = els[4], ins = els[5], go = els[6], out = els[7];
+      if (els.some(function(el){ return !el; })) return;
+      function money(n){
+        return n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+      function showError(msg){
+        out.textContent = '';
+        var p = document.createElement('p');
+        p.className = 'error';
+        p.textContent = msg;
+        out.appendChild(p);
+      }
+      go.addEventListener('click', function(){
+        var vals = [price, down, rate, years, tax, ins].map(function(el){
+          return el.value === '' ? 0 : parseFloat(el.value);
+        });
+        if (!(vals[0] > 0) || !(vals[3] > 0)) {
+          showError('Please enter a valid home price and loan term.');
+          return;
+        }
+        var r;
+        try {
+          r = LOGIC.mortgage({
+            price: vals[0], downPct: vals[1], annualRatePct: vals[2],
+            years: vals[3], annualTax: vals[4], annualInsurance: vals[5]
+          });
+        } catch (e) {
+          showError(e && e.message ? e.message : 'Invalid input.');
+          return;
+        }
+        out.textContent = '';
+        var big = document.createElement('p');
+        big.className = 'result-big';
+        big.textContent = 'Monthly total: ' + money(r.monthlyTotal);
+        out.appendChild(big);
+        [
+          ['Principal & interest', r.monthlyPI],
+          ['Property tax (monthly)', r.monthlyTax],
+          ['Home insurance (monthly)', r.monthlyIns],
+          ['Total interest over loan', r.totalInterest]
+        ].forEach(function(row){
+          var p = document.createElement('p');
+          var label = document.createElement('strong');
+          label.textContent = row[0] + ': ';
+          p.appendChild(label);
+          p.appendChild(document.createTextNode(money(row[1])));
+          out.appendChild(p);
+        });
+      });
+    })();
+</script>
+</body>
+</html>

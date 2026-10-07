@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Date Calculator — Days Between Dates Online</title>
+<meta name="description" content="Free date calculator: days between two dates (with weekdays count) or add/subtract days, weeks, months, years.">
+<meta name="keywords" content="date calculator, days between dates, date duration calculator, add days to date, weekday counter">
+<link rel="canonical" href="https://www.example.com/tools/date-calculator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Date Calculator — Days Between Dates Online">
+<meta property="og:description" content="Free date calculator: days between two dates (with weekdays count) or add/subtract days, weeks, months, years.">
+<meta property="og:url" content="https://www.example.com/tools/date-calculator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Date Calculator — Days Between Dates Online">
+<meta name="twitter:description" content="Free date calculator: days between two dates (with weekdays count) or add/subtract days, weeks, months, years.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li aria-current="page">Date Calculator</li></ol></nav>
+<h1>Date Calculator</h1>
+<div class="tool-body-intro">
+<p>Need to know how many days until a deadline, or what date falls 90 days from now? This free date calculator does both: it measures the <strong>exact span between two dates</strong> (days, weeks, approximate months and years, plus a weekday count) and it can <strong>add or subtract</strong> days, weeks, months or years from any date.</p><p>Month arithmetic clamps to the end of shorter months (31 January plus one month gives 28/29 February), and everything is computed in your browser with no data stored.</p>
+</div>
+<section class="tool-section tool-date-calculator" aria-label="Date Calculator">
+
+    <div class="card tool-panel">
+      <h2 class="tool-sub">Difference between two dates</h2>
+      <div class="field">
+        <label class="label" for="date-a">Start date</label>
+        <input class="input" id="date-a" type="date">
+      </div>
+      <div class="field">
+        <label class="label" for="date-b">End date</label>
+        <input class="input" id="date-b" type="date">
+      </div>
+      <button class="btn btn-primary" id="date-diff-go" type="button">Calculate difference</button>
+      <div class="result" id="date-diff-out" aria-live="polite"></div>
+      <hr>
+      <h2 class="tool-sub">Add to / subtract from a date</h2>
+      <div class="field">
+        <label class="label" for="date-base">Start date</label>
+        <input class="input" id="date-base" type="date">
+      </div>
+      <div class="field">
+        <label class="label" for="date-amt">Amount</label>
+        <input class="input" id="date-amt" type="number" inputmode="numeric" step="1" placeholder="e.g. 90">
+      </div>
+      <div class="field">
+        <label class="label" for="date-unit">Unit</label>
+        <select class="select" id="date-unit">
+          <option value="days">Days</option>
+          <option value="weeks">Weeks</option>
+          <option value="months">Months</option>
+          <option value="years">Years</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label" for="date-dir">Direction</label>
+        <select class="select" id="date-dir">
+          <option value="1">Add</option>
+          <option value="-1">Subtract</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" id="date-add-go" type="button">Calculate new date</button>
+      <div class="result" id="date-add-out" aria-live="polite"></div>
+      <p class="privacy-note">Your inputs never leave your device — everything runs in your browser.</p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>For a date difference: pick the start and end dates, then press Calculate difference.</li>
+<li>For date arithmetic: pick a start date, enter an amount, choose the unit and Add or Subtract.</li>
+<li>Read the result — spans show weekdays too; arithmetic shows the resulting date.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Does the day count include both the start and end dates?</summary><div class="faq-a"><p>The day count is the number of 24-hour steps between the two dates (end minus start), while the weekday count includes both endpoints.</p></div></details>
+<details><summary>What happens when I add one month to 31 January?</summary><div class="faq-a"><p>The result clamps to the last day of the target month — 28 February in a common year, 29 February in a leap year.</p></div></details>
+<details><summary>Can I subtract dates as well as add?</summary><div class="faq-a"><p>Yes. Choose Subtract with a positive amount, or simply enter a negative amount with Add.</p></div></details>
+<details><summary>Are time zones an issue?</summary><div class="faq-a"><p>No. Dates are handled as plain calendar dates in UTC, so daylight-saving changes cannot shift a result by a day.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../age-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#calendar"></use></svg><span class="tl-name">Age Calculator</span><span class="tl-desc">Calculators</span></a>
+<a class="tool-card" href="../calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#calculator"></use></svg><span class="tl-name">Calculator</span><span class="tl-desc">Calculators</span></a>
+<a class="tool-card" href="../percentage-calculator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#percent"></use></svg><span class="tl-name">Percentage Calculator</span><span class="tl-desc">Calculators</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Date Calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/date-calculator/","description":"Free date calculator: days between two dates (with weekdays count) or add/subtract days, weeks, months, years.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the day count include both the start and end dates?","acceptedAnswer":{"@type":"Answer","text":"The day count is the number of 24-hour steps between the two dates (end minus start), while the weekday count includes both endpoints."}},{"@type":"Question","name":"What happens when I add one month to 31 January?","acceptedAnswer":{"@type":"Answer","text":"The result clamps to the last day of the target month — 28 February in a common year, 29 February in a leap year."}},{"@type":"Question","name":"Can I subtract dates as well as add?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose Subtract with a positive amount, or simply enter a negative amount with Add."}},{"@type":"Question","name":"Are time zones an issue?","acceptedAnswer":{"@type":"Answer","text":"No. Dates are handled as plain calendar dates in UTC, so daylight-saving changes cannot shift a result by a day."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Calculators","item":"https://www.example.com/#cat-calculators"},{"@type":"ListItem","position":3,"name":"Date Calculator","item":"https://www.example.com/tools/date-calculator/"}]}</script>
+<script>
+var LOGIC={dateDiff:function (aISO, bISO) {
+    'use strict';
+    function r2(x) { var v = Math.round(x * 100) / 100; return v === 0 ? 0 : v; }
+    function parse(iso, label) {
+      if (typeof iso !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) {
+        throw new Error('Invalid date: ' + label);
+      }
+      var y = parseInt(iso.slice(0, 4), 10);
+      var m = parseInt(iso.slice(5, 7), 10);
+      var d = parseInt(iso.slice(8, 10), 10);
+      var t = Date.UTC(y, m - 1, d);
+      var chk = new Date(t);
+      if (chk.getUTCFullYear() !== y || chk.getUTCMonth() !== m - 1 || chk.getUTCDate() !== d) {
+        throw new Error('Invalid date: ' + label);
+      }
+      return t;
+    }
+    var t1 = parse(aISO, 'start');
+    var t2 = parse(bISO, 'end');
+    var lo = Math.min(t1, t2), hi = Math.max(t1, t2);
+    var days = Math.round((hi - lo) / 86400000);
+    var weekdays = 0;
+    for (var t = lo; t <= hi; t += 86400000) {
+      var dow = new Date(t).getUTCDay();
+      if (dow > 0 && dow < 6) weekdays++;
+    }
+    return {
+      days: days,
+      weeks: r2(days / 7),
+      monthsApprox: r2(days / 30.44),
+      yearsApprox: r2(days / 365.25),
+      weekdays: weekdays
+    };
+  },dateAdd:function (dateISO, amount, unit) {
+    'use strict';
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    if (typeof dateISO !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(dateISO)) {
+      throw new Error('Invalid date.');
+    }
+    var y = parseInt(dateISO.slice(0, 4), 10);
+    var m = parseInt(dateISO.slice(5, 7), 10);
+    var d = parseInt(dateISO.slice(8, 10), 10);
+    var t = Date.UTC(y, m - 1, d);
+    var chk = new Date(t);
+    if (chk.getUTCFullYear() !== y || chk.getUTCMonth() !== m - 1 || chk.getUTCDate() !== d) {
+      throw new Error('Invalid date.');
+    }
+    if (typeof amount !== 'number' || !isFinite(amount) || Math.floor(amount) !== amount) {
+      throw new Error('Amount must be a whole number.');
+    }
+    function isoOf(time) {
+      var dt = new Date(time);
+      return dt.getUTCFullYear() + '-' + pad(dt.getUTCMonth() + 1) + '-' + pad(dt.getUTCDate());
+    }
+    function daysInMonth(yy, mm) { return new Date(Date.UTC(yy, mm, 0)).getUTCDate(); }
+    if (unit === 'days' || unit === 'weeks') {
+      return isoOf(t + amount * (unit === 'weeks' ? 7 : 1) * 86400000);
+    }
+    if (unit === 'months') {
+      var total = (m - 1) + amount;
+      var y2 = y + Math.floor(total / 12);
+      var m2 = ((total % 12) + 12) % 12;
+      var d2 = Math.min(d, daysInMonth(y2, m2 + 1));
+      return isoOf(Date.UTC(y2, m2, d2));
+    }
+    if (unit === 'years') {
+      var y3 = y + amount;
+      var d3 = (m === 2 && d === 29 && !(((y3 % 4 === 0 && y3 % 100 !== 0) || y3 % 400 === 0))) ? 28 : d;
+      return isoOf(Date.UTC(y3, m - 1, d3));
+    }
+    throw new Error('Unknown unit. Use days, weeks, months or years.');
+  }};
+
+    (function(){
+      'use strict';
+      function $(id){ return document.getElementById(id); }
+      var a = $('date-a'), b = $('date-b'), diffGo = $('date-diff-go'), diffOut = $('date-diff-out'),
+          base = $('date-base'), amt = $('date-amt'), unit = $('date-unit'),
+          dir = $('date-dir'), addGo = $('date-add-go'), addOut = $('date-add-out');
+      if (!a || !b || !diffGo || !diffOut || !base || !amt || !unit || !dir || !addGo || !addOut) return;
+      function num(n){ return n.toLocaleString('en-US'); }
+      function showError(out, msg){
+        out.textContent = '';
+        var p = document.createElement('p');
+        p.className = 'error';
+        p.textContent = msg;
+        out.appendChild(p);
+      }
+      function fmtDate(iso){
+        var parts = iso.split('-');
+        var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        return parseInt(parts[2], 10) + ' ' + months[parseInt(parts[1], 10) - 1] + ' ' + parts[0];
+      }
+      diffGo.addEventListener('click', function(){
+        if (!a.value || !b.value) { showError(diffOut, 'Please pick both dates.'); return; }
+        var r;
+        try { r = LOGIC.dateDiff(a.value, b.value); }
+        catch (e) { showError(diffOut, e && e.message ? e.message : 'Invalid dates.'); return; }
+        diffOut.textContent = '';
+        var big = document.createElement('p');
+        big.className = 'result-big';
+        big.textContent = num(r.days) + ' days';
+        diffOut.appendChild(big);
+        [
+          ['Weeks', r.weeks],
+          ['Months (approx)', r.monthsApprox],
+          ['Years (approx)', r.yearsApprox],
+          ['Weekdays (Mon–Fri)', num(r.weekdays)]
+        ].forEach(function(row){
+          var p = document.createElement('p');
+          var label = document.createElement('strong');
+          label.textContent = row[0] + ': ';
+          p.appendChild(label);
+          p.appendChild(document.createTextNode(String(row[1])));
+          diffOut.appendChild(p);
+        });
+      });
+      addGo.addEventListener('click', function(){
+        if (!base.value) { showError(addOut, 'Please pick a start date.'); return; }
+        var n = parseInt(amt.value, 10);
+        if (!isFinite(n)) { showError(addOut, 'Please enter a whole-number amount.'); return; }
+        var iso;
+        try { iso = LOGIC.dateAdd(base.value, n * parseInt(dir.value, 10), unit.value); }
+        catch (e) { showError(addOut, e && e.message ? e.message : 'Invalid input.'); return; }
+        addOut.textContent = '';
+        var big = document.createElement('p');
+        big.className = 'result-big';
+        big.textContent = fmtDate(iso);
+        addOut.appendChild(big);
+        var sub = document.createElement('p');
+        sub.textContent = iso;
+        addOut.appendChild(sub);
+      });
+    })();
+</script>
+</body>
+</html>
