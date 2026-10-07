@@ -149,7 +149,12 @@ main{padding:2rem 0 3rem}
 .btn-danger{background:var(--danger);color:#fff}
 .btn-sm{min-height:36px;padding:.375rem .75rem;font-size:.875rem}
 .btn-block{width:100%}
-.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn:disabled{opacity:.6;cursor:not-allowed;filter:saturate(.35);box-shadow:none;transform:none}
+/* Busy buttons: obvious "working" state with spinner */
+.btn[aria-busy="true"]{opacity:.75;cursor:wait;filter:saturate(.35);box-shadow:none;transform:none;pointer-events:none}
+.btn[aria-busy="true"]::before{content:"";display:inline-block;width:1em;height:1em;margin-right:.55em;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;vertical-align:-.15em;animation:qt-btn-spin .7s linear infinite}
+@keyframes qt-btn-spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.btn[aria-busy="true"]::before{animation:none;border-top-color:currentColor}}
 
 /* ---------- 8. Forms ---------- */
 .field{margin-bottom:1rem}
