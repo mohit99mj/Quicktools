@@ -6,11 +6,11 @@
 <title>User Agent — Browser &amp; OS Info</title>
 <meta name="description" content="See your user agent string plus parsed browser, OS, device, CPU cores, memory and screen details — all in your browser.">
 <meta name="keywords" content="user agent, my user agent, browser info, what browser am i using">
-<link rel="canonical" href="https://www.example.com/tools/user-agent/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/user-agent/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="User Agent — Browser &amp; OS Info">
 <meta property="og:description" content="See your user agent string plus parsed browser, OS, device, CPU cores, memory and screen details — all in your browser.">
-<meta property="og:url" content="https://www.example.com/tools/user-agent/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/user-agent/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="User Agent — Browser &amp; OS Info">
 <meta name="twitter:description" content="See your user agent string plus parsed browser, OS, device, CPU cores, memory and screen details — all in your browser.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-user-agent .tool-user-agent-heading{font-size:1.1rem;margin:1rem 0 .5rem;}.tool-user-agent .tool-user-agent-raw{word-break:break-all;font-size:.85rem;}.tool-user-agent .table td,.tool-user-agent .table th{word-break:break-all;}
 </style>
@@ -100,9 +102,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"User Agent Info","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/user-agent/","description":"See your user agent string plus parsed browser, OS, device, CPU cores, memory and screen details — all in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"User Agent Info","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/user-agent/","description":"See your user agent string plus parsed browser, OS, device, CPU cores, memory and screen details — all in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a user agent string?","acceptedAnswer":{"@type":"Answer","text":"It is a line of text your browser sends to every website, identifying the browser version, operating system, and device. Sites use it to serve the right layout or troubleshoot issues."}},{"@type":"Question","name":"Can a user agent be faked?","acceptedAnswer":{"@type":"Answer","text":"Yes — browsers and extensions can override it, so it is an identification hint, not proof. The details here reflect what your browser reports, which may differ from the real device if spoofing is enabled."}},{"@type":"Question","name":"Is my user agent private information?","acceptedAnswer":{"@type":"Answer","text":"It is sent to every site you visit, so it is not secret — but combined with other signals it can help trackers fingerprint a device. Treat it as semi-public."}},{"@type":"Question","name":"Why does it mention \"Mozilla\" even in Chrome?","acceptedAnswer":{"@type":"Answer","text":"For historical compatibility, nearly all browsers start their user agent with \"Mozilla/5.0\". It is a legacy quirk, not a sign you are using Firefox."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Internet Tools","item":"https://www.example.com/#cat-internet-tools"},{"@type":"ListItem","position":3,"name":"User Agent Info","item":"https://www.example.com/tools/user-agent/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Internet Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-internet-tools"},{"@type":"ListItem","position":3,"name":"User Agent Info","item":"https://mohit99mj.github.io/Quicktools/tools/user-agent/"}]}</script>
 <script>
 var LOGIC={parseUA:(uaString) => {
     const ua = String(uaString || '');
