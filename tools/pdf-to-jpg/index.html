@@ -201,14 +201,14 @@
         pdfFile = f;
         pages = [];
         if(grid){ grid.textContent = ''; }
-        if(zipBtn){ zipBtn.hidden = true; zipBtn.disabled = true; }
+        if(zipBtn){ zipBtn.hidden = true; zipBtn.disabled = true; zipBtn.setAttribute('aria-busy', 'true'); }
         if(nameEl){
           nameEl.textContent = '';
           var label = document.createElement('span');
           label.textContent = 'Selected: ' + f.name;
           nameEl.appendChild(label);
         }
-        if(goBtn){ goBtn.disabled = false; }
+        if(goBtn){ goBtn.disabled = false; goBtn.removeAttribute('aria-busy'); }
         setStatus('"' + f.name + '" is ready. Choose a format and click Convert.');
       }
 
@@ -285,7 +285,7 @@
           waitForLibs(['pdfjsLib', 'JSZip'], function(){
             pShim(false);
             pShow({ title: 'Converting PDF…', stage: 'Reading PDF…', percent: 0 });
-            goBtn.disabled = true;
+            goBtn.disabled = true; goBtn.setAttribute('aria-busy', 'true');
             if(progress){ progress.hidden = false; progress.value = 0; }
             pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER;
             var format = 'jpg';
@@ -315,7 +315,7 @@
                   if(progress){ progress.value = Math.round((p / total) * 100); }
                 }
                 renderGrid(ext);
-                if(zipBtn){ zipBtn.hidden = false; zipBtn.disabled = false; }
+                if(zipBtn){ zipBtn.hidden = false; zipBtn.disabled = false; zipBtn.removeAttribute('aria-busy'); }
                 var imgTotal = pages.reduce(function(s, it){ return s + (it.blob ? it.blob.size : 0); }, 0);
                 pSum($('ptj-status'), '<strong>Conversion complete</strong> — ' + total + ' page' + (total === 1 ? '' : 's') + ' • ' + fmtSize(pdfFile.size) + ' PDF → ' + fmtSize(imgTotal) + ' ' + ext.toUpperCase() + ' images');
                 pHide();
@@ -325,7 +325,7 @@
                 setStatus('Could not convert this PDF: ' + (err && err.message ? err.message : 'the file may be corrupted or password-protected.'), true);
               }
               pHide();
-              goBtn.disabled = false;
+              goBtn.disabled = false; goBtn.removeAttribute('aria-busy');
               if(progress){ progress.hidden = true; }
             })();
           }, function(){
@@ -341,7 +341,7 @@
           if(!pages.length){ return; }
           setStatus('Building ZIP…');
           pShow({ title: 'Building ZIP…', stage: 'Compressing ' + pages.length + ' page images…' });
-          zipBtn.disabled = true;
+          zipBtn.disabled = true; zipBtn.setAttribute('aria-busy', 'true');
           var format = 'jpg';
           var fmtSel = $('ptj-format');
           if(fmtSel){ format = fmtSel.value; }
@@ -356,16 +356,16 @@
               downloadBlob(blob, base + '-pages.zip');
               pHide();
               setStatus(pages.length + ' page(s) downloaded as "' + base + '-pages.zip".');
-              zipBtn.disabled = false;
+              zipBtn.disabled = false; zipBtn.removeAttribute('aria-busy');
             }, function(err){
               pHide();
               setStatus('Could not build the ZIP: ' + (err && err.message ? err.message : 'unknown error'), true);
-              zipBtn.disabled = false;
+              zipBtn.disabled = false; zipBtn.removeAttribute('aria-busy');
             });
           } catch(err){
             pHide();
             setStatus('Could not build the ZIP: ' + (err && err.message ? err.message : 'unknown error'), true);
-            zipBtn.disabled = false;
+            zipBtn.disabled = false; zipBtn.removeAttribute('aria-busy');
           }
         });
       }

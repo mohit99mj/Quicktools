@@ -234,7 +234,7 @@
           label.textContent = 'Selected: ' + f.name;
           nameEl.appendChild(label);
         }
-        if(goBtn){ goBtn.disabled = false; }
+        if(goBtn){ goBtn.disabled = false; goBtn.removeAttribute('aria-busy'); }
         setStatus('"' + f.name + '" is ready. Click Extract to Word.');
       }
 
@@ -281,7 +281,7 @@
           setStatus('Loading libraries…');
           pShow({ title: 'Extracting PDF to Word…', stage: 'Loading libraries…' });
           waitForLibs(['pdfjsLib', 'JSZip'], function(){
-            goBtn.disabled = true;
+            goBtn.disabled = true; goBtn.setAttribute('aria-busy', 'true');
             if(ocrWrap){ ocrWrap.hidden = true; }
             if(progress){ progress.hidden = false; progress.value = 0; }
             pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER;
@@ -321,7 +321,7 @@
                   pHide();
                   setStatus('No extractable text was found in this PDF — it looks like a scanned document.', true);
                   if(ocrWrap){ ocrWrap.hidden = false; }
-                  goBtn.disabled = false;
+                  goBtn.disabled = false; goBtn.removeAttribute('aria-busy');
                   if(progress){ progress.hidden = true; }
                   return;
                 }
@@ -331,7 +331,7 @@
                 setStatus('Could not read this PDF: ' + (err && err.message ? err.message : 'the file may be corrupted or password-protected.'), true);
               }
               pHide();
-              goBtn.disabled = false;
+              goBtn.disabled = false; goBtn.removeAttribute('aria-busy');
               if(progress){ progress.hidden = true; }
             })();
           }, function(){
