@@ -315,7 +315,7 @@ function showError(t){ errEl.textContent = t; errEl.hidden = false; }
 
       loadBtn.addEventListener('click', function(){
         hideError();
-        loadBtn.disabled = true;
+        loadBtn.disabled = true; loadBtn.setAttribute('aria-busy', 'true');
         loadBtn.textContent = 'Loading engine…';
         progressEl.hidden = false;
         setBar(0);
@@ -333,7 +333,7 @@ function showError(t){ errEl.textContent = t; errEl.hidden = false; }
         }).catch(function(){
           pShim(false);
           pHide();
-          loadBtn.disabled = false;
+          loadBtn.disabled = false; loadBtn.removeAttribute('aria-busy');
           loadBtn.textContent = 'Load video engine (one-time ~25MB)';
           progressEl.hidden = true;
           status('');
@@ -357,7 +357,7 @@ function showError(t){ errEl.textContent = t; errEl.hidden = false; }
         } else {
           args = ['-ss', String(s), '-to', String(e), '-i', inName, '-c', 'copy', outName];
         }
-        goBtn.disabled = true;
+        goBtn.disabled = true; goBtn.setAttribute('aria-busy', 'true');
         resultEl.hidden = true;
         progressEl.hidden = false;
         setBar(0);
@@ -400,7 +400,7 @@ function showError(t){ errEl.textContent = t; errEl.hidden = false; }
           try{ ffmpeg.FS('unlink', inName); }catch(x){}
           if(ffmpeg && ffmpeg._qtStale){ ffmpeg = null; }
           try{ ffmpeg.FS('unlink', outName); }catch(x){}
-          goBtn.disabled = false;
+          goBtn.disabled = false; goBtn.removeAttribute('aria-busy');
           progressEl.hidden = true;
         });
       });
