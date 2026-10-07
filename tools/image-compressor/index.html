@@ -6,11 +6,11 @@
 <title>Compress Image — Free Online Image Compressor</title>
 <meta name="description" content="Compress images online for free. Adjust quality and format (JPEG, WebP, PNG) and see the live file-size estimate before you download.">
 <meta name="keywords" content="compress image, image compressor, reduce image size, compress jpeg, compress png, photo compressor">
-<link rel="canonical" href="https://www.example.com/tools/image-compressor/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/image-compressor/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Compress Image — Free Online Image Compressor">
 <meta property="og:description" content="Compress images online for free. Adjust quality and format (JPEG, WebP, PNG) and see the live file-size estimate before you download.">
-<meta property="og:url" content="https://www.example.com/tools/image-compressor/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/image-compressor/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Compress Image — Free Online Image Compressor">
 <meta name="twitter:description" content="Compress images online for free. Adjust quality and format (JPEG, WebP, PNG) and see the live file-size estimate before you download.">
@@ -19,8 +19,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-image-compressor .dropzone.drag{border-color:var(--accent);background:var(--accent-soft)}
+/* Target-size mode (workstream B) */
+.ts-mode{display:flex;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px}
+.ts-mode-btn{flex:1;min-height:44px;border:0;border-radius:999px;background:transparent;font:inherit;font-weight:700;color:var(--ink);cursor:pointer;transition:background-color .2s ease,color .2s ease,transform .15s ease;-webkit-tap-highlight-color:transparent}
+.ts-mode-btn.is-active{background:var(--accent);color:var(--accent-ink)}
+.ts-mode-btn:active{transform:scale(.98)}
+.ts-target-block{border:1px solid var(--line);border-radius:var(--radius);padding:1rem;background:var(--surface);margin-bottom:1rem}
+.ts-presets{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:.5rem 0 .75rem}
+.ts-preset{min-height:44px;border:1px solid var(--line);border-radius:12px;background:var(--bg);font:inherit;font-weight:700;color:var(--accent-strong);cursor:pointer;transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .15s ease;-webkit-tap-highlight-color:transparent}
+.ts-preset.is-active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.ts-preset:active{transform:scale(.97)}
+.ts-progress{height:10px;background:var(--bg);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:.75rem 0}
+.ts-progress-bar{height:100%;width:0%;background:var(--accent);transition:width .15s linear}
+.ts-preview{display:block;max-width:100%;max-height:280px;border-radius:12px;border:1px solid var(--line);margin-top:.75rem}
+@media (prefers-reduced-motion:reduce){.ts-mode-btn,.ts-preset,.ts-progress-bar{transition:none}}
 </style>
 </head>
 <body>
@@ -66,9 +82,36 @@
           <option value="image/png">PNG — lossless, larger files</option>
         </select>
       </div>
+      <div class="field">
+        <span class="label" id="ic-mode-label">Compression mode</span>
+        <div class="ts-mode" role="group" aria-labelledby="ic-mode-label">
+          <button type="button" class="ts-mode-btn is-active" id="ic-mode-quality" aria-pressed="true">By quality</button>
+          <button type="button" class="ts-mode-btn" id="ic-mode-target" aria-pressed="false">By target size</button>
+        </div>
+      </div>
       <div class="field" id="ic-quality-field">
         <label class="label" for="ic-quality">Quality: <output id="ic-quality-out" for="ic-quality">80%</output></label>
         <input class="input" type="range" id="ic-quality" min="0.1" max="1" step="0.01" value="0.8">
+      </div>
+      <div class="ts-target-block" id="ic-target-block" hidden>
+        <span class="label" id="ic-target-label">Target size</span>
+        <div class="ts-presets" role="group" aria-labelledby="ic-target-label">
+          <button type="button" class="ts-preset" data-kb="10">10 KB</button>
+          <button type="button" class="ts-preset" data-kb="15">15 KB</button>
+          <button type="button" class="ts-preset" data-kb="50">50 KB</button>
+          <button type="button" class="ts-preset" data-kb="100">100 KB</button>
+          <button type="button" class="ts-preset" data-kb="250">250 KB</button>
+          <button type="button" class="ts-preset" data-kb="500">500 KB</button>
+        </div>
+        <div class="field">
+          <label class="label" for="ic-custom-kb">Or custom size (KB)</label>
+          <input class="input" id="ic-custom-kb" type="number" min="1" max="102400" step="1" inputmode="numeric" placeholder="e.g. 75">
+        </div>
+        <p class="hint" id="ic-png-note" hidden>Target-size mode needs JPEG or WebP — PNG is lossless, so quality can’t shrink it. Pick JPEG or WebP above.</p>
+        <div class="ts-progress" id="ic-ts-progress" hidden><div class="ts-progress-bar" id="ic-ts-bar"></div></div>
+        <button class="btn btn-primary btn-block" id="ic-target-go" disabled>Compress to target size</button>
+        <p class="hint">Tries quality levels automatically (up to 8 quick passes) to land within ±5% of your target.</p>
+        <img id="ic-preview" class="ts-preview" alt="Compressed image preview" hidden>
       </div>
       <div class="result" id="ic-info" aria-live="polite"></div>
       <div class="field">
@@ -93,6 +136,9 @@
 <details><summary>Which format gives the smallest file?</summary><div class="faq-a"><p>WebP usually wins for photos. JPEG is the most compatible choice, and PNG keeps perfect quality but stays larger — it is best for graphics with sharp edges.</p></div></details>
 <details><summary>Are my images uploaded to a server?</summary><div class="faq-a"><p>No. Compression happens entirely in your browser. Your files never leave your device.</p></div></details>
 <details><summary>Why does PNG ignore the quality slider?</summary><div class="faq-a"><p>PNG is a lossless format, so there is no quality tradeoff to adjust. The slider applies to JPEG and WebP only.</p></div></details>
+
+<details><summary>How do I compress a photo to exactly 100 KB?</summary><div class="faq-a"><p>Switch to “By target size” mode, tap the 100 KB preset (or type any custom size), and the tool binary-searches the JPEG/WebP quality until the output lands within ±5% of your target — it reports e.g. “Done: 98 KB (target 100 KB)”. This is built for form uploads with strict KB limits (10, 15, 50, 100, 250 or 500 KB).</p></div></details>
+<details><summary>Why is my compressed image still too big for a form upload?</summary><div class="faq-a"><p>Three usual reasons: you picked PNG (it's lossless — switch to JPEG or WebP for target-size mode), the photo has very large dimensions (use Image Resizer first), or the KB target is simply smaller than the photo allows at minimum quality — the tool then tells you the closest size it could reach.</p></div></details>
 </section>
 <section class="related-tools" aria-label="Related tools">
 <h2>Related tools</h2>
@@ -101,6 +147,7 @@
 <a class="tool-card" href="../image-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#refresh-cw"></use></svg><span class="tl-name">Image Converter</span><span class="tl-desc">Image Tools</span></a>
 <a class="tool-card" href="../background-remover/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#sparkles"></use></svg><span class="tl-name">Background Remover</span><span class="tl-desc">Image Tools</span></a>
 <a class="tool-card" href="../image-cropper/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#crop"></use></svg><span class="tl-name">Image Cropper</span><span class="tl-desc">Image Tools</span></a>
+<a class="tool-card" href="../image-cropper/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#crop"></use></svg><span class="tl-name">Image Cropper</span><span class="tl-desc">Crop before compressing</span></a>
 </div>
 </section>
 </main>
@@ -122,10 +169,133 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Compressor","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/image-compressor/","description":"Compress images online for free. Adjust quality and format (JPEG, WebP, PNG) and see the live file-size estimate before you download.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much can image compression reduce file size?","acceptedAnswer":{"@type":"Answer","text":"It depends on the image and settings. Photos saved as JPEG or WebP at 70–80% quality are typically 60–90% smaller than the original with little visible difference."}},{"@type":"Question","name":"Does compression reduce image dimensions?","acceptedAnswer":{"@type":"Answer","text":"No, unless your image is larger than 4000 px on its longest side — then it is scaled down to that cap so your browser stays responsive. Dimensions are shown before and after."}},{"@type":"Question","name":"Which format gives the smallest file?","acceptedAnswer":{"@type":"Answer","text":"WebP usually wins for photos. JPEG is the most compatible choice, and PNG keeps perfect quality but stays larger — it is best for graphics with sharp edges."}},{"@type":"Question","name":"Are my images uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Compression happens entirely in your browser. Your files never leave your device."}},{"@type":"Question","name":"Why does PNG ignore the quality slider?","acceptedAnswer":{"@type":"Answer","text":"PNG is a lossless format, so there is no quality tradeoff to adjust. The slider applies to JPEG and WebP only."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://www.example.com/#cat-image-tools"},{"@type":"ListItem","position":3,"name":"Image Compressor","item":"https://www.example.com/tools/image-compressor/"}]}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Compressor","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/image-compressor/","description":"Compress images online for free. Adjust quality and format (JPEG, WebP, PNG) and see the live file-size estimate before you download.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much can image compression reduce file size?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the image and settings. Photos saved as JPEG or WebP at 70–80% quality are typically 60–90% smaller than the original with little visible difference."}}, {"@type": "Question", "name": "Does compression reduce image dimensions?", "acceptedAnswer": {"@type": "Answer", "text": "No, unless your image is larger than 4000 px on its longest side — then it is scaled down to that cap so your browser stays responsive. Dimensions are shown before and after."}}, {"@type": "Question", "name": "Which format gives the smallest file?", "acceptedAnswer": {"@type": "Answer", "text": "WebP usually wins for photos. JPEG is the most compatible choice, and PNG keeps perfect quality but stays larger — it is best for graphics with sharp edges."}}, {"@type": "Question", "name": "Are my images uploaded to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. Compression happens entirely in your browser. Your files never leave your device."}}, {"@type": "Question", "name": "Why does PNG ignore the quality slider?", "acceptedAnswer": {"@type": "Answer", "text": "PNG is a lossless format, so there is no quality tradeoff to adjust. The slider applies to JPEG and WebP only."}}, {"@type": "Question", "name": "How do I compress a photo to exactly 100 KB?", "acceptedAnswer": {"@type": "Answer", "text": "Switch to “By target size” mode, tap the 100 KB preset (or type any custom size), and the tool binary-searches the JPEG/WebP quality until the output lands within ±5% of your target — it reports e.g. “Done: 98 KB (target 100 KB)”. This is built for form uploads with strict KB limits (10, 15, 50, 100, 250 or 500 KB)."}}, {"@type": "Question", "name": "Why is my compressed image still too big for a form upload?", "acceptedAnswer": {"@type": "Answer", "text": "Three usual reasons: you picked PNG (it's lossless — switch to JPEG or WebP for target-size mode), the photo has very large dimensions (use Image Resizer first), or the KB target is simply smaller than the photo allows at minimum quality — the tool then tells you the closest size it could reach."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-image-tools"},{"@type":"ListItem","position":3,"name":"Image Compressor","item":"https://mohit99mj.github.io/Quicktools/tools/image-compressor/"}]}</script>
 <script>
+/*
+ * QuickTools — binarySearchTarget (shared logic, embedded per tool page)
+ *
+ * Pure helper: binary-search a quality-like parameter so that an async
+ * measure(quality) -> bytes lands within ±tolerance of targetBytes.
+ *
+ * Assumptions: output size increases with the quality parameter
+ * (higher quality => bigger output). The closest probe is always tracked,
+ * so mildly non-monotonic encoders still terminate with the best result.
+ *
+ * measure      async function(quality) -> positive byte count (number)
+ * targetBytes  positive number
+ * opts         { minQ, maxQ, tolerance, maxIter, initialQ, onStep }
+ *   minQ/maxQ    search range for the quality parameter (default 0.15/0.95)
+ *   tolerance    relative tolerance, e.g. 0.05 for ±5% (default 0.05)
+ *   maxIter      maximum number of measure() probes (default 8)
+ *   initialQ     optional smart first probe (e.g. a bitrate estimated from
+ *                duration); if it hits, we are done in 1 probe
+ *   onStep(q, iteration, maxIter, bytes)  progress callback
+ *
+ * Resolves to { quality, bytes, iterations, hit, reason } where reason is
+ * 'hit' | 'closest' | 'target-above-range' | 'target-below-range'.
+ * Never loops forever: probes are capped at maxIter.
+ *
+ * Works in browsers (defines window.binarySearchTarget) and in Node
+ * (module.exports) — the page copies must stay identical to this file.
+ */
+(function (root) {
+  'use strict';
+
+  function binarySearchTarget(measure, targetBytes, opts) {
+    var o = opts || {};
+    var minQ = typeof o.minQ === 'number' ? o.minQ : 0.15;
+    var maxQ = typeof o.maxQ === 'number' ? o.maxQ : 0.95;
+    var tol = typeof o.tolerance === 'number' ? o.tolerance : 0.05;
+    var maxIter = typeof o.maxIter === 'number' ? Math.max(1, Math.floor(o.maxIter)) : 8;
+    var initialQ = typeof o.initialQ === 'number' ? o.initialQ : null;
+    var onStep = typeof o.onStep === 'function' ? o.onStep : function () {};
+
+    function inTol(bytes) {
+      return bytes >= targetBytes * (1 - tol) && bytes <= targetBytes * (1 + tol);
+    }
+
+    function run() {
+      if (!(targetBytes > 0)) return Promise.reject(new Error('binarySearchTarget: targetBytes must be positive'));
+      if (!(maxQ > minQ)) return Promise.reject(new Error('binarySearchTarget: maxQ must be greater than minQ'));
+
+      var best = null; // {quality, bytes} — closest probe to the target so far
+      var iterations = 0;
+
+      function note(q, bytes) {
+        if (typeof bytes !== 'number' || !(bytes > 0) || !isFinite(bytes)) {
+          throw new Error('binarySearchTarget: measure() must resolve to a positive byte count');
+        }
+        iterations++;
+        if (!best || Math.abs(bytes - targetBytes) < Math.abs(best.bytes - targetBytes)) {
+          best = { quality: q, bytes: bytes };
+        }
+        onStep(q, iterations, maxIter, bytes);
+      }
+
+      function probe(q) {
+        return Promise.resolve()
+          .then(function () { return measure(q); })
+          .then(function (b) { note(q, b); return b; });
+      }
+
+      function finish(reason) {
+        var hit = inTol(best.bytes);
+        return { quality: best.quality, bytes: best.bytes, iterations: iterations, hit: hit, reason: hit ? 'hit' : reason };
+      }
+
+      function search(lo, hi) {
+        function step() {
+          if (iterations >= maxIter) return Promise.resolve(finish('closest'));
+          var mid = (lo + hi) / 2;
+          if (!(hi - lo > 1e-9)) return Promise.resolve(finish('closest'));
+          return probe(mid).then(function (b) {
+            if (inTol(b)) return finish('hit');
+            if (b > targetBytes) hi = mid; else lo = mid;
+            return step();
+          });
+        }
+        return step();
+      }
+
+      var first = initialQ !== null
+        ? probe(initialQ).then(function (b) {
+            if (inTol(b)) return finish('hit');
+            var lo = minQ, hi = maxQ;
+            if (b > targetBytes) hi = initialQ; else lo = initialQ;
+            return search(lo, hi);
+          })
+        : probe(maxQ).then(function (hiBytes) {
+            // Best-looking output first: if it already fits, take it in 1 probe.
+            if (inTol(hiBytes)) return finish('hit');
+            if (hiBytes < targetBytes * (1 - tol)) {
+              // Even max quality is smaller than the target: unreachable (target too large).
+              return finish('target-above-range');
+            }
+            return probe(minQ).then(function (loBytes) {
+              if (inTol(loBytes)) return finish('hit');
+              if (loBytes > targetBytes * (1 + tol)) {
+                // Even min quality overshoots: unreachable (target too small).
+                return finish('target-below-range');
+              }
+              return search(minQ, maxQ);
+            });
+          });
+      return first;
+    }
+
+    return run();
+  }
+
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = binarySearchTarget;
+  } else {
+    root.binarySearchTarget = binarySearchTarget;
+  }
+})(typeof self !== 'undefined' ? self : this);
 var LOGIC={fit:function(w, h, maxW, maxH) {
     w = +w; h = +h; maxW = +maxW; maxH = +maxH;
     if (!(w > 0) || !(h > 0) || !(maxW > 0) || !(maxH > 0)) return { w: 0, h: 0 };
@@ -164,6 +334,7 @@ var LOGIC={fit:function(w, h, maxW, maxH) {
       function schedule(){ if(timer) clearTimeout(timer); timer = setTimeout(compress, 120); }
       function compress(){
         if(!img) return;
+        if(icMode === 'target') return; // target-size mode runs its own search
         var mime = formatSel.value;
         var q = parseFloat(quality.value) || 0.8;
         var d = LOGIC.fit(origW, origH, MAX, MAX);
@@ -196,6 +367,7 @@ var LOGIC={fit:function(w, h, maxW, maxH) {
             setStatus('Note: image is ' + origW + ' × ' + origH + ' px — it will be scaled to fit within ' + MAX + ' px for smooth processing.');
           }
           schedule();
+          icUpdatePngNote();
         };
         probe.onerror = function(){ setStatus('Could not read that image. Try another file.', true); };
         probe.src = srcURL;
@@ -212,6 +384,15 @@ var LOGIC={fit:function(w, h, maxW, maxH) {
         if(fileInput.files && fileInput.files[0]) loadFile(fileInput.files[0]);
       });
       formatSel.addEventListener('change', function(){
+        if(icMode === 'target'){
+          qualityField.style.display = 'none';
+          outBlob = null;
+          dl.disabled = true;
+          if(icPreview){ if(icPreview.src) URL.revokeObjectURL(icPreview.src); icPreview.hidden = true; }
+          setStatus('Format changed — press “Compress to target size” to re-run.');
+          icUpdatePngNote();
+          return;
+        }
         qualityField.style.display = formatSel.value === 'image/png' ? 'none' : '';
         schedule();
       });
@@ -230,6 +411,148 @@ var LOGIC={fit:function(w, h, maxW, maxH) {
         a.click();
         a.remove();
       });
+      /* ---------- Target-size mode (workstream B) ---------- */
+      var icMode = 'quality';
+      var icTargetKb = 100;
+      var icTargetRunning = false;
+      var icModeQBtn = $('#ic-mode-quality'), icModeTBtn = $('#ic-mode-target');
+      var icTargetBlock = $('#ic-target-block'), icTargetGo = $('#ic-target-go');
+      var icCustomKb = $('#ic-custom-kb'), icPngNote = $('#ic-png-note');
+      var icTsProgress = $('#ic-ts-progress'), icTsBar = $('#ic-ts-bar');
+      var icPreview = $('#ic-preview');
+      var icBlobCache = {};
+      function icQt(){ return (typeof window.QTProgress !== 'undefined' && window.QTProgress) ? window.QTProgress : null; }
+      function icUpdatePngNote(){
+        var isPng = formatSel.value === 'image/png';
+        if(icPngNote) icPngNote.hidden = !(icMode === 'target' && isPng);
+        if(icTargetGo) icTargetGo.disabled = !img || icTargetRunning || (icMode === 'target' && isPng);
+      }
+      function icSetMode(m){
+        icMode = m;
+        var isTarget = (m === 'target');
+        if(icModeQBtn){ icModeQBtn.classList.toggle('is-active', !isTarget); icModeQBtn.setAttribute('aria-pressed', String(!isTarget)); }
+        if(icModeTBtn){ icModeTBtn.classList.toggle('is-active', isTarget); icModeTBtn.setAttribute('aria-pressed', String(isTarget)); }
+        if(qualityField) qualityField.style.display = isTarget ? 'none' : (formatSel.value === 'image/png' ? 'none' : '');
+        if(icTargetBlock) icTargetBlock.hidden = !isTarget;
+        if(icPreview) icPreview.hidden = true;
+        icUpdatePngNote();
+        if(isTarget){
+          setStatus(img ? 'Pick a target size and press “Compress to target size”.' : 'Upload an image first, then pick a target size.');
+          dl.disabled = true;
+        } else {
+          setStatus('');
+          schedule();
+        }
+      }
+      function icEncodeAt(q){
+        return new Promise(function(resolve, reject){
+          var mime = formatSel.value;
+          var d = LOGIC.fit(origW, origH, MAX, MAX);
+          outW = d.w; outH = d.h;
+          var c = document.createElement('canvas');
+          c.width = d.w; c.height = d.h;
+          var ctx = c.getContext('2d');
+          if(mime === 'image/jpeg'){ ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, d.w, d.h); }
+          ctx.drawImage(img, 0, 0, d.w, d.h);
+          c.toBlob(function(blob){
+            if(blob) resolve(blob); else reject(new Error('This browser could not encode ' + mime + '.'));
+          }, mime, q);
+        });
+      }
+      function icRunTarget(){
+        if(!img || icTargetRunning) return;
+        if(formatSel.value === 'image/png'){
+          setStatus('Target-size mode needs JPEG or WebP — PNG is lossless, so quality can’t shrink it.', true);
+          return;
+        }
+        if(!(icTargetKb > 0)){ setStatus('Pick a target size — tap a preset or enter a custom KB value.', true); return; }
+        var targetBytes = Math.round(icTargetKb * 1024);
+        icTargetRunning = true;
+        if(icModeQBtn) icModeQBtn.disabled = true;
+        if(icModeTBtn) icModeTBtn.disabled = true;
+        icBlobCache = {};
+        if(icTargetGo) icTargetGo.disabled = true;
+        dl.disabled = true;
+        if(icTsProgress) icTsProgress.hidden = false;
+        if(icTsBar) icTsBar.style.width = '0%';
+        var qp = icQt();
+        if(qp && qp.show) qp.show({ title: 'Compressing image to target size', stage: 'Starting…', percent: 0 });
+        setStatus('Finding the right quality for ' + fmtBytes(targetBytes) + '…');
+        binarySearchTarget(function(q){
+          return icEncodeAt(q).then(function(blob){
+            icBlobCache[q.toFixed(3)] = blob;
+            return blob.size;
+          });
+        }, targetBytes, {
+          minQ: 0.15, maxQ: 0.95, tolerance: 0.05, maxIter: 8,
+          onStep: function(q, i, n, bytes){
+            var r = i / n;
+            if(icTsBar) icTsBar.style.width = Math.round(r * 100) + '%';
+            var msg = 'Trying quality ' + q.toFixed(2) + '… (' + i + '/' + n + ') — ' + fmtBytes(bytes);
+            setStatus(msg);
+            var p2 = icQt();
+            if(p2 && p2.update) p2.update(Math.round(r * 100), msg);
+          }
+        }).then(function(res){
+          outBlob = icBlobCache[res.quality.toFixed(3)] || null;
+          var msg, isErr = false;
+          if(res.hit){
+            msg = 'Done: ' + fmtBytes(res.bytes) + ' (target ' + fmtBytes(targetBytes) + ').';
+          } else if(res.reason === 'target-below-range'){
+            msg = 'Closest achieved: ' + fmtBytes(res.bytes) + ' (target ' + fmtBytes(targetBytes) + ') — even the lowest quality can’t go smaller. Try a smaller image or a lower target.';
+            isErr = true;
+          } else if(res.reason === 'target-above-range'){
+            msg = 'Closest achieved: ' + fmtBytes(res.bytes) + ' (target ' + fmtBytes(targetBytes) + ') — this image is already smaller than your target at full quality.';
+          } else {
+            msg = 'Closest achieved: ' + fmtBytes(res.bytes) + ' (target ' + fmtBytes(targetBytes) + ').';
+          }
+          if(!outBlob){
+            setStatus('Target-size compression produced no output — please try again.', true);
+          } else {
+            setStatus(msg, isErr);
+            if(icPreview){
+              if(icPreview.src) URL.revokeObjectURL(icPreview.src);
+              icPreview.src = URL.createObjectURL(outBlob);
+              icPreview.hidden = false;
+            }
+            dl.disabled = false;
+          }
+          var p3 = icQt(); if(p3 && p3.hide) p3.hide();
+        }).catch(function(err){
+          setStatus('Target-size compression failed: ' + (err && err.message ? err.message : 'unknown error.'), true);
+          var p4 = icQt(); if(p4 && p4.hide) p4.hide();
+        }).then(function(){
+          icTargetRunning = false;
+          if(icModeQBtn) icModeQBtn.disabled = false;
+          if(icModeTBtn) icModeTBtn.disabled = false;
+          if(icTsProgress) icTsProgress.hidden = true;
+          icUpdatePngNote();
+        });
+      }
+      if(icModeQBtn) icModeQBtn.addEventListener('click', function(){ icSetMode('quality'); });
+      if(icModeTBtn) icModeTBtn.addEventListener('click', function(){ icSetMode('target'); });
+      (function(){
+        var btns = icTargetBlock ? icTargetBlock.querySelectorAll('.ts-preset') : [];
+        function clearActive(){ for(var i = 0; i < btns.length; i++) btns[i].classList.remove('is-active'); }
+        for(var i = 0; i < btns.length; i++){
+          (function(b){
+            b.addEventListener('click', function(){
+              clearActive();
+              b.classList.add('is-active');
+              if(icCustomKb) icCustomKb.value = '';
+              icTargetKb = parseInt(b.getAttribute('data-kb'), 10) || 0;
+            });
+          })(btns[i]);
+        }
+        var def = icTargetBlock ? icTargetBlock.querySelector('.ts-preset[data-kb="100"]') : null;
+        if(def) def.classList.add('is-active');
+        if(icCustomKb) icCustomKb.addEventListener('input', function(){
+          clearActive();
+          var v = parseInt(icCustomKb.value, 10);
+          icTargetKb = (v > 0) ? v : 0;
+        });
+      })();
+      if(icTargetGo) icTargetGo.addEventListener('click', icRunTarget);
       window.addEventListener('pagehide', function(){
         if(srcURL) URL.revokeObjectURL(srcURL);
         if(outURL) URL.revokeObjectURL(outURL);

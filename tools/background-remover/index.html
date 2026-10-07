@@ -6,11 +6,11 @@
 <title>Background Remover — Free AI Tool Online</title>
 <meta name="description" content="Remove the background from any photo with free on-device AI. The model downloads once (~40MB), then everything runs in your browser.">
 <meta name="keywords" content="background remover, remove background, transparent background, photo background remover, free background remover">
-<link rel="canonical" href="https://www.example.com/tools/background-remover/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/background-remover/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Background Remover — Free AI Tool Online">
 <meta property="og:description" content="Remove the background from any photo with free on-device AI. The model downloads once (~40MB), then everything runs in your browser.">
-<meta property="og:url" content="https://www.example.com/tools/background-remover/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/background-remover/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Background Remover — Free AI Tool Online">
 <meta name="twitter:description" content="Remove the background from any photo with free on-device AI. The model downloads once (~40MB), then everything runs in your browser.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-background-remover .br-checker{background:repeating-conic-gradient(#d4d9de 0 25%, #f5f7f8 0 50%) 0 0/24px 24px;border:1px solid var(--line);border-radius:var(--radius-sm);padding:1rem;text-align:center;margin:1rem 0}.tool-background-remover .br-checker img{max-width:100%;height:auto;border-radius:var(--radius-sm)}.tool-background-remover .dropzone.drag{border-color:var(--accent);background:var(--accent-soft)}
 </style>
@@ -66,6 +68,7 @@
       <div class="result" id="br-status" aria-live="polite"></div>
       <div id="br-result-wrap" hidden>
         <div class="br-checker" id="br-checker"><img id="br-result" alt="Image with background removed"></div>
+        <p class="hint" id="br-result-meta"></p>
         <div class="field"><button class="btn btn-primary" id="br-download">Download PNG</button></div>
       </div>
     </div>
@@ -115,9 +118,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Background Remover","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/background-remover/","description":"Remove the background from any photo with free on-device AI. The model downloads once (~40MB), then everything runs in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Background Remover","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/background-remover/","description":"Remove the background from any photo with free on-device AI. The model downloads once (~40MB), then everything runs in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this background remover really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The AI model runs on your own device, so there are no servers, accounts or watermarks. Use it as often as you like."}},{"@type":"Question","name":"Why does it download a ~40MB model first?","acceptedAnswer":{"@type":"Answer","text":"The AI needs its neural-network weights to separate foreground from background. They download once and are reused for every later photo, so subsequent removals start instantly."}},{"@type":"Question","name":"Do my photos get uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Processing happens entirely in your browser with on-device AI. Your files never leave your device."}},{"@type":"Question","name":"What image formats can I upload?","acceptedAnswer":{"@type":"Answer","text":"JPG, PNG, WebP and most other browser-readable formats. The result always downloads as a PNG with transparency."}},{"@type":"Question","name":"Why did the result keep part of the background?","acceptedAnswer":{"@type":"Answer","text":"AI segmentation works best with clear contrast between subject and background. Very busy or low-contrast backgrounds can leave artifacts — try a photo with a simpler background."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://www.example.com/#cat-image-tools"},{"@type":"ListItem","position":3,"name":"Background Remover","item":"https://www.example.com/tools/background-remover/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-image-tools"},{"@type":"ListItem","position":3,"name":"Background Remover","item":"https://mohit99mj.github.io/Quicktools/tools/background-remover/"}]}</script>
 <script>
 
     (function(){
@@ -125,10 +130,17 @@
       function $(s){ return document.querySelector(s); }
       var drop = $('#br-drop'), fileInput = $('#br-file'), go = $('#br-go');
       var statusEl = $('#br-status'), resultWrap = $('#br-result-wrap');
-      var resultImg = $('#br-result'), dl = $('#br-download');
+      var resultImg = $('#br-result'), dl = $('#br-download'), resultMeta = $('#br-result-meta');
       var progress = $('#br-progress'), progressBar = $('#br-progress-bar');
       if(!drop || !fileInput || !go || !statusEl) return;
       var srcURL = null, resultURL = null, fileName = 'image', modelLoaded = false;
+      function qp(){ return (typeof window !== 'undefined' && window.QTProgress && typeof window.QTProgress.show === 'function') ? window.QTProgress : null; }
+      function fmtBytes(b){
+        if(!(b > 0)) return '';
+        var u = ['B', 'KB', 'MB', 'GB'], i = 0, n = b;
+        while(n >= 1024 && i < u.length - 1){ n /= 1024; i++; }
+        return (n >= 100 ? Math.round(n) : n.toFixed(1)) + ' ' + u[i];
+      }
 
       function setStatus(msg, isError){
         statusEl.textContent = msg || '';
@@ -175,34 +187,60 @@
       go.addEventListener('click', async function(){
         if(!srcURL){ setStatus('Upload an image first.', true); return; }
         go.disabled = true;
+        var P = qp();
         try {
           if(!modelLoaded){
             setStatus('Downloading AI model (one-time, ~40MB)…');
             setProgress(0);
+            if(P) P.show({ title: 'Background Remover', stage: 'Loading AI model… 0%', percent: 2 });
           } else {
             setStatus('Processing…');
             setProgress(null);
+            if(P) P.show({ title: 'Background Remover', stage: 'Processing image…', percent: 40 });
           }
           var mod = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1/+esm');
           var removeBackground = mod.removeBackground || mod.default;
           if(typeof removeBackground !== 'function') throw new Error('bad-module');
           modelLoaded = true;
           setStatus('Processing…');
+          if(P && P.update) P.update(30, 'Processing image…');
           var res = await fetch(srcURL);
           var blob = await res.blob();
           var out = await removeBackground(blob, {
             progress: function(key, current, total){
-              if(total > 0) setProgress(current / total);
+              if(total > 0){
+                var frac = current / total;
+                setProgress(frac);
+                if(P && P.update){
+                  var pct = Math.round(frac * 100);
+                  var stage = (key === 'fetch' || key === 'download')
+                    ? 'Loading AI model… ' + pct + '%'
+                    : 'Processing image…';
+                  P.update(pct, stage);
+                }
+              }
             }
           });
           setProgress(null);
+          if(P) P.hide();
           if(resultURL) URL.revokeObjectURL(resultURL);
           resultURL = URL.createObjectURL(out);
           resultImg.src = resultURL;
           resultWrap.hidden = false;
-          setStatus('Done — background removed.');
+          if(resultMeta){
+            var probe = new Image();
+            probe.onload = function(){
+              resultMeta.textContent = 'PNG · ' + probe.naturalWidth + ' × ' + probe.naturalHeight + ' px · ' + fmtBytes(out.size);
+            };
+            probe.onerror = function(){
+              resultMeta.textContent = 'PNG · ' + fmtBytes(out.size);
+            };
+            probe.src = resultURL;
+          }
+          setStatus('Done — background removed. Check the preview above, then download.');
         } catch(err){
           setProgress(null);
+          if(P) P.hide();
           setStatus('Something went wrong. Check your connection (the model downloads from a CDN) and try again.', true);
         }
         go.disabled = false;

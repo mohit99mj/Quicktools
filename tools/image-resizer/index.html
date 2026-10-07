@@ -6,11 +6,11 @@
 <title>Resize Image — Free Online Image Resizer</title>
 <meta name="description" content="Resize images by pixels or percentage for free. Lock the aspect ratio to avoid stretching, then download the resized image.">
 <meta name="keywords" content="resize image, image resizer, resize photo, scale image, change image size">
-<link rel="canonical" href="https://www.example.com/tools/image-resizer/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/image-resizer/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Resize Image — Free Online Image Resizer">
 <meta property="og:description" content="Resize images by pixels or percentage for free. Lock the aspect ratio to avoid stretching, then download the resized image.">
-<meta property="og:url" content="https://www.example.com/tools/image-resizer/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/image-resizer/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Resize Image — Free Online Image Resizer">
 <meta name="twitter:description" content="Resize images by pixels or percentage for free. Lock the aspect ratio to avoid stretching, then download the resized image.">
@@ -19,8 +19,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-image-resizer .dropzone.drag{border-color:var(--accent);background:var(--accent-soft)}
+.tool-image-resizer #ir-preview{margin:1rem 0}.tool-image-resizer #ir-preview img{max-width:100%;max-height:320px;height:auto;border:1px solid var(--line);border-radius:var(--radius-sm);display:block;margin:0 auto}.tool-image-resizer #ir-preview-meta{text-align:center}
 </style>
 </head>
 <body>
@@ -93,6 +96,10 @@
         </select>
       </div>
       <div class="result" id="ir-status" aria-live="polite"></div>
+      <div id="ir-preview" hidden>
+        <img id="ir-preview-img" alt="Resized image preview">
+        <p class="hint" id="ir-preview-meta"></p>
+      </div>
       <div class="field">
         <button class="btn btn-primary" id="ir-download" disabled>Resize &amp; download</button>
       </div>
@@ -143,9 +150,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Resizer","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/image-resizer/","description":"Resize images by pixels or percentage for free. Lock the aspect ratio to avoid stretching, then download the resized image.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Resizer","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/image-resizer/","description":"Resize images by pixels or percentage for free. Lock the aspect ratio to avoid stretching, then download the resized image.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will resizing make my image blurry?","acceptedAnswer":{"@type":"Answer","text":"Downsizing keeps images sharp. Upscaling beyond the original size can look soft because no new detail is created — the tool warns you when you go above 100%."}},{"@type":"Question","name":"What does \"lock aspect ratio\" do?","acceptedAnswer":{"@type":"Answer","text":"It keeps the width-to-height proportions fixed, so the image scales without stretching. Change one side and the other updates automatically."}},{"@type":"Question","name":"What is the maximum output size?","acceptedAnswer":{"@type":"Answer","text":"4000 px on the longest side. Larger inputs are capped so processing stays fast on phones and laptops."}},{"@type":"Question","name":"Which format will the resized image be?","acceptedAnswer":{"@type":"Answer","text":"You choose JPEG, PNG or WebP before downloading. JPEG is the default for photos."}},{"@type":"Question","name":"Is my image uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Resizing happens in your browser with a canvas, and your files never leave your device."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://www.example.com/#cat-image-tools"},{"@type":"ListItem","position":3,"name":"Image Resizer","item":"https://www.example.com/tools/image-resizer/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-image-tools"},{"@type":"ListItem","position":3,"name":"Image Resizer","item":"https://mohit99mj.github.io/Quicktools/tools/image-resizer/"}]}</script>
 <script>
 var LOGIC={fit:function(w, h, maxW, maxH) {
     w = +w; h = +h; maxW = +maxW; maxH = +maxH;
@@ -161,9 +170,24 @@ var LOGIC={fit:function(w, h, maxW, maxH) {
       var wIn = $('#ir-w'), hIn = $('#ir-h'), lock = $('#ir-lock'), pctIn = $('#ir-pct');
       var pixelsBox = $('#ir-pixels'), percentBox = $('#ir-percent');
       var formatSel = $('#ir-format'), statusEl = $('#ir-status'), dl = $('#ir-download');
+      var preview = $('#ir-preview'), previewImg = $('#ir-preview-img'), previewMeta = $('#ir-preview-meta');
       if(!drop || !fileInput || !mode || !wIn || !hIn || !lock || !statusEl || !dl) return;
       var MAX = 4000;
       var img = null, origW = 0, origH = 0, srcURL = null, outURL = null, fileName = 'image';
+      var resized = false, pendingName = '';
+      function qp(){ return (typeof window !== 'undefined' && window.QTProgress && typeof window.QTProgress.show === 'function') ? window.QTProgress : null; }
+      function fmtBytes(b){
+        if(!(b > 0)) return '';
+        var u = ['B', 'KB', 'MB', 'GB'], i = 0, n = b;
+        while(n >= 1024 && i < u.length - 1){ n /= 1024; i++; }
+        return (n >= 100 ? Math.round(n) : n.toFixed(1)) + ' ' + u[i];
+      }
+      function resetResult(){
+        if(outURL){ URL.revokeObjectURL(outURL); outURL = null; }
+        resized = false; pendingName = '';
+        if(preview) preview.hidden = true;
+        dl.textContent = 'Resize & download';
+      }
 
       function setStatus(msg, isError){
         statusEl.textContent = msg || '';
@@ -192,6 +216,7 @@ var LOGIC={fit:function(w, h, maxW, maxH) {
         if(!img){ dl.disabled = true; return; }
         var t = targetSize();
         if(!t){ setStatus('Original: ' + origW + ' × ' + origH + ' px. Enter a valid target size.'); dl.disabled = true; return; }
+        resetResult();
         var warn = (t.pct && t.pct > 100) || (!t.pct && (t.w > origW || t.h > origH))
           ? ' Note: this upscales the image, which can look soft.' : '';
         setStatus('Original: ' + origW + ' × ' + origH + ' px → Resized: ' + t.w + ' × ' + t.h + ' px.' + warn);
@@ -202,14 +227,20 @@ var LOGIC={fit:function(w, h, maxW, maxH) {
         if(srcURL) URL.revokeObjectURL(srcURL);
         srcURL = URL.createObjectURL(f);
         fileName = safeName(f.name);
+        var P = qp();
+        if(P) P.show({ title: 'Image Resizer', stage: 'Reading image…', percent: 10 });
         var probe = new Image();
         probe.onload = function(){
           origW = probe.naturalWidth; origH = probe.naturalHeight;
           img = probe;
           if(mode.value === 'pixels'){ wIn.value = origW; hIn.value = origH; }
+          if(P) P.hide();
           refresh();
         };
-        probe.onerror = function(){ setStatus('Could not read that image. Try another file.', true); };
+        probe.onerror = function(){
+          if(P) P.hide();
+          setStatus('Could not read that image. Try another file.', true);
+        };
         probe.src = srcURL;
       }
       drop.addEventListener('click', function(e){ if(e.target !== fileInput) fileInput.click(); });
@@ -245,8 +276,19 @@ var LOGIC={fit:function(w, h, maxW, maxH) {
         refresh();
       });
       pctIn.addEventListener('input', refresh);
+      formatSel.addEventListener('change', function(){ if(img) resetResult(); });
       dl.addEventListener('click', function(){
         if(!img) return;
+        if(resized && outURL){
+          var a = document.createElement('a');
+          a.href = outURL;
+          a.download = pendingName;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          setStatus('Download started — ' + pendingName + '.');
+          return;
+        }
         var t = targetSize();
         if(!t){ setStatus('Enter a valid target size first.', true); return; }
         var mime = formatSel.value;
@@ -255,17 +297,20 @@ var LOGIC={fit:function(w, h, maxW, maxH) {
         var ctx = c.getContext('2d');
         if(mime === 'image/jpeg'){ ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, t.w, t.h); }
         ctx.drawImage(img, 0, 0, t.w, t.h);
+        var P = qp();
+        if(P) P.show({ title: 'Image Resizer', stage: 'Resizing…', percent: 50 });
         c.toBlob(function(blob){
+          if(P) P.hide();
           if(!blob){ setStatus('This browser could not encode that format.', true); return; }
           if(outURL) URL.revokeObjectURL(outURL);
           outURL = URL.createObjectURL(blob);
-          var a = document.createElement('a');
-          a.href = outURL;
-          a.download = fileName + '-' + t.w + 'x' + t.h + '.' + extFor(mime);
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          setStatus('Resized to ' + t.w + ' × ' + t.h + ' px — download started.');
+          resized = true;
+          pendingName = fileName + '-' + t.w + 'x' + t.h + '.' + extFor(mime);
+          if(previewImg) previewImg.src = outURL;
+          if(previewMeta) previewMeta.textContent = extFor(mime).toUpperCase() + ' · ' + t.w + ' × ' + t.h + ' px · ' + fmtBytes(blob.size);
+          if(preview) preview.hidden = false;
+          dl.textContent = 'Download ' + extFor(mime).toUpperCase();
+          setStatus('Preview ready — check the result above, then tap Download.');
         }, mime, 0.92);
       });
       window.addEventListener('pagehide', function(){
