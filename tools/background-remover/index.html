@@ -35,7 +35,7 @@
 <a href="../../index.html#all-tools">All Tools</a>
 <a href="../../index.html#categories">Categories</a>
 </nav>
-<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
 <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
 </div>
 <nav class="nav-panel" data-nav-panel aria-label="Mobile">
@@ -134,7 +134,11 @@
       var progress = $('#br-progress'), progressBar = $('#br-progress-bar');
       if(!drop || !fileInput || !go || !statusEl) return;
       var srcURL = null, resultURL = null, fileName = 'image', modelLoaded = false;
-      function qp(){ return (typeof window !== 'undefined' && window.QTProgress && typeof window.QTProgress.show === 'function') ? window.QTProgress : null; }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       function fmtBytes(b){
         if(!(b > 0)) return '';
         var u = ['B', 'KB', 'MB', 'GB'], i = 0, n = b;
@@ -187,23 +191,22 @@
       go.addEventListener('click', async function(){
         if(!srcURL){ setStatus('Upload an image first.', true); return; }
         go.disabled = true;
-        var P = qp();
         try {
           if(!modelLoaded){
             setStatus('Downloading AI model (one-time, ~40MB)…');
             setProgress(0);
-            if(P) P.show({ title: 'Background Remover', stage: 'Loading AI model… 0%', percent: 2 });
+            pShow({ title: 'Background Remover', stage: 'Loading AI model… 0%', percent: 2 });
           } else {
             setStatus('Processing…');
             setProgress(null);
-            if(P) P.show({ title: 'Background Remover', stage: 'Processing image…', percent: 40 });
+            pShow({ title: 'Background Remover', stage: 'Processing image…', percent: 40 });
           }
           var mod = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1/+esm');
           var removeBackground = mod.removeBackground || mod.default;
           if(typeof removeBackground !== 'function') throw new Error('bad-module');
           modelLoaded = true;
           setStatus('Processing…');
-          if(P && P.update) P.update(30, 'Processing image…');
+          pUpd(30, 'Processing image…');
           var res = await fetch(srcURL);
           var blob = await res.blob();
           var out = await removeBackground(blob, {
@@ -211,18 +214,16 @@
               if(total > 0){
                 var frac = current / total;
                 setProgress(frac);
-                if(P && P.update){
-                  var pct = Math.round(frac * 100);
-                  var stage = (key === 'fetch' || key === 'download')
-                    ? 'Loading AI model… ' + pct + '%'
-                    : 'Processing image…';
-                  P.update(pct, stage);
-                }
+                var pct = Math.round(frac * 100);
+                var stage = (key === 'fetch' || key === 'download')
+                  ? 'Loading AI model… ' + pct + '%'
+                  : 'Processing image…';
+                pUpd(pct, stage);
               }
             }
           });
           setProgress(null);
-          if(P) P.hide();
+          pHide();
           if(resultURL) URL.revokeObjectURL(resultURL);
           resultURL = URL.createObjectURL(out);
           resultImg.src = resultURL;
@@ -240,8 +241,8 @@
           setStatus('Done — background removed. Check the preview above, then download.');
         } catch(err){
           setProgress(null);
-          if(P) P.hide();
-          setStatus('Something went wrong. Check your connection (the model downloads from a CDN) and try again.', true);
+          pHide();
+          setStatus('Could not remove the background: the AI model (a one-time ~40 MB download) failed to load, or this image could not be processed. Check your connection and try again — a smaller JPG, PNG or WebP works best.', true);
         }
         go.disabled = false;
       });
