@@ -6,11 +6,11 @@
 <title>Merge PDF — Combine PDF Files Free</title>
 <meta name="description" content="Free PDF merger: combine multiple PDF files into one online. Reorder files before merging — everything runs in your browser, nothing is uploaded.">
 <meta name="keywords" content="merge pdf, combine pdf, join pdf files, pdf merger">
-<link rel="canonical" href="https://www.example.com/tools/merge-pdf/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/merge-pdf/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Merge PDF — Combine PDF Files Free">
 <meta property="og:description" content="Free PDF merger: combine multiple PDF files into one online. Reorder files before merging — everything runs in your browser, nothing is uploaded.">
-<meta property="og:url" content="https://www.example.com/tools/merge-pdf/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/merge-pdf/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Merge PDF — Combine PDF Files Free">
 <meta name="twitter:description" content="Free PDF merger: combine multiple PDF files into one online. Reorder files before merging — everything runs in your browser, nothing is uploaded.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-merge-pdf .file-list{list-style:none;margin:1rem 0;padding:0;display:grid;gap:.5rem}
 .tool-merge-pdf .file-row{display:flex;align-items:center;gap:.75rem;padding:.6rem .8rem;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);flex-wrap:wrap}
@@ -115,9 +117,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Merge PDF","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/merge-pdf/","description":"Free PDF merger: combine multiple PDF files into one online. Reorder files before merging — everything runs in your browser, nothing is uploaded.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Merge PDF","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/merge-pdf/","description":"Free PDF merger: combine multiple PDF files into one online. Reorder files before merging — everything runs in your browser, nothing is uploaded.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many PDFs can I merge at once?","acceptedAnswer":{"@type":"Answer","text":"There is no fixed limit, but very large files or dozens of documents can be slow on low-memory devices. For most everyday jobs, merging a handful of PDFs works smoothly."}},{"@type":"Question","name":"Can I change the order of the files?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use the Up and Down buttons next to each file to set the merge order. Pages within each individual file always keep their original sequence."}},{"@type":"Question","name":"Are bookmarks, links or form fields preserved?","acceptedAnswer":{"@type":"Answer","text":"Only page content is merged. Interactive elements such as form fields, annotations and bookmarks may not carry over into the combined file."}},{"@type":"Question","name":"Are my files uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Your files never leave your device — the entire merge runs locally in your browser."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://www.example.com/#cat-pdf-tools"},{"@type":"ListItem","position":3,"name":"Merge PDF","item":"https://www.example.com/tools/merge-pdf/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-pdf-tools"},{"@type":"ListItem","position":3,"name":"Merge PDF","item":"https://mohit99mj.github.io/Quicktools/tools/merge-pdf/"}]}</script>
 <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
 <script>
 
@@ -130,6 +134,11 @@
         el.textContent = msg || '';
         el.className = isError ? 'result error' : 'result';
       }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       function fmtSize(bytes){
         if(bytes < 1024){ return bytes + ' B'; }
         var kb = bytes / 1024;
@@ -289,9 +298,12 @@
         goBtn.addEventListener('click', function(){
           if(files.length < 2){ return; }
           setStatus('Loading PDF engine…');
+          pShow({ title: 'Merging PDFs…', stage: 'Loading PDF engine…' });
           waitForLibs(['PDFLib'], function(){
             goBtn.disabled = true;
             if(progress){ progress.hidden = false; progress.value = 0; }
+            var inTotal = files.reduce(function(s, f){ return s + f.file.size; }, 0);
+            pShow({ title: 'Merging PDFs…', stage: 'Reading file 1 of ' + files.length + '…', percent: 0 });
             var total = files.length;
             (async function(){
               try{
@@ -309,18 +321,26 @@
                   var pages = await merged.copyPages(src, src.getPageIndices());
                   pages.forEach(function(p){ merged.addPage(p); });
                   if(progress){ progress.value = Math.round(((i + 1) / total) * 100); }
+                  pUpd(Math.round(((i + 1) / total) * 90), (i + 1 < total) ? 'Reading file ' + (i + 2) + ' of ' + total + '…' : 'Building download…');
                 }
+                pUpd(95, 'Building download…');
                 var bytes = await merged.save();
+                pUpd(100, 'Building download…');
                 downloadBlob(new Blob([bytes], { type: 'application/pdf' }), 'merged.pdf');
+                pSum($('mp-status'), '<strong>Merge complete</strong> — ' + total + ' files • ' + fmtSize(inTotal) + ' → ' + fmtSize(bytes.length));
+                pHide();
                 setStatus('Done — merged.pdf downloaded (' + total + ' files combined).');
               } catch(err){
+                pHide();
                 setStatus('Could not merge the PDFs: ' + (err && err.message ? err.message : 'unknown error'), true);
               }
+              pHide();
               goBtn.disabled = false;
               updateGo();
               if(progress){ progress.hidden = true; }
             })();
           }, function(){
+            pHide();
             setStatus('The PDF library failed to load. Check your connection and reload the page.', true);
           });
         });

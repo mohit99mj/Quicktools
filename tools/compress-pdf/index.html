@@ -6,11 +6,11 @@
 <title>Compress PDF — Reduce PDF File Size Free</title>
 <meta name="description" content="Free PDF compressor: shrink PDF file size online by re-rendering pages at lower quality. Text becomes non-selectable — best for scanned PDFs.">
 <meta name="keywords" content="compress pdf, reduce pdf file size, shrink pdf, pdf compressor online">
-<link rel="canonical" href="https://www.example.com/tools/compress-pdf/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/compress-pdf/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Compress PDF — Reduce PDF File Size Free">
 <meta property="og:description" content="Free PDF compressor: shrink PDF file size online by re-rendering pages at lower quality. Text becomes non-selectable — best for scanned PDFs.">
-<meta property="og:url" content="https://www.example.com/tools/compress-pdf/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/compress-pdf/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Compress PDF — Reduce PDF File Size Free">
 <meta name="twitter:description" content="Free PDF compressor: shrink PDF file size online by re-rendering pages at lower quality. Text becomes non-selectable — best for scanned PDFs.">
@@ -19,10 +19,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-compress-pdf .file-name{font-weight:600;margin:1rem 0 .25rem}
 .tool-compress-pdf .dropzone.drag-over{outline:2px dashed var(--accent);outline-offset:4px}
 .tool-compress-pdf .progress{width:100%;margin-top:1rem}
+/* Target-size mode (workstream B) */
+.ts-mode{display:flex;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px}
+.ts-mode-btn{flex:1;min-height:44px;border:0;border-radius:999px;background:transparent;font:inherit;font-weight:700;color:var(--ink);cursor:pointer;transition:background-color .2s ease,color .2s ease,transform .15s ease;-webkit-tap-highlight-color:transparent}
+.ts-mode-btn.is-active{background:var(--accent);color:var(--accent-ink)}
+.ts-mode-btn:active{transform:scale(.98)}
+.ts-target-block{border:1px solid var(--line);border-radius:var(--radius);padding:1rem;background:var(--surface);margin-bottom:1rem}
+.ts-presets{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:.5rem 0 .75rem}
+.ts-preset{min-height:44px;border:1px solid var(--line);border-radius:12px;background:var(--bg);font:inherit;font-weight:700;color:var(--accent-strong);cursor:pointer;transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .15s ease;-webkit-tap-highlight-color:transparent}
+.ts-preset.is-active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.ts-preset:active{transform:scale(.97)}
+.ts-progress{height:10px;background:var(--bg);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:.75rem 0}
+.ts-progress-bar{height:100%;width:0%;background:var(--accent);transition:width .15s linear}
+.ts-preview{display:block;max-width:100%;max-height:280px;border-radius:12px;border:1px solid var(--line);margin-top:.75rem}
+@media (prefers-reduced-motion:reduce){.ts-mode-btn,.ts-preset,.ts-progress-bar{transition:none}}
 </style>
 </head>
 <body>
@@ -61,7 +77,7 @@
         <input type="file" id="cp-file" class="visually-hidden" accept="application/pdf,.pdf" aria-label="Choose a PDF file">
       </div>
       <p class="file-name" id="cp-name" aria-live="polite"></p>
-      <div class="field">
+      <div class="field" id="cp-quality-field">
         <label class="label" for="cp-quality">Image quality</label>
         <select class="select" id="cp-quality">
           <option value="0.4">Low — smallest file</option>
@@ -71,7 +87,30 @@
           <option value="0.8">High — best quality, larger file</option>
         </select>
       </div>
+      <div class="field">
+        <span class="label" id="cp-mode-label">Compression mode</span>
+        <div class="ts-mode" role="group" aria-labelledby="cp-mode-label">
+          <button type="button" class="ts-mode-btn is-active" id="cp-mode-quality" aria-pressed="true">By quality</button>
+          <button type="button" class="ts-mode-btn" id="cp-mode-target" aria-pressed="false">By target size</button>
+        </div>
+      </div>
       <p class="hint">Pages are re-rendered as images — text will no longer be selectable. Best for scanned or image-based PDFs.</p>
+      <div class="ts-target-block" id="cp-target-block" hidden>
+        <span class="label" id="cp-target-label">Target size</span>
+        <div class="ts-presets" role="group" aria-labelledby="cp-target-label">
+          <button type="button" class="ts-preset" data-kb="10">10 KB</button>
+          <button type="button" class="ts-preset" data-kb="15">15 KB</button>
+          <button type="button" class="ts-preset" data-kb="50">50 KB</button>
+          <button type="button" class="ts-preset" data-kb="100">100 KB</button>
+          <button type="button" class="ts-preset" data-kb="250">250 KB</button>
+          <button type="button" class="ts-preset" data-kb="500">500 KB</button>
+        </div>
+        <div class="field">
+          <label class="label" for="cp-custom-kb">Or custom size (KB)</label>
+          <input class="input" id="cp-custom-kb" type="number" min="1" max="102400" step="1" inputmode="numeric" placeholder="e.g. 75">
+        </div>
+        <p class="hint">Quality is tuned automatically (quick single-page probes, then one full render) to land within ±5% of your target.</p>
+      </div>
       <button class="btn btn-primary" id="cp-go" disabled>Compress PDF</button>
       <progress class="progress" id="cp-progress" max="100" value="0" hidden></progress>
       <div class="result" id="cp-status" aria-live="polite"></div>
@@ -93,6 +132,10 @@
 <details><summary>Will the text in my PDF stay selectable?</summary><div class="faq-a"><p>No. Pages are re-rendered as images, so text will no longer be selectable or searchable. This tool is best for scanned or image-based PDFs where that does not matter.</p></div></details>
 <details><summary>Which quality setting should I choose?</summary><div class="faq-a"><p>The balanced setting is a good starting point for most documents. Go lower if file size matters most, or higher if small text needs to stay crisp.</p></div></details>
 <details><summary>Are my files uploaded to a server?</summary><div class="faq-a"><p>No. Your files never leave your device — compression runs entirely in your browser.</p></div></details>
+
+<details><summary>How do I compress a PDF to exactly 500 KB?</summary><div class="faq-a"><p>Use “By target size” mode and pick the 500 KB preset (10, 15, 50, 100, 250 and 500 KB presets plus any custom size are available). The tool calibrates on your document and tunes the render quality to land within about ±5% of the target, then reports the exact result like “3 pages • 498 KB (target 500 KB)”.</p></div></details>
+<details><summary>Will compressing a PDF blur scanned pages?</summary><div class="faq-a"><p>Compression re-renders pages as images, so very aggressive settings can soften scanned text. If your scan must stay crisp, use a higher quality setting or a larger KB target — and always keep your original file until you check the result.</p></div></details>
+<details><summary>Why did my PDF get bigger after compression?</summary><div class="faq-a"><p>If the original was already heavily optimized (or mostly vector text), re-rendering its pages as images can add weight instead of removing it. The tool shows before/after sizes so you can simply keep the original in that case.</p></div></details>
 </section>
 <section class="related-tools" aria-label="Related tools">
 <h2>Related tools</h2>
@@ -101,6 +144,7 @@
 <a class="tool-card" href="../split-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#scissors"></use></svg><span class="tl-name">Split PDF</span><span class="tl-desc">PDF Tools</span></a>
 <a class="tool-card" href="../pdf-to-jpg/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#image"></use></svg><span class="tl-name">PDF to JPG</span><span class="tl-desc">PDF Tools</span></a>
 <a class="tool-card" href="../jpg-to-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#file-image"></use></svg><span class="tl-name">JPG to PDF</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../jpg-to-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#file-image"></use></svg><span class="tl-name">JPG to PDF</span><span class="tl-desc">Images into a PDF first</span></a>
 </div>
 </section>
 </main>
@@ -122,13 +166,136 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Compress PDF","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/compress-pdf/","description":"Free PDF compressor: shrink PDF file size online by re-rendering pages at lower quality. Text becomes non-selectable — best for scanned PDFs.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much smaller will my PDF become?","acceptedAnswer":{"@type":"Answer","text":"It depends on the content. Scanned or image-heavy PDFs often shrink dramatically, while PDFs that are mostly vector graphics or text shrink less. The tool always shows you the before and after sizes."}},{"@type":"Question","name":"Will the text in my PDF stay selectable?","acceptedAnswer":{"@type":"Answer","text":"No. Pages are re-rendered as images, so text will no longer be selectable or searchable. This tool is best for scanned or image-based PDFs where that does not matter."}},{"@type":"Question","name":"Which quality setting should I choose?","acceptedAnswer":{"@type":"Answer","text":"The balanced setting is a good starting point for most documents. Go lower if file size matters most, or higher if small text needs to stay crisp."}},{"@type":"Question","name":"Are my files uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Your files never leave your device — compression runs entirely in your browser."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://www.example.com/#cat-pdf-tools"},{"@type":"ListItem","position":3,"name":"Compress PDF","item":"https://www.example.com/tools/compress-pdf/"}]}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Compress PDF","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/compress-pdf/","description":"Free PDF compressor: shrink PDF file size online by re-rendering pages at lower quality. Text becomes non-selectable — best for scanned PDFs.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How much smaller will my PDF become?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the content. Scanned or image-heavy PDFs often shrink dramatically, while PDFs that are mostly vector graphics or text shrink less. The tool always shows you the before and after sizes."}}, {"@type": "Question", "name": "Will the text in my PDF stay selectable?", "acceptedAnswer": {"@type": "Answer", "text": "No. Pages are re-rendered as images, so text will no longer be selectable or searchable. This tool is best for scanned or image-based PDFs where that does not matter."}}, {"@type": "Question", "name": "Which quality setting should I choose?", "acceptedAnswer": {"@type": "Answer", "text": "The balanced setting is a good starting point for most documents. Go lower if file size matters most, or higher if small text needs to stay crisp."}}, {"@type": "Question", "name": "Are my files uploaded to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. Your files never leave your device — compression runs entirely in your browser."}}, {"@type": "Question", "name": "How do I compress a PDF to exactly 500 KB?", "acceptedAnswer": {"@type": "Answer", "text": "Use “By target size” mode and pick the 500 KB preset (10, 15, 50, 100, 250 and 500 KB presets plus any custom size are available). The tool calibrates on your document and tunes the render quality to land within about ±5% of the target, then reports the exact result like “3 pages • 498 KB (target 500 KB)”."}}, {"@type": "Question", "name": "Will compressing a PDF blur scanned pages?", "acceptedAnswer": {"@type": "Answer", "text": "Compression re-renders pages as images, so very aggressive settings can soften scanned text. If your scan must stay crisp, use a higher quality setting or a larger KB target — and always keep your original file until you check the result."}}, {"@type": "Question", "name": "Why did my PDF get bigger after compression?", "acceptedAnswer": {"@type": "Answer", "text": "If the original was already heavily optimized (or mostly vector text), re-rendering its pages as images can add weight instead of removing it. The tool shows before/after sizes so you can simply keep the original in that case."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-pdf-tools"},{"@type":"ListItem","position":3,"name":"Compress PDF","item":"https://mohit99mj.github.io/Quicktools/tools/compress-pdf/"}]}</script>
 <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
 <script>
 
+/*
+ * QuickTools — binarySearchTarget (shared logic, embedded per tool page)
+ *
+ * Pure helper: binary-search a quality-like parameter so that an async
+ * measure(quality) -> bytes lands within ±tolerance of targetBytes.
+ *
+ * Assumptions: output size increases with the quality parameter
+ * (higher quality => bigger output). The closest probe is always tracked,
+ * so mildly non-monotonic encoders still terminate with the best result.
+ *
+ * measure      async function(quality) -> positive byte count (number)
+ * targetBytes  positive number
+ * opts         { minQ, maxQ, tolerance, maxIter, initialQ, onStep }
+ *   minQ/maxQ    search range for the quality parameter (default 0.15/0.95)
+ *   tolerance    relative tolerance, e.g. 0.05 for ±5% (default 0.05)
+ *   maxIter      maximum number of measure() probes (default 8)
+ *   initialQ     optional smart first probe (e.g. a bitrate estimated from
+ *                duration); if it hits, we are done in 1 probe
+ *   onStep(q, iteration, maxIter, bytes)  progress callback
+ *
+ * Resolves to { quality, bytes, iterations, hit, reason } where reason is
+ * 'hit' | 'closest' | 'target-above-range' | 'target-below-range'.
+ * Never loops forever: probes are capped at maxIter.
+ *
+ * Works in browsers (defines window.binarySearchTarget) and in Node
+ * (module.exports) — the page copies must stay identical to this file.
+ */
+(function (root) {
+  'use strict';
+
+  function binarySearchTarget(measure, targetBytes, opts) {
+    var o = opts || {};
+    var minQ = typeof o.minQ === 'number' ? o.minQ : 0.15;
+    var maxQ = typeof o.maxQ === 'number' ? o.maxQ : 0.95;
+    var tol = typeof o.tolerance === 'number' ? o.tolerance : 0.05;
+    var maxIter = typeof o.maxIter === 'number' ? Math.max(1, Math.floor(o.maxIter)) : 8;
+    var initialQ = typeof o.initialQ === 'number' ? o.initialQ : null;
+    var onStep = typeof o.onStep === 'function' ? o.onStep : function () {};
+
+    function inTol(bytes) {
+      return bytes >= targetBytes * (1 - tol) && bytes <= targetBytes * (1 + tol);
+    }
+
+    function run() {
+      if (!(targetBytes > 0)) return Promise.reject(new Error('binarySearchTarget: targetBytes must be positive'));
+      if (!(maxQ > minQ)) return Promise.reject(new Error('binarySearchTarget: maxQ must be greater than minQ'));
+
+      var best = null; // {quality, bytes} — closest probe to the target so far
+      var iterations = 0;
+
+      function note(q, bytes) {
+        if (typeof bytes !== 'number' || !(bytes > 0) || !isFinite(bytes)) {
+          throw new Error('binarySearchTarget: measure() must resolve to a positive byte count');
+        }
+        iterations++;
+        if (!best || Math.abs(bytes - targetBytes) < Math.abs(best.bytes - targetBytes)) {
+          best = { quality: q, bytes: bytes };
+        }
+        onStep(q, iterations, maxIter, bytes);
+      }
+
+      function probe(q) {
+        return Promise.resolve()
+          .then(function () { return measure(q); })
+          .then(function (b) { note(q, b); return b; });
+      }
+
+      function finish(reason) {
+        var hit = inTol(best.bytes);
+        return { quality: best.quality, bytes: best.bytes, iterations: iterations, hit: hit, reason: hit ? 'hit' : reason };
+      }
+
+      function search(lo, hi) {
+        function step() {
+          if (iterations >= maxIter) return Promise.resolve(finish('closest'));
+          var mid = (lo + hi) / 2;
+          if (!(hi - lo > 1e-9)) return Promise.resolve(finish('closest'));
+          return probe(mid).then(function (b) {
+            if (inTol(b)) return finish('hit');
+            if (b > targetBytes) hi = mid; else lo = mid;
+            return step();
+          });
+        }
+        return step();
+      }
+
+      var first = initialQ !== null
+        ? probe(initialQ).then(function (b) {
+            if (inTol(b)) return finish('hit');
+            var lo = minQ, hi = maxQ;
+            if (b > targetBytes) hi = initialQ; else lo = initialQ;
+            return search(lo, hi);
+          })
+        : probe(maxQ).then(function (hiBytes) {
+            // Best-looking output first: if it already fits, take it in 1 probe.
+            if (inTol(hiBytes)) return finish('hit');
+            if (hiBytes < targetBytes * (1 - tol)) {
+              // Even max quality is smaller than the target: unreachable (target too large).
+              return finish('target-above-range');
+            }
+            return probe(minQ).then(function (loBytes) {
+              if (inTol(loBytes)) return finish('hit');
+              if (loBytes > targetBytes * (1 + tol)) {
+                // Even min quality overshoots: unreachable (target too small).
+                return finish('target-below-range');
+              }
+              return search(minQ, maxQ);
+            });
+          });
+      return first;
+    }
+
+    return run();
+  }
+
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = binarySearchTarget;
+  } else {
+    root.binarySearchTarget = binarySearchTarget;
+  }
+})(typeof self !== 'undefined' ? self : this);
     (function(){
       'use strict';
       var WORKER = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.worker.min.js';
@@ -232,9 +399,173 @@
         });
       }
 
+      /* ---------- Target-size mode (workstream B) ---------- */
+      var cpMode = 'quality';
+      var cpTargetKb = 100;
+      var cpTargetRunning = false;
+      var cpQualityField = $('cp-quality-field');
+      var cpTargetBlock = $('cp-target-block');
+      var cpCustomKb = $('cp-custom-kb');
+      function cpQt(){ return (typeof window.QTProgress !== 'undefined' && window.QTProgress) ? window.QTProgress : null; }
+      function cpSetMode(m){
+        cpMode = m;
+        var isTarget = (m === 'target');
+        var qb = $('cp-mode-quality'), tb = $('cp-mode-target');
+        if(qb){ qb.classList.toggle('is-active', !isTarget); qb.setAttribute('aria-pressed', String(!isTarget)); }
+        if(tb){ tb.classList.toggle('is-active', isTarget); tb.setAttribute('aria-pressed', String(isTarget)); }
+        if(cpQualityField) cpQualityField.style.display = isTarget ? 'none' : '';
+        if(cpTargetBlock) cpTargetBlock.hidden = !isTarget;
+        if(goBtn){
+          goBtn.textContent = isTarget ? 'Compress to target size' : 'Compress PDF';
+          goBtn.disabled = !pdfFile || cpTargetRunning;
+        }
+        setStatus(isTarget ? 'Pick a target size and press “Compress to target size”.'
+          : (pdfFile ? '"' + pdfFile.name + '" is ready. Pick a quality and click Compress PDF.' : ''));
+      }
+      function cpRenderPageJpeg(src, pageNum, scale, quality){
+        return src.getPage(pageNum).then(function(page){
+          var viewport = page.getViewport({ scale: scale });
+          var canvas = document.createElement('canvas');
+          canvas.width = Math.max(1, Math.floor(viewport.width));
+          canvas.height = Math.max(1, Math.floor(viewport.height));
+          return page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise
+            .then(function(){ return canvasToBlob(canvas, quality); });
+        });
+      }
+      function cpRunTarget(){
+        if(!pdfFile || cpTargetRunning){ return; }
+        if(!(cpTargetKb > 0)){ setStatus('Pick a target size first — tap a preset or enter a custom KB value.', true); return; }
+        var targetBytes = Math.round(cpTargetKb * 1024);
+        setStatus('Loading libraries…');
+        waitForLibs(['pdfjsLib', 'PDFLib'], function(){
+          cpTargetRunning = true;
+          goBtn.disabled = true;
+          var cpMq = $('cp-mode-quality'), cpMt = $('cp-mode-target');
+          if(cpMq) cpMq.disabled = true;
+          if(cpMt) cpMt.disabled = true;
+          if(progress){ progress.hidden = false; progress.value = 0; }
+          pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER;
+          var fileName = pdfFile.name;
+          var qp = cpQt();
+          if(qp && qp.show) qp.show({ title: 'Compressing PDF to target size', stage: 'Starting…', percent: 0 });
+          (async function(){
+            try{
+              var buf = await pdfFile.arrayBuffer();
+              var src = await pdfjsLib.getDocument({ data: buf }).promise;
+              var total = src.numPages;
+              setStatus('Reading ' + total + (total === 1 ? ' page' : ' pages') + '…');
+              if(progress) progress.value = 3;
+              var scales = [];
+              for(var p = 1; p <= total; p++){
+                var pg0 = await src.getPage(p);
+                var v0 = pg0.getViewport({ scale: 1 });
+                scales.push({ v0: v0, scale: Math.min(2, 1200 / v0.width) });
+              }
+              var sampleCount = Math.min(3, total);
+              var baseQ = 0.6;
+              async function sampleMean(q){
+                var sum = 0;
+                for(var s = 0; s < sampleCount; s++){
+                  var b = await cpRenderPageJpeg(src, s + 1, scales[s].scale, q);
+                  sum += b.size;
+                }
+                return sum / sampleCount;
+              }
+              async function fullPass(q, pBase, pSpan){
+                var out = await PDFLib.PDFDocument.create();
+                for(var f = 1; f <= total; f++){
+                  setStatus('Rendering page ' + f + ' of ' + total + '…');
+                  var blob = await cpRenderPageJpeg(src, f, scales[f - 1].scale, q);
+                  var imgBytes = new Uint8Array(await blob.arrayBuffer());
+                  var img = await out.embedJpg(imgBytes);
+                  var newPage = out.addPage([scales[f - 1].v0.width, scales[f - 1].v0.height]);
+                  newPage.drawImage(img, { x: 0, y: 0, width: scales[f - 1].v0.width, height: scales[f - 1].v0.height });
+                  if(progress) progress.value = pBase + Math.round(pSpan * (f / total));
+                }
+                return await out.save();
+              }
+              setStatus('Calibrating…');
+              var baseMean = await sampleMean(baseQ);
+              var t0 = await fullPass(baseQ, 5, 20);
+              var T0 = t0.length;
+              setStatus('Searching quality for ' + fmtSize(targetBytes) + '…');
+              var res = await binarySearchTarget(function(q){
+                return sampleMean(q).then(function(m){
+                  return Math.max(1, Math.round(T0 * (m / baseMean)));
+                });
+              }, targetBytes, {
+                minQ: 0.2, maxQ: 0.95, tolerance: 0.05, maxIter: 8,
+                onStep: function(q, i, n, bytes){
+                  var r = 0.25 + 0.45 * (i / n);
+                  if(progress) progress.value = Math.round(r * 100);
+                  var msg = 'Trying quality ' + q.toFixed(2) + '… (' + i + '/' + n + ') — est. ' + fmtSize(bytes);
+                  setStatus(msg);
+                  var p3 = cpQt();
+                  if(p3 && p3.update) p3.update(Math.round(r * 100), msg);
+                }
+              });
+              setStatus('Final render at quality ' + res.quality.toFixed(2) + '…');
+              if(progress) progress.value = 78;
+              var finalBytes = await fullPass(res.quality, 78, 22);
+              var finalSize = finalBytes.length;
+              if(progress) progress.value = 100;
+              var dlName = baseName(fileName) + '-' + Math.round(cpTargetKb) + 'kb.pdf';
+              var summary = total + (total === 1 ? ' page' : ' pages') + ' • ' + fmtSize(finalSize) + ' (target ' + fmtSize(targetBytes) + ')';
+              var ok = Math.abs(finalSize - targetBytes) <= targetBytes * 0.05;
+              var msg;
+              if(ok){
+                msg = 'Done: ' + summary + '. "' + dlName + '" downloaded.';
+              } else if(finalSize > targetBytes){
+                msg = 'Closest achieved: ' + summary + ' — even the lowest quality can’t go smaller at these render settings. "' + dlName + '" downloaded.';
+              } else {
+                msg = 'Closest achieved: ' + summary + ' — this PDF can’t reach that size at these render settings. "' + dlName + '" downloaded.';
+              }
+              downloadBlob(new Blob([finalBytes], { type: 'application/pdf' }), dlName);
+              setStatus(msg, !ok && finalSize > targetBytes);
+              var p4 = cpQt(); if(p4 && p4.hide) p4.hide();
+            } catch(err){
+              setStatus('Could not compress this PDF: ' + (err && err.message ? err.message : 'the file may be corrupted or password-protected.'), true);
+              var p5 = cpQt(); if(p5 && p5.hide) p5.hide();
+            }
+            cpTargetRunning = false;
+            goBtn.disabled = false;
+            var cpMq2 = $('cp-mode-quality'), cpMt2 = $('cp-mode-target');
+            if(cpMq2) cpMq2.disabled = false;
+            if(cpMt2) cpMt2.disabled = false;
+            if(progress){ progress.hidden = true; }
+          })();
+        }, function(){
+          setStatus('The required libraries failed to load. Check your connection and reload the page.', true);
+        });
+      }
+      (function(){
+        var qb = $('cp-mode-quality'), tb = $('cp-mode-target');
+        if(qb) qb.addEventListener('click', function(){ cpSetMode('quality'); });
+        if(tb) tb.addEventListener('click', function(){ cpSetMode('target'); });
+        var btns = cpTargetBlock ? cpTargetBlock.querySelectorAll('.ts-preset') : [];
+        function clearActive(){ for(var i = 0; i < btns.length; i++) btns[i].classList.remove('is-active'); }
+        for(var i = 0; i < btns.length; i++){
+          (function(b){
+            b.addEventListener('click', function(){
+              clearActive();
+              b.classList.add('is-active');
+              if(cpCustomKb) cpCustomKb.value = '';
+              cpTargetKb = parseInt(b.getAttribute('data-kb'), 10) || 0;
+            });
+          })(btns[i]);
+        }
+        var def = cpTargetBlock ? cpTargetBlock.querySelector('.ts-preset[data-kb="100"]') : null;
+        if(def) def.classList.add('is-active');
+        if(cpCustomKb) cpCustomKb.addEventListener('input', function(){
+          clearActive();
+          var v = parseInt(cpCustomKb.value, 10);
+          cpTargetKb = (v > 0) ? v : 0;
+        });
+      })();
       if(goBtn){
         goBtn.addEventListener('click', function(){
           if(!pdfFile){ return; }
+          if(cpMode === 'target'){ cpRunTarget(); return; }
           setStatus('Loading libraries…');
           waitForLibs(['pdfjsLib', 'PDFLib'], function(){
             goBtn.disabled = true;

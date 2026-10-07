@@ -6,11 +6,11 @@
 <title>PDF to Word — Convert PDF to DOCX Free</title>
 <meta name="description" content="Free PDF to Word converter: extract text from a PDF into a real, editable .docx file. Text only — layout, images and formatting are not preserved.">
 <meta name="keywords" content="pdf to word, convert pdf to word, pdf to docx, extract text from pdf">
-<link rel="canonical" href="https://www.example.com/tools/pdf-to-word/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/pdf-to-word/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="PDF to Word — Convert PDF to DOCX Free">
 <meta property="og:description" content="Free PDF to Word converter: extract text from a PDF into a real, editable .docx file. Text only — layout, images and formatting are not preserved.">
-<meta property="og:url" content="https://www.example.com/tools/pdf-to-word/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/pdf-to-word/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PDF to Word — Convert PDF to DOCX Free">
 <meta name="twitter:description" content="Free PDF to Word converter: extract text from a PDF into a real, editable .docx file. Text only — layout, images and formatting are not preserved.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-pdf-to-word .file-name{font-weight:600;margin:1rem 0 .25rem}
 .tool-pdf-to-word .dropzone.drag-over{outline:2px dashed var(--accent);outline-offset:4px}
@@ -65,6 +67,10 @@
       <button class="btn btn-primary" id="wtw-go" disabled>Extract to Word</button>
       <progress class="progress" id="wtw-progress" max="100" value="0" hidden></progress>
       <div class="result" id="wtw-status" aria-live="polite"></div>
+      <div id="wtw-ocr-wrap" hidden>
+        <p><button class="btn btn-secondary" id="wtw-ocr" type="button">Scan with OCR (for scanned PDFs)</button></p>
+        <p class="hint">No readable text found — this looks like a scanned PDF. OCR reads text from page images right on your device (one-time ~15&nbsp;MB engine download).</p>
+      </div>
       <p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
     </div>
 </section>
@@ -111,9 +117,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"PDF to Word","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/pdf-to-word/","description":"Free PDF to Word converter: extract text from a PDF into a real, editable .docx file. Text only — layout, images and formatting are not preserved.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"PDF to Word","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/pdf-to-word/","description":"Free PDF to Word converter: extract text from a PDF into a real, editable .docx file. Text only — layout, images and formatting are not preserved.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will the Word file keep the original layout?","acceptedAnswer":{"@type":"Answer","text":"No. This tool extracts text only — layout, images, tables and formatting are not preserved. Each line of text becomes a plain paragraph in the .docx file."}},{"@type":"Question","name":"What if my PDF is a scan or photo of pages?","acceptedAnswer":{"@type":"Answer","text":"Scanned pages contain no embedded text, so nothing can be extracted. You would need OCR (optical character recognition) software first to turn the scan into selectable text."}},{"@type":"Question","name":"Is the downloaded file a real Word document?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is a standard Office Open XML (.docx) package built from the extracted text, and it opens in Microsoft Word, Google Docs, LibreOffice and other word processors."}},{"@type":"Question","name":"Are my files uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Your files never leave your device — extraction and document building run entirely in your browser."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://www.example.com/#cat-pdf-tools"},{"@type":"ListItem","position":3,"name":"PDF to Word","item":"https://www.example.com/tools/pdf-to-word/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-pdf-tools"},{"@type":"ListItem","position":3,"name":"PDF to Word","item":"https://mohit99mj.github.io/Quicktools/tools/pdf-to-word/"}]}</script>
 <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>
 <script>
@@ -159,11 +167,58 @@
       }
 
       var pdfFile = null;
+      var lastPdf = null, lastFileName = '';
       var drop = $('wtw-drop'), input = $('wtw-file'), browse = $('wtw-browse');
       var goBtn = $('wtw-go'), progress = $('wtw-progress'), nameEl = $('wtw-name');
+      var ocrWrap = $('wtw-ocr-wrap'), ocrBtn = $('wtw-ocr');
+      var TESS_URL = 'https://cdn.jsdelivr.net/npm/tesseract.js@7.0.0/dist/tesseract.min.js';
+
+      function loadScript(src, cb){
+        var s = document.createElement('script');
+        s.src = src;
+        s.async = true;
+        s.onload = function(){ cb(true); };
+        s.onerror = function(){ if(s.parentNode){ s.parentNode.removeChild(s); } cb(false); };
+        document.head.appendChild(s);
+      }
+
+      async function buildDocx(blocks, fileName, doneMsg){
+        setStatus('Building Word document…');
+        if(progress){ progress.value = 90; }
+        var paras = blocks.map(function(b){
+          if(b === '\f'){
+            return '<w:p><w:r><w:br w:type="page"/></w:r></w:p>';
+          }
+          return '<w:p><w:r><w:t xml:space="preserve">' + escXml(b) + '</w:t></w:r></w:p>';
+        }).join('');
+        var contentTypes = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+          '<Types xmlns="http://schemas.openxmlformats.org/package/content-types">' +
+          '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>' +
+          '<Default Extension="xml" ContentType="application/xml"/>' +
+          '<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>' +
+          '</Types>';
+        var rels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+          '<Relationships xmlns="http://schemas.openxmlformats.org/package/relationships">' +
+          '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>' +
+          '</Relationships>';
+        var documentXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+          '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>' +
+          paras +
+          '</w:body></w:document>';
+        var zip = new JSZip();
+        zip.file('[Content_Types].xml', contentTypes);
+        zip.folder('_rels').file('.rels', rels);
+        zip.folder('word').file('document.xml', documentXml);
+        var blob = await zip.generateAsync({ type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+        downloadBlob(blob, baseName(fileName) + '.docx');
+        if(progress){ progress.value = 100; }
+        setStatus(doneMsg);
+      }
 
       function setFile(f){
         pdfFile = f;
+        lastPdf = null;
+        if(ocrWrap){ ocrWrap.hidden = true; }
         if(nameEl){
           nameEl.textContent = '';
           var label = document.createElement('span');
@@ -217,6 +272,7 @@
           setStatus('Loading libraries…');
           waitForLibs(['pdfjsLib', 'JSZip'], function(){
             goBtn.disabled = true;
+            if(ocrWrap){ ocrWrap.hidden = true; }
             if(progress){ progress.hidden = false; progress.value = 0; }
             pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER;
             var fileName = pdfFile.name;
@@ -224,6 +280,8 @@
               try{
                 var buf = await pdfFile.arrayBuffer();
                 var pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+                lastPdf = pdf;
+                lastFileName = fileName;
                 var total = pdf.numPages;
                 var blocks = [];
                 for(var p = 1; p <= total; p++){
@@ -248,41 +306,13 @@
                 }
                 var hasText = blocks.some(function(b){ return b !== '\f'; });
                 if(!hasText){
-                  setStatus('No extractable text was found in this PDF. It may be a scanned document — scanned pages need OCR software first.', true);
+                  setStatus('No extractable text was found in this PDF — it looks like a scanned document.', true);
+                  if(ocrWrap){ ocrWrap.hidden = false; }
                   goBtn.disabled = false;
                   if(progress){ progress.hidden = true; }
                   return;
                 }
-                setStatus('Building Word document…');
-                if(progress){ progress.value = 80; }
-                var paras = blocks.map(function(b){
-                  if(b === '\f'){
-                    return '<w:p><w:r><w:br w:type="page"/></w:r></w:p>';
-                  }
-                  return '<w:p><w:r><w:t xml:space="preserve">' + escXml(b) + '</w:t></w:r></w:p>';
-                }).join('');
-                var contentTypes = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
-                  '<Types xmlns="http://schemas.openxmlformats.org/package/content-types">' +
-                  '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>' +
-                  '<Default Extension="xml" ContentType="application/xml"/>' +
-                  '<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>' +
-                  '</Types>';
-                var rels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
-                  '<Relationships xmlns="http://schemas.openxmlformats.org/package/relationships">' +
-                  '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>' +
-                  '</Relationships>';
-                var documentXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
-                  '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>' +
-                  paras +
-                  '</w:body></w:document>';
-                var zip = new JSZip();
-                zip.file('[Content_Types].xml', contentTypes);
-                zip.folder('_rels').file('.rels', rels);
-                zip.folder('word').file('document.xml', documentXml);
-                var blob = await zip.generateAsync({ type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-                downloadBlob(blob, baseName(fileName) + '.docx');
-                if(progress){ progress.value = 100; }
-                setStatus('Done — "' + baseName(fileName) + '.docx" downloaded with text from ' + total + ' page' + (total === 1 ? '' : 's') + '.');
+                await buildDocx(blocks, fileName, 'Done — "' + baseName(fileName) + '.docx" downloaded with text from ' + total + ' page' + (total === 1 ? '' : 's') + '.');
               } catch(err){
                 setStatus('Could not read this PDF: ' + (err && err.message ? err.message : 'the file may be corrupted or password-protected.'), true);
               }
@@ -291,6 +321,58 @@
             })();
           }, function(){
             setStatus('The required libraries failed to load. Check your connection and reload the page.', true);
+          });
+        });
+      }
+      if(ocrBtn){
+        ocrBtn.addEventListener('click', function(){
+          if(!lastPdf){ return; }
+          ocrBtn.disabled = true;
+          if(ocrWrap){ ocrWrap.hidden = true; }
+          setStatus('Loading OCR engine (one-time download, about 15 MB)…');
+          if(window.QTProgress){ QTProgress.show({ title: 'Scanning PDF with OCR…', stage: 'Loading OCR engine…' }); }
+          if(progress){ progress.hidden = false; progress.value = 5; }
+          loadScript(TESS_URL, function(ok){
+            if(!ok || !window.Tesseract){
+              setStatus('Could not load the OCR engine. Check your connection and try again.', true);
+              ocrBtn.disabled = false;
+              if(progress){ progress.hidden = true; }
+              if(window.QTProgress){ QTProgress.hide(); }
+              return;
+            }
+            (async function(){
+              try{
+                var total = lastPdf.numPages;
+                var blocks = [];
+                for(var p = 1; p <= total; p++){
+                  var stage = 'Recognizing text on page ' + p + ' of ' + total + '…';
+                  setStatus(stage);
+                  if(window.QTProgress){ QTProgress.update(Math.round(((p - 1) / total) * 90), stage); }
+                  if(progress){ progress.value = Math.round(((p - 1) / total) * 90); }
+                  var page = await lastPdf.getPage(p);
+                  var viewport = page.getViewport({ scale: 2 });
+                  var canvas = document.createElement('canvas');
+                  canvas.width = Math.floor(viewport.width);
+                  canvas.height = Math.floor(viewport.height);
+                  await page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise;
+                  var res = await window.Tesseract.recognize(canvas, 'eng');
+                  var text = (res && res.data && res.data.text ? String(res.data.text) : '').trim();
+                  if(text){ blocks.push(text); }
+                  if(p < total){ blocks.push('\f'); }
+                }
+                var hasOcrText = blocks.some(function(b){ return b !== '\f'; });
+                if(!hasOcrText){
+                  setStatus('OCR could not read any text either — the scan may be too blurry, skewed, or handwritten.', true);
+                } else {
+                  await buildDocx(blocks, lastFileName, 'Done — OCR text from ' + total + ' page' + (total === 1 ? '' : 's') + ' saved to "' + baseName(lastFileName) + '.docx".');
+                }
+              } catch(err){
+                setStatus('OCR failed: ' + (err && err.message ? err.message : 'unknown error.'), true);
+              }
+              ocrBtn.disabled = false;
+              if(progress){ progress.hidden = true; }
+              if(window.QTProgress){ QTProgress.hide(); }
+            })();
           });
         });
       }
