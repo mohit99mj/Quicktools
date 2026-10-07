@@ -300,7 +300,7 @@
           setStatus('Loading PDF engine…');
           pShow({ title: 'Merging PDFs…', stage: 'Loading PDF engine…' });
           waitForLibs(['PDFLib'], function(){
-            goBtn.disabled = true;
+            goBtn.disabled = true; goBtn.setAttribute('aria-busy', 'true');
             if(progress){ progress.hidden = false; progress.value = 0; }
             var inTotal = files.reduce(function(s, f){ return s + f.file.size; }, 0);
             pShow({ title: 'Merging PDFs…', stage: 'Reading file 1 of ' + files.length + '…', percent: 0 });
@@ -335,7 +335,7 @@
                 setStatus('Could not merge the PDFs: ' + (err && err.message ? err.message : 'unknown error'), true);
               }
               pHide();
-              goBtn.disabled = false;
+              goBtn.disabled = false; goBtn.removeAttribute('aria-busy');
               updateGo();
               if(progress){ progress.hidden = true; }
             })();
