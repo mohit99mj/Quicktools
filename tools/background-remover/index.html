@@ -169,7 +169,7 @@
         setProgress(null);
         fileName = safeName(f.name);
         srcURL = URL.createObjectURL(f);
-        go.disabled = false;
+        go.disabled = false; go.removeAttribute('aria-busy');
         setStatus('Image loaded: ' + f.name + '. Click "Remove background" to start.');
       }
       drop.addEventListener('click', function(e){
@@ -190,7 +190,7 @@
 
       go.addEventListener('click', async function(){
         if(!srcURL){ setStatus('Upload an image first.', true); return; }
-        go.disabled = true;
+        go.disabled = true; go.setAttribute('aria-busy', 'true');
         try {
           if(!modelLoaded){
             setStatus('Downloading AI model (one-time, ~40MB)…');
@@ -244,7 +244,7 @@
           pHide();
           setStatus('Could not remove the background: the AI model (a one-time ~40 MB download) failed to load, or this image could not be processed. Check your connection and try again — a smaller JPG, PNG or WebP works best.', true);
         }
-        go.disabled = false;
+        go.disabled = false; go.removeAttribute('aria-busy');
       });
 
       dl.addEventListener('click', function(){

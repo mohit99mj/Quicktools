@@ -247,7 +247,7 @@
           return;
         }
         file = f;
-        if(goBtn){ goBtn.disabled = false; }
+        if(goBtn){ goBtn.disabled = false; goBtn.removeAttribute('aria-busy'); }
         var fi = $('at-fileinfo');
         if(fi){ fi.hidden = false; }
         var fn = $('at-filename');
@@ -423,7 +423,7 @@
       if(goBtn){
         goBtn.addEventListener('click', function(){
           if(!file){ return; }
-          goBtn.disabled = true;
+          goBtn.disabled = true; goBtn.setAttribute('aria-busy', 'true');
           hideOutput();
           pShow({ title: 'Transcribing audio…', stage: 'Reading your file…', percent: 2 });
           stage(2, 'Reading your file…');
@@ -483,7 +483,7 @@
               setStatus(friendlyError(err), true);
             }
             pHide();
-            goBtn.disabled = false;
+            goBtn.disabled = false; goBtn.removeAttribute('aria-busy');
             if(progress){ progress.hidden = true; }
           })();
         });
