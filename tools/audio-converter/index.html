@@ -6,11 +6,11 @@
 <title>Audio Converter — MP3, WAV &amp; OGG In Browser</title>
 <meta name="description" content="Convert audio between MP3, WAV and OGG in your browser. Free, private and fast — your files never leave your device.">
 <meta name="keywords" content="audio converter, convert audio to mp3, mp3 to wav, audio to ogg, convert audio online">
-<link rel="canonical" href="https://www.example.com/tools/audio-converter/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/audio-converter/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Audio Converter — MP3, WAV &amp; OGG In Browser">
 <meta property="og:description" content="Convert audio between MP3, WAV and OGG in your browser. Free, private and fast — your files never leave your device.">
-<meta property="og:url" content="https://www.example.com/tools/audio-converter/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/audio-converter/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Audio Converter — MP3, WAV &amp; OGG In Browser">
 <meta name="twitter:description" content="Convert audio between MP3, WAV and OGG in your browser. Free, private and fast — your files never leave your device.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-audio-converter .progress{height:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:12px 0;}
 .tool-audio-converter .progress-bar{height:100%;width:0%;background:var(--accent);transition:width .15s linear;}
@@ -128,9 +130,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Audio Converter","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/audio-converter/","description":"Convert audio between MP3, WAV and OGG in your browser. Free, private and fast — your files never leave your device.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Audio Converter","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/audio-converter/","description":"Convert audio between MP3, WAV and OGG in your browser. Free, private and fast — your files never leave your device.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my audio uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Conversion happens entirely on your device using an audio engine that runs in your browser. Your file is never sent to a server."}},{"@type":"Question","name":"Which output format should I choose?","acceptedAnswer":{"@type":"Answer","text":"MP3 is the most compatible choice for phones and players. WAV is uncompressed and best for editing. OGG is a high-quality open format that works well on the web."}},{"@type":"Question","name":"What conversion settings are used?","acceptedAnswer":{"@type":"Answer","text":"MP3 is encoded at 192k bitrate, WAV uses uncompressed 16-bit PCM, and OGG uses quality level 4 — sensible defaults for everyday use."}},{"@type":"Question","name":"Will converting lose quality?","acceptedAnswer":{"@type":"Answer","text":"Converting to a lossy format like MP3 or OGG discards some detail, especially if the source was already compressed. Converting to WAV does not add back quality that was already lost."}},{"@type":"Question","name":"Why does the engine need to download ~25MB first?","acceptedAnswer":{"@type":"Answer","text":"Audio conversion needs a full media codec, which downloads once and is then cached by your browser. After that, conversion runs fully offline."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Video & Audio","item":"https://www.example.com/#cat-video-audio"},{"@type":"ListItem","position":3,"name":"Audio Converter","item":"https://www.example.com/tools/audio-converter/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Video & Audio","item":"https://mohit99mj.github.io/Quicktools/#cat-video-audio"},{"@type":"ListItem","position":3,"name":"Audio Converter","item":"https://mohit99mj.github.io/Quicktools/tools/audio-converter/"}]}</script>
 <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js" defer></script>
 <script>
 
@@ -175,6 +179,12 @@
       function status(t){ statusEl.textContent = t; statusEl.hidden = !t; }
       function showError(t){ errEl.textContent = t; errEl.hidden = false; }
       function hideError(){ errEl.textContent = ''; errEl.hidden = true; }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      var qpStage = '';
+      function qbar(r){ setBar(r); if(window.QTProgress){ QTProgress.update(Math.round(r * 100), qpStage || 'Working…'); } }
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pShim(on){ if(window.QTProgress){ if(on){ QTProgress.shimmer(); } else { QTProgress.shimmerClear(); } } }
 
       function ensureEngine(progressCb){
         if(ffmpeg) return Promise.resolve(ffmpeg);
@@ -209,12 +219,19 @@
         progressEl.hidden = false;
         setBar(0);
         status('Downloading engine (~25MB)… this is a one-time download and can take a while on slow connections.');
-        ensureEngine(setBar).then(function(){
+        qpStage = 'Downloading engine (~25MB)…';
+        pShow({ title: 'Loading engine…', stage: qpStage, percent: 0 });
+        pShim(true);
+        ensureEngine(qbar).then(function(){
+          pShim(false);
+          pHide();
           loadWrap.hidden = true;
           controls.hidden = false;
           progressEl.hidden = true;
           status('Engine ready — pick a format and press "Convert audio".');
         }).catch(function(){
+          pShim(false);
+          pHide();
           loadBtn.disabled = false;
           loadBtn.textContent = 'Load audio engine (one-time ~25MB)';
           progressEl.hidden = true;
@@ -235,13 +252,19 @@
         progressEl.hidden = false;
         setBar(0);
         status('Preparing…');
-        ensureEngine(setBar).then(function(){
+        qpStage = 'Preparing…';
+        pShow({ title: 'Converting audio…', stage: qpStage, percent: 0 });
+        ensureEngine(qbar).then(function(){
+          qpStage = 'Reading file…';
           status('Reading file…');
+          if(window.QTProgress){ QTProgress.update(0, qpStage); }
           return fetchFileFn(file);
         }).then(function(data){
           ffmpeg.FS('writeFile', inName, data);
+          qpStage = 'Converting…';
           status('Converting…');
           setBar(0);
+          if(window.QTProgress){ QTProgress.update(0, qpStage); }
           return ffmpeg.run.apply(ffmpeg, args);
         }).then(function(){
           var data = ffmpeg.FS('readFile', outName);
@@ -262,6 +285,7 @@
             showError('Conversion failed — the file may be corrupt or in an unsupported format. Try a different file.');
           }
         }).then(function(){
+          pHide();
           try{ ffmpeg.FS('unlink', inName); }catch(x){}
           try{ ffmpeg.FS('unlink', outName); }catch(x){}
           goBtn.disabled = false;

@@ -6,11 +6,11 @@
 <title>Resize Video Online — Free Resolution Changer</title>
 <meta name="description" content="Resize video resolution in your browser — downscale to 720p, 480p or a custom width. Free, private, no watermarks.">
 <meta name="keywords" content="resize video, change video resolution, video resizer online, downscale video, 720p converter">
-<link rel="canonical" href="https://www.example.com/tools/video-resizer/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/video-resizer/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Resize Video Online — Free Resolution Changer">
 <meta property="og:description" content="Resize video resolution in your browser — downscale to 720p, 480p or a custom width. Free, private, no watermarks.">
-<meta property="og:url" content="https://www.example.com/tools/video-resizer/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/video-resizer/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Resize Video Online — Free Resolution Changer">
 <meta name="twitter:description" content="Resize video resolution in your browser — downscale to 720p, 480p or a custom width. Free, private, no watermarks.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-video-resizer .progress{height:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:12px 0;}
 .tool-video-resizer .progress-bar{height:100%;width:0%;background:var(--accent);transition:width .15s linear;}
@@ -135,9 +137,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Resize Video","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/video-resizer/","description":"Resize video resolution in your browser — downscale to 720p, 480p or a custom width. Free, private, no watermarks.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Resize Video","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/video-resizer/","description":"Resize video resolution in your browser — downscale to 720p, 480p or a custom width. Free, private, no watermarks.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my video uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Resizing happens entirely on your device using a video engine that runs in your browser. Your file is never sent to a server."}},{"@type":"Question","name":"Does resizing keep the aspect ratio?","acceptedAnswer":{"@type":"Answer","text":"Yes. You choose the width and the height is calculated automatically so the video is never stretched or squashed."}},{"@type":"Question","name":"Should I upscale a small video to 720p?","acceptedAnswer":{"@type":"Answer","text":"You can, but upscaling does not add detail — the picture will just be larger and softer. Resizing is most useful for downscaling large videos to share-friendly sizes."}},{"@type":"Question","name":"Why does the engine need to download ~25MB first?","acceptedAnswer":{"@type":"Answer","text":"Video processing needs a full video codec, which downloads once and is then cached by your browser. After that, resizing runs fully offline."}},{"@type":"Question","name":"Does the audio change?","acceptedAnswer":{"@type":"Answer","text":"No. The audio stream is copied untouched — only the video resolution is re-encoded."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Video & Audio","item":"https://www.example.com/#cat-video-audio"},{"@type":"ListItem","position":3,"name":"Resize Video","item":"https://www.example.com/tools/video-resizer/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Video & Audio","item":"https://mohit99mj.github.io/Quicktools/#cat-video-audio"},{"@type":"ListItem","position":3,"name":"Resize Video","item":"https://mohit99mj.github.io/Quicktools/tools/video-resizer/"}]}</script>
 <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js" defer></script>
 <script>
 
@@ -178,6 +182,12 @@
       function status(t){ statusEl.textContent = t; statusEl.hidden = !t; }
       function showError(t){ errEl.textContent = t; errEl.hidden = false; }
       function hideError(){ errEl.textContent = ''; errEl.hidden = true; }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      var qpStage = '';
+      function qbar(r){ setBar(r); if(window.QTProgress){ QTProgress.update(Math.round(r * 100), qpStage || 'Working…'); } }
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pShim(on){ if(window.QTProgress){ if(on){ QTProgress.shimmer(); } else { QTProgress.shimmerClear(); } } }
 
       function ensureEngine(progressCb){
         if(ffmpeg) return Promise.resolve(ffmpeg);
@@ -216,12 +226,19 @@
         progressEl.hidden = false;
         setBar(0);
         status('Downloading engine (~25MB)… this is a one-time download and can take a while on slow connections.');
-        ensureEngine(setBar).then(function(){
+        qpStage = 'Downloading engine (~25MB)…';
+        pShow({ title: 'Loading engine…', stage: qpStage, percent: 0 });
+        pShim(true);
+        ensureEngine(qbar).then(function(){
+          pShim(false);
+          pHide();
           loadWrap.hidden = true;
           controls.hidden = false;
           progressEl.hidden = true;
           status('Engine ready — pick a resolution and press "Resize video".');
         }).catch(function(){
+          pShim(false);
+          pHide();
           loadBtn.disabled = false;
           loadBtn.textContent = 'Load video engine (one-time ~25MB)';
           progressEl.hidden = true;
@@ -254,13 +271,19 @@
         progressEl.hidden = false;
         setBar(0);
         status('Preparing…');
-        ensureEngine(setBar).then(function(){
+        qpStage = 'Preparing…';
+        pShow({ title: 'Resizing video…', stage: qpStage, percent: 0 });
+        ensureEngine(qbar).then(function(){
+          qpStage = 'Reading file…';
           status('Reading file…');
+          if(window.QTProgress){ QTProgress.update(0, qpStage); }
           return fetchFileFn(file);
         }).then(function(data){
           ffmpeg.FS('writeFile', inName, data);
+          qpStage = 'Resizing…';
           status('Resizing… this may take a few minutes for large videos.');
           setBar(0);
+          if(window.QTProgress){ QTProgress.update(0, qpStage); }
           return ffmpeg.run('-i', inName, '-vf', 'scale=' + w + ':-2', '-c:a', 'copy', outName);
         }).then(function(){
           var data = ffmpeg.FS('readFile', outName);
@@ -281,6 +304,7 @@
             showError('Resizing failed — the file may be corrupt or in an unsupported format. Try a different file.');
           }
         }).then(function(){
+          pHide();
           try{ ffmpeg.FS('unlink', inName); }catch(x){}
           try{ ffmpeg.FS('unlink', outName); }catch(x){}
           goBtn.disabled = false;

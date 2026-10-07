@@ -6,11 +6,11 @@
 <title>Weight Converter — kg, lb, Grams &amp; Ounces</title>
 <meta name="description" content="Free weight converter: convert mg, g, kg, tons, ounces, pounds and stones instantly, with exact formulas. Runs 100% in your browser.">
 <meta name="keywords" content="weight converter, kg to lb, grams to ounces, pounds to kg, stone to kg">
-<link rel="canonical" href="https://www.example.com/tools/weight-converter/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/weight-converter/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Weight Converter — kg, lb, Grams &amp; Ounces">
 <meta property="og:description" content="Free weight converter: convert mg, g, kg, tons, ounces, pounds and stones instantly, with exact formulas. Runs 100% in your browser.">
-<meta property="og:url" content="https://www.example.com/tools/weight-converter/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/weight-converter/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Weight Converter — kg, lb, Grams &amp; Ounces">
 <meta name="twitter:description" content="Free weight converter: convert mg, g, kg, tons, ounces, pounds and stones instantly, with exact formulas. Runs 100% in your browser.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 
     .tool-weight-converter .conv-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
@@ -123,9 +125,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Weight Converter","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/weight-converter/","description":"Free weight converter: convert mg, g, kg, tons, ounces, pounds and stones instantly, with exact formulas. Runs 100% in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Weight Converter","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/weight-converter/","description":"Free weight converter: convert mg, g, kg, tons, ounces, pounds and stones instantly, with exact formulas. Runs 100% in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I convert kg to lb?","acceptedAnswer":{"@type":"Answer","text":"Select kg as the \"from\" unit and lb as the \"to\" unit. One kilogram equals 2.20462 pounds."}},{"@type":"Question","name":"How many ounces are in a pound?","acceptedAnswer":{"@type":"Answer","text":"There are exactly 16 ounces in one avoirdupois pound (1 oz = 28.3495 g)."}},{"@type":"Question","name":"What is a stone in kg?","acceptedAnswer":{"@type":"Answer","text":"One stone equals 6.35029 kg (14 pounds). Stones are still commonly used for body weight in the UK and Ireland."}},{"@type":"Question","name":"Is this weight converter accurate?","acceptedAnswer":{"@type":"Answer","text":"Yes. It uses internationally defined conversion factors (for example, 1 lb = 0.45359237 kg exactly) and shows results to 6 significant digits."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Unit Converters","item":"https://www.example.com/#cat-unit-converters"},{"@type":"ListItem","position":3,"name":"Weight Converter","item":"https://www.example.com/tools/weight-converter/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Unit Converters","item":"https://mohit99mj.github.io/Quicktools/#cat-unit-converters"},{"@type":"ListItem","position":3,"name":"Weight Converter","item":"https://mohit99mj.github.io/Quicktools/tools/weight-converter/"}]}</script>
 <script>
 var LOGIC={units:() => ['mg', 'g', 'kg', 't', 'oz', 'lb', 'st'],convert:(v, from, to) => {
     var F = { mg: 0.000001, g: 0.001, kg: 1, t: 1000, oz: 0.028349523125, lb: 0.45359237, st: 6.35029318 };
