@@ -181,6 +181,18 @@ var LOGIC = {
     return best;
   },
 
+  // Parse Jina AI reader markdown: "Title: ...\n...\nMarkdown Content:\n<text>".
+  parseJina: function(t){
+    if(!t || typeof t !== 'string') return null;
+    var m = t.match(/Markdown Content:\s*\n([\s\S]*)/);
+    var text = m ? m[1].trim() : '';
+    if(!text || text.length < 20) return null;
+    var tm = t.match(/^Title:\s*(.+)$/m);
+    // strip markdown links/images noise, keep readable text
+    text = text.replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1').replace(/\[([^\]]*)\]\([^)]*\)/g, '$1');
+    return { title: tm ? tm[1].trim() : '', text: text };
+  },
+
   // Build request URLs for the proxy chain (verified 2026-10-07).
   proxyUrl: function(kind, targetUrl){
     var enc = encodeURIComponent(targetUrl);
@@ -331,9 +343,10 @@ var LOGIC = {
   function fetchText(targetUrl, onStage){
     var enc = encodeURIComponent(targetUrl);
     var attempts = [
-      { stage: 'Fetching page…',            pct: 12, url: LOGIC.proxyUrl('raw', targetUrl), kind: 'text' },
-      { stage: 'Trying proxy 2…',           pct: 38, url: LOGIC.proxyUrl('json', targetUrl), kind: 'json' },
-      { stage: 'Trying direct connection…', pct: 62, url: targetUrl, kind: 'text' }
+      { stage: 'Reading page…',             pct: 12, url: 'https://r.jina.ai/' + targetUrl, kind: 'jina' },
+      { stage: 'Fetching page…',            pct: 35, url: LOGIC.proxyUrl('raw', targetUrl), kind: 'text' },
+      { stage: 'Trying proxy 2…',           pct: 55, url: LOGIC.proxyUrl('json', targetUrl), kind: 'json' },
+      { stage: 'Trying direct connection…', pct: 75, url: targetUrl, kind: 'text' }
     ];
     var chain = Promise.resolve(null);
     attempts.forEach(function(a){
@@ -346,6 +359,13 @@ var LOGIC = {
             return r.json().then(function(j){
               if(!j || typeof j.contents !== 'string' || !j.contents) throw new Error('empty');
               return { html: j.contents, ct: '' };
+            });
+          }
+          if(a.kind === 'jina'){
+            return r.text().then(function(t){
+              var parsed = LOGIC.parseJina(t);
+              if(!parsed) throw new Error('empty');
+              return { jina: true, title: parsed.title, text: parsed.text };
             });
           }
           var ct = r.headers ? (r.headers.get('content-type') || '') : '';
@@ -394,6 +414,17 @@ var LOGIC = {
       if(!found){
         pHide(); setWorking(false);
         showError('Couldn\'t fetch that page — the site may block extraction (or be offline). Try another link.');
+        return;
+      }
+      if(found.jina){
+        pHide(); setWorking(false);
+        lastText = found.text;
+        var wordsJ = LOGIC.countWords(lastText);
+        if(titleEl) titleEl.textContent = found.title || 'Extracted text';
+        if(wordsEl) wordsEl.textContent = wordsJ.toLocaleString('en-IN') + (wordsJ === 1 ? ' word' : ' words');
+        if(outEl) outEl.textContent = lastText;
+        if(outWrap) outWrap.hidden = false;
+        pSum(outEl, '<strong>Extraction complete</strong> — ' + wordsJ.toLocaleString('en-IN') + (wordsJ === 1 ? ' word' : ' words') + ' of clean article text');
         return;
       }
       pUpd(80, 'Extracting article text…');
