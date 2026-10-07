@@ -40,7 +40,7 @@
 <a href="../../index.html#all-tools">All Tools</a>
 <a href="../../index.html#categories">Categories</a>
 </nav>
-<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
 <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
 </div>
 <nav class="nav-panel" data-nav-panel aria-label="Mobile">
@@ -156,6 +156,11 @@ var LOGIC={dedupe:(text, opts) => {
 
     (function(){
       'use strict';
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       function $(id){ return document.getElementById(id); }
       var inEl = $('dl-in'), outEl = $('dl-out'), icaseEl = $('dl-icase'),
           trimEl = $('dl-trim'), emptyEl = $('dl-empty'), copyBtn = $('dl-copy'),
