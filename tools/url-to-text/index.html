@@ -340,25 +340,47 @@ var LOGIC = {
     return /<\s*html|<\s*article|<\s*p[\s>]/i.test(html);
   }
 
+  function fetchWithTimeout(url, ms){
+    var ctrl = null, timer = 0;
+    try{
+      if(typeof AbortController !== 'undefined'){
+        ctrl = new AbortController();
+        timer = setTimeout(function(){ try{ ctrl.abort(); }catch(x){} }, ms || 15000);
+      }
+    }catch(x){ ctrl = null; }
+    var opts = { mode: 'cors', credentials: 'omit' };
+    if(ctrl) opts.signal = ctrl.signal;
+    return fetch(url, opts).then(function(r){
+      if(timer) clearTimeout(timer);
+      return r;
+    }, function(e){
+      if(timer) clearTimeout(timer);
+      throw e;
+    });
+  }
+
   function fetchText(targetUrl, onStage){
     var enc = encodeURIComponent(targetUrl);
     var attempts = [
-      { stage: 'Reading page…',             pct: 12, url: 'https://r.jina.ai/' + targetUrl, kind: 'jina' },
-      { stage: 'Fetching page…',            pct: 35, url: LOGIC.proxyUrl('raw', targetUrl), kind: 'text' },
-      { stage: 'Trying proxy 2…',           pct: 55, url: LOGIC.proxyUrl('json', targetUrl), kind: 'json' },
-      { stage: 'Trying direct connection…', pct: 75, url: targetUrl, kind: 'text' }
+      { stage: 'Reading page…',               pct: 12, url: 'https://r.jina.ai/' + targetUrl, kind: 'jina', ms: 15000 },
+      { stage: 'Retrying reader…',           pct: 32, url: 'https://r.jina.ai/' + targetUrl, kind: 'jina', ms: 15000 },
+      { stage: 'Trying metadata service…',   pct: 52, url: 'https://api.microlink.io/?url=' + enc, kind: 'microlink', ms: 15000 },
+      { stage: 'Trying direct connection…', pct: 72, url: targetUrl, kind: 'text', ms: 10000 }
     ];
     var chain = Promise.resolve(null);
     attempts.forEach(function(a){
       chain = chain.then(function(found){
         if(found) return found;
         onStage(a.pct, a.stage);
-        return fetch(a.url, { mode: 'cors', credentials: 'omit' }).then(function(r){
+        return fetchWithTimeout(a.url, a.ms).then(function(r){
           if(!r.ok) throw new Error('HTTP ' + r.status);
-          if(a.kind === 'json'){
+          if(a.kind === 'microlink'){
             return r.json().then(function(j){
-              if(!j || typeof j.contents !== 'string' || !j.contents) throw new Error('empty');
-              return { html: j.contents, ct: '' };
+              var d = j && j.data;
+              if(!d || j.status !== 'success') throw new Error('empty');
+              var t = [d.title, d.description].filter(Boolean).join('\n\n');
+              if(!t) throw new Error('empty');
+              return { microlink: true, title: d.title || '', text: t };
             });
           }
           if(a.kind === 'jina'){
@@ -414,6 +436,17 @@ var LOGIC = {
       if(!found){
         pHide(); setWorking(false);
         showError('Couldn\'t fetch that page — the site may block extraction (or be offline). Try another link.');
+        return;
+      }
+      if(found.microlink){
+        pHide(); setWorking(false);
+        lastText = found.text;
+        var wordsM = LOGIC.countWords(lastText);
+        if(titleEl) titleEl.textContent = found.title || 'Extracted text';
+        if(wordsEl) wordsEl.textContent = wordsM.toLocaleString('en-IN') + (wordsM === 1 ? ' word' : ' words');
+        if(outEl) outEl.textContent = lastText;
+        if(outWrap) outWrap.hidden = false;
+        pSum(outEl, '<strong>Partial extraction</strong> — the full article text was blocked, so this is the page\u2019s title and description (' + wordsM.toLocaleString('en-IN') + (wordsM === 1 ? ' word' : ' words') + '). Try another link for full text.');
         return;
       }
       if(found.jina){
