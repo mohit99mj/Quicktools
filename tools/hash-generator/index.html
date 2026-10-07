@@ -6,11 +6,11 @@
 <title>SHA256 Generator — Hash Text &amp; Files Online</title>
 <meta name="description" content="Free SHA-256 generator: hash text or files with SHA-1, SHA-256, SHA-384 or SHA-512. Runs entirely in your browser.">
 <meta name="keywords" content="sha256 generator, hash generator, sha256 online, sha512, checksum generator">
-<link rel="canonical" href="https://www.example.com/tools/hash-generator/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/hash-generator/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="SHA256 Generator — Hash Text &amp; Files Online">
 <meta property="og:description" content="Free SHA-256 generator: hash text or files with SHA-1, SHA-256, SHA-384 or SHA-512. Runs entirely in your browser.">
-<meta property="og:url" content="https://www.example.com/tools/hash-generator/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/hash-generator/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SHA256 Generator — Hash Text &amp; Files Online">
 <meta name="twitter:description" content="Free SHA-256 generator: hash text or files with SHA-1, SHA-256, SHA-384 or SHA-512. Runs entirely in your browser.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 
     .tool-hash-generator .hg-area{ min-height:120px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; }
@@ -123,9 +125,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Hash Generator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/hash-generator/","description":"Free SHA-256 generator: hash text or files with SHA-1, SHA-256, SHA-384 or SHA-512. Runs entirely in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Hash Generator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/hash-generator/","description":"Free SHA-256 generator: hash text or files with SHA-1, SHA-256, SHA-384 or SHA-512. Runs entirely in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is there no MD5 option?","acceptedAnswer":{"@type":"Answer","text":"MD5 is not available in browsers’ secure crypto (WebCrypto) — use SHA-256 instead. MD5 is also considered broken for security purposes, so SHA-256 is the safer choice anyway."}},{"@type":"Question","name":"Which algorithm should I choose?","acceptedAnswer":{"@type":"Answer","text":"SHA-256 is the best default: widely supported and secure. SHA-512 is stronger but produces a longer digest; SHA-1 is only suitable for non-security checks like deduplication."}},{"@type":"Question","name":"Can a hash be reversed to get the original text?","acceptedAnswer":{"@type":"Answer","text":"No. Cryptographic hashes are one-way — you cannot recover the input from the digest. That is what makes them useful for integrity checks and password storage (with a proper salt and KDF)."}},{"@type":"Question","name":"How do I verify a downloaded file’s checksum?","acceptedAnswer":{"@type":"Answer","text":"Choose the file, select the same algorithm the publisher used (usually SHA-256), generate the hash, and compare it character-for-character with the published checksum. If they match, the file is intact."}},{"@type":"Question","name":"Is my file uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. The file is read and hashed locally in your browser — it never leaves your device."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://www.example.com/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"Hash Generator","item":"https://www.example.com/tools/hash-generator/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"Hash Generator","item":"https://mohit99mj.github.io/Quicktools/tools/hash-generator/"}]}</script>
 <script>
 var LOGIC={hash:async (algo, str) => {
     // Uses the platform secure digest (browsers + Node 19+). No MD5: not exposed by WebCrypto.

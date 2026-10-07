@@ -6,11 +6,11 @@
 <title>URL Encoder &amp; Decoder — Percent-Encode URLs</title>
 <meta name="description" content="Free URL encoder: percent-encode or decode full URLs and components. Runs entirely in your browser.">
 <meta name="keywords" content="url encode, url decode, percent encoding, encodeuricomponent, url encoder online">
-<link rel="canonical" href="https://www.example.com/tools/url-encoder/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/url-encoder/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="URL Encoder &amp; Decoder — Percent-Encode URLs">
 <meta property="og:description" content="Free URL encoder: percent-encode or decode full URLs and components. Runs entirely in your browser.">
-<meta property="og:url" content="https://www.example.com/tools/url-encoder/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/url-encoder/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="URL Encoder &amp; Decoder — Percent-Encode URLs">
 <meta name="twitter:description" content="Free URL encoder: percent-encode or decode full URLs and components. Runs entirely in your browser.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 
     .tool-url-encoder .ue-area{ min-height:120px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; }
@@ -119,9 +121,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"URL Encoder","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/url-encoder/","description":"Free URL encoder: percent-encode or decode full URLs and components. Runs entirely in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"URL Encoder","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/url-encoder/","description":"Free URL encoder: percent-encode or decode full URLs and components. Runs entirely in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between Full URL and Component mode?","acceptedAnswer":{"@type":"Answer","text":"Full URL mode uses encodeURI, which leaves structural characters like : / ? # intact. Component mode uses encodeURIComponent, which also encodes those — use it for a single query-string value that may itself contain & or =."}},{"@type":"Question","name":"Which characters get percent-encoded?","acceptedAnswer":{"@type":"Answer","text":"Spaces become %20, and reserved or non-ASCII characters become %XX sequences based on their UTF-8 bytes. Unreserved characters (A–Z, a–z, 0–9, - _ . ~) are never encoded."}},{"@type":"Question","name":"Why did decoding fail with \"URI malformed\"?","acceptedAnswer":{"@type":"Answer","text":"The input contains a % not followed by two hex digits, or a lone % at the end. Check for stray percent signs and try again."}},{"@type":"Question","name":"Is my URL sent to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Encoding and decoding run locally in your browser — your URLs never leave your device."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://www.example.com/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"URL Encoder","item":"https://www.example.com/tools/url-encoder/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"URL Encoder","item":"https://mohit99mj.github.io/Quicktools/tools/url-encoder/"}]}</script>
 <script>
 var LOGIC={urlEncode:(str, full) => {
     // full=true: encode a whole URL (encodeURI keeps :/?#[]@!$&'()*+,;=).

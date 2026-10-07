@@ -6,11 +6,11 @@
 <title>Regex Tester — Test Regular Expressions Live</title>
 <meta name="description" content="Free regex tester: test regular expressions with live match highlighting, groups, counts and replace preview. Runs in your browser.">
 <meta name="keywords" content="regex tester, regular expression tester, regex online, test regex, javascript regex">
-<link rel="canonical" href="https://www.example.com/tools/regex-tester/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/regex-tester/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Regex Tester — Test Regular Expressions Live">
 <meta property="og:description" content="Free regex tester: test regular expressions with live match highlighting, groups, counts and replace preview. Runs in your browser.">
-<meta property="og:url" content="https://www.example.com/tools/regex-tester/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/regex-tester/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Regex Tester — Test Regular Expressions Live">
 <meta name="twitter:description" content="Free regex tester: test regular expressions with live match highlighting, groups, counts and replace preview. Runs in your browser.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 
     .tool-regex-tester .rx-mono{ font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; }
@@ -133,9 +135,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Regex Tester","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/regex-tester/","description":"Free regex tester: test regular expressions with live match highlighting, groups, counts and replace preview. Runs in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Regex Tester","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/regex-tester/","description":"Free regex tester: test regular expressions with live match highlighting, groups, counts and replace preview. Runs in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which regex flavor does this tester use?","acceptedAnswer":{"@type":"Answer","text":"JavaScript (the same engine as your browser). Patterns you validate here work directly in JS code, and flags g, i, m, s, u, y are supported."}},{"@type":"Question","name":"How do capture groups work?","acceptedAnswer":{"@type":"Answer","text":"Wrap part of the pattern in parentheses, e.g. (\\d+)-(\\d+). Each match lists its groups in order, so you can see exactly what each group captured."}},{"@type":"Question","name":"What replacement patterns can I use?","acceptedAnswer":{"@type":"Answer","text":"Standard JavaScript replacement tokens: $1, $2 for capture groups, $& for the whole match, $$ for a literal dollar sign."}},{"@type":"Question","name":"Why is my text limited to 50,000 characters?","acceptedAnswer":{"@type":"Answer","text":"Very long inputs combined with complex patterns can freeze a page (catastrophic backtracking). The cap keeps the tester fast and responsive."}},{"@type":"Question","name":"What does the \"s\" flag do?","acceptedAnswer":{"@type":"Answer","text":"The s (dotAll) flag makes . match newline characters too, so a pattern like a.+b can span multiple lines."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://www.example.com/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"Regex Tester","item":"https://www.example.com/tools/regex-tester/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"Regex Tester","item":"https://mohit99mj.github.io/Quicktools/tools/regex-tester/"}]}</script>
 <script>
 var LOGIC={testRegex:(pattern, flags, text) => {
     var MAX_TEXT = 50000, MAX_MATCHES = 200;

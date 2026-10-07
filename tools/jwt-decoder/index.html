@@ -6,11 +6,11 @@
 <title>JWT Decoder — Decode Header &amp; Payload</title>
 <meta name="description" content="Free JWT decoder: decode a token’s header and payload with readable issued/expiry dates. Signature is NOT verified — runs in your browser.">
 <meta name="keywords" content="jwt decoder, jwt decode, decode jwt token, jwt payload, json web token">
-<link rel="canonical" href="https://www.example.com/tools/jwt-decoder/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/jwt-decoder/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="JWT Decoder — Decode Header &amp; Payload">
 <meta property="og:description" content="Free JWT decoder: decode a token’s header and payload with readable issued/expiry dates. Signature is NOT verified — runs in your browser.">
-<meta property="og:url" content="https://www.example.com/tools/jwt-decoder/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/jwt-decoder/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JWT Decoder — Decode Header &amp; Payload">
 <meta name="twitter:description" content="Free JWT decoder: decode a token’s header and payload with readable issued/expiry dates. Signature is NOT verified — runs in your browser.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 
     .tool-jwt-decoder .jwt-area{ min-height:110px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; word-break:break-all; }
@@ -110,9 +112,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JWT Decoder","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/jwt-decoder/","description":"Free JWT decoder: decode a token’s header and payload with readable issued/expiry dates. Signature is NOT verified — runs in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JWT Decoder","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/jwt-decoder/","description":"Free JWT decoder: decode a token’s header and payload with readable issued/expiry dates. Signature is NOT verified — runs in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does this tool verify the token signature?","acceptedAnswer":{"@type":"Answer","text":"No. Signature is NOT verified — never trust a token based on this output. Always verify signatures on your own server with the correct secret or public key."}},{"@type":"Question","name":"Is it safe to paste my token here?","acceptedAnswer":{"@type":"Answer","text":"Decoding runs entirely in your browser, so the token is never uploaded. Still, avoid pasting production tokens with sensitive claims into any website as a habit."}},{"@type":"Question","name":"What are the iat and exp claims?","acceptedAnswer":{"@type":"Answer","text":"iat (issued at) and exp (expiration time) are Unix timestamps in the payload. This decoder converts them to readable dates and flags expired tokens."}},{"@type":"Question","name":"Why does decoding fail?","acceptedAnswer":{"@type":"Answer","text":"The token must have three dot-separated Base64url segments (header.payload.signature) with valid JSON in the first two. Truncated or URL-mangled tokens fail with an error."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://www.example.com/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"JWT Decoder","item":"https://www.example.com/tools/jwt-decoder/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"JWT Decoder","item":"https://mohit99mj.github.io/Quicktools/tools/jwt-decoder/"}]}</script>
 <script>
 var LOGIC={decodeJwt:(token) => {
     // Base64url decode by hand (no Buffer, no atob dependency): UTF-8 safe.
