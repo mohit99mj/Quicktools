@@ -6,11 +6,11 @@
 <title>MP4 to MP3 Converter — Free, In Your Browser</title>
 <meta name="description" content="Convert MP4 to MP3 in your browser — extract audio from video at 128k, 192k or 320k. Private, fast and free.">
 <meta name="keywords" content="mp4 to mp3, convert mp4 to mp3, extract audio from video, video to audio converter">
-<link rel="canonical" href="https://www.example.com/tools/mp4-to-mp3/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/mp4-to-mp3/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="MP4 to MP3 Converter — Free, In Your Browser">
 <meta property="og:description" content="Convert MP4 to MP3 in your browser — extract audio from video at 128k, 192k or 320k. Private, fast and free.">
-<meta property="og:url" content="https://www.example.com/tools/mp4-to-mp3/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/mp4-to-mp3/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MP4 to MP3 Converter — Free, In Your Browser">
 <meta name="twitter:description" content="Convert MP4 to MP3 in your browser — extract audio from video at 128k, 192k or 320k. Private, fast and free.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-mp4-to-mp3 .progress{height:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:12px 0;}
 .tool-mp4-to-mp3 .progress-bar{height:100%;width:0%;background:var(--accent);transition:width .15s linear;}
@@ -128,9 +130,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MP4 to MP3","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/mp4-to-mp3/","description":"Convert MP4 to MP3 in your browser — extract audio from video at 128k, 192k or 320k. Private, fast and free.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MP4 to MP3","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/mp4-to-mp3/","description":"Convert MP4 to MP3 in your browser — extract audio from video at 128k, 192k or 320k. Private, fast and free.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my video uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Extraction happens entirely on your device using an audio engine that runs in your browser. Your file is never sent to a server."}},{"@type":"Question","name":"Which bitrate should I choose?","acceptedAnswer":{"@type":"Answer","text":"128k is fine for voice and small files, 192k is a good all-round choice, and 320k gives the best quality for music at the cost of a larger file."}},{"@type":"Question","name":"What video formats are supported?","acceptedAnswer":{"@type":"Answer","text":"Any video format the engine can read — MP4, WebM, MOV, MKV, AVI and more. The output is always a standard MP3 file."}},{"@type":"Question","name":"What if my video has no audio track?","acceptedAnswer":{"@type":"Answer","text":"The conversion will fail with a clear message. The tool can only extract audio if the video actually contains an audio stream."}},{"@type":"Question","name":"Why does the engine need to download ~25MB first?","acceptedAnswer":{"@type":"Answer","text":"Audio extraction needs a full media codec, which downloads once and is then cached by your browser. After that, conversion runs fully offline."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Video & Audio","item":"https://www.example.com/#cat-video-audio"},{"@type":"ListItem","position":3,"name":"MP4 to MP3","item":"https://www.example.com/tools/mp4-to-mp3/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Video & Audio","item":"https://mohit99mj.github.io/Quicktools/#cat-video-audio"},{"@type":"ListItem","position":3,"name":"MP4 to MP3","item":"https://mohit99mj.github.io/Quicktools/tools/mp4-to-mp3/"}]}</script>
 <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js" defer></script>
 <script>
 
@@ -169,6 +173,12 @@
       function status(t){ statusEl.textContent = t; statusEl.hidden = !t; }
       function showError(t){ errEl.textContent = t; errEl.hidden = false; }
       function hideError(){ errEl.textContent = ''; errEl.hidden = true; }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      var qpStage = '';
+      function qbar(r){ setBar(r); if(window.QTProgress){ QTProgress.update(Math.round(r * 100), qpStage || 'Working…'); } }
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pShim(on){ if(window.QTProgress){ if(on){ QTProgress.shimmer(); } else { QTProgress.shimmerClear(); } } }
 
       function ensureEngine(progressCb){
         if(ffmpeg) return Promise.resolve(ffmpeg);
@@ -203,12 +213,19 @@
         progressEl.hidden = false;
         setBar(0);
         status('Downloading engine (~25MB)… this is a one-time download and can take a while on slow connections.');
-        ensureEngine(setBar).then(function(){
+        qpStage = 'Downloading engine (~25MB)…';
+        pShow({ title: 'Loading engine…', stage: qpStage, percent: 0 });
+        pShim(true);
+        ensureEngine(qbar).then(function(){
+          pShim(false);
+          pHide();
           loadWrap.hidden = true;
           controls.hidden = false;
           progressEl.hidden = true;
           status('Engine ready — pick a bitrate and press "Convert to MP3".');
         }).catch(function(){
+          pShim(false);
+          pHide();
           loadBtn.disabled = false;
           loadBtn.textContent = 'Load audio engine (one-time ~25MB)';
           progressEl.hidden = true;
@@ -229,13 +246,19 @@
         progressEl.hidden = false;
         setBar(0);
         status('Preparing…');
-        ensureEngine(setBar).then(function(){
+        qpStage = 'Preparing…';
+        pShow({ title: 'Extracting audio…', stage: qpStage, percent: 0 });
+        ensureEngine(qbar).then(function(){
+          qpStage = 'Reading file…';
           status('Reading file…');
+          if(window.QTProgress){ QTProgress.update(0, qpStage); }
           return fetchFileFn(file);
         }).then(function(data){
           ffmpeg.FS('writeFile', inName, data);
+          qpStage = 'Extracting audio…';
           status('Extracting audio…');
           setBar(0);
+          if(window.QTProgress){ QTProgress.update(0, qpStage); }
           return ffmpeg.run('-i', inName, '-vn', '-ar', '44100', '-b:a', rate, outName);
         }).then(function(){
           var data = ffmpeg.FS('readFile', outName);
@@ -258,6 +281,7 @@
             showError('Conversion failed — the file may be corrupt or in an unsupported format. Try a different file.');
           }
         }).then(function(){
+          pHide();
           try{ ffmpeg.FS('unlink', inName); }catch(x){}
           try{ ffmpeg.FS('unlink', outName); }catch(x){}
           goBtn.disabled = false;

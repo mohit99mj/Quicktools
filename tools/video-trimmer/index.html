@@ -6,11 +6,11 @@
 <title>Trim Video Online — Free In-Browser Cutter</title>
 <meta name="description" content="Trim video clips in your browser — cut a start–end segment fast, or re-encode for frame-exact cuts. No upload needed.">
 <meta name="keywords" content="trim video, cut video, video cutter online, trim mp4, cut video clip">
-<link rel="canonical" href="https://www.example.com/tools/video-trimmer/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/video-trimmer/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Trim Video Online — Free In-Browser Cutter">
 <meta property="og:description" content="Trim video clips in your browser — cut a start–end segment fast, or re-encode for frame-exact cuts. No upload needed.">
-<meta property="og:url" content="https://www.example.com/tools/video-trimmer/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/video-trimmer/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Trim Video Online — Free In-Browser Cutter">
 <meta name="twitter:description" content="Trim video clips in your browser — cut a start–end segment fast, or re-encode for frame-exact cuts. No upload needed.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-video-trimmer .progress{height:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:12px 0;}
 .tool-video-trimmer .progress-bar{height:100%;width:0%;background:var(--accent);transition:width .15s linear;}
@@ -141,9 +143,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Trim Video","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/video-trimmer/","description":"Trim video clips in your browser — cut a start–end segment fast, or re-encode for frame-exact cuts. No upload needed.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Trim Video","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/video-trimmer/","description":"Trim video clips in your browser — cut a start–end segment fast, or re-encode for frame-exact cuts. No upload needed.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my video uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Trimming happens entirely on your device using a video engine that runs in your browser. Your file is never sent to a server."}},{"@type":"Question","name":"Why does the fast cut start slightly before my chosen time?","acceptedAnswer":{"@type":"Answer","text":"Fast cuts snap to keyframes, which are reference points the encoder places every few seconds. If you need the cut at an exact frame, enable re-encode mode — it is slower but frame-exact."}},{"@type":"Question","name":"What is the difference between fast cut and re-encode?","acceptedAnswer":{"@type":"Answer","text":"Fast cut copies the video stream without re-compressing it, so it finishes in seconds with no quality loss. Re-encode re-compresses the clip, which takes longer but cuts at the exact frame you picked."}},{"@type":"Question","name":"Why does the engine need to download ~25MB first?","acceptedAnswer":{"@type":"Answer","text":"Video processing needs a full video codec, which downloads once and is then cached by your browser. After that, trimming runs fully offline."}},{"@type":"Question","name":"Will trimming reduce the video quality?","acceptedAnswer":{"@type":"Answer","text":"Not in fast-cut mode — the video stream is copied untouched. Re-encode mode re-compresses with high-quality settings, so any loss is minimal."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Video & Audio","item":"https://www.example.com/#cat-video-audio"},{"@type":"ListItem","position":3,"name":"Trim Video","item":"https://www.example.com/tools/video-trimmer/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Video & Audio","item":"https://mohit99mj.github.io/Quicktools/#cat-video-audio"},{"@type":"ListItem","position":3,"name":"Trim Video","item":"https://mohit99mj.github.io/Quicktools/tools/video-trimmer/"}]}</script>
 <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js" defer></script>
 <script>
 
@@ -191,6 +195,12 @@
       function status(t){ statusEl.textContent = t; statusEl.hidden = !t; }
       function showError(t){ errEl.textContent = t; errEl.hidden = false; }
       function hideError(){ errEl.textContent = ''; errEl.hidden = true; }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      var qpStage = '';
+      function qbar(r){ setBar(r); if(window.QTProgress){ QTProgress.update(Math.round(r * 100), qpStage || 'Working…'); } }
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pShim(on){ if(window.QTProgress){ if(on){ QTProgress.shimmer(); } else { QTProgress.shimmerClear(); } } }
 
       function ensureEngine(progressCb){
         if(ffmpeg) return Promise.resolve(ffmpeg);
@@ -268,12 +278,19 @@
         progressEl.hidden = false;
         setBar(0);
         status('Downloading engine (~25MB)… this is a one-time download and can take a while on slow connections.');
-        ensureEngine(setBar).then(function(){
+        qpStage = 'Downloading engine (~25MB)…';
+        pShow({ title: 'Loading engine…', stage: qpStage, percent: 0 });
+        pShim(true);
+        ensureEngine(qbar).then(function(){
+          pShim(false);
+          pHide();
           loadWrap.hidden = true;
           controls.hidden = false;
           progressEl.hidden = true;
           status('Engine ready — set your times and press "Trim video".');
         }).catch(function(){
+          pShim(false);
+          pHide();
           loadBtn.disabled = false;
           loadBtn.textContent = 'Load video engine (one-time ~25MB)';
           progressEl.hidden = true;
@@ -302,13 +319,19 @@
         progressEl.hidden = false;
         setBar(0);
         status('Preparing…');
-        ensureEngine(setBar).then(function(){
+        qpStage = 'Preparing…';
+        pShow({ title: 'Trimming video…', stage: qpStage, percent: 0 });
+        ensureEngine(qbar).then(function(){
+          qpStage = 'Reading file…';
           status('Reading file…');
+          if(window.QTProgress){ QTProgress.update(0, qpStage); }
           return fetchFileFn(file);
         }).then(function(data){
           ffmpeg.FS('writeFile', inName, data);
-          status(reencode.checked ? 'Trimming (re-encoding — this is the slow, frame-exact mode)…' : 'Trimming…');
+          qpStage = reencode.checked ? 'Trimming (re-encoding — this is the slow, frame-exact mode)…' : 'Trimming…';
+          status(qpStage);
           setBar(0);
+          if(window.QTProgress){ QTProgress.update(0, qpStage); }
           return ffmpeg.run.apply(ffmpeg, args);
         }).then(function(){
           var data = ffmpeg.FS('readFile', outName);
@@ -329,6 +352,7 @@
             showError('Trimming failed — the file may be corrupt or in an unsupported format. Try a different file.');
           }
         }).then(function(){
+          pHide();
           try{ ffmpeg.FS('unlink', inName); }catch(x){}
           try{ ffmpeg.FS('unlink', outName); }catch(x){}
           goBtn.disabled = false;

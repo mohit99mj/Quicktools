@@ -6,11 +6,11 @@
 <title>Compress Video Online — Free Browser Tool</title>
 <meta name="description" content="Compress video files right in your browser — shrink MP4 size with adjustable quality. No uploads, no watermarks, free.">
 <meta name="keywords" content="compress video, reduce video size, shrink mp4, video compressor online, compress mp4 online">
-<link rel="canonical" href="https://www.example.com/tools/video-compressor/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/video-compressor/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Compress Video Online — Free Browser Tool">
 <meta property="og:description" content="Compress video files right in your browser — shrink MP4 size with adjustable quality. No uploads, no watermarks, free.">
-<meta property="og:url" content="https://www.example.com/tools/video-compressor/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/video-compressor/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Compress Video Online — Free Browser Tool">
 <meta name="twitter:description" content="Compress video files right in your browser — shrink MP4 size with adjustable quality. No uploads, no watermarks, free.">
@@ -19,11 +19,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-video-compressor .progress{height:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:12px 0;}
 .tool-video-compressor .progress-bar{height:100%;width:0%;background:var(--accent);transition:width .15s linear;}
 .tool-video-compressor video{width:100%;max-height:380px;background:#000;border-radius:var(--radius-sm);}
 .tool-video-compressor #vc-result .btn{margin-top:12px;}
+/* Target-size mode (workstream B) */
+.ts-mode{display:flex;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px}
+.ts-mode-btn{flex:1;min-height:44px;border:0;border-radius:999px;background:transparent;font:inherit;font-weight:700;color:var(--ink);cursor:pointer;transition:background-color .2s ease,color .2s ease,transform .15s ease;-webkit-tap-highlight-color:transparent}
+.ts-mode-btn.is-active{background:var(--accent);color:var(--accent-ink)}
+.ts-mode-btn:active{transform:scale(.98)}
+.ts-target-block{border:1px solid var(--line);border-radius:var(--radius);padding:1rem;background:var(--surface);margin-bottom:1rem}
+.ts-presets{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:.5rem 0 .75rem}
+.ts-preset{min-height:44px;border:1px solid var(--line);border-radius:12px;background:var(--bg);font:inherit;font-weight:700;color:var(--accent-strong);cursor:pointer;transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .15s ease;-webkit-tap-highlight-color:transparent}
+.ts-preset.is-active{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.ts-preset:active{transform:scale(.97)}
+.ts-progress{height:10px;background:var(--bg);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:.75rem 0}
+.ts-progress-bar{height:100%;width:0%;background:var(--accent);transition:width .15s linear}
+.ts-preview{display:block;max-width:100%;max-height:280px;border-radius:12px;border:1px solid var(--line);margin-top:.75rem}
+@media (prefers-reduced-motion:reduce){.ts-mode-btn,.ts-preset,.ts-progress-bar{transition:none}}
 </style>
 </head>
 <body>
@@ -64,13 +80,36 @@
         <button class="btn btn-primary" id="vc-load">Load video engine (one-time ~25MB)</button>
       </div>
       <div id="vc-controls" hidden>
-        <div class="field">
+        <div class="field" id="vc-quality-field">
           <label class="label" for="vc-quality">Quality</label>
           <select class="select" id="vc-quality">
             <option value="23">High quality — larger file</option>
             <option value="28" selected>Balanced — good for sharing</option>
             <option value="33">Smallest file — lower quality</option>
           </select>
+        </div>
+        <div class="field">
+          <span class="label" id="vc-mode-label">Compression mode</span>
+          <div class="ts-mode" role="group" aria-labelledby="vc-mode-label">
+            <button type="button" class="ts-mode-btn is-active" id="vc-mode-quality" aria-pressed="true">By quality</button>
+            <button type="button" class="ts-mode-btn" id="vc-mode-target" aria-pressed="false">By target size</button>
+          </div>
+        </div>
+        <div class="ts-target-block" id="vc-target-block" hidden>
+          <span class="label" id="vc-target-label">Target size</span>
+          <div class="ts-presets" role="group" aria-labelledby="vc-target-label">
+            <button type="button" class="ts-preset" data-kb="10">10 KB</button>
+          <button type="button" class="ts-preset" data-kb="15">15 KB</button>
+          <button type="button" class="ts-preset" data-kb="50">50 KB</button>
+          <button type="button" class="ts-preset" data-kb="100">100 KB</button>
+          <button type="button" class="ts-preset" data-kb="250">250 KB</button>
+          <button type="button" class="ts-preset" data-kb="500">500 KB</button>
+          </div>
+          <div class="field">
+            <label class="label" for="vc-custom-kb">Or custom size (KB)</label>
+            <input class="input" id="vc-custom-kb" type="number" min="1" max="102400" step="1" inputmode="numeric" placeholder="e.g. 500">
+          </div>
+          <p class="hint">Encodes at the bitrate your target needs — usually a single pass, with one refinement pass only if the first misses ±5%. Re-encoding video is slow, especially on phones.</p>
         </div>
         <button class="btn btn-primary" id="vc-go">Compress video</button>
       </div>
@@ -130,14 +169,137 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Compress Video","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/video-compressor/","description":"Compress video files right in your browser — shrink MP4 size with adjustable quality. No uploads, no watermarks, free.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Compress Video","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/video-compressor/","description":"Compress video files right in your browser — shrink MP4 size with adjustable quality. No uploads, no watermarks, free.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my video uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The video is processed entirely on your device using a video engine that runs in your browser. Your file is never sent to a server."}},{"@type":"Question","name":"How much smaller will my video get?","acceptedAnswer":{"@type":"Answer","text":"It depends on the source. High-bitrate recordings can shrink 50–80%, while already-compressed videos shrink less. The tool shows the before/after sizes so you can see exactly what you saved."}},{"@type":"Question","name":"Which quality setting should I choose?","acceptedAnswer":{"@type":"Answer","text":"High keeps near-original quality with moderate savings. Balanced is a good default for sharing online. Small gives the smallest file but with visibly lower quality."}},{"@type":"Question","name":"Why does the engine need to download ~25MB first?","acceptedAnswer":{"@type":"Answer","text":"Video compression needs a full video codec, which downloads once and is then cached by your browser. After that, compression runs fully offline."}},{"@type":"Question","name":"Will it work on my phone?","acceptedAnswer":{"@type":"Answer","text":"Yes, but large videos can be slow on phones with limited memory. For best results on mobile, use shorter clips or the \"Small\" quality setting."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Video & Audio","item":"https://www.example.com/#cat-video-audio"},{"@type":"ListItem","position":3,"name":"Compress Video","item":"https://www.example.com/tools/video-compressor/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Video & Audio","item":"https://mohit99mj.github.io/Quicktools/#cat-video-audio"},{"@type":"ListItem","position":3,"name":"Compress Video","item":"https://mohit99mj.github.io/Quicktools/tools/video-compressor/"}]}</script>
 <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js" defer></script>
 <script>
 
     (function(){
       'use strict';
+/*
+ * QuickTools — binarySearchTarget (shared logic, embedded per tool page)
+ *
+ * Pure helper: binary-search a quality-like parameter so that an async
+ * measure(quality) -> bytes lands within ±tolerance of targetBytes.
+ *
+ * Assumptions: output size increases with the quality parameter
+ * (higher quality => bigger output). The closest probe is always tracked,
+ * so mildly non-monotonic encoders still terminate with the best result.
+ *
+ * measure      async function(quality) -> positive byte count (number)
+ * targetBytes  positive number
+ * opts         { minQ, maxQ, tolerance, maxIter, initialQ, onStep }
+ *   minQ/maxQ    search range for the quality parameter (default 0.15/0.95)
+ *   tolerance    relative tolerance, e.g. 0.05 for ±5% (default 0.05)
+ *   maxIter      maximum number of measure() probes (default 8)
+ *   initialQ     optional smart first probe (e.g. a bitrate estimated from
+ *                duration); if it hits, we are done in 1 probe
+ *   onStep(q, iteration, maxIter, bytes)  progress callback
+ *
+ * Resolves to { quality, bytes, iterations, hit, reason } where reason is
+ * 'hit' | 'closest' | 'target-above-range' | 'target-below-range'.
+ * Never loops forever: probes are capped at maxIter.
+ *
+ * Works in browsers (defines window.binarySearchTarget) and in Node
+ * (module.exports) — the page copies must stay identical to this file.
+ */
+(function (root) {
+  'use strict';
+
+  function binarySearchTarget(measure, targetBytes, opts) {
+    var o = opts || {};
+    var minQ = typeof o.minQ === 'number' ? o.minQ : 0.15;
+    var maxQ = typeof o.maxQ === 'number' ? o.maxQ : 0.95;
+    var tol = typeof o.tolerance === 'number' ? o.tolerance : 0.05;
+    var maxIter = typeof o.maxIter === 'number' ? Math.max(1, Math.floor(o.maxIter)) : 8;
+    var initialQ = typeof o.initialQ === 'number' ? o.initialQ : null;
+    var onStep = typeof o.onStep === 'function' ? o.onStep : function () {};
+
+    function inTol(bytes) {
+      return bytes >= targetBytes * (1 - tol) && bytes <= targetBytes * (1 + tol);
+    }
+
+    function run() {
+      if (!(targetBytes > 0)) return Promise.reject(new Error('binarySearchTarget: targetBytes must be positive'));
+      if (!(maxQ > minQ)) return Promise.reject(new Error('binarySearchTarget: maxQ must be greater than minQ'));
+
+      var best = null; // {quality, bytes} — closest probe to the target so far
+      var iterations = 0;
+
+      function note(q, bytes) {
+        if (typeof bytes !== 'number' || !(bytes > 0) || !isFinite(bytes)) {
+          throw new Error('binarySearchTarget: measure() must resolve to a positive byte count');
+        }
+        iterations++;
+        if (!best || Math.abs(bytes - targetBytes) < Math.abs(best.bytes - targetBytes)) {
+          best = { quality: q, bytes: bytes };
+        }
+        onStep(q, iterations, maxIter, bytes);
+      }
+
+      function probe(q) {
+        return Promise.resolve()
+          .then(function () { return measure(q); })
+          .then(function (b) { note(q, b); return b; });
+      }
+
+      function finish(reason) {
+        var hit = inTol(best.bytes);
+        return { quality: best.quality, bytes: best.bytes, iterations: iterations, hit: hit, reason: hit ? 'hit' : reason };
+      }
+
+      function search(lo, hi) {
+        function step() {
+          if (iterations >= maxIter) return Promise.resolve(finish('closest'));
+          var mid = (lo + hi) / 2;
+          if (!(hi - lo > 1e-9)) return Promise.resolve(finish('closest'));
+          return probe(mid).then(function (b) {
+            if (inTol(b)) return finish('hit');
+            if (b > targetBytes) hi = mid; else lo = mid;
+            return step();
+          });
+        }
+        return step();
+      }
+
+      var first = initialQ !== null
+        ? probe(initialQ).then(function (b) {
+            if (inTol(b)) return finish('hit');
+            var lo = minQ, hi = maxQ;
+            if (b > targetBytes) hi = initialQ; else lo = initialQ;
+            return search(lo, hi);
+          })
+        : probe(maxQ).then(function (hiBytes) {
+            // Best-looking output first: if it already fits, take it in 1 probe.
+            if (inTol(hiBytes)) return finish('hit');
+            if (hiBytes < targetBytes * (1 - tol)) {
+              // Even max quality is smaller than the target: unreachable (target too large).
+              return finish('target-above-range');
+            }
+            return probe(minQ).then(function (loBytes) {
+              if (inTol(loBytes)) return finish('hit');
+              if (loBytes > targetBytes * (1 + tol)) {
+                // Even min quality overshoots: unreachable (target too small).
+                return finish('target-below-range');
+              }
+              return search(minQ, maxQ);
+            });
+          });
+      return first;
+    }
+
+    return run();
+  }
+
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = binarySearchTarget;
+  } else {
+    root.binarySearchTarget = binarySearchTarget;
+  }
+})(typeof self !== 'undefined' ? self : this);
       var $ = function(id){ return document.getElementById(id); };
       var fileInput = $('vc-file'), fileInfo = $('vc-fileinfo');
       var loadWrap = $('vc-loadwrap'), loadBtn = $('vc-load');
@@ -219,9 +381,186 @@
         });
       });
 
+      /* ---------- Target-size mode (workstream B) ---------- */
+      var vcMode = 'quality';
+      var vcTargetKb = 100;
+      var vcTargetRunning = false;
+      var vcQualityField = $('vc-quality-field');
+      var vcTargetBlock = $('vc-target-block');
+      var vcCustomKb = $('vc-custom-kb');
+      function vcQt(){ return (typeof window.QTProgress !== 'undefined' && window.QTProgress) ? window.QTProgress : null; }
+      function vcSetMode(m){
+        vcMode = m;
+        var isTarget = (m === 'target');
+        var qb = $('vc-mode-quality'), tb = $('vc-mode-target');
+        if(qb){ qb.classList.toggle('is-active', !isTarget); qb.setAttribute('aria-pressed', String(!isTarget)); }
+        if(tb){ tb.classList.toggle('is-active', isTarget); tb.setAttribute('aria-pressed', String(isTarget)); }
+        if(vcQualityField) vcQualityField.style.display = isTarget ? 'none' : '';
+        if(vcTargetBlock) vcTargetBlock.hidden = !isTarget;
+        if(goBtn) goBtn.textContent = isTarget ? 'Compress to target size' : 'Compress video';
+      }
+      function vcGetDuration(f){
+        return new Promise(function(resolve, reject){
+          var url = URL.createObjectURL(f);
+          var v = document.createElement('video');
+          var done = false;
+          function cleanup(){ try{ URL.revokeObjectURL(url); }catch(x){} }
+          v.preload = 'metadata';
+          v.onloadedmetadata = function(){
+            if(done) return; done = true;
+            var d = v.duration; cleanup(); resolve(d);
+          };
+          v.onerror = function(){
+            if(done) return; done = true;
+            cleanup(); reject(new Error('Could not read this video’s metadata.'));
+          };
+          v.src = url;
+          setTimeout(function(){
+            if(!done){ done = true; cleanup(); reject(new Error('Timed out reading the video’s metadata.')); }
+          }, 15000);
+        });
+      }
+      function vcRunTarget(){
+        hideError();
+        if(!file){ showError('Choose a video file first.'); return; }
+        if(vcTargetRunning) return;
+        if(!(vcTargetKb > 0)){ showError('Pick a target size — tap a preset or enter a custom KB value.'); return; }
+        var targetBytes = Math.round(vcTargetKb * 1024);
+        vcTargetRunning = true;
+        var vcMq = $('vc-mode-quality'), vcMt = $('vc-mode-target');
+        if(vcMq) vcMq.disabled = true;
+        if(vcMt) vcMt.disabled = true;
+        goBtn.disabled = true;
+        resultEl.hidden = true;
+        progressEl.hidden = false;
+        setBar(0);
+        status('Reading video info…');
+        var qp = vcQt();
+        if(qp && qp.show) qp.show({ title: 'Compressing video to target size', stage: 'Reading video info…', percent: 0 });
+        var inName = 'input' + extOf(file.name, '.mp4');
+        var beforeSize = file.size;
+        vcGetDuration(file).then(function(duration){
+          if(!(duration > 0) || !isFinite(duration)) throw new Error('Could not read this video’s duration.');
+          var AUDIO_BR = 48000, MIN_VB = 24000;
+          var vb0 = Math.round((targetBytes * 8) / duration - AUDIO_BR);
+          var clamped = false;
+          if(vb0 < MIN_VB){ vb0 = MIN_VB; clamped = true; }
+          status('Loading engine…');
+          if(qp && qp.update) qp.update(3, 'Loading engine…');
+          return ensureEngine(function(r){ setBar(r * 0.05); }).then(function(){
+            status('Preparing…');
+            return fetchFileFn(file);
+          }).then(function(data){
+            ffmpeg.FS('writeFile', inName, data);
+            var cache = {};
+            var passCount = 0;
+            function encodeAt(vb){
+              vb = Math.max(MIN_VB, Math.round(vb));
+              if(cache[vb]) return Promise.resolve(cache[vb].length);
+              passCount++;
+              var outName = 'ts_' + vb + '_' + passCount + '.mp4';
+              var label = 'Encoding at ~' + Math.round(vb / 1000) + ' kbps';
+              status(label + ' — pass ' + passCount + ' of up to 2. Re-encoding video can take a few minutes.');
+              if(qp && qp.update) qp.update(8, label + ' (pass ' + passCount + ' of up to 2)');
+              ffmpeg.setProgress(function(pr){
+                var r = pr && pr.ratio ? pr.ratio : 0;
+                var overall = 0.08 + 0.88 * r;
+                setBar(overall);
+                if(qp && qp.update) qp.update(Math.round(overall * 100), label + ' — ' + Math.round(r * 100) + '%');
+              });
+              return ffmpeg.run('-i', inName,
+                '-vcodec', 'libx264',
+                '-b:v', String(vb),
+                '-maxrate', String(Math.round(vb * 1.5)),
+                '-bufsize', String(Math.round(vb * 3)),
+                '-preset', 'veryfast',
+                '-acodec', 'aac', '-b:a', '48k',
+                outName).then(function(){
+                  var out = ffmpeg.FS('readFile', outName);
+                  cache[vb] = out;
+                  try{ ffmpeg.FS('unlink', outName); }catch(x){}
+                  return out.length;
+                });
+            }
+            if(clamped){
+              status('Note: this target is very small for a ' + Math.round(duration) + 's video — using the lowest usable bitrate.');
+            }
+            return binarySearchTarget(encodeAt, targetBytes, {
+              minQ: MIN_VB,
+              maxQ: Math.max(vb0 * 4, 200000),
+              initialQ: vb0,
+              tolerance: 0.05,
+              maxIter: 2,
+              onStep: function(q, i, n, bytes){
+                status('Pass ' + i + ' of ' + n + ': ~' + Math.round(q / 1000) + ' kbps → ' + fmtBytes(bytes) + '.');
+              }
+            }).then(function(res){
+              var bestVb = Math.max(MIN_VB, Math.round(res.quality));
+              var data = cache[bestVb];
+              if(!data) throw new Error('The encoded output went missing — please try again.');
+              var afterSize = data.length;
+              if(lastUrl){ URL.revokeObjectURL(lastUrl); lastUrl = null; }
+              var url = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
+              lastUrl = url;
+              preview.src = url;
+              dl.href = url;
+              dl.setAttribute('download', baseName(file.name) + '-' + Math.round(vcTargetKb) + 'kb.mp4');
+              var ok = res.hit;
+              sizesEl.textContent = fmtBytes(beforeSize) + ' → ' + fmtBytes(afterSize) + ' (target ' + fmtBytes(targetBytes) + ')';
+              if(ok){
+                savedEl.textContent = 'Done: ' + fmtBytes(afterSize) + ' (target ' + fmtBytes(targetBytes) + ').';
+              } else if(afterSize > targetBytes){
+                savedEl.textContent = 'Closest achieved: ' + fmtBytes(afterSize) + ' (target ' + fmtBytes(targetBytes) + ') — even the lowest usable bitrate can’t go smaller. Try a larger target or a shorter clip.';
+              } else {
+                savedEl.textContent = 'Closest achieved: ' + fmtBytes(afterSize) + ' (target ' + fmtBytes(targetBytes) + ') — the video can’t reach that size without dropping below usable quality.';
+              }
+              resultEl.hidden = false;
+              status(ok ? 'Done.' : 'Finished — closest achievable size shown above.');
+              if(qp && qp.update) qp.update(100, 'Done');
+            });
+          });
+        }).catch(function(e){
+          showError((e && e.message) ? e.message : 'Target-size compression failed.');
+        }).then(function(){
+          try{ ffmpeg.FS('unlink', inName); }catch(x){}
+          if(ffmpeg){ ffmpeg.setProgress(function(pr){ setBar(pr && pr.ratio ? pr.ratio : 0); }); }
+          vcTargetRunning = false;
+          goBtn.disabled = false;
+          var vcMq2 = $('vc-mode-quality'), vcMt2 = $('vc-mode-target');
+          if(vcMq2) vcMq2.disabled = false;
+          if(vcMt2) vcMt2.disabled = false;
+          progressEl.hidden = true;
+          if(qp && qp.hide) qp.hide();
+        });
+      }
+      (function(){
+        var qb = $('vc-mode-quality'), tb = $('vc-mode-target');
+        if(qb) qb.addEventListener('click', function(){ vcSetMode('quality'); });
+        if(tb) tb.addEventListener('click', function(){ vcSetMode('target'); });
+        var btns = vcTargetBlock ? vcTargetBlock.querySelectorAll('.ts-preset') : [];
+        function clearActive(){ for(var i = 0; i < btns.length; i++) btns[i].classList.remove('is-active'); }
+        for(var i = 0; i < btns.length; i++){
+          (function(b){
+            b.addEventListener('click', function(){
+              clearActive();
+              b.classList.add('is-active');
+              if(vcCustomKb) vcCustomKb.value = '';
+              vcTargetKb = parseInt(b.getAttribute('data-kb'), 10) || 0;
+            });
+          })(btns[i]);
+        }
+        var def = vcTargetBlock ? vcTargetBlock.querySelector('.ts-preset[data-kb="100"]') : null;
+        if(def) def.classList.add('is-active');
+        if(vcCustomKb) vcCustomKb.addEventListener('input', function(){
+          clearActive();
+          var v = parseInt(vcCustomKb.value, 10);
+          vcTargetKb = (v > 0) ? v : 0;
+        });
+      })();
       goBtn.addEventListener('click', function(){
         hideError();
         if(!file){ showError('Choose a video file first.'); return; }
+        if(vcMode === 'target'){ vcRunTarget(); return; }
         var crf = qualitySel.value;
         if(crf !== '23' && crf !== '28' && crf !== '33') crf = '28';
         var inName = 'input' + extOf(file.name, '.mp4');
