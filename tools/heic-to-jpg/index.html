@@ -6,11 +6,11 @@
 <title>HEIC to JPG — Convert HEIC Photos Online</title>
 <meta name="description" content="Convert HEIC to JPG free online. iPhone photos become JPG in your browser — no upload, completely private.">
 <meta name="keywords" content="heic to jpg, convert heic to jpg, heic converter, iphone photo to jpg">
-<link rel="canonical" href="https://www.example.com/tools/heic-to-jpg/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/heic-to-jpg/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="HEIC to JPG — Convert HEIC Photos Online">
 <meta property="og:description" content="Convert HEIC to JPG free online. iPhone photos become JPG in your browser — no upload, completely private.">
-<meta property="og:url" content="https://www.example.com/tools/heic-to-jpg/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/heic-to-jpg/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HEIC to JPG — Convert HEIC Photos Online">
 <meta name="twitter:description" content="Convert HEIC to JPG free online. iPhone photos become JPG in your browser — no upload, completely private.">
@@ -19,8 +19,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-heic-to-jpg .tool-heic-to-jpg-preview img{max-width:100%;height:auto;border-radius:var(--radius-sm);border:1px solid var(--line);margin:1rem 0;}
+.tool-heic-to-jpg .tool-heic-to-jpg-preview #heic-meta{text-align:center}
 </style>
 </head>
 <body>
@@ -60,6 +63,7 @@
       <div class="result" id="heic-out" aria-live="polite"></div>
       <div class="tool-heic-to-jpg-preview" id="heic-preview" hidden>
         <img id="heic-img" alt="Converted JPG preview" />
+        <p class="hint" id="heic-meta"></p>
       </div>
       <button class="btn btn-primary" id="heic-dl" disabled>Download JPG</button>
     </div>
@@ -107,9 +111,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"HEIC to JPG","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/heic-to-jpg/","description":"Convert HEIC to JPG free online. iPhone photos become JPG in your browser — no upload, completely private.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"HEIC to JPG","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/heic-to-jpg/","description":"Convert HEIC to JPG free online. iPhone photos become JPG in your browser — no upload, completely private.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does this convert HEIC to JPG on my device?","acceptedAnswer":{"@type":"Answer","text":"Yes. The conversion happens entirely in your browser using the heic2any library. Your photo is never uploaded to any server."}},{"@type":"Question","name":"Can I convert multiple HEIC files at once?","acceptedAnswer":{"@type":"Answer","text":"The tool converts one file at a time. For another photo, just choose the next file — conversion restarts automatically."}},{"@type":"Question","name":"Will my photo lose quality?","acceptedAnswer":{"@type":"Answer","text":"The JPG is encoded at 90% quality, which looks the same as the original for normal viewing. Some metadata may be dropped."}},{"@type":"Question","name":"My file has several images in it. Which one gets converted?","acceptedAnswer":{"@type":"Answer","text":"Only the first image in the file is converted — bursts and multi-image HEIC files yield their first frame."}},{"@type":"Question","name":"Why does my browser need to download a library first?","acceptedAnswer":{"@type":"Answer","text":"HEIC decoding needs special code that browsers do not include natively. A small converter library loads once from a CDN, then everything runs locally."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"File Converters","item":"https://www.example.com/#cat-file-converters"},{"@type":"ListItem","position":3,"name":"HEIC to JPG","item":"https://www.example.com/tools/heic-to-jpg/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"File Converters","item":"https://mohit99mj.github.io/Quicktools/#cat-file-converters"},{"@type":"ListItem","position":3,"name":"HEIC to JPG","item":"https://mohit99mj.github.io/Quicktools/tools/heic-to-jpg/"}]}</script>
 <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js" defer></script>
 <script>
 
@@ -119,8 +125,16 @@
       var out = document.getElementById('heic-out');
       var preview = document.getElementById('heic-preview');
       var img = document.getElementById('heic-img');
+      var meta = document.getElementById('heic-meta');
       var dl = document.getElementById('heic-dl');
       var lastUrl = null;
+      function qp(){ return (typeof window !== 'undefined' && window.QTProgress && typeof window.QTProgress.show === 'function') ? window.QTProgress : null; }
+      function fmtBytes(b){
+        if(!(b > 0)) return '';
+        var u = ['B', 'KB', 'MB', 'GB'], i = 0, n = b;
+        while(n >= 1024 && i < u.length - 1){ n /= 1024; i++; }
+        return (n >= 100 ? Math.round(n) : n.toFixed(1)) + ' ' + u[i];
+      }
       function setStatus(html){ if (out) out.innerHTML = html; }
       function revoke(){ if (lastUrl){ URL.revokeObjectURL(lastUrl); lastUrl = null; } }
       if (!input) return;
@@ -128,6 +142,7 @@
         revoke();
         if (dl) dl.disabled = true;
         if (preview) preview.hidden = true;
+        if (meta) meta.textContent = '';
         var file = input.files && input.files[0];
         if (!file){ setStatus(''); return; }
         var name = (file.name || '').toLowerCase();
@@ -139,6 +154,8 @@
           setStatus('<p class="error">Converter library failed to load. Check your connection and reload the page.</p>');
           return;
         }
+        var P = qp();
+        if (P) P.show({ title: 'HEIC to JPG', stage: 'Decoding HEIC…', percent: 15 });
         setStatus('<p>Converting… this may take a few seconds.</p>');
         heic2any({ blob: file, toType: 'image/jpeg', quality: 0.9 })
           .then(function(result){
@@ -159,9 +176,19 @@
                 a.remove();
               };
             }
-            setStatus('<p>Done — your JPG is ready.</p>');
+            if (P) P.update(85, 'Reading result…');
+            var probe = new Image();
+            function finish(w, h){
+              if (P) P.hide();
+              if (meta) meta.textContent = 'JPG · ' + (w ? w + ' × ' + h + ' px · ' : '') + fmtBytes(blob.size);
+              setStatus('<p>Done — your JPG is ready.</p>');
+            }
+            probe.onload = function(){ finish(probe.naturalWidth, probe.naturalHeight); };
+            probe.onerror = function(){ finish(0, 0); };
+            probe.src = lastUrl;
           })
           .catch(function(){
+            if (P) P.hide();
             setStatus('<p class="error">Could not convert this file. It may be corrupt or an unsupported HEIC variant.</p>');
           });
       });

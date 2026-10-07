@@ -6,11 +6,11 @@
 <title>Crop Image Online — Free Image Cropper</title>
 <meta name="description" content="Crop images online for free. Drag and resize the selection box, snap to aspect-ratio presets, then download the cropped image.">
 <meta name="keywords" content="crop image, image cropper, crop photo online, photo cropper, crop picture">
-<link rel="canonical" href="https://www.example.com/tools/image-cropper/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/image-cropper/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Crop Image Online — Free Image Cropper">
 <meta property="og:description" content="Crop images online for free. Drag and resize the selection box, snap to aspect-ratio presets, then download the cropped image.">
-<meta property="og:url" content="https://www.example.com/tools/image-cropper/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/image-cropper/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Crop Image Online — Free Image Cropper">
 <meta name="twitter:description" content="Crop images online for free. Drag and resize the selection box, snap to aspect-ratio presets, then download the cropped image.">
@@ -19,8 +19,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
-.tool-image-cropper .dropzone.drag{border-color:var(--accent);background:var(--accent-soft)}.tool-image-cropper .cr-canvas-wrap{overflow:auto;max-width:100%;border:1px solid var(--line);border-radius:var(--radius-sm);margin:0.75rem 0;background:var(--surface)}.tool-image-cropper #cr-canvas{display:block;max-width:100%;height:auto;cursor:move;margin:0 auto;touch-action:none}
+.tool-image-cropper .dropzone.drag{border-color:var(--accent);background:var(--accent-soft)}.tool-image-cropper .cr-stage{display:flex;gap:.75rem;align-items:flex-start;margin:0.75rem 0}.tool-image-cropper .cr-canvas-wrap{flex:1 1 auto;min-width:0;overflow:auto;max-width:100%;border:1px solid var(--line);border-radius:var(--radius-sm);margin:0;background:var(--surface)}.tool-image-cropper #cr-canvas{display:block;max-width:100%;height:auto;cursor:move;margin:0 auto;touch-action:none}
+.tool-image-cropper .cr-presets{display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.25rem;-webkit-overflow-scrolling:touch}
+.tool-image-cropper .cr-preset{flex:0 0 auto;min-height:44px;padding:.55rem 1rem}
+.tool-image-cropper .cr-preset.is-active{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-strong);font-weight:700}
+.tool-image-cropper .cr-preview{flex:0 0 auto;min-width:0;margin:0;text-align:center}
+.tool-image-cropper .cr-preview canvas{max-width:150px;max-height:220px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface)}
+.tool-image-cropper .cr-preview figcaption{font-size:.8rem;color:var(--muted);margin-top:.25rem}
+.tool-image-cropper .cr-preview .cr-preview-meta{font-size:.8rem;color:var(--muted);margin-top:.125rem}
+.tool-image-cropper #cr-go{width:100%;min-height:52px;font-size:1.05rem}
+@media (max-width:560px){.tool-image-cropper .cr-stage{flex-direction:column;align-items:stretch}.tool-image-cropper .cr-preview canvas{max-width:200px}}
 </style>
 </head>
 <body>
@@ -60,17 +71,23 @@
       </div>
       <div id="cr-editor" hidden>
         <div class="field">
-          <label class="label" for="cr-aspect">Aspect ratio</label>
-          <select class="select" id="cr-aspect">
-            <option value="free">Free</option>
-            <option value="1">1:1 (square)</option>
-            <option value="1.333333">4:3</option>
-            <option value="0.75">3:4</option>
-            <option value="1.777778">16:9</option>
-          </select>
+          <span class="label" id="cr-aspect-label">Aspect ratio</span>
+          <div class="cr-presets" role="group" aria-labelledby="cr-aspect-label">
+            <button type="button" class="btn btn-ghost cr-preset is-active" data-aspect="free" aria-pressed="true">Free</button>
+            <button type="button" class="btn btn-ghost cr-preset" data-aspect="1" aria-pressed="false">1:1</button>
+            <button type="button" class="btn btn-ghost cr-preset" data-aspect="1.3333" aria-pressed="false">4:3</button>
+            <button type="button" class="btn btn-ghost cr-preset" data-aspect="1.7778" aria-pressed="false">16:9</button>
+          </div>
         </div>
-        <div class="cr-canvas-wrap"><canvas id="cr-canvas" aria-label="Image crop editor. Drag corners to resize, drag inside to move."></canvas></div>
-        <p class="hint">Drag a corner to resize · drag inside the box to move · pinch works on touch screens via drag.</p>
+        <div class="cr-stage">
+          <div class="cr-canvas-wrap"><canvas id="cr-canvas" aria-label="Image crop editor. Drag corners to resize, drag inside to move."></canvas></div>
+          <figure class="cr-preview" id="cr-preview-wrap" hidden>
+            <canvas id="cr-preview" aria-label="Live crop preview"></canvas>
+            <figcaption>Live preview</figcaption>
+            <p class="cr-preview-meta" id="cr-preview-meta" aria-live="polite"></p>
+          </figure>
+        </div>
+        <p class="hint">Drag a corner to resize · drag inside the box to move · works with touch and mouse.</p>
         <div class="result" id="cr-status" aria-live="polite"></div>
         <div class="field">
           <button class="btn btn-primary" id="cr-go">Crop &amp; download</button>
@@ -124,20 +141,26 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Cropper","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/image-cropper/","description":"Crop images online for free. Drag and resize the selection box, snap to aspect-ratio presets, then download the cropped image.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Cropper","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/image-cropper/","description":"Crop images online for free. Drag and resize the selection box, snap to aspect-ratio presets, then download the cropped image.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will cropping reduce image quality?","acceptedAnswer":{"@type":"Answer","text":"No. Cropping cuts pixels at full resolution — nothing is re-scaled or re-compressed beyond the normal encoding of the downloaded file."}},{"@type":"Question","name":"How do I keep a specific aspect ratio?","acceptedAnswer":{"@type":"Answer","text":"Pick a preset (1:1, 4:3, 3:4, 16:9) above the image. Resizing the corners then keeps that shape locked. Choose \"Free\" to crop any shape."}},{"@type":"Question","name":"What is the maximum image size?","acceptedAnswer":{"@type":"Answer","text":"The editor works with images up to 4000 px on the longest side, but the crop is taken from your full-resolution upload whenever possible."}},{"@type":"Question","name":"Can I crop a circle?","acceptedAnswer":{"@type":"Answer","text":"Not yet — this tool crops rectangles only. For round avatars, crop a square (1:1) and most platforms display it as a circle."}},{"@type":"Question","name":"Are my photos uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. The image stays in your browser from upload to download."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://www.example.com/#cat-image-tools"},{"@type":"ListItem","position":3,"name":"Image Cropper","item":"https://www.example.com/tools/image-cropper/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-image-tools"},{"@type":"ListItem","position":3,"name":"Image Cropper","item":"https://mohit99mj.github.io/Quicktools/tools/image-cropper/"}]}</script>
 <script>
 
     (function(){
       'use strict';
       function $(s){ return document.querySelector(s); }
       var drop = $('#cr-drop'), fileInput = $('#cr-file'), editor = $('#cr-editor');
-      var canvas = $('#cr-canvas'), aspectSel = $('#cr-aspect');
-      var uploadStatus = $('#cr-upload-status'), statusEl = $('#cr-status'), go = $('#cr-go');
-      if(!drop || !fileInput || !editor || !canvas || !aspectSel || !go) return;
+      var canvas = $('#cr-canvas'), go = $('#cr-go');
+      var previewWrap = $('#cr-preview-wrap'), previewCanvas = $('#cr-preview'), previewMeta = $('#cr-preview-meta');
+      var presetBtns = Array.prototype.slice.call(document.querySelectorAll('.cr-preset'));
+      var uploadStatus = $('#cr-upload-status'), statusEl = $('#cr-status');
+      if(!drop || !fileInput || !editor || !canvas || !go || !presetBtns.length) return;
       var ctx = canvas.getContext('2d');
-      var MAX = 4000, HANDLE = 12;
+      var pctx = previewCanvas ? previewCanvas.getContext('2d') : null;
+      var MAX = 4000, HANDLE = 12, curAspect = 0, previewQueued = false;
+      function qp(){ return (typeof window !== 'undefined' && window.QTProgress && typeof window.QTProgress.show === 'function') ? window.QTProgress : null; }
       var img = null, dispW = 0, dispH = 0, scale = 1, srcURL = null, fileName = 'image';
       var rect = { x: 0, y: 0, w: 0, h: 0 };
       var drag = null; // {mode:'move'|'nw'|'ne'|'sw'|'se', dx, dy, startRect}
@@ -152,7 +175,48 @@
       function safeName(s){
         return String(s).replace(/\.[a-zA-Z0-9]+$/, '').replace(/[^a-zA-Z0-9._-]+/g, '_').slice(0, 80) || 'image';
       }
-      function aspect(){ return aspectSel.value === 'free' ? 0 : parseFloat(aspectSel.value); }
+      function aspect(){ return curAspect; }
+      function selectAspect(btn){
+        curAspect = btn.getAttribute('data-aspect') === 'free' ? 0 : parseFloat(btn.getAttribute('data-aspect'));
+        for(var i = 0; i < presetBtns.length; i++){
+          var on = presetBtns[i] === btn;
+          presetBtns[i].classList.toggle('is-active', on);
+          presetBtns[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+        }
+        if(!img) return;
+        var cx = rect.x + rect.w / 2, cy = rect.y + rect.h / 2;
+        var w = dispW * 0.8, h = dispH * 0.8;
+        var d = fitAspectToBox(w, h, aspect());
+        rect.w = d.w; rect.h = d.h;
+        rect.x = cx - rect.w / 2; rect.y = cy - rect.h / 2;
+        clampRect();
+        draw();
+        schedulePreview();
+      }
+      function schedulePreview(){
+        if(previewQueued || !previewCanvas || !pctx) return;
+        previewQueued = true;
+        requestAnimationFrame(function(){
+          previewQueued = false;
+          renderPreview();
+        });
+      }
+      function renderPreview(){
+        if(!img || !pctx) return;
+        var sx = Math.max(0, Math.round(rect.x / scale));
+        var sy = Math.max(0, Math.round(rect.y / scale));
+        var sw = Math.max(1, Math.round(rect.w / scale));
+        var sh = Math.max(1, Math.round(rect.h / scale));
+        var k = Math.min(1, 220 / Math.max(sw, sh));
+        var pw = Math.max(1, Math.round(sw * k));
+        var ph = Math.max(1, Math.round(sh * k));
+        if(previewCanvas.width !== pw || previewCanvas.height !== ph){
+          previewCanvas.width = pw; previewCanvas.height = ph;
+        }
+        pctx.clearRect(0, 0, pw, ph);
+        pctx.drawImage(img, sx, sy, sw, sh, 0, 0, pw, ph);
+        if(previewMeta) previewMeta.textContent = sw + ' × ' + sh + ' px';
+      }
       function fitAspectToBox(w, h, a){
         if(a > 0){
           if(w / h > a) w = h * a; else h = w / a;
@@ -186,15 +250,17 @@
         }
         setStatus('Selection: ' + Math.round(rect.w / scale) + ' × ' + Math.round(rect.h / scale) + ' px of ' +
           img.naturalWidth + ' × ' + img.naturalHeight + ' px.');
+        schedulePreview();
       }
       function cornerAt(x, y){
         var r = [
           ['nw', rect.x, rect.y], ['ne', rect.x + rect.w, rect.y],
           ['sw', rect.x, rect.y + rect.h], ['se', rect.x + rect.w, rect.y + rect.h]
         ];
+        var hit = HANDLE + 14; // generous touch target; drawn handle stays HANDLE
         for(var i = 0; i < r.length; i++){
           var dx = x - r[i][1], dy = y - r[i][2];
-          if(dx * dx + dy * dy <= (HANDLE + 6) * (HANDLE + 6)) return r[i][0];
+          if(dx * dx + dy * dy <= hit * hit) return r[i][0];
         }
         return null;
       }
@@ -249,21 +315,18 @@
       function endDrag(){ drag = null; }
       canvas.addEventListener('pointerup', endDrag);
       canvas.addEventListener('pointercancel', endDrag);
-      aspectSel.addEventListener('change', function(){
-        if(!img) return;
-        var cx = rect.x + rect.w / 2, cy = rect.y + rect.h / 2;
-        var w = dispW * 0.8, h = dispH * 0.8;
-        var d = fitAspectToBox(w, h, aspect());
-        rect.w = d.w; rect.h = d.h;
-        rect.x = cx - rect.w / 2; rect.y = cy - rect.h / 2;
-        clampRect();
-        draw();
-      });
+      for(var pi = 0; pi < presetBtns.length; pi++){
+        (function(btn){
+          btn.addEventListener('click', function(){ selectAspect(btn); });
+        })(presetBtns[pi]);
+      }
       function loadFile(f){
         if(!f || !/^image\//.test(f.type)){ setUploadStatus('Please choose an image file.', true); return; }
         if(srcURL) URL.revokeObjectURL(srcURL);
         srcURL = URL.createObjectURL(f);
         fileName = safeName(f.name);
+        var P = qp();
+        if(P) P.show({ title: 'Image Cropper', stage: 'Reading image…', percent: 10 });
         var probe = new Image();
         probe.onload = function(){
           img = probe;
@@ -275,10 +338,16 @@
           canvas.style.touchAction = 'none';
           centerRect();
           editor.hidden = false;
+          if(previewWrap) previewWrap.hidden = false;
           setUploadStatus('');
+          if(P) P.update(85, 'Preparing editor…');
           draw();
+          if(P) P.hide();
         };
-        probe.onerror = function(){ setUploadStatus('Could not read that image. Try another file.', true); };
+        probe.onerror = function(){
+          if(P) P.hide();
+          setUploadStatus('Could not read that image. Try another file.', true);
+        };
         probe.src = srcURL;
       }
       drop.addEventListener('click', function(e){ if(e.target !== fileInput) fileInput.click(); });
@@ -303,7 +372,10 @@
         var c = document.createElement('canvas');
         c.width = sw; c.height = sh;
         c.getContext('2d').drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
+        var P = qp();
+        if(P) P.show({ title: 'Image Cropper', stage: 'Cropping…', percent: 60 });
         c.toBlob(function(blob){
+          if(P) P.hide();
           if(!blob){ setStatus('Could not encode the cropped image.'); return; }
           var url = URL.createObjectURL(blob);
           var a = document.createElement('a');

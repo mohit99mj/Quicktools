@@ -6,11 +6,11 @@
 <title>Image Converter — JPG, PNG, WebP Online</title>
 <meta name="description" content="Convert images between JPG, PNG and WebP for free. Adjust quality for lossy formats, preview the result, then download.">
 <meta name="keywords" content="image converter, convert png to jpg, convert jpg to webp, photo converter, image format converter">
-<link rel="canonical" href="https://www.example.com/tools/image-converter/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/image-converter/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Image Converter — JPG, PNG, WebP Online">
 <meta property="og:description" content="Convert images between JPG, PNG and WebP for free. Adjust quality for lossy formats, preview the result, then download.">
-<meta property="og:url" content="https://www.example.com/tools/image-converter/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/image-converter/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Image Converter — JPG, PNG, WebP Online">
 <meta name="twitter:description" content="Convert images between JPG, PNG and WebP for free. Adjust quality for lossy formats, preview the result, then download.">
@@ -19,8 +19,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-image-converter .dropzone.drag{border-color:var(--accent);background:var(--accent-soft)}
+.tool-image-converter #iv-preview{margin:1rem 0}.tool-image-converter #iv-preview img{max-width:100%;max-height:320px;height:auto;border:1px solid var(--line);border-radius:var(--radius-sm);display:block;margin:0 auto}.tool-image-converter #iv-preview-meta{text-align:center}
 </style>
 </head>
 <body>
@@ -72,6 +75,10 @@
       </div>
       <p class="hint" id="iv-trans-hint" hidden>JPG does not support transparency — transparent areas will become white.</p>
       <div class="result" id="iv-status" aria-live="polite"></div>
+      <div id="iv-preview" hidden>
+        <img id="iv-preview-img" alt="Converted image preview">
+        <p class="hint" id="iv-preview-meta"></p>
+      </div>
       <div class="field">
         <button class="btn btn-primary" id="iv-download" disabled>Convert &amp; download</button>
       </div>
@@ -122,9 +129,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Converter","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/image-converter/","description":"Convert images between JPG, PNG and WebP for free. Adjust quality for lossy formats, preview the result, then download.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Converter","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/image-converter/","description":"Convert images between JPG, PNG and WebP for free. Adjust quality for lossy formats, preview the result, then download.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What happens to transparency when converting to JPG?","acceptedAnswer":{"@type":"Answer","text":"JPG does not support transparency. Transparent areas become white (the canvas background) when you convert a PNG or WebP to JPG."}},{"@type":"Question","name":"Which format should I choose?","acceptedAnswer":{"@type":"Answer","text":"JPG for photos and maximum compatibility, PNG when you need transparency or pixel-perfect graphics, WebP for the best size-to-quality ratio in modern browsers."}},{"@type":"Question","name":"Does converting change the image size in pixels?","acceptedAnswer":{"@type":"Answer","text":"No. Conversion keeps the original dimensions; only the file format (and quality for JPG/WebP) changes. Images over 4000 px on the longest side are capped at that size."}},{"@type":"Question","name":"Is there a limit on how many images I can convert?","acceptedAnswer":{"@type":"Answer","text":"No limit — convert one image at a time, as many times as you like, all free."}},{"@type":"Question","name":"Are my files uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Conversion happens with a canvas in your browser, so your files never leave your device."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://www.example.com/#cat-image-tools"},{"@type":"ListItem","position":3,"name":"Image Converter","item":"https://www.example.com/tools/image-converter/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-image-tools"},{"@type":"ListItem","position":3,"name":"Image Converter","item":"https://mohit99mj.github.io/Quicktools/tools/image-converter/"}]}</script>
 <script>
 
     (function(){
@@ -133,9 +142,24 @@
       var drop = $('#iv-drop'), fileInput = $('#iv-file'), formatSel = $('#iv-format');
       var quality = $('#iv-quality'), qualityOut = $('#iv-quality-out'), qualityField = $('#iv-quality-field');
       var transHint = $('#iv-trans-hint'), statusEl = $('#iv-status'), dl = $('#iv-download');
+      var preview = $('#iv-preview'), previewImg = $('#iv-preview-img'), previewMeta = $('#iv-preview-meta');
       if(!drop || !fileInput || !formatSel || !quality || !statusEl || !dl) return;
       var MAX = 4000;
       var img = null, srcURL = null, outURL = null, fileName = 'image', hasAlpha = false;
+      var converted = false, pendingMime = '', pendingName = '';
+      function qp(){ return (typeof window !== 'undefined' && window.QTProgress && typeof window.QTProgress.show === 'function') ? window.QTProgress : null; }
+      function fmtBytes(b){
+        if(!(b > 0)) return '';
+        var u = ['B', 'KB', 'MB', 'GB'], i = 0, n = b;
+        while(n >= 1024 && i < u.length - 1){ n /= 1024; i++; }
+        return (n >= 100 ? Math.round(n) : n.toFixed(1)) + ' ' + u[i];
+      }
+      function resetResult(){
+        if(outURL){ URL.revokeObjectURL(outURL); outURL = null; }
+        converted = false; pendingMime = ''; pendingName = '';
+        if(preview) preview.hidden = true;
+        dl.textContent = 'Convert & download';
+      }
 
       function setStatus(msg, isError){
         statusEl.textContent = msg || '';
@@ -167,6 +191,7 @@
         qualityField.style.display = isJpg || formatSel.value === 'image/webp' ? '' : 'none';
         transHint.hidden = !(isJpg && hasAlpha);
         dl.disabled = !img;
+        resetResult();
         if(img) setStatus('Loaded ' + img.naturalWidth + ' × ' + img.naturalHeight + ' px. Ready to convert.');
       }
       function loadFile(f){
@@ -174,13 +199,19 @@
         if(srcURL) URL.revokeObjectURL(srcURL);
         srcURL = URL.createObjectURL(f);
         fileName = safeName(f.name);
+        var P = qp();
+        if(P) P.show({ title: 'Image Converter', stage: 'Reading image…', percent: 10 });
         var probe = new Image();
         probe.onload = function(){
           img = probe;
           detectAlpha();
+          if(P) P.hide();
           refresh();
         };
-        probe.onerror = function(){ setStatus('Could not read that image. Try another file.', true); };
+        probe.onerror = function(){
+          if(P) P.hide();
+          setStatus('Could not read that image. Try another file.', true);
+        };
         probe.src = srcURL;
       }
       drop.addEventListener('click', function(e){ if(e.target !== fileInput) fileInput.click(); });
@@ -197,9 +228,20 @@
       formatSel.addEventListener('change', refresh);
       quality.addEventListener('input', function(){
         qualityOut.textContent = Math.round(parseFloat(quality.value) * 100) + '%';
+        resetResult();
       });
       dl.addEventListener('click', function(){
         if(!img) return;
+        if(converted && outURL){
+          var a = document.createElement('a');
+          a.href = outURL;
+          a.download = pendingName;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          setStatus('Download started — ' + pendingName + '.');
+          return;
+        }
         var mime = formatSel.value;
         var w = img.naturalWidth, h = img.naturalHeight;
         var s = Math.min(1, MAX / Math.max(w, h));
@@ -209,17 +251,21 @@
         var ctx = c.getContext('2d');
         if(mime === 'image/jpeg'){ ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, w, h); }
         ctx.drawImage(img, 0, 0, w, h);
+        var P = qp();
+        if(P) P.show({ title: 'Image Converter', stage: 'Converting…', percent: 50 });
         c.toBlob(function(blob){
+          if(P) P.hide();
           if(!blob){ setStatus('This browser could not encode that format.', true); return; }
           if(outURL) URL.revokeObjectURL(outURL);
           outURL = URL.createObjectURL(blob);
-          var a = document.createElement('a');
-          a.href = outURL;
-          a.download = fileName + '-converted.' + extFor(mime);
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          setStatus('Converted to ' + extFor(mime).toUpperCase() + ' — download started.');
+          converted = true;
+          pendingMime = mime;
+          pendingName = fileName + '-converted.' + extFor(mime);
+          if(previewImg) previewImg.src = outURL;
+          if(previewMeta) previewMeta.textContent = extFor(mime).toUpperCase() + ' · ' + w + ' × ' + h + ' px · ' + fmtBytes(blob.size);
+          if(preview) preview.hidden = false;
+          dl.textContent = 'Download ' + extFor(mime).toUpperCase();
+          setStatus('Preview ready — check the result above, then tap Download.');
         }, mime, parseFloat(quality.value) || 0.9);
       });
       window.addEventListener('pagehide', function(){

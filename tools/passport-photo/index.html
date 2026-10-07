@@ -6,11 +6,11 @@
 <title>Passport Photo Maker — Free ID Photo Tool</title>
 <meta name="description" content="Make passport and ID photos online free. Choose 35×45mm, 2×2in or 50×50mm, frame your face, zoom, and download the exact-size photo.">
 <meta name="keywords" content="passport photo maker, passport photo online, id photo maker, 35x45 photo, 2x2 photo">
-<link rel="canonical" href="https://www.example.com/tools/passport-photo/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/passport-photo/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Passport Photo Maker — Free ID Photo Tool">
 <meta property="og:description" content="Make passport and ID photos online free. Choose 35×45mm, 2×2in or 50×50mm, frame your face, zoom, and download the exact-size photo.">
-<meta property="og:url" content="https://www.example.com/tools/passport-photo/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/passport-photo/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Passport Photo Maker — Free ID Photo Tool">
 <meta name="twitter:description" content="Make passport and ID photos online free. Choose 35×45mm, 2×2in or 50×50mm, frame your face, zoom, and download the exact-size photo.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-passport-photo .dropzone.drag{border-color:var(--accent);background:var(--accent-soft)}.tool-passport-photo .pp-canvas-wrap{text-align:center;margin:0.75rem 0}.tool-passport-photo #pp-canvas{max-width:100%;height:auto;border:1px solid var(--line);border-radius:var(--radius-sm);cursor:grab;touch-action:none;background:#ffffff}
 </style>
@@ -127,9 +129,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Passport Photo Maker","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/passport-photo/","description":"Make passport and ID photos online free. Choose 35×45mm, 2×2in or 50×50mm, frame your face, zoom, and download the exact-size photo.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Passport Photo Maker","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/passport-photo/","description":"Make passport and ID photos online free. Choose 35×45mm, 2×2in or 50×50mm, frame your face, zoom, and download the exact-size photo.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What sizes does this passport photo maker support?","acceptedAnswer":{"@type":"Answer","text":"Three presets: 35×45mm (413×531 px @ 300 dpi, used by India, the EU and many others), 2×2in (600×600 px, US passport) and 50×50mm (591×591 px)."}},{"@type":"Question","name":"Will my photo be accepted for a real passport?","acceptedAnswer":{"@type":"Answer","text":"The tool produces the exact required pixel size, but acceptance also depends on official photo rules — plain background, neutral expression, face size ratios and recency. Check your issuing authority's guidelines."}},{"@type":"Question","name":"What kind of photo works best?","acceptedAnswer":{"@type":"Answer","text":"A recent, sharp, front-facing headshot taken in even light against a plain white or light background, with your face clearly visible and centered."}},{"@type":"Question","name":"Can I print the photo at the right size?","acceptedAnswer":{"@type":"Answer","text":"Yes. The download is rendered at the preset's pixel size at 300 dpi, so printing software set to \"actual size\" produces the correct physical dimensions."}},{"@type":"Question","name":"Are my photos uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Your photo is processed in your browser and never leaves your device."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://www.example.com/#cat-image-tools"},{"@type":"ListItem","position":3,"name":"Passport Photo Maker","item":"https://www.example.com/tools/passport-photo/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-image-tools"},{"@type":"ListItem","position":3,"name":"Passport Photo Maker","item":"https://mohit99mj.github.io/Quicktools/tools/passport-photo/"}]}</script>
 <script>
 var LOGIC={idSize:function(preset) {
     var sizes = {
@@ -152,6 +156,7 @@ var LOGIC={idSize:function(preset) {
       var MAX = 4000;
       var img = null, srcURL = null, fileName = 'photo';
       var zoomLevel = 1, offX = 0, offY = 0, dragging = false, dragSX = 0, dragSY = 0, dragOX = 0, dragOY = 0;
+      function qp(){ return (typeof window !== 'undefined' && window.QTProgress && typeof window.QTProgress.show === 'function') ? window.QTProgress : null; }
 
       function setUploadStatus(msg, isError){
         uploadStatus.textContent = msg || '';
@@ -222,6 +227,8 @@ var LOGIC={idSize:function(preset) {
         if(srcURL) URL.revokeObjectURL(srcURL);
         srcURL = URL.createObjectURL(f);
         fileName = safeName(f.name);
+        var P = qp();
+        if(P) P.show({ title: 'Passport Photo', stage: 'Reading photo…', percent: 10 });
         var probe = new Image();
         probe.onload = function(){
           if(Math.max(probe.naturalWidth, probe.naturalHeight) > MAX){
@@ -234,9 +241,14 @@ var LOGIC={idSize:function(preset) {
           offX = 0; offY = 0;
           editor.hidden = false;
           canvas.style.touchAction = 'none';
+          if(P) P.update(85, 'Preparing preview…');
           draw();
+          if(P) P.hide();
         };
-        probe.onerror = function(){ setUploadStatus('Could not read that image. Try another file.', true); };
+        probe.onerror = function(){
+          if(P) P.hide();
+          setUploadStatus('Could not read that image. Try another file.', true);
+        };
         probe.src = srcURL;
       }
       drop.addEventListener('click', function(e){ if(e.target !== fileInput) fileInput.click(); });
