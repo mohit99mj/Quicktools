@@ -210,7 +210,7 @@
         }
         fetchFileFn = FF.fetchFile;
         ffmpeg = FF.createFFmpeg({
-          corePath: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.11.0/dist/ffmpeg-core.js',
+          corePath: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core-st@0.11.1/dist/ffmpeg-core.js',
           logger: function(){}
         });
         ffmpeg.setProgress(function(p){ progressCb(p && p.ratio ? p.ratio : 0); });
