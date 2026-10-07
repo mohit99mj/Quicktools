@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Passport Photo Maker — Free ID Photo Tool</title>
+<meta name="description" content="Make passport and ID photos online free. Choose 35×45mm, 2×2in or 50×50mm, frame your face, zoom, and download the exact-size photo.">
+<meta name="keywords" content="passport photo maker, passport photo online, id photo maker, 35x45 photo, 2x2 photo">
+<link rel="canonical" href="https://www.example.com/tools/passport-photo/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Passport Photo Maker — Free ID Photo Tool">
+<meta property="og:description" content="Make passport and ID photos online free. Choose 35×45mm, 2×2in or 50×50mm, frame your face, zoom, and download the exact-size photo.">
+<meta property="og:url" content="https://www.example.com/tools/passport-photo/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Passport Photo Maker — Free ID Photo Tool">
+<meta name="twitter:description" content="Make passport and ID photos online free. Choose 35×45mm, 2×2in or 50×50mm, frame your face, zoom, and download the exact-size photo.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-passport-photo .dropzone.drag{border-color:var(--accent);background:var(--accent-soft)}.tool-passport-photo .pp-canvas-wrap{text-align:center;margin:0.75rem 0}.tool-passport-photo #pp-canvas{max-width:100%;height:auto;border:1px solid var(--line);border-radius:var(--radius-sm);cursor:grab;touch-action:none;background:#ffffff}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li aria-current="page">Passport Photo Maker</li></ol></nav>
+<h1>Passport Photo Maker</h1>
+<div class="tool-body-intro">
+<p>Turn any recent headshot into a correctly sized passport or ID photo. Pick the official size for your document, frame your face with the zoom slider, and download a photo at the exact required pixels.</p><p>Tip: official rules vary by country — most require a plain light background, a neutral expression and no headwear. This tool sizes the photo; always check your issuing authority's photo rules before submitting.</p>
+</div>
+<section class="tool-section tool-passport-photo" aria-label="Passport Photo Maker">
+
+    <div class="card tool-panel">
+      <p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+      <div class="dropzone" id="pp-drop" tabindex="0" role="button" aria-label="Upload a photo for your ID photo">
+        <svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#camera"/></svg>
+        <p><strong>Drop a headshot here</strong> or <span class="kbd">browse</span></p>
+        <p class="hint">JPG or PNG. Use a clear, front-facing photo with a plain background.</p>
+        <input type="file" id="pp-file" class="visually-hidden" accept="image/*" aria-label="Choose a photo file">
+      </div>
+      <div class="field">
+        <label class="label" for="pp-preset">ID size</label>
+        <select class="select" id="pp-preset">
+          <option value="35x45mm">35 × 45 mm — India / EU passport (413 × 531 px)</option>
+          <option value="2x2in">2 × 2 in — US passport (600 × 600 px)</option>
+          <option value="50x50mm">50 × 50 mm (591 × 591 px)</option>
+        </select>
+      </div>
+      <div id="pp-editor" hidden>
+        <div class="pp-canvas-wrap"><canvas id="pp-canvas" aria-label="ID photo preview at exact size"></canvas></div>
+        <div class="field">
+          <label class="label" for="pp-zoom">Zoom: <output id="pp-zoom-out" for="pp-zoom">100%</output></label>
+          <input class="input" type="range" id="pp-zoom" min="1" max="3" step="0.01" value="1">
+        </div>
+        <p class="hint">Drag the preview to reposition your face. The preview shows the exact final pixel size.</p>
+        <div class="result" id="pp-status" aria-live="polite"></div>
+        <div class="field">
+          <button class="btn btn-primary" id="pp-download">Download photo</button>
+        </div>
+      </div>
+      <div class="result" id="pp-upload-status" aria-live="polite"></div>
+      <p class="hint">This tool sets the correct size; it cannot verify official photo rules. Check your issuing authority's requirements (background, face size, recency) before submitting.</p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Choose your ID size: 35×45mm, 2×2in or 50×50mm.</li>
+<li>Upload a clear front-facing photo with a plain background.</li>
+<li>Drag to reposition and use the zoom slider to frame your head and shoulders.</li>
+<li>Click &quot;Download photo&quot; to save the exact-size image.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>What sizes does this passport photo maker support?</summary><div class="faq-a"><p>Three presets: 35×45mm (413×531 px @ 300 dpi, used by India, the EU and many others), 2×2in (600×600 px, US passport) and 50×50mm (591×591 px).</p></div></details>
+<details><summary>Will my photo be accepted for a real passport?</summary><div class="faq-a"><p>The tool produces the exact required pixel size, but acceptance also depends on official photo rules — plain background, neutral expression, face size ratios and recency. Check your issuing authority&#39;s guidelines.</p></div></details>
+<details><summary>What kind of photo works best?</summary><div class="faq-a"><p>A recent, sharp, front-facing headshot taken in even light against a plain white or light background, with your face clearly visible and centered.</p></div></details>
+<details><summary>Can I print the photo at the right size?</summary><div class="faq-a"><p>Yes. The download is rendered at the preset&#39;s pixel size at 300 dpi, so printing software set to &quot;actual size&quot; produces the correct physical dimensions.</p></div></details>
+<details><summary>Are my photos uploaded anywhere?</summary><div class="faq-a"><p>No. Your photo is processed in your browser and never leaves your device.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../image-cropper/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#crop"></use></svg><span class="tl-name">Image Cropper</span><span class="tl-desc">Image Tools</span></a>
+<a class="tool-card" href="../image-resizer/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#maximize"></use></svg><span class="tl-name">Image Resizer</span><span class="tl-desc">Image Tools</span></a>
+<a class="tool-card" href="../image-compressor/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#minimize-2"></use></svg><span class="tl-name">Image Compressor</span><span class="tl-desc">Image Tools</span></a>
+<a class="tool-card" href="../background-remover/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#sparkles"></use></svg><span class="tl-name">Background Remover</span><span class="tl-desc">Image Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Passport Photo Maker","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/passport-photo/","description":"Make passport and ID photos online free. Choose 35×45mm, 2×2in or 50×50mm, frame your face, zoom, and download the exact-size photo.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What sizes does this passport photo maker support?","acceptedAnswer":{"@type":"Answer","text":"Three presets: 35×45mm (413×531 px @ 300 dpi, used by India, the EU and many others), 2×2in (600×600 px, US passport) and 50×50mm (591×591 px)."}},{"@type":"Question","name":"Will my photo be accepted for a real passport?","acceptedAnswer":{"@type":"Answer","text":"The tool produces the exact required pixel size, but acceptance also depends on official photo rules — plain background, neutral expression, face size ratios and recency. Check your issuing authority's guidelines."}},{"@type":"Question","name":"What kind of photo works best?","acceptedAnswer":{"@type":"Answer","text":"A recent, sharp, front-facing headshot taken in even light against a plain white or light background, with your face clearly visible and centered."}},{"@type":"Question","name":"Can I print the photo at the right size?","acceptedAnswer":{"@type":"Answer","text":"Yes. The download is rendered at the preset's pixel size at 300 dpi, so printing software set to \"actual size\" produces the correct physical dimensions."}},{"@type":"Question","name":"Are my photos uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Your photo is processed in your browser and never leaves your device."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://www.example.com/#cat-image-tools"},{"@type":"ListItem","position":3,"name":"Passport Photo Maker","item":"https://www.example.com/tools/passport-photo/"}]}</script>
+<script>
+var LOGIC={idSize:function(preset) {
+    var sizes = {
+      '35x45mm': { w: 413, h: 531, label: '35 × 45 mm (413 × 531 px @ 300 dpi)' },
+      '2x2in': { w: 600, h: 600, label: '2 × 2 in (600 × 600 px)' },
+      '50x50mm': { w: 591, h: 591, label: '50 × 50 mm (591 × 591 px)' },
+    };
+    return sizes[preset] || sizes['35x45mm'];
+  }};
+
+    (function(){
+      'use strict';
+      function $(s){ return document.querySelector(s); }
+      var drop = $('#pp-drop'), fileInput = $('#pp-file'), presetSel = $('#pp-preset');
+      var editor = $('#pp-editor'), canvas = $('#pp-canvas');
+      var zoom = $('#pp-zoom'), zoomOut = $('#pp-zoom-out');
+      var uploadStatus = $('#pp-upload-status'), statusEl = $('#pp-status'), dl = $('#pp-download');
+      if(!drop || !fileInput || !presetSel || !editor || !canvas || !zoom || !dl) return;
+      var ctx = canvas.getContext('2d');
+      var MAX = 4000;
+      var img = null, srcURL = null, fileName = 'photo';
+      var zoomLevel = 1, offX = 0, offY = 0, dragging = false, dragSX = 0, dragSY = 0, dragOX = 0, dragOY = 0;
+
+      function setUploadStatus(msg, isError){
+        uploadStatus.textContent = msg || '';
+        uploadStatus.className = 'result' + (isError ? ' error' : '');
+      }
+      function setStatus(msg){
+        if(statusEl) statusEl.textContent = msg || '';
+      }
+      function safeName(s){
+        return String(s).replace(/\.[a-zA-Z0-9]+$/, '').replace(/[^a-zA-Z0-9._-]+/g, '_').slice(0, 80) || 'photo';
+      }
+      function size(){
+        var s = LOGIC.idSize(presetSel.value);
+        return { w: s.w, h: s.h, label: s.label };
+      }
+      function draw(){
+        if(!img) return;
+        var s = size();
+        canvas.width = s.w; canvas.height = s.h;
+        var imgAspect = img.naturalWidth / img.naturalHeight;
+        var targetAspect = s.w / s.h;
+        var bw, bh;
+        if(imgAspect > targetAspect){ bh = s.h; bw = bh * imgAspect; }
+        else { bw = s.w; bh = bw / imgAspect; }
+        bw *= zoomLevel; bh *= zoomLevel;
+        var maxOX = Math.max(0, (bw - s.w) / 2), maxOY = Math.max(0, (bh - s.h) / 2);
+        offX = Math.max(-maxOX, Math.min(maxOX, offX));
+        offY = Math.max(-maxOY, Math.min(maxOY, offY));
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, s.w, s.h);
+        ctx.drawImage(img, (s.w - bw) / 2 + offX, (s.h - bh) / 2 + offY, bw, bh);
+        setStatus('Preview at exact size: ' + s.label + '.');
+      }
+      function posOf(e){
+        var r = canvas.getBoundingClientRect();
+        return { x: (e.clientX - r.left) * (canvas.width / r.width), y: (e.clientY - r.top) * (canvas.height / r.height) };
+      }
+      canvas.addEventListener('pointerdown', function(e){
+        if(!img) return;
+        dragging = true;
+        canvas.setPointerCapture(e.pointerId);
+        dragSX = e.clientX; dragSY = e.clientY;
+        dragOX = offX; dragOY = offY;
+      });
+      canvas.addEventListener('pointermove', function(e){
+        if(!dragging || !img) return;
+        e.preventDefault();
+        var r = canvas.getBoundingClientRect();
+        var kx = canvas.width / r.width, ky = canvas.height / r.height;
+        offX = dragOX + (e.clientX - dragSX) * kx;
+        offY = dragOY + (e.clientY - dragSY) * ky;
+        draw();
+      });
+      function endDrag(){ dragging = false; }
+      canvas.addEventListener('pointerup', endDrag);
+      canvas.addEventListener('pointercancel', endDrag);
+      zoom.addEventListener('input', function(){
+        zoomLevel = parseFloat(zoom.value) || 1;
+        zoomOut.textContent = Math.round(zoomLevel * 100) + '%';
+        draw();
+      });
+      presetSel.addEventListener('change', function(){
+        offX = 0; offY = 0;
+        draw();
+      });
+      function loadFile(f){
+        if(!f || !/^image\//.test(f.type)){ setUploadStatus('Please choose an image file.', true); return; }
+        if(srcURL) URL.revokeObjectURL(srcURL);
+        srcURL = URL.createObjectURL(f);
+        fileName = safeName(f.name);
+        var probe = new Image();
+        probe.onload = function(){
+          if(Math.max(probe.naturalWidth, probe.naturalHeight) > MAX){
+            setUploadStatus('That image is very large and was scaled down for smooth editing.', false);
+          } else {
+            setUploadStatus('', false);
+          }
+          img = probe;
+          zoomLevel = 1; zoom.value = 1; zoomOut.textContent = '100%';
+          offX = 0; offY = 0;
+          editor.hidden = false;
+          canvas.style.touchAction = 'none';
+          draw();
+        };
+        probe.onerror = function(){ setUploadStatus('Could not read that image. Try another file.', true); };
+        probe.src = srcURL;
+      }
+      drop.addEventListener('click', function(e){ if(e.target !== fileInput) fileInput.click(); });
+      drop.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); fileInput.click(); } });
+      drop.addEventListener('dragover', function(e){ e.preventDefault(); drop.classList.add('drag'); });
+      drop.addEventListener('dragleave', function(){ drop.classList.remove('drag'); });
+      drop.addEventListener('drop', function(e){
+        e.preventDefault(); drop.classList.remove('drag');
+        if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+      });
+      fileInput.addEventListener('change', function(){
+        if(fileInput.files && fileInput.files[0]) loadFile(fileInput.files[0]);
+      });
+      dl.addEventListener('click', function(){
+        if(!img) return;
+        var s = size();
+        var out = document.createElement('canvas');
+        out.width = s.w; out.height = s.h;
+        out.getContext('2d').drawImage(canvas, 0, 0);
+        out.toBlob(function(blob){
+          if(!blob){ setStatus('Could not encode the photo.'); return; }
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = fileName + '-passport-' + s.w + 'x' + s.h + '.jpg';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+          setStatus('Downloaded at ' + s.label + '.');
+        }, 'image/jpeg', 0.95);
+      });
+      window.addEventListener('pagehide', function(){
+        if(srcURL) URL.revokeObjectURL(srcURL);
+      });
+    })();
+</script>
+</body>
+</html>
