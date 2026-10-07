@@ -6,11 +6,11 @@
 <title>PDF Editor — Rearrange &amp; Rotate PDF Pages</title>
 <meta name="description" content="Free online PDF editor: delete, reorder and rotate PDF pages in your browser. No sign-up, no uploads — download the edited PDF instantly.">
 <meta name="keywords" content="pdf editor, edit pdf online, rotate pdf pages, rearrange pdf pages">
-<link rel="canonical" href="https://www.example.com/tools/pdf-editor/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/pdf-editor/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="PDF Editor — Rearrange &amp; Rotate PDF Pages">
 <meta property="og:description" content="Free online PDF editor: delete, reorder and rotate PDF pages in your browser. No sign-up, no uploads — download the edited PDF instantly.">
-<meta property="og:url" content="https://www.example.com/tools/pdf-editor/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/pdf-editor/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PDF Editor — Rearrange &amp; Rotate PDF Pages">
 <meta name="twitter:description" content="Free online PDF editor: delete, reorder and rotate PDF pages in your browser. No sign-up, no uploads — download the edited PDF instantly.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-pdf-editor .file-name{font-weight:600;margin:1rem 0 .25rem}
 .tool-pdf-editor .dropzone.drag-over{outline:2px dashed var(--accent);outline-offset:4px}
@@ -117,9 +119,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"PDF Editor","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/pdf-editor/","description":"Free online PDF editor: delete, reorder and rotate PDF pages in your browser. No sign-up, no uploads — download the edited PDF instantly.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"PDF Editor","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/pdf-editor/","description":"Free online PDF editor: delete, reorder and rotate PDF pages in your browser. No sign-up, no uploads — download the edited PDF instantly.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I edit the text inside the PDF?","acceptedAnswer":{"@type":"Answer","text":"No. This editor works at the page level — it deletes, reorders and rotates whole pages. It cannot change text, images or other content on a page."}},{"@type":"Question","name":"Is the rotation permanent in the saved file?","acceptedAnswer":{"@type":"Answer","text":"Yes. Rotations are written into the new PDF, so the pages open correctly rotated in any PDF reader."}},{"@type":"Question","name":"Does editing change my original file?","acceptedAnswer":{"@type":"Answer","text":"No. Your original file stays untouched on your device; you download a separate new PDF with your changes."}},{"@type":"Question","name":"Are my files uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Your files never leave your device — all editing runs locally in your browser."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://www.example.com/#cat-pdf-tools"},{"@type":"ListItem","position":3,"name":"PDF Editor","item":"https://www.example.com/tools/pdf-editor/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-pdf-tools"},{"@type":"ListItem","position":3,"name":"PDF Editor","item":"https://mohit99mj.github.io/Quicktools/tools/pdf-editor/"}]}</script>
 <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
 <script>
@@ -134,6 +138,18 @@
         el.textContent = msg || '';
         el.className = isError ? 'result error' : 'result';
       }
+      function fmtSize(bytes){
+        if(bytes < 1024){ return bytes + ' B'; }
+        var kb = bytes / 1024;
+        if(kb < 1024){ return kb.toFixed(1) + ' KB'; }
+        return (kb / 1024).toFixed(2) + ' MB';
+      }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
+      function pShim(on){ if(window.QTProgress){ if(on){ QTProgress.shimmer(); } else { QTProgress.shimmerClear(); } } }
       function downloadBlob(blob, name){
         var url = URL.createObjectURL(blob);
         var a = document.createElement('a');
@@ -181,9 +197,11 @@
         (function next(){
           var item = queue.shift();
           if(!item){
+            pHide();
             setStatus(pages.length + ' page(s). Delete, move or rotate pages, then click Save PDF.');
             return;
           }
+          pUpd(Math.round(((pages.length - queue.length) / Math.max(1, pages.length)) * 100), 'Rendering thumbnail ' + (pages.length - queue.length) + ' of ' + pages.length + '…');
           pdfDoc.getPage(item.pg.srcIndex + 1).then(function(page){
             var v0 = page.getViewport({ scale: 1 });
             var scale = 170 / v0.width;
@@ -243,6 +261,7 @@
               next();
             });
           }).catch(function(err){
+            pHide();
             setStatus('Could not render a page thumbnail: ' + (err && err.message ? err.message : 'unknown error'), true);
           });
         })();
@@ -250,7 +269,11 @@
 
       function loadFile(f){
         setStatus('Loading libraries…');
+        pShow({ title: 'Opening PDF…', stage: 'Loading libraries…' });
+        pShim(true);
         waitForLibs(['pdfjsLib', 'PDFLib'], function(){
+          pShim(false);
+          pShow({ title: 'Opening PDF…', stage: 'Opening "' + f.name + '"…', percent: 10 });
           if(progress){ progress.hidden = false; progress.value = 10; }
           pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER;
           setStatus('Opening "' + f.name + '"…');
@@ -274,11 +297,14 @@
               if(progress){ progress.hidden = true; }
               renderGrid();
             } catch(err){
+              pHide();
               setStatus('Could not open this PDF: ' + (err && err.message ? err.message : 'the file may be corrupted or password-protected.'), true);
               if(progress){ progress.hidden = true; }
             }
           })();
         }, function(){
+          pShim(false);
+          pHide();
           setStatus('The required libraries failed to load. Check your connection and reload the page.', true);
         });
       }
@@ -324,6 +350,7 @@
         saveBtn.addEventListener('click', function(){
           if(!pages.length || !pdfBytes){ return; }
           setStatus('Building your edited PDF…');
+          pShow({ title: 'Saving edited PDF…', stage: 'Building your edited PDF…', percent: 50 });
           saveBtn.disabled = true;
           if(progress){ progress.hidden = false; progress.value = 50; }
           (async function(){
@@ -341,12 +368,17 @@
                 out.addPage(cp);
               });
               var bytes = await out.save();
+              pUpd(100, 'Building download…');
               downloadBlob(new Blob([bytes], { type: 'application/pdf' }), baseName(pdfName) + '-edited.pdf');
               if(progress){ progress.value = 100; }
+              pSum($('pe-status'), '<strong>PDF saved</strong> — ' + pages.length + ' page' + (pages.length === 1 ? '' : 's') + ' • ' + fmtSize(pdfBytes.length) + ' → ' + fmtSize(bytes.length));
+              pHide();
               setStatus('Done — "' + baseName(pdfName) + '-edited.pdf" downloaded (' + pages.length + ' page' + (pages.length === 1 ? '' : 's') + ').');
             } catch(err){
+              pHide();
               setStatus('Could not save the PDF: ' + (err && err.message ? err.message : 'unknown error'), true);
             }
+            pHide();
             updateSave();
             if(progress){ progress.hidden = true; }
           })();
