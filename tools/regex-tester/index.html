@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regex Tester — Test Regular Expressions Live</title>
+<meta name="description" content="Free regex tester: test regular expressions with live match highlighting, groups, counts and replace preview. Runs in your browser.">
+<meta name="keywords" content="regex tester, regular expression tester, regex online, test regex, javascript regex">
+<link rel="canonical" href="https://www.example.com/tools/regex-tester/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Regex Tester — Test Regular Expressions Live">
+<meta property="og:description" content="Free regex tester: test regular expressions with live match highlighting, groups, counts and replace preview. Runs in your browser.">
+<meta property="og:url" content="https://www.example.com/tools/regex-tester/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Regex Tester — Test Regular Expressions Live">
+<meta name="twitter:description" content="Free regex tester: test regular expressions with live match highlighting, groups, counts and replace preview. Runs in your browser.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+
+    .tool-regex-tester .rx-mono{ font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; }
+    .tool-regex-tester .rx-area{ min-height:120px; }
+    .tool-regex-tester .rx-flags{ border:1px solid var(--line); border-radius:var(--radius-sm); padding:8px 12px; margin:0 0 12px; display:flex; flex-wrap:wrap; gap:4px 16px; }
+    .tool-regex-tester .rx-flags legend{ padding:0 6px; }
+    .tool-regex-tester .rx-flag{ display:inline-flex; align-items:center; gap:6px; font-family:ui-monospace,Menlo,Consolas,monospace; cursor:pointer; min-height:32px; }
+    .tool-regex-tester .rx-prev{ white-space:pre-wrap; word-break:break-word; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-sm); padding:12px; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:13px; max-height:240px; overflow:auto; margin:8px 0 12px; }
+    .tool-regex-tester .rx-prev mark{ background:var(--accent-soft); color:inherit; border-radius:4px; padding:0 1px; }
+    .tool-regex-tester .rx-list{ margin:0 0 12px; padding-left:24px; font-size:13px; }
+    .tool-regex-tester .rx-list li{ margin-bottom:6px; word-break:break-word; }
+    .tool-regex-tester .rx-list code{ background:var(--surface); border:1px solid var(--line); border-radius:4px; padding:1px 6px; }
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li><li aria-current="page">Regex Tester</li></ol></nav>
+<h1>Regex Tester</h1>
+<div class="tool-body-intro">
+<p>Test JavaScript regular expressions against your text with live results. See every match with its position and capture groups, a total match count, and a live preview of find-and-replace. Input is capped at 50,000 characters and 200 matches to keep the page responsive.</p><p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+</div>
+<section class="tool-section tool-regex-tester" aria-label="Regex Tester">
+
+    <div class="card tool-panel">
+      <div class="field">
+        <label class="label" for="rx-pattern">Pattern</label>
+        <input class="input rx-mono" id="rx-pattern" type="text" spellcheck="false" placeholder="e.g. (\w+)@(\w+\.\w+)">
+      </div>
+      <fieldset class="rx-flags">
+        <legend class="label">Flags</legend>
+        <label class="rx-flag"><input type="checkbox" id="rx-g" checked> g <span class="hint">global</span></label>
+        <label class="rx-flag"><input type="checkbox" id="rx-i"> i <span class="hint">ignore case</span></label>
+        <label class="rx-flag"><input type="checkbox" id="rx-m"> m <span class="hint">multiline</span></label>
+        <label class="rx-flag"><input type="checkbox" id="rx-s"> s <span class="hint">dotAll</span></label>
+        <label class="rx-flag"><input type="checkbox" id="rx-u"> u <span class="hint">unicode</span></label>
+        <label class="rx-flag"><input type="checkbox" id="rx-y"> y <span class="hint">sticky</span></label>
+      </fieldset>
+      <div class="field">
+        <label class="label" for="rx-text">Test string</label>
+        <textarea class="textarea rx-mono rx-area" id="rx-text" spellcheck="false" placeholder="Paste the text to test against"></textarea>
+      </div>
+      <div class="result" id="rx-out" aria-live="polite"></div>
+      <div class="field">
+        <label class="label" for="rx-repl">Replacement <span class="hint">(supports $1, $2, $&amp;, $$)</span></label>
+        <input class="input rx-mono" id="rx-repl" type="text" spellcheck="false" placeholder="e.g. [$1]">
+      </div>
+      <div class="field">
+        <label class="label" for="rx-replout">Replace preview</label>
+        <textarea class="textarea rx-mono rx-area" id="rx-replout" spellcheck="false" readonly placeholder="Replace preview appears here"></textarea>
+      </div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Type your regular expression in the pattern field.</li>
+<li>Tick the flags you need (g, i, m, s, u, y).</li>
+<li>Paste your test string — matches highlight live with indexes and groups.</li>
+<li>Optionally enter a replacement and preview the replace result.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Which regex flavor does this tester use?</summary><div class="faq-a"><p>JavaScript (the same engine as your browser). Patterns you validate here work directly in JS code, and flags g, i, m, s, u, y are supported.</p></div></details>
+<details><summary>How do capture groups work?</summary><div class="faq-a"><p>Wrap part of the pattern in parentheses, e.g. (\d+)-(\d+). Each match lists its groups in order, so you can see exactly what each group captured.</p></div></details>
+<details><summary>What replacement patterns can I use?</summary><div class="faq-a"><p>Standard JavaScript replacement tokens: $1, $2 for capture groups, $&amp; for the whole match, $$ for a literal dollar sign.</p></div></details>
+<details><summary>Why is my text limited to 50,000 characters?</summary><div class="faq-a"><p>Very long inputs combined with complex patterns can freeze a page (catastrophic backtracking). The cap keeps the tester fast and responsive.</p></div></details>
+<details><summary>What does the &quot;s&quot; flag do?</summary><div class="faq-a"><p>The s (dotAll) flag makes . match newline characters too, so a pattern like a.+b can span multiple lines.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../json-formatter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#braces"></use></svg><span class="tl-name">JSON Formatter</span><span class="tl-desc">Developer Tools</span></a>
+<a class="tool-card" href="../url-encoder/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#link"></use></svg><span class="tl-name">URL Encoder</span><span class="tl-desc">Developer Tools</span></a>
+<a class="tool-card" href="../hash-generator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#hash"></use></svg><span class="tl-name">Hash Generator</span><span class="tl-desc">Developer Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Regex Tester","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/regex-tester/","description":"Free regex tester: test regular expressions with live match highlighting, groups, counts and replace preview. Runs in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which regex flavor does this tester use?","acceptedAnswer":{"@type":"Answer","text":"JavaScript (the same engine as your browser). Patterns you validate here work directly in JS code, and flags g, i, m, s, u, y are supported."}},{"@type":"Question","name":"How do capture groups work?","acceptedAnswer":{"@type":"Answer","text":"Wrap part of the pattern in parentheses, e.g. (\\d+)-(\\d+). Each match lists its groups in order, so you can see exactly what each group captured."}},{"@type":"Question","name":"What replacement patterns can I use?","acceptedAnswer":{"@type":"Answer","text":"Standard JavaScript replacement tokens: $1, $2 for capture groups, $& for the whole match, $$ for a literal dollar sign."}},{"@type":"Question","name":"Why is my text limited to 50,000 characters?","acceptedAnswer":{"@type":"Answer","text":"Very long inputs combined with complex patterns can freeze a page (catastrophic backtracking). The cap keeps the tester fast and responsive."}},{"@type":"Question","name":"What does the \"s\" flag do?","acceptedAnswer":{"@type":"Answer","text":"The s (dotAll) flag makes . match newline characters too, so a pattern like a.+b can span multiple lines."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://www.example.com/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"Regex Tester","item":"https://www.example.com/tools/regex-tester/"}]}</script>
+<script>
+var LOGIC={testRegex:(pattern, flags, text) => {
+    var MAX_TEXT = 50000, MAX_MATCHES = 200;
+    var src = String(text === undefined || text === null ? '' : text);
+    if (src.length > MAX_TEXT) return { ok: false, error: 'Text exceeds the 50,000 character limit.' };
+    var fl = String(flags === undefined || flags === null ? '' : flags);
+    if (!/^[gimsuy]*$/.test(fl)) return { ok: false, error: 'Invalid flags: only g, i, m, s, u, y are allowed.' };
+    var re;
+    try {
+      re = new RegExp(String(pattern), fl);
+    } catch (e) {
+      return { ok: false, error: 'Invalid regular expression: ' + (e && e.message ? e.message : 'could not compile') };
+    }
+    var matches = [];
+    try {
+      if (fl.indexOf('g') === -1 && fl.indexOf('y') === -1) {
+        var m = re.exec(src);
+        if (m) matches.push({ match: m[0], index: m.index, groups: m.slice(1) });
+      } else {
+        re.lastIndex = 0;
+        var guard = 0;
+        while (matches.length < MAX_MATCHES) {
+          var m2 = re.exec(src);
+          if (m2 === null) break;
+          matches.push({ match: m2[0], index: m2.index, groups: m2.slice(1) });
+          if (m2[0] === '') re.lastIndex++;
+          if (++guard > 1000) break;
+        }
+      }
+    } catch (e) {
+      return { ok: false, error: 'Matching failed: ' + (e && e.message ? e.message : 'unknown error') };
+    }
+    return { ok: true, matches: matches, count: matches.length };
+  },applyReplace:(pattern, flags, text, repl) => {
+    var MAX_TEXT = 50000;
+    var src = String(text === undefined || text === null ? '' : text);
+    if (src.length > MAX_TEXT) return { ok: false, error: 'Text exceeds the 50,000 character limit.' };
+    var fl = String(flags === undefined || flags === null ? '' : flags);
+    if (!/^[gimsuy]*$/.test(fl)) return { ok: false, error: 'Invalid flags: only g, i, m, s, u, y are allowed.' };
+    var re;
+    try {
+      re = new RegExp(String(pattern), fl);
+    } catch (e) {
+      return { ok: false, error: 'Invalid regular expression: ' + (e && e.message ? e.message : 'could not compile') };
+    }
+    try {
+      return { ok: true, result: src.replace(re, String(repl === undefined || repl === null ? '' : repl)) };
+    } catch (e) {
+      return { ok: false, error: 'Replace failed: ' + (e && e.message ? e.message : 'unknown error') };
+    }
+  }};
+
+    (function(){
+      'use strict';
+      function $(s){ return document.querySelector(s); }
+      var patEl = $('#rx-pattern'), txtEl = $('#rx-text'), outEl = $('#rx-out'),
+          replEl = $('#rx-repl'), replOut = $('#rx-replout');
+      var flagEls = { g: $('#rx-g'), i: $('#rx-i'), m: $('#rx-m'), s: $('#rx-s'), u: $('#rx-u'), y: $('#rx-y') };
+      if(!patEl || !txtEl || !outEl || !replEl || !replOut) return;
+      var okFlags = true;
+      Object.keys(flagEls).forEach(function(k){ if(!flagEls[k]) okFlags = false; });
+      if(!okFlags) return;
+      function flags(){
+        var f = '';
+        Object.keys(flagEls).forEach(function(k){ if(flagEls[k].checked) f += k; });
+        return f;
+      }
+      function esc(s){
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      }
+      function render(){
+        var pattern = patEl.value, fl = flags(), text = txtEl.value;
+        outEl.textContent = '';
+        var r = LOGIC.testRegex(pattern, fl, text);
+        if(!r.ok){
+          var pe = document.createElement('p'); pe.className = 'error'; pe.textContent = r.error;
+          outEl.appendChild(pe); replOut.value = ''; return;
+        }
+        var head = document.createElement('p'); head.className = 'hint';
+        head.textContent = r.count === 0 ? 'No matches.' : (r.count + (r.count === 1 ? ' match' : ' matches') + (r.count >= 200 ? ' (capped at 200)' : '') + ':');
+        outEl.appendChild(head);
+        // Highlighted preview
+        var prev = document.createElement('div'); prev.className = 'rx-prev';
+        var html = '', last = 0;
+        var sorted = r.matches.slice().sort(function(a,b){ return a.index - b.index; });
+        sorted.forEach(function(m){
+          if(m.index < last) return;
+          html += esc(text.slice(last, m.index)) + '<mark>' + esc(m.match) + '</mark>';
+          last = m.index + m.match.length;
+        });
+        html += esc(text.slice(last));
+        prev.innerHTML = html === '' ? '<span class="hint">—</span>' : html;
+        outEl.appendChild(prev);
+        // Match list with index + groups
+        if(r.count > 0){
+          var list = document.createElement('ol'); list.className = 'rx-list';
+          sorted.forEach(function(m, i){
+            var li = document.createElement('li');
+            var code = document.createElement('code'); code.textContent = m.match;
+            li.appendChild(code);
+            var meta = document.createElement('span'); meta.className = 'hint';
+            var gtxt = m.groups.length
+              ? 'groups: [' + m.groups.map(function(g){ return g === undefined ? 'undefined' : JSON.stringify(g); }).join(', ') + ']'
+              : 'no groups';
+            meta.textContent = '  at index ' + m.index + ', ' + gtxt;
+            li.appendChild(meta);
+            list.appendChild(li);
+          });
+          outEl.appendChild(list);
+        }
+        // Replace preview
+        var rr = LOGIC.applyReplace(pattern, fl, text, replEl.value);
+        replOut.value = rr.ok ? rr.result : '';
+        if(!rr.ok){
+          var re2 = document.createElement('p'); re2.className = 'error'; re2.textContent = rr.error;
+          outEl.appendChild(re2);
+        }
+      }
+      [patEl, txtEl, replEl].forEach(function(el){ el.addEventListener('input', render); });
+      Object.keys(flagEls).forEach(function(k){ flagEls[k].addEventListener('change', render); });
+      render();
+    })();
+</script>
+</body>
+</html>

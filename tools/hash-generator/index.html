@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SHA256 Generator — Hash Text &amp; Files Online</title>
+<meta name="description" content="Free SHA-256 generator: hash text or files with SHA-1, SHA-256, SHA-384 or SHA-512. Runs entirely in your browser.">
+<meta name="keywords" content="sha256 generator, hash generator, sha256 online, sha512, checksum generator">
+<link rel="canonical" href="https://www.example.com/tools/hash-generator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SHA256 Generator — Hash Text &amp; Files Online">
+<meta property="og:description" content="Free SHA-256 generator: hash text or files with SHA-1, SHA-256, SHA-384 or SHA-512. Runs entirely in your browser.">
+<meta property="og:url" content="https://www.example.com/tools/hash-generator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SHA256 Generator — Hash Text &amp; Files Online">
+<meta name="twitter:description" content="Free SHA-256 generator: hash text or files with SHA-1, SHA-256, SHA-384 or SHA-512. Runs entirely in your browser.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+
+    .tool-hash-generator .hg-area{ min-height:120px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; }
+    .tool-hash-generator .hg-actions{ display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+    .tool-hash-generator .hg-digest{ word-break:break-all; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-sm); padding:12px; }
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li><li aria-current="page">Hash Generator</li></ol></nav>
+<h1>Hash Generator</h1>
+<div class="tool-body-intro">
+<p>Generate cryptographic checksums of text or files using SHA-1, SHA-256, SHA-384 or SHA-512. Useful for verifying downloads, checksums and data integrity. MD5 is not available in browsers’ secure crypto — use SHA-256 instead.</p><p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+</div>
+<section class="tool-section tool-hash-generator" aria-label="Hash Generator">
+
+    <div class="card tool-panel">
+      <p class="hint">MD5 is not available in browsers’ secure crypto — use SHA-256 instead.</p>
+      <div class="field">
+        <label class="label" for="hg-text">Text to hash</label>
+        <textarea class="textarea hg-area" id="hg-text" spellcheck="false" placeholder="Type or paste text"></textarea>
+      </div>
+      <div class="field">
+        <label class="label" for="hg-file">Or choose a file</label>
+        <input class="input" id="hg-file" type="file">
+      </div>
+      <div class="field">
+        <label class="label" for="hg-algo">Algorithm</label>
+        <select class="select" id="hg-algo">
+          <option value="SHA-256" selected>SHA-256 (recommended)</option>
+          <option value="SHA-1">SHA-1</option>
+          <option value="SHA-384">SHA-384</option>
+          <option value="SHA-512">SHA-512</option>
+        </select>
+      </div>
+      <div class="hg-actions">
+        <button class="btn btn-primary" id="hg-go" type="button">Generate hash</button>
+        <button class="btn btn-ghost" id="hg-copy" type="button">Copy digest</button>
+      </div>
+      <div class="result" id="hg-out" aria-live="polite"></div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Type text or choose a file to hash.</li>
+<li>Pick the algorithm: SHA-256 is the best default.</li>
+<li>Click Generate hash and wait a moment for large files.</li>
+<li>Copy the hex digest with one click.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Why is there no MD5 option?</summary><div class="faq-a"><p>MD5 is not available in browsers’ secure crypto (WebCrypto) — use SHA-256 instead. MD5 is also considered broken for security purposes, so SHA-256 is the safer choice anyway.</p></div></details>
+<details><summary>Which algorithm should I choose?</summary><div class="faq-a"><p>SHA-256 is the best default: widely supported and secure. SHA-512 is stronger but produces a longer digest; SHA-1 is only suitable for non-security checks like deduplication.</p></div></details>
+<details><summary>Can a hash be reversed to get the original text?</summary><div class="faq-a"><p>No. Cryptographic hashes are one-way — you cannot recover the input from the digest. That is what makes them useful for integrity checks and password storage (with a proper salt and KDF).</p></div></details>
+<details><summary>How do I verify a downloaded file’s checksum?</summary><div class="faq-a"><p>Choose the file, select the same algorithm the publisher used (usually SHA-256), generate the hash, and compare it character-for-character with the published checksum. If they match, the file is intact.</p></div></details>
+<details><summary>Is my file uploaded to a server?</summary><div class="faq-a"><p>No. The file is read and hashed locally in your browser — it never leaves your device.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../jwt-decoder/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#key"></use></svg><span class="tl-name">JWT Decoder</span><span class="tl-desc">Developer Tools</span></a>
+<a class="tool-card" href="../json-formatter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#braces"></use></svg><span class="tl-name">JSON Formatter</span><span class="tl-desc">Developer Tools</span></a>
+<a class="tool-card" href="../regex-tester/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#regex"></use></svg><span class="tl-name">Regex Tester</span><span class="tl-desc">Developer Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Hash Generator","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/hash-generator/","description":"Free SHA-256 generator: hash text or files with SHA-1, SHA-256, SHA-384 or SHA-512. Runs entirely in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is there no MD5 option?","acceptedAnswer":{"@type":"Answer","text":"MD5 is not available in browsers’ secure crypto (WebCrypto) — use SHA-256 instead. MD5 is also considered broken for security purposes, so SHA-256 is the safer choice anyway."}},{"@type":"Question","name":"Which algorithm should I choose?","acceptedAnswer":{"@type":"Answer","text":"SHA-256 is the best default: widely supported and secure. SHA-512 is stronger but produces a longer digest; SHA-1 is only suitable for non-security checks like deduplication."}},{"@type":"Question","name":"Can a hash be reversed to get the original text?","acceptedAnswer":{"@type":"Answer","text":"No. Cryptographic hashes are one-way — you cannot recover the input from the digest. That is what makes them useful for integrity checks and password storage (with a proper salt and KDF)."}},{"@type":"Question","name":"How do I verify a downloaded file’s checksum?","acceptedAnswer":{"@type":"Answer","text":"Choose the file, select the same algorithm the publisher used (usually SHA-256), generate the hash, and compare it character-for-character with the published checksum. If they match, the file is intact."}},{"@type":"Question","name":"Is my file uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. The file is read and hashed locally in your browser — it never leaves your device."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://www.example.com/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"Hash Generator","item":"https://www.example.com/tools/hash-generator/"}]}</script>
+<script>
+var LOGIC={hash:async (algo, str) => {
+    // Uses the platform secure digest (browsers + Node 19+). No MD5: not exposed by WebCrypto.
+    var map = { 'SHA-1': 'SHA-1', 'SHA-256': 'SHA-256', 'SHA-384': 'SHA-384', 'SHA-512': 'SHA-512' };
+    var name = map[algo] || 'SHA-256';
+    var data = new TextEncoder().encode(String(str));
+    var digest = await globalThis.crypto.subtle.digest(name, data);
+    var bytes = new Uint8Array(digest);
+    var hex = '';
+    for (var i = 0; i < bytes.length; i++) hex += bytes[i].toString(16).padStart(2, '0');
+    return hex;
+  }};
+
+    (function(){
+      'use strict';
+      function $(s){ return document.querySelector(s); }
+      var tEl = $('#hg-text'), fEl = $('#hg-file'), aEl = $('#hg-algo'),
+          outEl = $('#hg-out'), bGo = $('#hg-go'), bCopy = $('#hg-copy');
+      if(!tEl || !fEl || !aEl || !outEl || !bGo || !bCopy) return;
+      function hexOf(buf){
+        var bytes = new Uint8Array(buf), hex = '';
+        for(var i = 0; i < bytes.length; i++) hex += bytes[i].toString(16).padStart(2, '0');
+        return hex;
+      }
+      function show(text, isErr){
+        outEl.textContent = '';
+        var p = document.createElement('p');
+        p.className = isErr ? 'error' : 'hg-digest';
+        p.textContent = text;
+        outEl.appendChild(p);
+      }
+      bGo.addEventListener('click', function(){
+        if(!(window.crypto && window.crypto.subtle)){
+          show('Web Crypto is not available in this browser context. Try a secure (HTTPS) page or a modern browser.', true);
+          return;
+        }
+        var algo = aEl.value;
+        bGo.disabled = true; bGo.textContent = 'Hashing…';
+        function done(hex){
+          bGo.disabled = false; bGo.textContent = 'Generate hash';
+          show(algo + '  ' + hex, false);
+        }
+        function fail(){
+          bGo.disabled = false; bGo.textContent = 'Generate hash';
+          show('Hashing failed. The algorithm may be unsupported here.', true);
+        }
+        if(fEl.files && fEl.files.length > 0){
+          var file = fEl.files[0];
+          var rd = new FileReader();
+          rd.onload = function(){
+            window.crypto.subtle.digest(algo, rd.result).then(function(d){ done(hexOf(d)); }, fail);
+          };
+          rd.onerror = fail;
+          rd.readAsArrayBuffer(file);
+        } else {
+          LOGIC.hash(algo, tEl.value).then(done, fail);
+        }
+      });
+      bCopy.addEventListener('click', function(){
+        var d = outEl.querySelector('.hg-digest');
+        if(!d){ show('Generate a hash first.', true); return; }
+        var hex = d.textContent.split('  ').pop();
+        function done2(ok){
+          bCopy.textContent = ok ? 'Copied!' : 'Copy failed';
+          setTimeout(function(){ bCopy.textContent = 'Copy digest'; }, 1500);
+        }
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(hex).then(function(){ done2(true); }, function(){ done2(false); });
+        } else { done2(false); }
+      });
+      fEl.addEventListener('change', function(){
+        if(fEl.files && fEl.files.length > 0) tEl.value = '';
+      });
+    })();
+</script>
+</body>
+</html>

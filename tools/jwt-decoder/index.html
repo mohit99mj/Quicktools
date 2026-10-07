@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JWT Decoder — Decode Header &amp; Payload</title>
+<meta name="description" content="Free JWT decoder: decode a token’s header and payload with readable issued/expiry dates. Signature is NOT verified — runs in your browser.">
+<meta name="keywords" content="jwt decoder, jwt decode, decode jwt token, jwt payload, json web token">
+<link rel="canonical" href="https://www.example.com/tools/jwt-decoder/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JWT Decoder — Decode Header &amp; Payload">
+<meta property="og:description" content="Free JWT decoder: decode a token’s header and payload with readable issued/expiry dates. Signature is NOT verified — runs in your browser.">
+<meta property="og:url" content="https://www.example.com/tools/jwt-decoder/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JWT Decoder — Decode Header &amp; Payload">
+<meta name="twitter:description" content="Free JWT decoder: decode a token’s header and payload with readable issued/expiry dates. Signature is NOT verified — runs in your browser.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+
+    .tool-jwt-decoder .jwt-area{ min-height:110px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; word-break:break-all; }
+    .tool-jwt-decoder .jwt-actions{ display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+    .tool-jwt-decoder .jwt-h{ font-size:15px; margin:16px 0 6px; }
+    .tool-jwt-decoder .jwt-pre{ white-space:pre-wrap; word-break:break-word; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius-sm); padding:12px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; max-height:320px; overflow:auto; }
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li><li aria-current="page">JWT Decoder</li></ol></nav>
+<h1>JWT Decoder</h1>
+<div class="tool-body-intro">
+<p>Paste a JSON Web Token to inspect its header and payload as formatted JSON. If the payload contains standard <code>iat</code> (issued at) or <code>exp</code> (expires) claims, they are shown as human-readable dates.</p><p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+</div>
+<section class="tool-section tool-jwt-decoder" aria-label="JWT Decoder">
+
+    <div class="card tool-panel">
+      <p class="alert">Signature is NOT verified — never trust a token based on this. Verify signatures on your own server.</p>
+      <div class="field">
+        <label class="label" for="jwt-in">JWT token</label>
+        <textarea class="textarea jwt-area" id="jwt-in" spellcheck="false" placeholder="Paste your JWT here: header.payload.signature"></textarea>
+      </div>
+      <div class="jwt-actions">
+        <button class="btn btn-primary" id="jwt-decode" type="button">Decode JWT</button>
+        <button class="btn btn-ghost" id="jwt-clear" type="button">Clear</button>
+      </div>
+      <div class="result" id="jwt-out" aria-live="polite"></div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Paste your JWT (header.payload.signature) into the text area.</li>
+<li>Click Decode JWT.</li>
+<li>Read the header and payload as formatted JSON.</li>
+<li>Check the issued-at and expiry dates if the token carries them.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Does this tool verify the token signature?</summary><div class="faq-a"><p>No. Signature is NOT verified — never trust a token based on this output. Always verify signatures on your own server with the correct secret or public key.</p></div></details>
+<details><summary>Is it safe to paste my token here?</summary><div class="faq-a"><p>Decoding runs entirely in your browser, so the token is never uploaded. Still, avoid pasting production tokens with sensitive claims into any website as a habit.</p></div></details>
+<details><summary>What are the iat and exp claims?</summary><div class="faq-a"><p>iat (issued at) and exp (expiration time) are Unix timestamps in the payload. This decoder converts them to readable dates and flags expired tokens.</p></div></details>
+<details><summary>Why does decoding fail?</summary><div class="faq-a"><p>The token must have three dot-separated Base64url segments (header.payload.signature) with valid JSON in the first two. Truncated or URL-mangled tokens fail with an error.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../base64/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#binary"></use></svg><span class="tl-name">Base64 Encoder</span><span class="tl-desc">Developer Tools</span></a>
+<a class="tool-card" href="../json-formatter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#braces"></use></svg><span class="tl-name">JSON Formatter</span><span class="tl-desc">Developer Tools</span></a>
+<a class="tool-card" href="../hash-generator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#hash"></use></svg><span class="tl-name">Hash Generator</span><span class="tl-desc">Developer Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JWT Decoder","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/jwt-decoder/","description":"Free JWT decoder: decode a token’s header and payload with readable issued/expiry dates. Signature is NOT verified — runs in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does this tool verify the token signature?","acceptedAnswer":{"@type":"Answer","text":"No. Signature is NOT verified — never trust a token based on this output. Always verify signatures on your own server with the correct secret or public key."}},{"@type":"Question","name":"Is it safe to paste my token here?","acceptedAnswer":{"@type":"Answer","text":"Decoding runs entirely in your browser, so the token is never uploaded. Still, avoid pasting production tokens with sensitive claims into any website as a habit."}},{"@type":"Question","name":"What are the iat and exp claims?","acceptedAnswer":{"@type":"Answer","text":"iat (issued at) and exp (expiration time) are Unix timestamps in the payload. This decoder converts them to readable dates and flags expired tokens."}},{"@type":"Question","name":"Why does decoding fail?","acceptedAnswer":{"@type":"Answer","text":"The token must have three dot-separated Base64url segments (header.payload.signature) with valid JSON in the first two. Truncated or URL-mangled tokens fail with an error."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://www.example.com/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"JWT Decoder","item":"https://www.example.com/tools/jwt-decoder/"}]}</script>
+<script>
+var LOGIC={decodeJwt:(token) => {
+    // Base64url decode by hand (no Buffer, no atob dependency): UTF-8 safe.
+    function b64urlDecode(seg) {
+      var b = String(seg).replace(/-/g, '+').replace(/_/g, '/');
+      var pad = b.length % 4;
+      if (pad === 1) throw new Error('bad base64url length');
+      if (pad > 1) b += '===='.slice(0, 4 - pad);
+      if (!/^[A-Za-z0-9+/=]*$/.test(b)) throw new Error('bad characters in segment');
+      var ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+      function val(c) { return c === '=' ? 0 : ALPHA.indexOf(c); }
+      var bytes = [];
+      for (var i = 0; i < b.length; i += 4) {
+        var n = (val(b.charAt(i)) << 18) | (val(b.charAt(i + 1)) << 12) | (val(b.charAt(i + 2)) << 6) | val(b.charAt(i + 3));
+        bytes.push((n >> 16) & 255, (n >> 8) & 255, n & 255);
+      }
+      var p = 0;
+      if (b.charAt(b.length - 1) === '=') p++;
+      if (b.charAt(b.length - 2) === '=') p++;
+      return new TextDecoder('utf-8', { fatal: true }).decode(new Uint8Array(bytes.slice(0, bytes.length - p)));
+    }
+    try {
+      var parts = String(token).trim().split('.');
+      if (parts.length !== 3 && parts.length !== 2) {
+        return { ok: false, error: 'Invalid JWT: expected header.payload.signature (3 dot-separated parts).' };
+      }
+      if (!parts[0] || !parts[1]) return { ok: false, error: 'Invalid JWT: header or payload segment is empty.' };
+      var header = JSON.parse(b64urlDecode(parts[0]));
+      var payload = JSON.parse(b64urlDecode(parts[1]));
+      return { ok: true, header: header, payload: payload };
+    } catch (e) {
+      return { ok: false, error: 'Invalid JWT: ' + (e && e.message ? e.message : 'could not decode') };
+    }
+  }};
+
+    (function(){
+      'use strict';
+      function $(s){ return document.querySelector(s); }
+      var inEl = $('#jwt-in'), outEl = $('#jwt-out');
+      var bDec = $('#jwt-decode'), bClear = $('#jwt-clear');
+      if(!inEl || !outEl || !bDec || !bClear) return;
+      function section(title, obj){
+        var h = document.createElement('h3'); h.className = 'jwt-h'; h.textContent = title;
+        var pre = document.createElement('pre'); pre.className = 'jwt-pre';
+        pre.textContent = JSON.stringify(obj, null, 2);
+        outEl.appendChild(h); outEl.appendChild(pre);
+      }
+      function claimDate(label, ts, expired){
+        var d = new Date(ts * 1000);
+        var p = document.createElement('p'); p.className = 'hint';
+        var when = isFinite(d.getTime()) ? d.toLocaleString() + ' (' + d.toISOString() + ')' : 'invalid timestamp';
+        p.textContent = label + ': ' + when + (expired ? ' — this token has EXPIRED.' : '');
+        outEl.appendChild(p);
+      }
+      bDec.addEventListener('click', function(){
+        outEl.textContent = '';
+        var t = inEl.value.trim();
+        if(!t){
+          var pe = document.createElement('p'); pe.className = 'error';
+          pe.textContent = 'Paste a JWT first.'; outEl.appendChild(pe); return;
+        }
+        var r = LOGIC.decodeJwt(t);
+        if(!r.ok){
+          var pe2 = document.createElement('p'); pe2.className = 'error';
+          pe2.textContent = r.error; outEl.appendChild(pe2); return;
+        }
+        section('Header', r.header);
+        section('Payload', r.payload);
+        var now = Math.floor(Date.now() / 1000);
+        if(r.payload && typeof r.payload.iat === 'number') claimDate('Issued at', r.payload.iat, false);
+        if(r.payload && typeof r.payload.exp === 'number') claimDate('Expires', r.payload.exp, r.payload.exp < now);
+        if(r.payload && typeof r.payload.nbf === 'number') claimDate('Not before', r.payload.nbf, false);
+      });
+      bClear.addEventListener('click', function(){
+        inEl.value = ''; outEl.textContent = ''; inEl.focus();
+      });
+    })();
+</script>
+</body>
+</html>
