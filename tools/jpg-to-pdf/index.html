@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JPG to PDF — Convert Images to PDF Free</title>
+<meta name="description" content="Free JPG to PDF converter: turn JPG and PNG images into a PDF online. Reorder pages, choose fit-to-image or A4 sizing — files never leave your device.">
+<meta name="keywords" content="jpg to pdf, convert jpg to pdf, image to pdf, png to pdf, photos to pdf">
+<link rel="canonical" href="https://www.example.com/tools/jpg-to-pdf/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JPG to PDF — Convert Images to PDF Free">
+<meta property="og:description" content="Free JPG to PDF converter: turn JPG and PNG images into a PDF online. Reorder pages, choose fit-to-image or A4 sizing — files never leave your device.">
+<meta property="og:url" content="https://www.example.com/tools/jpg-to-pdf/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JPG to PDF — Convert Images to PDF Free">
+<meta name="twitter:description" content="Free JPG to PDF converter: turn JPG and PNG images into a PDF online. Reorder pages, choose fit-to-image or A4 sizing — files never leave your device.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-jpg-to-pdf .file-list{list-style:none;margin:1rem 0;padding:0;display:grid;gap:.5rem}
+.tool-jpg-to-pdf .file-row{display:flex;align-items:center;gap:.75rem;padding:.6rem .8rem;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface)}
+.tool-jpg-to-pdf .file-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
+.tool-jpg-to-pdf .dropzone.drag-over{outline:2px dashed var(--accent);outline-offset:4px}
+.tool-jpg-to-pdf .progress{width:100%;margin-top:1rem}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li aria-current="page">JPG to PDF</li></ol></nav>
+<h1>JPG to PDF</h1>
+<div class="tool-body-intro">
+<p>Turn your photos into a polished PDF in seconds. The <strong>JPG to PDF</strong> converter joins JPG and PNG images into a single PDF document, right in your browser — handy for sharing photo sets, receipts, scanned pages or portfolios as one file.</p><p>Choose <strong>fit-to-image</strong> pages that match each photo, or standard <strong>A4</strong> pages with each image scaled to fit. Remove any image you don't want before converting, then download a single PDF.</p>
+</div>
+<section class="tool-section tool-jpg-to-pdf" aria-label="JPG to PDF">
+
+    <div class="card tool-panel">
+      <div class="dropzone" id="jpg-drop" tabindex="0" role="button" aria-label="Drop JPG or PNG images here, or press Enter to browse for files">
+        <svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#file-image"/></svg>
+        <p><strong>Drag &amp; drop images here</strong></p>
+        <p><button type="button" class="btn btn-ghost" id="jpg-browse">Browse files</button></p>
+        <p class="hint">JPG and PNG images only. Add as many as you like.</p>
+        <input type="file" id="jpg-file" class="visually-hidden" accept="image/jpeg,image/png" multiple aria-label="Choose JPG or PNG images">
+      </div>
+      <ul class="file-list" id="jpg-list" aria-label="Selected images"></ul>
+      <div class="field">
+        <label class="label" for="jpg-size">Page size</label>
+        <select class="select" id="jpg-size">
+          <option value="fit">Fit image — each page matches its photo</option>
+          <option value="a4">A4 — images scaled to fit an A4 page</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" id="jpg-create" disabled>Create PDF</button>
+      <progress class="progress" id="jpg-progress" max="100" value="0" hidden></progress>
+      <div class="result" id="jpg-status" aria-live="polite"></div>
+      <p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Drop your JPG or PNG images into the upload area, or click Browse files to select them.</li>
+<li>Review the file list and remove any image you don&#39;t want with its Remove button.</li>
+<li>Choose a page size: Fit image (each page matches the photo) or A4.</li>
+<li>Click Create PDF, then save the downloaded images.pdf file.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Will my images lose quality when converted to PDF?</summary><div class="faq-a"><p>No. JPG and PNG images are embedded directly without re-encoding, so the conversion itself does not reduce image quality.</p></div></details>
+<details><summary>What is the difference between Fit image and A4 page sizes?</summary><div class="faq-a"><p>Fit image makes each PDF page match the dimensions of its photo. A4 creates standard A4 pages and scales each image to fit inside, centered on the page.</p></div></details>
+<details><summary>Which image formats are supported?</summary><div class="faq-a"><p>JPG/JPEG and PNG. Other formats such as GIF or WebP are skipped with a notice — convert them to JPG or PNG first.</p></div></details>
+<details><summary>Are my photos uploaded to a server?</summary><div class="faq-a"><p>No. Your files never leave your device — the entire conversion runs locally in your browser.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../pdf-to-jpg/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#image"></use></svg><span class="tl-name">PDF to JPG</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../merge-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#layers"></use></svg><span class="tl-name">Merge PDF</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../compress-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#minimize-2"></use></svg><span class="tl-name">Compress PDF</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../pdf-to-word/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#file-text"></use></svg><span class="tl-name">PDF to Word</span><span class="tl-desc">PDF Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JPG to PDF","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/jpg-to-pdf/","description":"Free JPG to PDF converter: turn JPG and PNG images into a PDF online. Reorder pages, choose fit-to-image or A4 sizing — files never leave your device.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will my images lose quality when converted to PDF?","acceptedAnswer":{"@type":"Answer","text":"No. JPG and PNG images are embedded directly without re-encoding, so the conversion itself does not reduce image quality."}},{"@type":"Question","name":"What is the difference between Fit image and A4 page sizes?","acceptedAnswer":{"@type":"Answer","text":"Fit image makes each PDF page match the dimensions of its photo. A4 creates standard A4 pages and scales each image to fit inside, centered on the page."}},{"@type":"Question","name":"Which image formats are supported?","acceptedAnswer":{"@type":"Answer","text":"JPG/JPEG and PNG. Other formats such as GIF or WebP are skipped with a notice — convert them to JPG or PNG first."}},{"@type":"Question","name":"Are my photos uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Your files never leave your device — the entire conversion runs locally in your browser."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://www.example.com/#cat-pdf-tools"},{"@type":"ListItem","position":3,"name":"JPG to PDF","item":"https://www.example.com/tools/jpg-to-pdf/"}]}</script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
+<script>
+
+    (function(){
+      'use strict';
+      function $(id){ return document.getElementById(id); }
+      function setStatus(msg, isError){
+        var el = $('jpg-status');
+        if(!el){ return; }
+        el.textContent = msg || '';
+        el.className = isError ? 'result error' : 'result';
+      }
+      function fmtSize(bytes){
+        if(bytes < 1024){ return bytes + ' B'; }
+        var kb = bytes / 1024;
+        if(kb < 1024){ return kb.toFixed(1) + ' KB'; }
+        return (kb / 1024).toFixed(2) + ' MB';
+      }
+      function downloadBlob(blob, name){
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = name;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 10000);
+      }
+      function waitForLibs(names, ready, onMissing){
+        var tries = 0;
+        (function check(){
+          var ok = true;
+          for(var k = 0; k < names.length; k++){
+            if(!window[names[k]]){ ok = false; break; }
+          }
+          if(ok){ ready(); return; }
+          if(tries++ > 100){ onMissing(); return; }
+          setTimeout(check, 100);
+        })();
+      }
+      function isPng(b){
+        return b.length > 8 && b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4E && b[3] === 0x47;
+      }
+      function isJpeg(b){
+        return b.length > 3 && b[0] === 0xFF && b[1] === 0xD8 && b[2] === 0xFF;
+      }
+
+      var files = [];
+      var nextId = 1;
+      var drop = $('jpg-drop'), input = $('jpg-file'), browse = $('jpg-browse');
+      var list = $('jpg-list'), createBtn = $('jpg-create'), progress = $('jpg-progress');
+
+      function updateCreate(){
+        if(createBtn){ createBtn.disabled = files.length === 0; }
+      }
+
+      function renderList(){
+        if(!list){ return; }
+        list.textContent = '';
+        files.forEach(function(item){
+          var li = document.createElement('li');
+          li.className = 'file-row';
+          var name = document.createElement('span');
+          name.className = 'file-name';
+          name.textContent = item.file.name;
+          name.title = item.file.name;
+          var size = document.createElement('span');
+          size.className = 'hint';
+          size.textContent = fmtSize(item.file.size);
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'btn btn-ghost';
+          btn.textContent = 'Remove';
+          btn.setAttribute('aria-label', 'Remove ' + item.file.name);
+          btn.addEventListener('click', function(){
+            files = files.filter(function(f){ return f.id !== item.id; });
+            renderList();
+            updateCreate();
+            setStatus(files.length ? '' : 'No images selected yet.');
+          });
+          li.appendChild(name);
+          li.appendChild(size);
+          li.appendChild(btn);
+          list.appendChild(li);
+        });
+      }
+
+      function addFiles(fileList){
+        var skipped = [];
+        for(var i = 0; i < fileList.length; i++){
+          var f = fileList[i];
+          var t = (f.type || '').toLowerCase();
+          if(t === 'image/jpeg' || t === 'image/png'){
+            files.push({ id: nextId++, file: f });
+          } else {
+            skipped.push(f.name);
+          }
+        }
+        renderList();
+        updateCreate();
+        if(skipped.length){
+          setStatus('Added ' + files.length + ' image(s). Skipped ' + skipped.length + ' unsupported file(s) — only JPG and PNG are supported.', true);
+        } else if(files.length){
+          setStatus(files.length + ' image(s) ready. Click Create PDF when you are done adding.');
+        }
+      }
+
+      if(drop && input){
+        drop.addEventListener('click', function(e){
+          if(e.target === input){ return; }
+          input.click();
+        });
+        drop.addEventListener('keydown', function(e){
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            input.click();
+          }
+        });
+        drop.addEventListener('dragover', function(e){
+          e.preventDefault();
+          drop.classList.add('drag-over');
+        });
+        drop.addEventListener('dragleave', function(){
+          drop.classList.remove('drag-over');
+        });
+        drop.addEventListener('drop', function(e){
+          e.preventDefault();
+          drop.classList.remove('drag-over');
+          if(e.dataTransfer && e.dataTransfer.files){
+            addFiles(e.dataTransfer.files);
+          }
+        });
+        input.addEventListener('change', function(){
+          addFiles(input.files);
+          input.value = '';
+        });
+      }
+      if(browse && input){
+        browse.addEventListener('click', function(e){
+          e.stopPropagation();
+          input.click();
+        });
+      }
+
+      if(createBtn){
+        createBtn.addEventListener('click', function(){
+          if(!files.length){ return; }
+          setStatus('Loading PDF engine…');
+          waitForLibs(['PDFLib'], function(){
+            createBtn.disabled = true;
+            if(progress){ progress.hidden = false; progress.value = 0; }
+            var mode = 'fit';
+            var sizeSel = $('jpg-size');
+            if(sizeSel){ mode = sizeSel.value; }
+            var total = files.length;
+            (async function(){
+              try{
+                var pdf = await PDFLib.PDFDocument.create();
+                for(var i = 0; i < total; i++){
+                  setStatus('Processing image ' + (i + 1) + ' of ' + total + '…');
+                  var buf = await files[i].file.arrayBuffer();
+                  var bytes = new Uint8Array(buf);
+                  var img;
+                  if(isPng(bytes)){
+                    img = await pdf.embedPng(bytes);
+                  } else if(isJpeg(bytes)){
+                    img = await pdf.embedJpg(bytes);
+                  } else {
+                    throw new Error('"' + files[i].file.name + '" is not a valid JPG or PNG image.');
+                  }
+                  var w = img.width, h = img.height;
+                  var page;
+                  if(mode === 'a4'){
+                    var pw = 595.28, ph = 841.89;
+                    var s = Math.min(pw / w, ph / h);
+                    page = pdf.addPage([pw, ph]);
+                    page.drawImage(img, { x: (pw - w * s) / 2, y: (ph - h * s) / 2, width: w * s, height: h * s });
+                  } else {
+                    var maxSide = 1440;
+                    var s2 = Math.min(1, maxSide / Math.max(w, h));
+                    page = pdf.addPage([w * s2, h * s2]);
+                    page.drawImage(img, { x: 0, y: 0, width: w * s2, height: h * s2 });
+                  }
+                  if(progress){ progress.value = Math.round(((i + 1) / total) * 100); }
+                }
+                var out = await pdf.save();
+                downloadBlob(new Blob([out], { type: 'application/pdf' }), 'images.pdf');
+                setStatus('Done — images.pdf downloaded (' + total + ' page' + (total === 1 ? '' : 's') + ').');
+              } catch(err){
+                setStatus('Could not create the PDF: ' + (err && err.message ? err.message : 'unknown error'), true);
+              }
+              createBtn.disabled = false;
+              if(progress){ progress.hidden = true; }
+            })();
+          }, function(){
+            setStatus('The PDF library failed to load. Check your connection and reload the page.', true);
+          });
+        });
+      }
+      updateCreate();
+    })();
+</script>
+</body>
+</html>

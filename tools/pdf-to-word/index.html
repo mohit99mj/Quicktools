@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PDF to Word — Convert PDF to DOCX Free</title>
+<meta name="description" content="Free PDF to Word converter: extract text from a PDF into a real, editable .docx file. Text only — layout, images and formatting are not preserved.">
+<meta name="keywords" content="pdf to word, convert pdf to word, pdf to docx, extract text from pdf">
+<link rel="canonical" href="https://www.example.com/tools/pdf-to-word/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PDF to Word — Convert PDF to DOCX Free">
+<meta property="og:description" content="Free PDF to Word converter: extract text from a PDF into a real, editable .docx file. Text only — layout, images and formatting are not preserved.">
+<meta property="og:url" content="https://www.example.com/tools/pdf-to-word/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PDF to Word — Convert PDF to DOCX Free">
+<meta name="twitter:description" content="Free PDF to Word converter: extract text from a PDF into a real, editable .docx file. Text only — layout, images and formatting are not preserved.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-pdf-to-word .file-name{font-weight:600;margin:1rem 0 .25rem}
+.tool-pdf-to-word .dropzone.drag-over{outline:2px dashed var(--accent);outline-offset:4px}
+.tool-pdf-to-word .progress{width:100%;margin-top:1rem}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li aria-current="page">PDF to Word</li></ol></nav>
+<h1>PDF to Word</h1>
+<div class="tool-body-intro">
+<p>Need the text out of a PDF? The <strong>PDF to Word</strong> tool reads every page of your document and builds a real, editable <strong>.docx</strong> file you can open in Microsoft Word, Google Docs or LibreOffice.</p><p>It performs honest text extraction: you get the words, one paragraph per line, with page breaks preserved — but layout, images, tables and formatting are not carried over. Ideal for quoting, editing or repurposing document text.</p>
+</div>
+<section class="tool-section tool-pdf-to-word" aria-label="PDF to Word">
+
+    <div class="card tool-panel">
+      <div class="dropzone" id="wtw-drop" tabindex="0" role="button" aria-label="Drop a PDF file here, or press Enter to browse for a file">
+        <svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#file-text"/></svg>
+        <p><strong>Drag &amp; drop your PDF here</strong></p>
+        <p><button type="button" class="btn btn-ghost" id="wtw-browse">Browse files</button></p>
+        <p class="hint">One PDF file at a time.</p>
+        <input type="file" id="wtw-file" class="visually-hidden" accept="application/pdf,.pdf" aria-label="Choose a PDF file">
+      </div>
+      <p class="file-name" id="wtw-name" aria-live="polite"></p>
+      <p class="hint">Extracts text only — layout, images and formatting are not preserved.</p>
+      <button class="btn btn-primary" id="wtw-go" disabled>Extract to Word</button>
+      <progress class="progress" id="wtw-progress" max="100" value="0" hidden></progress>
+      <div class="result" id="wtw-status" aria-live="polite"></div>
+      <p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Drop your PDF file into the upload area, or click Browse files to select it.</li>
+<li>Click Extract to Word and wait while the text of each page is read.</li>
+<li>Download the .docx file and open it in Word, Google Docs or LibreOffice.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Will the Word file keep the original layout?</summary><div class="faq-a"><p>No. This tool extracts text only — layout, images, tables and formatting are not preserved. Each line of text becomes a plain paragraph in the .docx file.</p></div></details>
+<details><summary>What if my PDF is a scan or photo of pages?</summary><div class="faq-a"><p>Scanned pages contain no embedded text, so nothing can be extracted. You would need OCR (optical character recognition) software first to turn the scan into selectable text.</p></div></details>
+<details><summary>Is the downloaded file a real Word document?</summary><div class="faq-a"><p>Yes. It is a standard Office Open XML (.docx) package built from the extracted text, and it opens in Microsoft Word, Google Docs, LibreOffice and other word processors.</p></div></details>
+<details><summary>Are my files uploaded to a server?</summary><div class="faq-a"><p>No. Your files never leave your device — extraction and document building run entirely in your browser.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../jpg-to-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#file-image"></use></svg><span class="tl-name">JPG to PDF</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../pdf-to-jpg/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#image"></use></svg><span class="tl-name">PDF to JPG</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../merge-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#layers"></use></svg><span class="tl-name">Merge PDF</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../split-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#scissors"></use></svg><span class="tl-name">Split PDF</span><span class="tl-desc">PDF Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"PDF to Word","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/pdf-to-word/","description":"Free PDF to Word converter: extract text from a PDF into a real, editable .docx file. Text only — layout, images and formatting are not preserved.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Will the Word file keep the original layout?","acceptedAnswer":{"@type":"Answer","text":"No. This tool extracts text only — layout, images, tables and formatting are not preserved. Each line of text becomes a plain paragraph in the .docx file."}},{"@type":"Question","name":"What if my PDF is a scan or photo of pages?","acceptedAnswer":{"@type":"Answer","text":"Scanned pages contain no embedded text, so nothing can be extracted. You would need OCR (optical character recognition) software first to turn the scan into selectable text."}},{"@type":"Question","name":"Is the downloaded file a real Word document?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is a standard Office Open XML (.docx) package built from the extracted text, and it opens in Microsoft Word, Google Docs, LibreOffice and other word processors."}},{"@type":"Question","name":"Are my files uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Your files never leave your device — extraction and document building run entirely in your browser."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://www.example.com/#cat-pdf-tools"},{"@type":"ListItem","position":3,"name":"PDF to Word","item":"https://www.example.com/tools/pdf-to-word/"}]}</script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js" defer></script>
+<script>
+
+    (function(){
+      'use strict';
+      var WORKER = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.worker.min.js';
+      function $(id){ return document.getElementById(id); }
+      function setStatus(msg, isError){
+        var el = $('wtw-status');
+        if(!el){ return; }
+        el.textContent = msg || '';
+        el.className = isError ? 'result error' : 'result';
+      }
+      function downloadBlob(blob, name){
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = name;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 10000);
+      }
+      function waitForLibs(names, ready, onMissing){
+        var tries = 0;
+        (function check(){
+          var ok = true;
+          for(var k = 0; k < names.length; k++){
+            if(!window[names[k]]){ ok = false; break; }
+          }
+          if(ok){ ready(); return; }
+          if(tries++ > 100){ onMissing(); return; }
+          setTimeout(check, 100);
+        })();
+      }
+      function escXml(s){
+        return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+      }
+      function baseName(name){
+        var n = name.replace(/\.pdf$/i, '').replace(/[\\/]/g, '');
+        return n || 'document';
+      }
+
+      var pdfFile = null;
+      var drop = $('wtw-drop'), input = $('wtw-file'), browse = $('wtw-browse');
+      var goBtn = $('wtw-go'), progress = $('wtw-progress'), nameEl = $('wtw-name');
+
+      function setFile(f){
+        pdfFile = f;
+        if(nameEl){
+          nameEl.textContent = '';
+          var label = document.createElement('span');
+          label.textContent = 'Selected: ' + f.name;
+          nameEl.appendChild(label);
+        }
+        if(goBtn){ goBtn.disabled = false; }
+        setStatus('"' + f.name + '" is ready. Click Extract to Word.');
+      }
+
+      if(drop && input){
+        drop.addEventListener('click', function(e){
+          if(e.target === input){ return; }
+          input.click();
+        });
+        drop.addEventListener('keydown', function(e){
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            input.click();
+          }
+        });
+        drop.addEventListener('dragover', function(e){
+          e.preventDefault();
+          drop.classList.add('drag-over');
+        });
+        drop.addEventListener('dragleave', function(){
+          drop.classList.remove('drag-over');
+        });
+        drop.addEventListener('drop', function(e){
+          e.preventDefault();
+          drop.classList.remove('drag-over');
+          if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length){
+            setFile(e.dataTransfer.files[0]);
+          }
+        });
+        input.addEventListener('change', function(){
+          if(input.files && input.files.length){ setFile(input.files[0]); }
+          input.value = '';
+        });
+      }
+      if(browse && input){
+        browse.addEventListener('click', function(e){
+          e.stopPropagation();
+          input.click();
+        });
+      }
+
+      if(goBtn){
+        goBtn.addEventListener('click', function(){
+          if(!pdfFile){ return; }
+          setStatus('Loading libraries…');
+          waitForLibs(['pdfjsLib', 'JSZip'], function(){
+            goBtn.disabled = true;
+            if(progress){ progress.hidden = false; progress.value = 0; }
+            pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER;
+            var fileName = pdfFile.name;
+            (async function(){
+              try{
+                var buf = await pdfFile.arrayBuffer();
+                var pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+                var total = pdf.numPages;
+                var blocks = [];
+                for(var p = 1; p <= total; p++){
+                  setStatus('Reading text from page ' + p + ' of ' + total + '…');
+                  var page = await pdf.getPage(p);
+                  var tc = await page.getTextContent();
+                  var rows = {};
+                  tc.items.forEach(function(it){
+                    if(!it.str){ return; }
+                    var y = Math.round(it.transform[5]);
+                    if(!rows[y]){ rows[y] = []; }
+                    rows[y].push(it);
+                  });
+                  var ys = Object.keys(rows).map(function(k){ return parseInt(k, 10); }).sort(function(a, b){ return b - a; });
+                  ys.forEach(function(y){
+                    var row = rows[y].sort(function(a, b){ return a.transform[4] - b.transform[4]; });
+                    var text = row.map(function(r){ return r.str; }).join('').replace(/\s+/g, ' ').trim();
+                    if(text){ blocks.push(text); }
+                  });
+                  if(p < total){ blocks.push('\f'); }
+                  if(progress){ progress.value = Math.round((p / total) * 70); }
+                }
+                var hasText = blocks.some(function(b){ return b !== '\f'; });
+                if(!hasText){
+                  setStatus('No extractable text was found in this PDF. It may be a scanned document — scanned pages need OCR software first.', true);
+                  goBtn.disabled = false;
+                  if(progress){ progress.hidden = true; }
+                  return;
+                }
+                setStatus('Building Word document…');
+                if(progress){ progress.value = 80; }
+                var paras = blocks.map(function(b){
+                  if(b === '\f'){
+                    return '<w:p><w:r><w:br w:type="page"/></w:r></w:p>';
+                  }
+                  return '<w:p><w:r><w:t xml:space="preserve">' + escXml(b) + '</w:t></w:r></w:p>';
+                }).join('');
+                var contentTypes = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+                  '<Types xmlns="http://schemas.openxmlformats.org/package/content-types">' +
+                  '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>' +
+                  '<Default Extension="xml" ContentType="application/xml"/>' +
+                  '<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>' +
+                  '</Types>';
+                var rels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+                  '<Relationships xmlns="http://schemas.openxmlformats.org/package/relationships">' +
+                  '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>' +
+                  '</Relationships>';
+                var documentXml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+                  '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>' +
+                  paras +
+                  '</w:body></w:document>';
+                var zip = new JSZip();
+                zip.file('[Content_Types].xml', contentTypes);
+                zip.folder('_rels').file('.rels', rels);
+                zip.folder('word').file('document.xml', documentXml);
+                var blob = await zip.generateAsync({ type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+                downloadBlob(blob, baseName(fileName) + '.docx');
+                if(progress){ progress.value = 100; }
+                setStatus('Done — "' + baseName(fileName) + '.docx" downloaded with text from ' + total + ' page' + (total === 1 ? '' : 's') + '.');
+              } catch(err){
+                setStatus('Could not read this PDF: ' + (err && err.message ? err.message : 'the file may be corrupted or password-protected.'), true);
+              }
+              goBtn.disabled = false;
+              if(progress){ progress.hidden = true; }
+            })();
+          }, function(){
+            setStatus('The required libraries failed to load. Check your connection and reload the page.', true);
+          });
+        });
+      }
+    })();
+</script>
+</body>
+</html>
