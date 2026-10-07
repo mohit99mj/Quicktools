@@ -36,7 +36,7 @@
 <a href="../../index.html#all-tools">All Tools</a>
 <a href="../../index.html#categories">Categories</a>
 </nav>
-<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
 <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
 </div>
 <nav class="nav-panel" data-nav-panel aria-label="Mobile">
@@ -147,7 +147,11 @@
       var MAX = 4000;
       var img = null, srcURL = null, outURL = null, fileName = 'image', hasAlpha = false;
       var converted = false, pendingMime = '', pendingName = '';
-      function qp(){ return (typeof window !== 'undefined' && window.QTProgress && typeof window.QTProgress.show === 'function') ? window.QTProgress : null; }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       function fmtBytes(b){
         if(!(b > 0)) return '';
         var u = ['B', 'KB', 'MB', 'GB'], i = 0, n = b;
@@ -199,17 +203,16 @@
         if(srcURL) URL.revokeObjectURL(srcURL);
         srcURL = URL.createObjectURL(f);
         fileName = safeName(f.name);
-        var P = qp();
-        if(P) P.show({ title: 'Image Converter', stage: 'Reading image…', percent: 10 });
+        pShow({ title: 'Image Converter', stage: 'Reading image…', percent: 10 });
         var probe = new Image();
         probe.onload = function(){
           img = probe;
           detectAlpha();
-          if(P) P.hide();
+          pHide();
           refresh();
         };
         probe.onerror = function(){
-          if(P) P.hide();
+          pHide();
           setStatus('Could not read that image. Try another file.', true);
         };
         probe.src = srcURL;
@@ -251,10 +254,11 @@
         var ctx = c.getContext('2d');
         if(mime === 'image/jpeg'){ ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, w, h); }
         ctx.drawImage(img, 0, 0, w, h);
-        var P = qp();
-        if(P) P.show({ title: 'Image Converter', stage: 'Converting…', percent: 50 });
+        dl.disabled = true;
+        pShow({ title: 'Image Converter', stage: 'Converting…', percent: 50 });
         c.toBlob(function(blob){
-          if(P) P.hide();
+          dl.disabled = false;
+          pHide();
           if(!blob){ setStatus('This browser could not encode that format.', true); return; }
           if(outURL) URL.revokeObjectURL(outURL);
           outURL = URL.createObjectURL(blob);

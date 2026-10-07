@@ -44,7 +44,7 @@
 <a href="../../index.html#all-tools">All Tools</a>
 <a href="../../index.html#categories">Categories</a>
 </nav>
-<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
 <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
 </div>
 <nav class="nav-panel" data-nav-panel aria-label="Mobile">
@@ -160,7 +160,11 @@
       var ctx = canvas.getContext('2d');
       var pctx = previewCanvas ? previewCanvas.getContext('2d') : null;
       var MAX = 4000, HANDLE = 12, curAspect = 0, previewQueued = false;
-      function qp(){ return (typeof window !== 'undefined' && window.QTProgress && typeof window.QTProgress.show === 'function') ? window.QTProgress : null; }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       var img = null, dispW = 0, dispH = 0, scale = 1, srcURL = null, fileName = 'image';
       var rect = { x: 0, y: 0, w: 0, h: 0 };
       var drag = null; // {mode:'move'|'nw'|'ne'|'sw'|'se', dx, dy, startRect}
@@ -169,8 +173,8 @@
         uploadStatus.textContent = msg || '';
         uploadStatus.className = 'result' + (isError ? ' error' : '');
       }
-      function setStatus(msg){
-        if(statusEl) statusEl.textContent = msg || '';
+      function setStatus(msg, isError){
+        if(statusEl){ statusEl.textContent = msg || ''; statusEl.className = isError ? 'result error' : 'result'; }
       }
       function safeName(s){
         return String(s).replace(/\.[a-zA-Z0-9]+$/, '').replace(/[^a-zA-Z0-9._-]+/g, '_').slice(0, 80) || 'image';
@@ -325,8 +329,7 @@
         if(srcURL) URL.revokeObjectURL(srcURL);
         srcURL = URL.createObjectURL(f);
         fileName = safeName(f.name);
-        var P = qp();
-        if(P) P.show({ title: 'Image Cropper', stage: 'Reading image…', percent: 10 });
+        pShow({ title: 'Image Cropper', stage: 'Reading image…', percent: 10 });
         var probe = new Image();
         probe.onload = function(){
           img = probe;
@@ -340,12 +343,12 @@
           editor.hidden = false;
           if(previewWrap) previewWrap.hidden = false;
           setUploadStatus('');
-          if(P) P.update(85, 'Preparing editor…');
+          pUpd(85, 'Preparing editor…');
           draw();
-          if(P) P.hide();
+          pHide();
         };
         probe.onerror = function(){
-          if(P) P.hide();
+          pHide();
           setUploadStatus('Could not read that image. Try another file.', true);
         };
         probe.src = srcURL;
@@ -372,11 +375,12 @@
         var c = document.createElement('canvas');
         c.width = sw; c.height = sh;
         c.getContext('2d').drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
-        var P = qp();
-        if(P) P.show({ title: 'Image Cropper', stage: 'Cropping…', percent: 60 });
+        go.disabled = true;
+        pShow({ title: 'Image Cropper', stage: 'Cropping…', percent: 60 });
         c.toBlob(function(blob){
-          if(P) P.hide();
-          if(!blob){ setStatus('Could not encode the cropped image.'); return; }
+          go.disabled = false;
+          pHide();
+          if(!blob){ setStatus('Could not encode the cropped image. Try a different image file.', true); return; }
           var url = URL.createObjectURL(blob);
           var a = document.createElement('a');
           a.href = url;

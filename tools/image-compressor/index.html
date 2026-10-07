@@ -49,7 +49,7 @@
 <a href="../../index.html#all-tools">All Tools</a>
 <a href="../../index.html#categories">Categories</a>
 </nav>
-<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
 <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
 </div>
 <nav class="nav-panel" data-nav-panel aria-label="Mobile">
@@ -421,7 +421,11 @@ var LOGIC={fit:function(w, h, maxW, maxH) {
       var icTsProgress = $('#ic-ts-progress'), icTsBar = $('#ic-ts-bar');
       var icPreview = $('#ic-preview');
       var icBlobCache = {};
-      function icQt(){ return (typeof window.QTProgress !== 'undefined' && window.QTProgress) ? window.QTProgress : null; }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       function icUpdatePngNote(){
         var isPng = formatSel.value === 'image/png';
         if(icPngNote) icPngNote.hidden = !(icMode === 'target' && isPng);
@@ -475,8 +479,7 @@ var LOGIC={fit:function(w, h, maxW, maxH) {
         dl.disabled = true;
         if(icTsProgress) icTsProgress.hidden = false;
         if(icTsBar) icTsBar.style.width = '0%';
-        var qp = icQt();
-        if(qp && qp.show) qp.show({ title: 'Compressing image to target size', stage: 'Starting…', percent: 0 });
+        pShow({ title: 'Compressing image to target size', stage: 'Starting…', percent: 0 });
         setStatus('Finding the right quality for ' + fmtBytes(targetBytes) + '…');
         binarySearchTarget(function(q){
           return icEncodeAt(q).then(function(blob){
@@ -490,8 +493,7 @@ var LOGIC={fit:function(w, h, maxW, maxH) {
             if(icTsBar) icTsBar.style.width = Math.round(r * 100) + '%';
             var msg = 'Trying quality ' + q.toFixed(2) + '… (' + i + '/' + n + ') — ' + fmtBytes(bytes);
             setStatus(msg);
-            var p2 = icQt();
-            if(p2 && p2.update) p2.update(Math.round(r * 100), msg);
+            pUpd(Math.round(r * 100), msg);
           }
         }).then(function(res){
           outBlob = icBlobCache[res.quality.toFixed(3)] || null;
@@ -517,10 +519,10 @@ var LOGIC={fit:function(w, h, maxW, maxH) {
             }
             dl.disabled = false;
           }
-          var p3 = icQt(); if(p3 && p3.hide) p3.hide();
+          pHide();
         }).catch(function(err){
           setStatus('Target-size compression failed: ' + (err && err.message ? err.message : 'unknown error.'), true);
-          var p4 = icQt(); if(p4 && p4.hide) p4.hide();
+          pHide();
         }).then(function(){
           icTargetRunning = false;
           if(icModeQBtn) icModeQBtn.disabled = false;
