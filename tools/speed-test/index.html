@@ -344,7 +344,7 @@
       }
       function fail(msg){
         testing = false; stopLoop();
-        go.disabled = false;
+        go.disabled = false; go.removeAttribute('aria-busy');
         go.textContent = 'Try again';
         gaugeWrap.classList.remove('is-measuring');
         setPillState(0, null); setPillState(1, null); setPillState(2, null);
@@ -396,7 +396,7 @@
         resultPanel.hidden = true;
         setPillState(0, 'is-active'); setPillState(1, null); setPillState(2, null);
         gaugeWrap.classList.add('is-measuring');
-        go.disabled = true;
+        go.disabled = true; go.setAttribute('aria-busy', 'true');
         go.textContent = 'Testing\u2026';
         setPhase('Phase 1 of 3 \u2014 Measuring ping\u2026');
         micro.textContent = 'Ping 0/4';
@@ -455,7 +455,7 @@
             setPhase('Done.');
             micro.textContent = fmtMB(totalBytes) + ' downloaded in a 7-second burst';
             showResult(pingMs, jitMs, downMbps);
-            go.disabled = false;
+            go.disabled = false; go.removeAttribute('aria-busy');
             go.textContent = 'Run again';
           });
         }).catch(function(){ fail(); });

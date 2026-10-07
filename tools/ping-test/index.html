@@ -187,7 +187,7 @@
           out.innerHTML = '<p class="error">Enter a valid host, e.g. example.org</p>';
           return;
         }
-        go.disabled = true;
+        go.disabled = true; go.setAttribute('aria-busy', 'true');
         out.innerHTML = '';
         pShow({ title: 'Ping Test', stage: 'Pinging ' + host + '…', percent: 5 });
         var times = [];
@@ -205,7 +205,7 @@
           })(i);
         }
         chain.then(function(){
-          go.disabled = false;
+          go.disabled = false; go.removeAttribute('aria-busy');
           pHide();
           setPhase('Done.');
           render(times);
