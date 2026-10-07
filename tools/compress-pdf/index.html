@@ -362,7 +362,7 @@
           label.textContent = 'Selected: ' + f.name + ' (' + fmtSize(f.size) + ')';
           nameEl.appendChild(label);
         }
-        if(goBtn){ goBtn.disabled = false; }
+        if(goBtn){ goBtn.disabled = false; goBtn.removeAttribute('aria-busy'); }
         setStatus('"' + f.name + '" is ready. Pick a quality and click Compress PDF.');
       }
 
@@ -447,7 +447,7 @@
         setStatus('Loading libraries…');
         waitForLibs(['pdfjsLib', 'PDFLib'], function(){
           cpTargetRunning = true;
-          goBtn.disabled = true;
+          goBtn.disabled = true; goBtn.setAttribute('aria-busy', 'true');
           var cpMq = $('cp-mode-quality'), cpMt = $('cp-mode-target');
           if(cpMq) cpMq.disabled = true;
           if(cpMt) cpMt.disabled = true;
@@ -534,7 +534,7 @@
               pHide();
             }
             cpTargetRunning = false;
-            goBtn.disabled = false;
+            goBtn.disabled = false; goBtn.removeAttribute('aria-busy');
             var cpMq2 = $('cp-mode-quality'), cpMt2 = $('cp-mode-target');
             if(cpMq2) cpMq2.disabled = false;
             if(cpMt2) cpMt2.disabled = false;
@@ -574,7 +574,7 @@
           if(cpMode === 'target'){ cpRunTarget(); return; }
           setStatus('Loading libraries…');
           waitForLibs(['pdfjsLib', 'PDFLib'], function(){
-            goBtn.disabled = true;
+            goBtn.disabled = true; goBtn.setAttribute('aria-busy', 'true');
             if(progress){ progress.hidden = false; progress.value = 0; }
             pShow({ title: 'Compressing PDF…', stage: 'Reading pages…', percent: 0 });
             pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER;
@@ -621,7 +621,7 @@
                 setStatus('Could not compress this PDF: ' + (err && err.message ? err.message : 'the file may be corrupted or password-protected.'), true);
               }
               pHide();
-              goBtn.disabled = false;
+              goBtn.disabled = false; goBtn.removeAttribute('aria-busy');
               if(progress){ progress.hidden = true; }
             })();
           }, function(){

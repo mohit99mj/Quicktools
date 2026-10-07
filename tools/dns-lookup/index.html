@@ -155,7 +155,7 @@
         }
         var type = typeEl ? typeEl.value : 'A';
         out.innerHTML = '<p>Looking up ' + type + ' records for ' + domain + '…</p>';
-        go.disabled = true;
+        go.disabled = true; go.setAttribute('aria-busy', 'true');
         pShow({ title: 'DNS Lookup', stage: 'Querying DNS for ' + domain + '…', percent: 30 });
         fetch('https://dns.google/resolve?name=' + encodeURIComponent(domain) + '&type=' + encodeURIComponent(type))
           .then(function(res){
@@ -167,7 +167,7 @@
             out.innerHTML = '';
             if (!data || data.Status !== 0){
               pHide();
-              go.disabled = false;
+              go.disabled = false; go.removeAttribute('aria-busy');
               var code = data && typeof data.Status === 'number' ? data.Status : -1;
               var msg = STATUS_TEXT[code] || 'DNS query failed';
               var err = document.createElement('p');
@@ -183,7 +183,7 @@
             out.appendChild(h);
             if (!answers.length){
               pHide();
-              go.disabled = false;
+              go.disabled = false; go.removeAttribute('aria-busy');
               var p = document.createElement('p');
               p.className = 'hint';
               p.textContent = 'No ' + type + ' records found for "' + domain + '".';
@@ -214,11 +214,11 @@
             tbl.appendChild(tb);
             out.appendChild(tbl);
             pHide();
-            go.disabled = false;
+            go.disabled = false; go.removeAttribute('aria-busy');
           })
           .catch(function(){
             pHide();
-            go.disabled = false;
+            go.disabled = false; go.removeAttribute('aria-busy');
             out.innerHTML = '<p class="error">Could not reach the DNS service for "' + domain + '". Check your connection and try again.</p>';
           });
       });
