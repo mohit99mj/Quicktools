@@ -188,7 +188,8 @@ function showError(t){ errEl.textContent = t; errEl.hidden = false; }
       function pShim(on){ if(window.QTProgress){ if(on){ QTProgress.shimmer(); } else { QTProgress.shimmerClear(); } } }
 
       function ensureEngine(progressCb){
-        if(ffmpeg) return Promise.resolve(ffmpeg);
+        if(ffmpeg && ffmpeg.isLoaded && ffmpeg.isLoaded()) return Promise.resolve(ffmpeg);
+        ffmpeg = null;
         var FF = window.FFmpeg;
         if(!FF || typeof FF.createFFmpeg !== 'function' || typeof FF.fetchFile !== 'function'){
           return Promise.reject(new Error('Engine library did not load. Check your connection and reload the page.'));
@@ -238,7 +239,8 @@ function showError(t){ errEl.textContent = t; errEl.hidden = false; }
           loadBtn.textContent = 'Load audio engine (one-time ~25MB)';
           progressEl.hidden = true;
           status('');
-          showError('Engine failed to load — check your connection and retry.');
+          ffmpeg = null;
+            showError('Engine failed to load — check your connection and retry.');
         });
       });
 
@@ -284,6 +286,7 @@ function showError(t){ errEl.textContent = t; errEl.hidden = false; }
           if(/memory/i.test(msg)){
             showError('Ran out of memory while processing — try a smaller audio file.');
           } else {
+            ffmpeg = null;
             showError('Conversion failed: ' + dbg(e));
           }
         }).then(function(){
