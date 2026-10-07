@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QR Code Generator — Free Online QR Maker</title>
+<meta name="description" content="Create custom QR codes free — choose size, colors and error correction, then download as PNG or SVG. Everything runs in your browser.">
+<meta name="keywords" content="qr code generator, create qr code, qr code maker, free qr code, qr code svg">
+<link rel="canonical" href="https://www.example.com/tools/qr-generator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="QR Code Generator — Free Online QR Maker">
+<meta property="og:description" content="Create custom QR codes free — choose size, colors and error correction, then download as PNG or SVG. Everything runs in your browser.">
+<meta property="og:url" content="https://www.example.com/tools/qr-generator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="QR Code Generator — Free Online QR Maker">
+<meta name="twitter:description" content="Create custom QR codes free — choose size, colors and error correction, then download as PNG or SVG. Everything runs in your browser.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-qr-generator .tool-qr-generator-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:12px;}
+.tool-qr-generator .tool-qr-generator-color{padding:4px;height:44px;cursor:pointer;}
+.tool-qr-generator #qr-out{margin-top:16px;text-align:center;}
+.tool-qr-generator #qr-canvas{max-width:100%;height:auto;border:1px solid var(--line);border-radius:var(--radius-sm);}
+.tool-qr-generator .tool-qr-generator-dl{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap;}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li aria-current="page">QR Code Generator</li></ol></nav>
+<h1>QR Code Generator</h1>
+<div class="tool-body-intro">
+<p>A QR code generator that turns any text or URL into a scannable QR code in seconds. Adjust the size, foreground and background colors, and the error-correction level, then download your code as a crisp PNG or an infinitely scalable SVG.</p><p>QR codes work for links, Wi-Fi details, contact cards and plain text — anything you can type can be encoded. Codes are generated locally with a widely used open-source QR library.</p><p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+</div>
+<section class="tool-section tool-qr-generator" aria-label="QR Code Generator">
+
+    <div class="card tool-panel">
+      <div class="field">
+        <label class="label" for="qr-text">Text or URL</label>
+        <textarea class="textarea" id="qr-text" rows="3" placeholder="https://example.com"></textarea>
+      </div>
+      <div class="tool-qr-generator-row">
+        <div class="field">
+          <label class="label" for="qr-size">Size</label>
+          <select class="select" id="qr-size">
+            <option value="256">256 px</option>
+            <option value="512" selected>512 px</option>
+            <option value="1024">1024 px</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label" for="qr-ec">Error correction</label>
+          <select class="select" id="qr-ec">
+            <option value="L">L — Low (7%)</option>
+            <option value="M" selected>M — Medium (15%)</option>
+            <option value="Q">Q — Quartile (25%)</option>
+            <option value="H">H — High (30%)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label" for="qr-dark">Foreground</label>
+          <input class="input tool-qr-generator-color" id="qr-dark" type="color" value="#000000">
+        </div>
+        <div class="field">
+          <label class="label" for="qr-light">Background</label>
+          <input class="input tool-qr-generator-color" id="qr-light" type="color" value="#ffffff">
+        </div>
+      </div>
+      <button class="btn btn-primary" id="qr-generate">Generate QR code</button>
+      <p class="hint" id="qr-hint" role="status" style="display:none"></p>
+      <div class="result" id="qr-out" aria-live="polite" style="display:none">
+        <canvas id="qr-canvas" width="512" height="512"></canvas>
+        <div class="tool-qr-generator-dl">
+          <button class="btn btn-ghost" id="qr-png" disabled>Download PNG</button>
+          <button class="btn btn-ghost" id="qr-svg" disabled>Download SVG</button>
+        </div>
+      </div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Type or paste the text or URL you want to encode.</li>
+<li>Pick an image size, foreground and background colors, and an error-correction level.</li>
+<li>Click &quot;Generate QR code&quot; to preview it instantly.</li>
+<li>Download the result as a PNG (for screens and documents) or SVG (for print).</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Are the QR codes free to use commercially?</summary><div class="faq-a"><p>Yes. The QR codes are generated entirely in your browser with no watermarks or tracking, so you can use them anywhere, including commercial projects.</p></div></details>
+<details><summary>What is error correction in a QR code?</summary><div class="faq-a"><p>Error correction lets a QR code stay readable even if part of it is damaged or covered. Higher levels (Q, H) survive more damage but store slightly less data. Level M works well for most uses.</p></div></details>
+<details><summary>Which size should I choose?</summary><div class="faq-a"><p>256 px is fine for screens; choose 512 or 1024 px for print so the code stays sharp when scaled up. The SVG download scales perfectly at any size.</p></div></details>
+<details><summary>Does this tool track what I encode?</summary><div class="faq-a"><p>No. Everything happens locally in your browser — your text or URL is never sent to a server.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../barcode-generator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#barcode"></use></svg><span class="tl-name">Barcode Generator</span><span class="tl-desc">QR &amp; Generators</span></a>
+<a class="tool-card" href="../password-generator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#key"></use></svg><span class="tl-name">Password Generator</span><span class="tl-desc">QR &amp; Generators</span></a>
+<a class="tool-card" href="../uuid-generator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#fingerprint"></use></svg><span class="tl-name">UUID Generator</span><span class="tl-desc">QR &amp; Generators</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"QR Code Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/qr-generator/","description":"Create custom QR codes free — choose size, colors and error correction, then download as PNG or SVG. Everything runs in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are the QR codes free to use commercially?","acceptedAnswer":{"@type":"Answer","text":"Yes. The QR codes are generated entirely in your browser with no watermarks or tracking, so you can use them anywhere, including commercial projects."}},{"@type":"Question","name":"What is error correction in a QR code?","acceptedAnswer":{"@type":"Answer","text":"Error correction lets a QR code stay readable even if part of it is damaged or covered. Higher levels (Q, H) survive more damage but store slightly less data. Level M works well for most uses."}},{"@type":"Question","name":"Which size should I choose?","acceptedAnswer":{"@type":"Answer","text":"256 px is fine for screens; choose 512 or 1024 px for print so the code stays sharp when scaled up. The SVG download scales perfectly at any size."}},{"@type":"Question","name":"Does this tool track what I encode?","acceptedAnswer":{"@type":"Answer","text":"No. Everything happens locally in your browser — your text or URL is never sent to a server."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"QR & Generators","item":"https://www.example.com/#cat-qr-generators"},{"@type":"ListItem","position":3,"name":"QR Code Generator","item":"https://www.example.com/tools/qr-generator/"}]}</script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js" defer></script>
+<script>
+
+    (function(){
+      'use strict';
+      function $(id){ return document.getElementById(id); }
+      var textEl = $('qr-text'), sizeEl = $('qr-size'), darkEl = $('qr-dark'),
+          lightEl = $('qr-light'), ecEl = $('qr-ec'), genBtn = $('qr-generate'),
+          pngBtn = $('qr-png'), svgBtn = $('qr-svg'), canvas = $('qr-canvas'),
+          hint = $('qr-hint'), out = $('qr-out');
+      if(!textEl || !genBtn || !canvas || !out) return;
+      var lastText = null;
+      function setHint(msg, isError){
+        if(!hint) return;
+        hint.textContent = msg || '';
+        hint.style.display = msg ? '' : 'none';
+        hint.className = isError ? 'error' : 'hint';
+      }
+      function download(url, name){
+        var a = document.createElement('a');
+        a.href = url; a.download = name;
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      }
+      function currentOpts(extra){
+        var o = {
+          width: parseInt(sizeEl.value, 10) || 512,
+          margin: 2,
+          color: { dark: darkEl.value, light: lightEl.value },
+          errorCorrectionLevel: ecEl.value
+        };
+        if(extra){ for(var k in extra){ if(Object.prototype.hasOwnProperty.call(extra, k)) o[k] = extra[k]; } }
+        return o;
+      }
+      genBtn.addEventListener('click', function(){
+        var text = textEl.value.trim();
+        if(!text){ setHint('Please enter some text or a URL first.', true); return; }
+        if(typeof QRCode === 'undefined'){ setHint('The QR library failed to load. Check your connection and reload the page.', true); return; }
+        setHint('', false);
+        QRCode.toCanvas(canvas, text, currentOpts()).then(function(){
+          lastText = text;
+          out.style.display = '';
+          if(pngBtn) pngBtn.disabled = false;
+          if(svgBtn) svgBtn.disabled = false;
+          setHint('QR code generated.', false);
+        }).catch(function(){
+          setHint('Could not generate a QR code for that input — it may be too long for a QR code.', true);
+        });
+      });
+      if(pngBtn) pngBtn.addEventListener('click', function(){
+        if(!lastText || !canvas.toBlob) return;
+        canvas.toBlob(function(blob){
+          if(!blob) return;
+          var url = URL.createObjectURL(blob);
+          download(url, 'qr-code.png');
+          setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+        }, 'image/png');
+      });
+      if(svgBtn) svgBtn.addEventListener('click', function(){
+        if(!lastText || typeof QRCode === 'undefined') return;
+        QRCode.toString(lastText, currentOpts({ type: 'svg' })).then(function(svg){
+          var blob = new Blob([svg], { type: 'image/svg+xml' });
+          var url = URL.createObjectURL(blob);
+          download(url, 'qr-code.svg');
+          setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+        }).catch(function(){
+          setHint('SVG export failed. Try generating the code again.', true);
+        });
+      });
+    })();
+</script>
+</body>
+</html>

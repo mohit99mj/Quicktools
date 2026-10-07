@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Password Generator — Strong Random Passwords</title>
+<meta name="description" content="Generate strong random passwords with crypto-grade randomness. Choose length and character sets, see entropy strength, and copy in one click.">
+<meta name="keywords" content="password generator, strong password generator, random password, secure password generator">
+<link rel="canonical" href="https://www.example.com/tools/password-generator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Password Generator — Strong Random Passwords">
+<meta property="og:description" content="Generate strong random passwords with crypto-grade randomness. Choose length and character sets, see entropy strength, and copy in one click.">
+<meta property="og:url" content="https://www.example.com/tools/password-generator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Password Generator — Strong Random Passwords">
+<meta name="twitter:description" content="Generate strong random passwords with crypto-grade randomness. Choose length and character sets, see entropy strength, and copy in one click.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-password-generator .tool-password-generator-sets{border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px;margin:0 0 12px;}
+.tool-password-generator .tool-password-generator-sets .label{padding:0 4px;}
+.tool-password-generator .tool-password-generator-check{display:flex;align-items:center;gap:8px;margin:6px 0;min-height:44px;cursor:pointer;}
+.tool-password-generator .tool-password-generator-check input{width:20px;height:20px;accent-color:var(--accent);}
+.tool-password-generator #pg-len{width:100%;accent-color:var(--accent);}
+.tool-password-generator .tool-password-generator-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;}
+.tool-password-generator .tool-password-generator-out{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:0.02em;}
+.tool-password-generator .tool-password-generator-meter{margin-top:12px;}
+.tool-password-generator #pg-bar{height:100%;background:var(--accent);border-radius:inherit;transition:width .2s ease;}
+.tool-password-generator .progress{height:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden;}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li aria-current="page">Password Generator</li></ol></nav>
+<h1>Password Generator</h1>
+<div class="tool-body-intro">
+<p>A password generator that creates strong, random passwords using your browser’s cryptographic random number generator. Set the length from 8 to 64 characters and mix lowercase, uppercase, digits and symbols to taste.</p><p>Every password comes with an entropy rating so you can see at a glance how resistant it is to guessing. Generate as many as you like — nothing is stored or transmitted.</p><p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+</div>
+<section class="tool-section tool-password-generator" aria-label="Password Generator">
+
+    <div class="card tool-panel">
+      <div class="field">
+        <label class="label" for="pg-len">Password length: <output id="pg-len-val" for="pg-len">20</output></label>
+        <input type="range" id="pg-len" min="8" max="64" step="1" value="20">
+      </div>
+      <fieldset class="tool-password-generator-sets">
+        <legend class="label">Character sets</legend>
+        <label class="tool-password-generator-check"><input type="checkbox" id="pg-lower" checked> Lowercase (a–z)</label>
+        <label class="tool-password-generator-check"><input type="checkbox" id="pg-upper" checked> Uppercase (A–Z)</label>
+        <label class="tool-password-generator-check"><input type="checkbox" id="pg-digits" checked> Digits (0–9)</label>
+        <label class="tool-password-generator-check"><input type="checkbox" id="pg-symbols" checked> Symbols (!@#$…)</label>
+      </fieldset>
+      <div class="field">
+        <label class="tool-password-generator-check"><input type="checkbox" id="pg-ambiguous"> Exclude ambiguous characters (l, I, 1, O, 0)</label>
+      </div>
+      <div class="tool-password-generator-actions">
+        <button class="btn btn-primary" id="pg-generate">Generate new password</button>
+        <button class="btn btn-ghost" id="pg-copy">Copy</button>
+      </div>
+      <p class="hint" id="pg-hint" role="status" style="display:none"></p>
+      <div class="result" aria-live="polite">
+        <label class="label" for="pg-out">Generated password</label>
+        <input class="input tool-password-generator-out" id="pg-out" type="text" readonly autocomplete="off" spellcheck="false">
+        <div class="tool-password-generator-meter">
+          <div class="progress" role="progressbar" aria-label="Password strength" aria-valuemin="0" aria-valuemax="100" id="pg-bar-wrap"><div id="pg-bar"></div></div>
+          <p class="hint" id="pg-entropy"></p>
+        </div>
+      </div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Drag the slider to set the password length (8–64 characters).</li>
+<li>Tick the character sets you want to include: lowercase, uppercase, digits, symbols.</li>
+<li>Optionally exclude ambiguous characters that are easy to mix up.</li>
+<li>Click &quot;Generate new password&quot; (or it regenerates automatically) and copy the result.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>How random are these passwords?</summary><div class="faq-a"><p>They are generated with your browser’s cryptographic random number generator (crypto.getRandomValues) — the same source of randomness browsers use for security features.</p></div></details>
+<details><summary>What does the entropy number mean?</summary><div class="faq-a"><p>Entropy, measured in bits, estimates how hard the password is to guess by brute force. Around 80 bits or more is considered strong for most purposes.</p></div></details>
+<details><summary>Should I exclude ambiguous characters?</summary><div class="faq-a"><p>Characters like l, I, 1, O and 0 look alike in some fonts and cause mistakes when a password must be read or typed by hand. Excluding them helps in those cases.</p></div></details>
+<details><summary>Is my password sent anywhere?</summary><div class="faq-a"><p>No. Generation happens entirely on your device and nothing is stored or transmitted.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../qr-generator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#qr-code"></use></svg><span class="tl-name">QR Code Generator</span><span class="tl-desc">QR &amp; Generators</span></a>
+<a class="tool-card" href="../uuid-generator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#fingerprint"></use></svg><span class="tl-name">UUID Generator</span><span class="tl-desc">QR &amp; Generators</span></a>
+<a class="tool-card" href="../hash-generator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#hash"></use></svg><span class="tl-name">Hash Generator</span><span class="tl-desc">Developer Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Password Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/password-generator/","description":"Generate strong random passwords with crypto-grade randomness. Choose length and character sets, see entropy strength, and copy in one click.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How random are these passwords?","acceptedAnswer":{"@type":"Answer","text":"They are generated with your browser’s cryptographic random number generator (crypto.getRandomValues) — the same source of randomness browsers use for security features."}},{"@type":"Question","name":"What does the entropy number mean?","acceptedAnswer":{"@type":"Answer","text":"Entropy, measured in bits, estimates how hard the password is to guess by brute force. Around 80 bits or more is considered strong for most purposes."}},{"@type":"Question","name":"Should I exclude ambiguous characters?","acceptedAnswer":{"@type":"Answer","text":"Characters like l, I, 1, O and 0 look alike in some fonts and cause mistakes when a password must be read or typed by hand. Excluding them helps in those cases."}},{"@type":"Question","name":"Is my password sent anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Generation happens entirely on your device and nothing is stored or transmitted."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"QR & Generators","item":"https://www.example.com/#cat-qr-generators"},{"@type":"ListItem","position":3,"name":"Password Generator","item":"https://www.example.com/tools/password-generator/"}]}</script>
+<script>
+var LOGIC={buildCharset:(opts) => {
+    var o = opts || {};
+    var cs = '';
+    if (o.lower) cs += 'abcdefghijklmnopqrstuvwxyz';
+    if (o.upper) cs += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if (o.digits) cs += '0123456789';
+    if (o.symbols) cs += '!@#$%^&*()-_=+[]{};:,.<>?/~';
+    if (o.excludeAmbiguous) {
+      var ambiguous = 'Il1O0';
+      var filtered = '';
+      for (var i = 0; i < cs.length; i++) {
+        if (ambiguous.indexOf(cs.charAt(i)) === -1) filtered += cs.charAt(i);
+      }
+      cs = filtered;
+    }
+    return cs;
+  },pickPassword:(charset, length, randFn) => {
+    if (!charset || charset.length === 0) return '';
+    var n = Math.floor(Number(length));
+    if (!(n > 0)) return '';
+    var out = '';
+    for (var i = 0; i < n; i++) {
+      var r = randFn();
+      if (!(r >= 0) || !(r < 1)) r = 0;
+      var idx = Math.floor(r * charset.length);
+      if (idx >= charset.length) idx = charset.length - 1;
+      out += charset.charAt(idx);
+    }
+    return out;
+  }};
+
+    (function(){
+      'use strict';
+      function $(id){ return document.getElementById(id); }
+      var lenEl = $('pg-len'), lenVal = $('pg-len-val'), lowerEl = $('pg-lower'),
+          upperEl = $('pg-upper'), digitsEl = $('pg-digits'), symbolsEl = $('pg-symbols'),
+          ambEl = $('pg-ambiguous'), genBtn = $('pg-generate'), copyBtn = $('pg-copy'),
+          outEl = $('pg-out'), hint = $('pg-hint'), bar = $('pg-bar'),
+          barWrap = $('pg-bar-wrap'), entropyEl = $('pg-entropy');
+      if(!lenEl || !genBtn || !outEl || !lowerEl || !upperEl || !digitsEl || !symbolsEl || !ambEl) return;
+      function setHint(msg, isError){
+        if(!hint) return;
+        hint.textContent = msg || '';
+        hint.style.display = msg ? '' : 'none';
+        hint.className = isError ? 'error' : 'hint';
+      }
+      function randFloat(){
+        var a = new Uint32Array(1);
+        window.crypto.getRandomValues(a);
+        return a[0] / 4294967296;
+      }
+      function strengthLabel(bits){
+        if(bits < 60) return 'Weak';
+        if(bits < 80) return 'Fair';
+        if(bits < 100) return 'Good';
+        return 'Strong';
+      }
+      function generate(){
+        var opts = {
+          lower: lowerEl.checked, upper: upperEl.checked,
+          digits: digitsEl.checked, symbols: symbolsEl.checked,
+          excludeAmbiguous: ambEl.checked
+        };
+        var charset = LOGIC.buildCharset(opts);
+        if(!charset){ setHint('Select at least one character set.', true); outEl.value = ''; if(entropyEl) entropyEl.textContent = ''; if(bar) bar.style.width = '0%'; return; }
+        setHint('', false);
+        var length = parseInt(lenEl.value, 10) || 20;
+        var pw = LOGIC.pickPassword(charset, length, randFloat);
+        outEl.value = pw;
+        var bits = Math.round(length * (Math.log(charset.length) / Math.log(2)));
+        if(entropyEl) entropyEl.textContent = '≈ ' + bits + ' bits of entropy — ' + strengthLabel(bits) + '.';
+        if(bar){ bar.style.width = Math.min(100, Math.round(bits / 1.2)) + '%'; }
+        if(barWrap) barWrap.setAttribute('aria-valuenow', String(Math.min(100, Math.round(bits / 1.2))));
+      }
+      function copyText(t, done){
+        function fallback(){
+          var ta = document.createElement('textarea');
+          ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select();
+          var ok = false;
+          try{ ok = document.execCommand('copy'); }catch(e){}
+          document.body.removeChild(ta); done(ok);
+        }
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(t).then(function(){ done(true); }, fallback);
+        } else { fallback(); }
+      }
+      genBtn.addEventListener('click', generate);
+      [lenEl, lowerEl, upperEl, digitsEl, symbolsEl, ambEl].forEach(function(el){
+        el.addEventListener('input', function(){
+          if(lenVal) lenVal.textContent = lenEl.value;
+          generate();
+        });
+        el.addEventListener('change', function(){
+          if(lenVal) lenVal.textContent = lenEl.value;
+          generate();
+        });
+      });
+      if(lenVal) lenVal.textContent = lenEl.value;
+      if(copyBtn) copyBtn.addEventListener('click', function(){
+        if(!outEl.value){ setHint('Generate a password first.', true); return; }
+        copyText(outEl.value, function(ok){
+          setHint(ok ? 'Copied to clipboard.' : 'Copy failed — select the password manually.', !ok);
+          copyBtn.textContent = ok ? 'Copied!' : 'Copy';
+          setTimeout(function(){ copyBtn.textContent = 'Copy'; }, 1500);
+        });
+      });
+      if(!(window.crypto && window.crypto.getRandomValues)){
+        setHint('Your browser does not support cryptographic randomness; this tool cannot run here.', true);
+        genBtn.disabled = true;
+        return;
+      }
+      generate();
+    })();
+</script>
+</body>
+</html>

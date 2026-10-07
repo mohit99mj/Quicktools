@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barcode Generator — CODE128, EAN-13 &amp; More</title>
+<meta name="description" content="Create barcodes in CODE128, CODE39, EAN-13, UPC, ITF-14 and more. Preview instantly and download as SVG or PNG — free, in your browser.">
+<meta name="keywords" content="barcode generator, code128 generator, ean13 barcode, upc barcode generator, free barcode">
+<link rel="canonical" href="https://www.example.com/tools/barcode-generator/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Barcode Generator — CODE128, EAN-13 &amp; More">
+<meta property="og:description" content="Create barcodes in CODE128, CODE39, EAN-13, UPC, ITF-14 and more. Preview instantly and download as SVG or PNG — free, in your browser.">
+<meta property="og:url" content="https://www.example.com/tools/barcode-generator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Barcode Generator — CODE128, EAN-13 &amp; More">
+<meta name="twitter:description" content="Create barcodes in CODE128, CODE39, EAN-13, UPC, ITF-14 and more. Preview instantly and download as SVG or PNG — free, in your browser.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-barcode-generator .tool-barcode-generator-preview{background:#ffffff;border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px;margin-top:16px;overflow-x:auto;text-align:center;}
+.tool-barcode-generator .tool-barcode-generator-preview svg{max-width:100%;height:auto;}
+.tool-barcode-generator .tool-barcode-generator-dl{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap;}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li aria-current="page">Barcode Generator</li></ol></nav>
+<h1>Barcode Generator</h1>
+<div class="tool-body-intro">
+<p>A barcode generator that draws CODE128, CODE39, EAN-13, UPC-A, ITF-14, MSI, Pharmacode and Codabar barcodes right in your browser. Pick a format, enter your value, and preview the barcode instantly.</p><p>Download the result as a scalable SVG for print work or as a PNG for documents and labels. No fonts or plugins needed — the barcode is drawn as vector graphics on the page.</p><p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+</div>
+<section class="tool-section tool-barcode-generator" aria-label="Barcode Generator">
+
+    <div class="card tool-panel">
+      <div class="field">
+        <label class="label" for="bc-format">Barcode format</label>
+        <select class="select" id="bc-format">
+          <option value="CODE128" selected>CODE128 — general purpose</option>
+          <option value="CODE39">CODE39 — A–Z, 0–9 and symbols</option>
+          <option value="EAN13">EAN-13 — retail (12 digits)</option>
+          <option value="UPC">UPC-A — retail US (11–12 digits)</option>
+          <option value="ITF14">ITF-14 — cartons (13–14 digits)</option>
+          <option value="MSI">MSI — digits only</option>
+          <option value="pharmacode">Pharmacode — 3 to 131071</option>
+          <option value="codabar">Codabar — A–D start/stop</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label" for="bc-value">Value to encode</label>
+        <input class="input" id="bc-value" type="text" placeholder="e.g. 590123412345" autocomplete="off" spellcheck="false">
+        <p class="hint" id="bc-format-hint">CODE128 accepts standard keyboard characters.</p>
+      </div>
+      <button class="btn btn-primary" id="bc-generate">Generate barcode</button>
+      <p class="hint" id="bc-hint" role="status" style="display:none"></p>
+      <div class="result" id="bc-out" aria-live="polite" style="display:none">
+        <div class="tool-barcode-generator-preview"><svg id="bc-svg" role="img" aria-label="Generated barcode"></svg></div>
+        <div class="tool-barcode-generator-dl">
+          <button class="btn btn-ghost" id="bc-svg-dl" disabled>Download SVG</button>
+          <button class="btn btn-ghost" id="bc-png-dl" disabled>Download PNG</button>
+        </div>
+      </div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Choose a barcode format from the list (CODE128 is the most flexible general choice).</li>
+<li>Enter the value, following the format hint shown under the input.</li>
+<li>Click &quot;Generate barcode&quot; to preview it.</li>
+<li>Download as SVG for print or PNG for documents.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Which barcode format should I choose?</summary><div class="faq-a"><p>CODE128 is the most flexible for general use. EAN-13 is standard for retail products worldwide, UPC-A for North America, and ITF-14 for cartons and outer cases.</p></div></details>
+<details><summary>Why does EAN-13 ask for 12 digits?</summary><div class="faq-a"><p>The 13th digit is a check digit calculated from the other 12. Enter the first 12 digits and the check digit is added automatically — or enter all 13 if you already have the full code.</p></div></details>
+<details><summary>Can I print these barcodes?</summary><div class="faq-a"><p>Yes. Download the SVG version for print work since vector graphics stay sharp at any size, or use the PNG for documents and on-screen labels.</p></div></details>
+<details><summary>Do I need a barcode font installed?</summary><div class="faq-a"><p>No. The barcode is drawn as vector graphics directly on the page, so it displays and prints correctly without any special fonts.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../qr-generator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#qr-code"></use></svg><span class="tl-name">QR Code Generator</span><span class="tl-desc">QR &amp; Generators</span></a>
+<a class="tool-card" href="../uuid-generator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#fingerprint"></use></svg><span class="tl-name">UUID Generator</span><span class="tl-desc">QR &amp; Generators</span></a>
+<a class="tool-card" href="../password-generator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#key"></use></svg><span class="tl-name">Password Generator</span><span class="tl-desc">QR &amp; Generators</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Barcode Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/barcode-generator/","description":"Create barcodes in CODE128, CODE39, EAN-13, UPC, ITF-14 and more. Preview instantly and download as SVG or PNG — free, in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which barcode format should I choose?","acceptedAnswer":{"@type":"Answer","text":"CODE128 is the most flexible for general use. EAN-13 is standard for retail products worldwide, UPC-A for North America, and ITF-14 for cartons and outer cases."}},{"@type":"Question","name":"Why does EAN-13 ask for 12 digits?","acceptedAnswer":{"@type":"Answer","text":"The 13th digit is a check digit calculated from the other 12. Enter the first 12 digits and the check digit is added automatically — or enter all 13 if you already have the full code."}},{"@type":"Question","name":"Can I print these barcodes?","acceptedAnswer":{"@type":"Answer","text":"Yes. Download the SVG version for print work since vector graphics stay sharp at any size, or use the PNG for documents and on-screen labels."}},{"@type":"Question","name":"Do I need a barcode font installed?","acceptedAnswer":{"@type":"Answer","text":"No. The barcode is drawn as vector graphics directly on the page, so it displays and prints correctly without any special fonts."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"QR & Generators","item":"https://www.example.com/#cat-qr-generators"},{"@type":"ListItem","position":3,"name":"Barcode Generator","item":"https://www.example.com/tools/barcode-generator/"}]}</script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js" defer></script>
+<script>
+
+    (function(){
+      'use strict';
+      function $(id){ return document.getElementById(id); }
+      var formatEl = $('bc-format'), valueEl = $('bc-value'), genBtn = $('bc-generate'),
+          hint = $('bc-hint'), out = $('bc-out'), svg = $('bc-svg'),
+          svgDl = $('bc-svg-dl'), pngDl = $('bc-png-dl'), formatHint = $('bc-format-hint');
+      if(!formatEl || !valueEl || !genBtn || !svg) return;
+      var generated = false;
+      var FORMAT_HINTS = {
+        CODE128: 'CODE128 accepts standard keyboard characters.',
+        CODE39: 'CODE39 allows A–Z, 0–9, space and - . $ / + %.',
+        EAN13: 'EAN-13 needs exactly 12 digits (check digit added automatically) or 13 digits.',
+        UPC: 'UPC-A needs 11 or 12 digits.',
+        ITF14: 'ITF-14 needs 13 or 14 digits.',
+        MSI: 'MSI accepts digits only.',
+        pharmacode: 'Pharmacode accepts a whole number from 3 to 131071.',
+        codabar: 'Codabar must start and end with A, B, C or D.'
+      };
+      function setHint(msg, isError){
+        if(!hint) return;
+        hint.textContent = msg || '';
+        hint.style.display = msg ? '' : 'none';
+        hint.className = isError ? 'error' : 'hint';
+      }
+      function download(url, name){
+        var a = document.createElement('a');
+        a.href = url; a.download = name;
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      }
+      function validateBarcode(v, f){
+        if(!v) return 'Enter a value to encode.';
+        switch(f){
+          case 'CODE128':
+            if(!/^[\x20-\x7E]*$/.test(v)) return 'CODE128 supports standard keyboard characters (letters, digits, symbols) only.';
+            return null;
+          case 'CODE39':
+            if(!/^[0-9A-Z \-\.\$\/\+\%]*$/.test(v.toUpperCase())) return 'CODE39 allows A–Z, 0–9, space and - . $ / + % only.';
+            return null;
+          case 'EAN13':
+            if(!/^\d{12}$/.test(v) && !/^\d{13}$/.test(v)) return 'EAN-13 needs exactly 12 digits (the check digit is added automatically) or all 13 digits.';
+            return null;
+          case 'UPC':
+            if(!/^\d{11,12}$/.test(v)) return 'UPC-A needs 11 or 12 digits.';
+            return null;
+          case 'ITF14':
+            if(!/^\d{13,14}$/.test(v)) return 'ITF-14 needs 13 or 14 digits.';
+            return null;
+          case 'MSI':
+            if(!/^\d+$/.test(v)) return 'MSI accepts digits only.';
+            return null;
+          case 'pharmacode':
+            if(!/^\d+$/.test(v) || parseInt(v, 10) < 3 || parseInt(v, 10) > 131071) return 'Pharmacode accepts a whole number from 3 to 131071.';
+            return null;
+          case 'codabar':
+            if(!/^[A-Da-d][0-9\-\$\:\/\.\+]*[A-Da-d]$/.test(v)) return 'Codabar must start and end with A, B, C or D, with digits and - $ : / . + inside.';
+            return null;
+          default:
+            return 'Unknown barcode format.';
+        }
+      }
+      function updateFormatHint(){
+        if(formatHint) formatHint.textContent = FORMAT_HINTS[formatEl.value] || '';
+      }
+      formatEl.addEventListener('change', updateFormatHint);
+      updateFormatHint();
+      genBtn.addEventListener('click', function(){
+        var format = formatEl.value;
+        var value = valueEl.value.trim();
+        if(format === 'CODE39') value = value.toUpperCase();
+        var err = validateBarcode(value, format);
+        if(err){ setHint(err, true); return; }
+        if(typeof JsBarcode === 'undefined'){ setHint('The barcode library failed to load. Check your connection and reload the page.', true); return; }
+        setHint('', false);
+        try{
+          JsBarcode(svg, value, {
+            format: format,
+            lineColor: '#101418',
+            background: '#ffffff',
+            displayValue: format !== 'pharmacode',
+            fontSize: 16,
+            fontOptions: 'bold',
+            height: format === 'pharmacode' ? 60 : 80,
+            margin: 10,
+            textMargin: 4
+          });
+          svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+          generated = true;
+          out.style.display = '';
+          if(svgDl) svgDl.disabled = false;
+          if(pngDl) pngDl.disabled = false;
+          setHint('Barcode generated.', false);
+        }catch(e){
+          setHint('That value is not valid for the selected format. Check the hint above the input.', true);
+        }
+      });
+      function serializedSvg(){
+        return new XMLSerializer().serializeToString(svg);
+      }
+      if(svgDl) svgDl.addEventListener('click', function(){
+        if(!generated) return;
+        var blob = new Blob([serializedSvg()], { type: 'image/svg+xml' });
+        var url = URL.createObjectURL(blob);
+        download(url, 'barcode.svg');
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+      });
+      if(pngDl) pngDl.addEventListener('click', function(){
+        if(!generated) return;
+        var str = serializedSvg();
+        var blob = new Blob([str], { type: 'image/svg+xml;charset=utf-8' });
+        var url = URL.createObjectURL(blob);
+        var img = new Image();
+        img.onload = function(){
+          try{
+            var scale = 3;
+            var w = parseInt(svg.getAttribute('width'), 10) || svg.viewBox.baseVal.width || 300;
+            var h = parseInt(svg.getAttribute('height'), 10) || 100;
+            var c = document.createElement('canvas');
+            c.width = Math.round(w * scale); c.height = Math.round(h * scale);
+            var ctx = c.getContext('2d');
+            ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, c.width, c.height);
+            ctx.drawImage(img, 0, 0, c.width, c.height);
+            c.toBlob(function(b){
+              URL.revokeObjectURL(url);
+              if(!b){ setHint('PNG export failed. Try the SVG download instead.', true); return; }
+              var u2 = URL.createObjectURL(b);
+              download(u2, 'barcode.png');
+              setTimeout(function(){ URL.revokeObjectURL(u2); }, 4000);
+            }, 'image/png');
+          }catch(e){
+            URL.revokeObjectURL(url);
+            setHint('PNG export failed. Try the SVG download instead.', true);
+          }
+        };
+        img.onerror = function(){
+          URL.revokeObjectURL(url);
+          setHint('PNG export failed. Try the SVG download instead.', true);
+        };
+        img.src = url;
+      });
+    })();
+</script>
+</body>
+</html>

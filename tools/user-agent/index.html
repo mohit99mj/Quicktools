@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>User Agent — Browser &amp; OS Info</title>
+<meta name="description" content="See your user agent string plus parsed browser, OS, device, CPU cores, memory and screen details — all in your browser.">
+<meta name="keywords" content="user agent, my user agent, browser info, what browser am i using">
+<link rel="canonical" href="https://www.example.com/tools/user-agent/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="User Agent — Browser &amp; OS Info">
+<meta property="og:description" content="See your user agent string plus parsed browser, OS, device, CPU cores, memory and screen details — all in your browser.">
+<meta property="og:url" content="https://www.example.com/tools/user-agent/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="User Agent — Browser &amp; OS Info">
+<meta name="twitter:description" content="See your user agent string plus parsed browser, OS, device, CPU cores, memory and screen details — all in your browser.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-user-agent .tool-user-agent-heading{font-size:1.1rem;margin:1rem 0 .5rem;}.tool-user-agent .tool-user-agent-raw{word-break:break-all;font-size:.85rem;}.tool-user-agent .table td,.tool-user-agent .table th{word-break:break-all;}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li aria-current="page">User Agent Info</li></ol></nav>
+<h1>User Agent Info</h1>
+<div class="tool-body-intro">
+<p>Your <strong>user agent</strong> string tells websites which browser, operating system, and device you are using. This page shows the raw string plus a parsed summary of your browser, OS, and device type.</p><p>Everything is read locally from your browser — nothing is sent or stored anywhere.</p>
+</div>
+<section class="tool-section tool-user-agent" aria-label="User Agent Info">
+
+    <div class="card tool-panel">
+      <h2 class="tool-user-agent-heading">Parsed summary</h2>
+      <div class="result" id="ua-parsed" aria-live="polite"></div>
+      <h2 class="tool-user-agent-heading">Full details</h2>
+      <div class="result" id="ua-table" aria-live="polite"></div>
+      <button class="btn btn-ghost" id="ua-copy">Copy user agent string</button>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Open the page — your details load automatically.</li>
+<li>Read the parsed summary: browser, OS, and device type.</li>
+<li>Copy the raw user agent string if a support form asks for it.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>What is a user agent string?</summary><div class="faq-a"><p>It is a line of text your browser sends to every website, identifying the browser version, operating system, and device. Sites use it to serve the right layout or troubleshoot issues.</p></div></details>
+<details><summary>Can a user agent be faked?</summary><div class="faq-a"><p>Yes — browsers and extensions can override it, so it is an identification hint, not proof. The details here reflect what your browser reports, which may differ from the real device if spoofing is enabled.</p></div></details>
+<details><summary>Is my user agent private information?</summary><div class="faq-a"><p>It is sent to every site you visit, so it is not secret — but combined with other signals it can help trackers fingerprint a device. Treat it as semi-public.</p></div></details>
+<details><summary>Why does it mention &quot;Mozilla&quot; even in Chrome?</summary><div class="faq-a"><p>For historical compatibility, nearly all browsers start their user agent with &quot;Mozilla/5.0&quot;. It is a legacy quirk, not a sign you are using Firefox.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../ip-lookup/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#globe"></use></svg><span class="tl-name">What&#39;s My IP</span><span class="tl-desc">Internet Tools</span></a>
+<a class="tool-card" href="../dns-lookup/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#network"></use></svg><span class="tl-name">DNS Lookup</span><span class="tl-desc">Internet Tools</span></a>
+<a class="tool-card" href="../speed-test/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#gauge"></use></svg><span class="tl-name">Internet Speed Test</span><span class="tl-desc">Internet Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"User Agent Info","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/user-agent/","description":"See your user agent string plus parsed browser, OS, device, CPU cores, memory and screen details — all in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a user agent string?","acceptedAnswer":{"@type":"Answer","text":"It is a line of text your browser sends to every website, identifying the browser version, operating system, and device. Sites use it to serve the right layout or troubleshoot issues."}},{"@type":"Question","name":"Can a user agent be faked?","acceptedAnswer":{"@type":"Answer","text":"Yes — browsers and extensions can override it, so it is an identification hint, not proof. The details here reflect what your browser reports, which may differ from the real device if spoofing is enabled."}},{"@type":"Question","name":"Is my user agent private information?","acceptedAnswer":{"@type":"Answer","text":"It is sent to every site you visit, so it is not secret — but combined with other signals it can help trackers fingerprint a device. Treat it as semi-public."}},{"@type":"Question","name":"Why does it mention \"Mozilla\" even in Chrome?","acceptedAnswer":{"@type":"Answer","text":"For historical compatibility, nearly all browsers start their user agent with \"Mozilla/5.0\". It is a legacy quirk, not a sign you are using Firefox."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Internet Tools","item":"https://www.example.com/#cat-internet-tools"},{"@type":"ListItem","position":3,"name":"User Agent Info","item":"https://www.example.com/tools/user-agent/"}]}</script>
+<script>
+var LOGIC={parseUA:(uaString) => {
+    const ua = String(uaString || '');
+    let browser = 'Unknown';
+    if (/Edg\/[\d.]+/.test(ua)) {
+      browser = 'Edge';
+    } else if (/OPR\/[\d.]+/.test(ua) || /Opera/.test(ua)) {
+      browser = 'Opera';
+    } else if (/Firefox\/[\d.]+/.test(ua)) {
+      browser = 'Firefox';
+    } else if (/Chrome\/[\d.]+/.test(ua)) {
+      browser = 'Chrome';
+    } else if (/Version\/[\d.]+.*Safari/.test(ua)) {
+      browser = 'Safari';
+    } else if (/Safari\/[\d.]+/.test(ua)) {
+      browser = 'Safari';
+    }
+    let os = 'Unknown';
+    if (/Windows NT 10/.test(ua)) {
+      os = 'Windows 10/11';
+    } else if (/Windows NT 6\.3/.test(ua)) {
+      os = 'Windows 8.1';
+    } else if (/Windows NT 6\.1/.test(ua)) {
+      os = 'Windows 7';
+    } else if (/Windows/.test(ua)) {
+      os = 'Windows';
+    } else if (/iPhone|iPad|iPod/.test(ua)) {
+      os = 'iOS';
+    } else if (/Android/.test(ua)) {
+      os = 'Android';
+    } else if (/Mac OS X/.test(ua)) {
+      os = 'macOS';
+    } else if (/CrOS/.test(ua)) {
+      os = 'Chrome OS';
+    } else if (/Linux/.test(ua)) {
+      os = 'Linux';
+    }
+    let device = 'Desktop';
+    if (/iPad|Tablet/.test(ua) || (/Android/.test(ua) && !/Mobile/.test(ua))) {
+      device = 'Tablet';
+    } else if (/Mobi|Android|iPhone|iPod/.test(ua)) {
+      device = 'Mobile';
+    }
+    return { browser, os, device };
+  }};
+
+    (function(){
+      'use strict';
+      var parsedEl = document.getElementById('ua-parsed');
+      var tableEl = document.getElementById('ua-table');
+      var copyBtn = document.getElementById('ua-copy');
+      var ua = (typeof navigator !== 'undefined' && navigator.userAgent) ? navigator.userAgent : '';
+      function fmt(v){ return (v === undefined || v === null || v === '') ? 'Not reported' : String(v); }
+      function row(label, value){
+        var tr = document.createElement('tr');
+        var th = document.createElement('th');
+        th.textContent = label;
+        th.scope = 'row';
+        var td = document.createElement('td');
+        td.textContent = value;
+        tr.appendChild(th);
+        tr.appendChild(td);
+        return tr;
+      }
+      if (parsedEl){
+        var p = LOGIC.parseUA(ua);
+        var dl = document.createElement('p');
+        var b = document.createElement('strong');
+        b.className = 'result-big';
+        b.textContent = p.browser + ' on ' + p.os;
+        dl.appendChild(b);
+        var dt = document.createElement('span');
+        dt.className = 'hint';
+        dt.textContent = ' — ' + p.device;
+        dl.appendChild(dt);
+        parsedEl.appendChild(dl);
+        var raw = document.createElement('p');
+        raw.className = 'hint tool-user-agent-raw';
+        raw.textContent = ua;
+        parsedEl.appendChild(raw);
+      }
+      if (tableEl && typeof navigator !== 'undefined'){
+        var tbl = document.createElement('table');
+        tbl.className = 'table';
+        var tb = document.createElement('tbody');
+        tb.appendChild(row('User agent', fmt(navigator.userAgent)));
+        tb.appendChild(row('Platform', fmt(navigator.platform)));
+        tb.appendChild(row('Language', fmt(navigator.language)));
+        tb.appendChild(row('Languages', fmt(navigator.languages && navigator.languages.join(', '))));
+        tb.appendChild(row('CPU cores', fmt(navigator.hardwareConcurrency)));
+        tb.appendChild(row('Device memory', navigator.deviceMemory ? '~' + navigator.deviceMemory + ' GB' : 'Not reported'));
+        tb.appendChild(row('Touch support', ('ontouchstart' in window || (navigator.maxTouchPoints || 0) > 0) ? 'Yes' : 'No'));
+        tb.appendChild(row('Screen', typeof screen !== 'undefined' ? screen.width + ' × ' + screen.height + ' @ ' + (window.devicePixelRatio || 1) + 'x' : 'Not reported'));
+        tb.appendChild(row('Cookies enabled', fmt(navigator.cookieEnabled)));
+        tbl.appendChild(tb);
+        tableEl.appendChild(tbl);
+      }
+      if (copyBtn){
+        copyBtn.addEventListener('click', function(){
+          if (!ua) return;
+          if (navigator.clipboard && navigator.clipboard.writeText){
+            navigator.clipboard.writeText(ua).then(function(){
+              copyBtn.textContent = 'Copied!';
+              setTimeout(function(){ copyBtn.textContent = 'Copy user agent string'; }, 1500);
+            }).catch(function(){});
+          } else {
+            var ta = document.createElement('textarea');
+            ta.value = ua;
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); } catch (e) {}
+            ta.remove();
+          }
+        });
+      }
+    })();
+</script>
+</body>
+</html>
