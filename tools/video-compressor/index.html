@@ -403,7 +403,7 @@
 
       loadBtn.addEventListener('click', function(){
         hideError();
-        loadBtn.disabled = true;
+        loadBtn.disabled = true; loadBtn.setAttribute('aria-busy', 'true');
         loadBtn.textContent = 'Loading engine…';
         progressEl.hidden = false;
         setBar(0);
@@ -414,7 +414,7 @@
           progressEl.hidden = true;
           status('Engine ready — pick a quality and press "Compress video".');
         }).catch(function(){
-          loadBtn.disabled = false;
+          loadBtn.disabled = false; loadBtn.removeAttribute('aria-busy');
           loadBtn.textContent = 'Load video engine (one-time ~25MB)';
           progressEl.hidden = true;
           status('');
@@ -472,7 +472,7 @@
         var vcMq = $('vc-mode-quality'), vcMt = $('vc-mode-target');
         if(vcMq) vcMq.disabled = true;
         if(vcMt) vcMt.disabled = true;
-        goBtn.disabled = true;
+        goBtn.disabled = true; goBtn.setAttribute('aria-busy', 'true');
         resultEl.hidden = true;
         progressEl.hidden = false;
         setBar(0);
@@ -574,7 +574,7 @@
           if(ffmpeg && ffmpeg._qtStale){ ffmpeg = null; }
           if(ffmpeg){ ffmpeg.setProgress(function(pr){ setBar(pr && pr.ratio ? pr.ratio : 0); }); }
           vcTargetRunning = false;
-          goBtn.disabled = false;
+          goBtn.disabled = false; goBtn.removeAttribute('aria-busy');
           var vcMq2 = $('vc-mode-quality'), vcMt2 = $('vc-mode-target');
           if(vcMq2) vcMq2.disabled = false;
           if(vcMt2) vcMt2.disabled = false;
@@ -615,7 +615,7 @@
         var inName = 'input' + extOf(file.name, '.mp4');
         var outName = baseName(file.name) + '-compressed.mp4';
         var beforeSize = file.size;
-        goBtn.disabled = true;
+        goBtn.disabled = true; goBtn.setAttribute('aria-busy', 'true');
         resultEl.hidden = true;
         progressEl.hidden = false;
         setBar(0);
@@ -660,7 +660,7 @@
           try{ ffmpeg.FS('unlink', inName); }catch(x){}
           if(ffmpeg && ffmpeg._qtStale){ ffmpeg = null; }
           try{ ffmpeg.FS('unlink', outName); }catch(x){}
-          goBtn.disabled = false;
+          goBtn.disabled = false; goBtn.removeAttribute('aria-busy');
           progressEl.hidden = true;
         });
       });
