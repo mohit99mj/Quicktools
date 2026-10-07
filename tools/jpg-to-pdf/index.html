@@ -282,7 +282,7 @@
           setStatus('Loading PDF engine…');
           pShow({ title: 'Creating PDF…', stage: 'Loading PDF engine…' });
           waitForLibs(['PDFLib'], function(){
-            createBtn.disabled = true;
+            createBtn.disabled = true; createBtn.setAttribute('aria-busy', 'true');
             if(progress){ progress.hidden = false; progress.value = 0; }
             var inTotal = files.reduce(function(s, it){ return s + it.file.size; }, 0);
             pShow({ title: 'Creating PDF…', stage: 'Processing image 1 of ' + files.length + '…', percent: 0 });
@@ -333,7 +333,7 @@
                 setStatus('Could not create the PDF: ' + (err && err.message ? err.message : 'unknown error'), true);
               }
               pHide();
-              createBtn.disabled = false;
+              createBtn.disabled = false; createBtn.removeAttribute('aria-busy');
               if(progress){ progress.hidden = true; }
             })();
           }, function(){

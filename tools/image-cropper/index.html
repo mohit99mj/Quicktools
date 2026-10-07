@@ -375,10 +375,10 @@
         var c = document.createElement('canvas');
         c.width = sw; c.height = sh;
         c.getContext('2d').drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
-        go.disabled = true;
+        go.disabled = true; go.setAttribute('aria-busy', 'true');
         pShow({ title: 'Image Cropper', stage: 'Cropping…', percent: 60 });
         c.toBlob(function(blob){
-          go.disabled = false;
+          go.disabled = false; go.removeAttribute('aria-busy');
           pHide();
           if(!blob){ setStatus('Could not encode the cropped image. Try a different image file.', true); return; }
           var url = URL.createObjectURL(blob);
