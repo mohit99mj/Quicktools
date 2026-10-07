@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resize Video Online — Free Resolution Changer</title>
+<meta name="description" content="Resize video resolution in your browser — downscale to 720p, 480p or a custom width. Free, private, no watermarks.">
+<meta name="keywords" content="resize video, change video resolution, video resizer online, downscale video, 720p converter">
+<link rel="canonical" href="https://www.example.com/tools/video-resizer/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Resize Video Online — Free Resolution Changer">
+<meta property="og:description" content="Resize video resolution in your browser — downscale to 720p, 480p or a custom width. Free, private, no watermarks.">
+<meta property="og:url" content="https://www.example.com/tools/video-resizer/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Resize Video Online — Free Resolution Changer">
+<meta name="twitter:description" content="Resize video resolution in your browser — downscale to 720p, 480p or a custom width. Free, private, no watermarks.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-video-resizer .progress{height:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:12px 0;}
+.tool-video-resizer .progress-bar{height:100%;width:0%;background:var(--accent);transition:width .15s linear;}
+.tool-video-resizer video{width:100%;max-height:380px;background:#000;border-radius:var(--radius-sm);}
+.tool-video-resizer #vr-result .btn{margin-top:12px;}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li aria-current="page">Resize Video</li></ol></nav>
+<h1>Resize Video</h1>
+<div class="tool-body-intro">
+<p>Make a video smaller — in pixels, not just megabytes. This free video resizer changes the resolution of any video to 720p, 480p, 360p or a custom width, with the height set automatically to preserve the aspect ratio.</p><p>Your files never leave your device — everything runs in your browser. Nothing is uploaded to any server.</p>
+</div>
+<section class="tool-section tool-video-resizer" aria-label="Resize Video">
+
+    <div class="card tool-panel">
+      <p class="hint privacy-note">Processing happens 100% in your browser — your files are never uploaded. The engine (~25MB) downloads once. Large files may be slow on phones.</p>
+      <div class="field">
+        <label class="label" for="vr-file">Choose a video</label>
+        <input class="input" id="vr-file" type="file" accept="video/*">
+      </div>
+      <p class="hint" id="vr-fileinfo" aria-live="polite"></p>
+      <div class="field" id="vr-loadwrap">
+        <button class="btn btn-primary" id="vr-load">Load video engine (one-time ~25MB)</button>
+      </div>
+      <div id="vr-controls" hidden>
+        <div class="field">
+          <label class="label" for="vr-preset">Resolution</label>
+          <select class="select" id="vr-preset">
+            <option value="1280">1280 × 720 (720p)</option>
+            <option value="854" selected>854 × 480 (480p)</option>
+            <option value="640">640 × 360 (360p)</option>
+            <option value="custom">Custom width…</option>
+          </select>
+          <p class="hint">The height is set automatically to preserve the aspect ratio.</p>
+        </div>
+        <div class="field" id="vr-customwrap" hidden>
+          <label class="label" for="vr-width">Custom width (px)</label>
+          <input class="input" id="vr-width" type="number" min="16" max="7680" step="2" value="960">
+          <p class="hint" id="vr-widthnote">Width must be even — odd values are rounded down.</p>
+        </div>
+        <button class="btn btn-primary" id="vr-go">Resize video</button>
+      </div>
+      <div class="progress" id="vr-progress" hidden><div class="progress-bar" id="vr-bar"></div></div>
+      <p class="hint" id="vr-status" aria-live="polite" hidden></p>
+      <div class="result" id="vr-result" aria-live="polite" hidden>
+        <p class="result-big" id="vr-done"></p>
+        <video id="vr-preview" controls playsinline></video>
+        <p><a class="btn btn-primary" id="vr-download" href="#">Download resized video</a></p>
+      </div>
+      <p class="error" id="vr-error" aria-live="polite" hidden></p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Choose a video file from your device.</li>
+<li>Click &quot;Load video engine&quot; — a one-time ~25MB download that enables resizing.</li>
+<li>Pick a preset (720p, 480p, 360p) or enter a custom width, then press &quot;Resize video&quot;.</li>
+<li>Preview the resized video and download it.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Is my video uploaded anywhere?</summary><div class="faq-a"><p>No. Resizing happens entirely on your device using a video engine that runs in your browser. Your file is never sent to a server.</p></div></details>
+<details><summary>Does resizing keep the aspect ratio?</summary><div class="faq-a"><p>Yes. You choose the width and the height is calculated automatically so the video is never stretched or squashed.</p></div></details>
+<details><summary>Should I upscale a small video to 720p?</summary><div class="faq-a"><p>You can, but upscaling does not add detail — the picture will just be larger and softer. Resizing is most useful for downscaling large videos to share-friendly sizes.</p></div></details>
+<details><summary>Why does the engine need to download ~25MB first?</summary><div class="faq-a"><p>Video processing needs a full video codec, which downloads once and is then cached by your browser. After that, resizing runs fully offline.</p></div></details>
+<details><summary>Does the audio change?</summary><div class="faq-a"><p>No. The audio stream is copied untouched — only the video resolution is re-encoded.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../video-compressor/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#video"></use></svg><span class="tl-name">Compress Video</span><span class="tl-desc">Video &amp; Audio</span></a>
+<a class="tool-card" href="../video-trimmer/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#scissors"></use></svg><span class="tl-name">Trim Video</span><span class="tl-desc">Video &amp; Audio</span></a>
+<a class="tool-card" href="../mp4-to-mp3/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#music"></use></svg><span class="tl-name">MP4 to MP3</span><span class="tl-desc">Video &amp; Audio</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Resize Video","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/video-resizer/","description":"Resize video resolution in your browser — downscale to 720p, 480p or a custom width. Free, private, no watermarks.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my video uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Resizing happens entirely on your device using a video engine that runs in your browser. Your file is never sent to a server."}},{"@type":"Question","name":"Does resizing keep the aspect ratio?","acceptedAnswer":{"@type":"Answer","text":"Yes. You choose the width and the height is calculated automatically so the video is never stretched or squashed."}},{"@type":"Question","name":"Should I upscale a small video to 720p?","acceptedAnswer":{"@type":"Answer","text":"You can, but upscaling does not add detail — the picture will just be larger and softer. Resizing is most useful for downscaling large videos to share-friendly sizes."}},{"@type":"Question","name":"Why does the engine need to download ~25MB first?","acceptedAnswer":{"@type":"Answer","text":"Video processing needs a full video codec, which downloads once and is then cached by your browser. After that, resizing runs fully offline."}},{"@type":"Question","name":"Does the audio change?","acceptedAnswer":{"@type":"Answer","text":"No. The audio stream is copied untouched — only the video resolution is re-encoded."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Video & Audio","item":"https://www.example.com/#cat-video-audio"},{"@type":"ListItem","position":3,"name":"Resize Video","item":"https://www.example.com/tools/video-resizer/"}]}</script>
+<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js" defer></script>
+<script>
+
+    (function(){
+      'use strict';
+      var $ = function(id){ return document.getElementById(id); };
+      var fileInput = $('vr-file'), fileInfo = $('vr-fileinfo');
+      var loadWrap = $('vr-loadwrap'), loadBtn = $('vr-load');
+      var controls = $('vr-controls'), presetSel = $('vr-preset');
+      var customWrap = $('vr-customwrap'), widthInput = $('vr-width'), widthNote = $('vr-widthnote');
+      var goBtn = $('vr-go');
+      var progressEl = $('vr-progress'), bar = $('vr-bar'), statusEl = $('vr-status');
+      var resultEl = $('vr-result'), doneEl = $('vr-done');
+      var preview = $('vr-preview'), dl = $('vr-download'), errEl = $('vr-error');
+      if(!fileInput || !loadBtn || !goBtn) return;
+
+      var ffmpeg = null, fetchFileFn = null, lastUrl = null, file = null;
+
+      function fmtBytes(b){
+        if(!(b >= 0)) return '—';
+        var u = ['B','KB','MB','GB'], i = 0;
+        while(b >= 1024 && i < u.length - 1){ b /= 1024; i++; }
+        return (b >= 100 ? Math.round(b) : Math.round(b * 10) / 10) + ' ' + u[i];
+      }
+      function baseName(n){
+        var b = String(n || '').replace(/\.[A-Za-z0-9]{1,5}$/, '').replace(/[^a-zA-Z0-9-_]+/g, '_').replace(/^_+|_+$/g, '');
+        if(!b) b = 'output';
+        return b.slice(0, 60);
+      }
+      function extOf(n, fb){
+        var m = /\.([A-Za-z0-9]{1,5})$/.exec(String(n || ''));
+        return m ? '.' + m[1].toLowerCase() : fb;
+      }
+      function setBar(r){
+        var p = Math.max(0, Math.min(1, r || 0));
+        bar.style.width = Math.round(p * 100) + '%';
+      }
+      function status(t){ statusEl.textContent = t; statusEl.hidden = !t; }
+      function showError(t){ errEl.textContent = t; errEl.hidden = false; }
+      function hideError(){ errEl.textContent = ''; errEl.hidden = true; }
+
+      function ensureEngine(progressCb){
+        if(ffmpeg) return Promise.resolve(ffmpeg);
+        var FF = window.FFmpeg;
+        if(!FF || typeof FF.createFFmpeg !== 'function' || typeof FF.fetchFile !== 'function'){
+          return Promise.reject(new Error('Engine library did not load. Check your connection and reload the page.'));
+        }
+        fetchFileFn = FF.fetchFile;
+        ffmpeg = FF.createFFmpeg({
+          corePath: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.11.0/dist/umd/ffmpeg-core.js',
+          logger: function(){}
+        });
+        ffmpeg.setProgress(function(p){ progressCb(p && p.ratio ? p.ratio : 0); });
+        return ffmpeg.load().then(function(){ return ffmpeg; });
+      }
+
+      fileInput.addEventListener('change', function(){
+        hideError();
+        file = (fileInput.files && fileInput.files[0]) ? fileInput.files[0] : null;
+        resultEl.hidden = true;
+        if(file){
+          fileInfo.textContent = file.name + ' — ' + fmtBytes(file.size);
+        } else {
+          fileInfo.textContent = '';
+        }
+      });
+
+      presetSel.addEventListener('change', function(){
+        customWrap.hidden = presetSel.value !== 'custom';
+      });
+
+      loadBtn.addEventListener('click', function(){
+        hideError();
+        loadBtn.disabled = true;
+        loadBtn.textContent = 'Loading engine…';
+        progressEl.hidden = false;
+        setBar(0);
+        status('Downloading engine (~25MB)… this is a one-time download and can take a while on slow connections.');
+        ensureEngine(setBar).then(function(){
+          loadWrap.hidden = true;
+          controls.hidden = false;
+          progressEl.hidden = true;
+          status('Engine ready — pick a resolution and press "Resize video".');
+        }).catch(function(){
+          loadBtn.disabled = false;
+          loadBtn.textContent = 'Load video engine (one-time ~25MB)';
+          progressEl.hidden = true;
+          status('');
+          showError('Engine failed to load — check your connection and retry.');
+        });
+      });
+
+      goBtn.addEventListener('click', function(){
+        hideError();
+        if(!file){ showError('Choose a video file first.'); return; }
+        var w;
+        if(presetSel.value === 'custom'){
+          w = parseInt(widthInput.value, 10);
+          if(!(w >= 16) || w > 7680){ showError('Enter a custom width between 16 and 7680 pixels.'); return; }
+          var even = Math.floor(w / 2) * 2;
+          if(even !== w){
+            w = even;
+            widthNote.textContent = 'Rounded down to ' + w + ' px — video widths must be even.';
+          } else {
+            widthNote.textContent = 'Width must be even — odd values are rounded down.';
+          }
+        } else {
+          w = parseInt(presetSel.value, 10);
+        }
+        var inName = 'input' + extOf(file.name, '.mp4');
+        var outName = baseName(file.name) + '-' + w + 'p.mp4';
+        goBtn.disabled = true;
+        resultEl.hidden = true;
+        progressEl.hidden = false;
+        setBar(0);
+        status('Preparing…');
+        ensureEngine(setBar).then(function(){
+          status('Reading file…');
+          return fetchFileFn(file);
+        }).then(function(data){
+          ffmpeg.FS('writeFile', inName, data);
+          status('Resizing… this may take a few minutes for large videos.');
+          setBar(0);
+          return ffmpeg.run('-i', inName, '-vf', 'scale=' + w + ':-2', '-c:a', 'copy', outName);
+        }).then(function(){
+          var data = ffmpeg.FS('readFile', outName);
+          if(lastUrl){ URL.revokeObjectURL(lastUrl); lastUrl = null; }
+          var url = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
+          lastUrl = url;
+          preview.src = url;
+          dl.href = url;
+          dl.setAttribute('download', outName);
+          doneEl.textContent = 'Resized to ' + w + ' px wide — ' + fmtBytes(data.length) + '.';
+          resultEl.hidden = false;
+          status('Done.');
+        }).catch(function(e){
+          var msg = (e && e.message) ? String(e.message) : '';
+          if(/memory/i.test(msg)){
+            showError('Ran out of memory while processing — try a smaller video file.');
+          } else {
+            showError('Resizing failed — the file may be corrupt or in an unsupported format. Try a different file.');
+          }
+        }).then(function(){
+          try{ ffmpeg.FS('unlink', inName); }catch(x){}
+          try{ ffmpeg.FS('unlink', outName); }catch(x){}
+          goBtn.disabled = false;
+          progressEl.hidden = true;
+        });
+      });
+    })();
+</script>
+</body>
+</html>
