@@ -38,7 +38,7 @@
 <a href="../../index.html#all-tools">All Tools</a>
 <a href="../../index.html#categories">Categories</a>
 </nav>
-<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
 <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
 </div>
 <nav class="nav-panel" data-nav-panel aria-label="Mobile">
@@ -145,6 +145,11 @@ var LOGIC={hash:async (algo, str) => {
 
     (function(){
       'use strict';
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       function $(s){ return document.querySelector(s); }
       var tEl = $('#hg-text'), fEl = $('#hg-file'), aEl = $('#hg-algo'),
           outEl = $('#hg-out'), bGo = $('#hg-go'), bCopy = $('#hg-copy');
@@ -169,22 +174,27 @@ var LOGIC={hash:async (algo, str) => {
         var algo = aEl.value;
         bGo.disabled = true; bGo.textContent = 'Hashing…';
         function done(hex){
+          pHide();
           bGo.disabled = false; bGo.textContent = 'Generate hash';
           show(algo + '  ' + hex, false);
         }
         function fail(){
+          pHide();
           bGo.disabled = false; bGo.textContent = 'Generate hash';
-          show('Hashing failed. The algorithm may be unsupported here.', true);
+          show('Hashing failed. The ' + algo + ' algorithm may be unsupported in this browser — try SHA-256.', true);
         }
         if(fEl.files && fEl.files.length > 0){
           var file = fEl.files[0];
+          pShow({ title: 'Hash Generator', stage: 'Reading file…', percent: 15 });
           var rd = new FileReader();
           rd.onload = function(){
+            pUpd(55, 'Computing ' + algo + ' digest…');
             window.crypto.subtle.digest(algo, rd.result).then(function(d){ done(hexOf(d)); }, fail);
           };
           rd.onerror = fail;
           rd.readAsArrayBuffer(file);
         } else {
+          if(!tEl.value){ show('Type some text or choose a file first.', true); bGo.disabled = false; bGo.textContent = 'Generate hash'; return; }
           LOGIC.hash(algo, tEl.value).then(done, fail);
         }
       });

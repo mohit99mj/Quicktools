@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PDF Text Editor — Edit Text in PDFs Online Free</title>
+<meta name="description" content="Click-to-edit text inside your PDFs. Replace text in place on any page, then download the updated PDF — 100% in your browser, nothing uploaded.">
+<meta name="keywords" content="pdf text editor, edit pdf text, edit text in pdf online, change pdf text, pdf text replacer">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/pdf-text-editor/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PDF Text Editor — Edit Text in PDFs Online Free">
+<meta property="og:description" content="Click-to-edit text inside your PDFs. Replace text in place on any page, then download the updated PDF — 100% in your browser, nothing uploaded.">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/pdf-text-editor/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PDF Text Editor — Edit Text in PDFs Online Free">
+<meta name="twitter:description" content="Click-to-edit text inside your PDFs. Replace text in place on any page, then download the updated PDF — 100% in your browser, nothing uploaded.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
+<style>
+.tool-pdf-text-editor .pte-stage{position:relative;margin:1rem 0;border:1px solid var(--line);border-radius:var(--radius-sm);background:#f7f8f7;overflow:auto;max-height:75vh;padding:1rem;display:flex;justify-content:center}
+.tool-pdf-text-editor .pte-page{position:relative;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.12);flex:0 0 auto}
+.tool-pdf-text-editor .pte-page canvas{display:block}
+.tool-pdf-text-editor .pte-layer{position:absolute;left:0;top:0;overflow:hidden}
+.tool-pdf-text-editor .tl-span{position:absolute;color:transparent;white-space:pre;cursor:pointer;line-height:1;border-radius:2px;-webkit-tap-highlight-color:transparent}
+.tool-pdf-text-editor .tl-span:hover,.tool-pdf-text-editor .tl-span:focus{outline:2px solid rgba(14,124,102,.7);background:rgba(14,124,102,.08)}
+.tool-pdf-text-editor .tl-span.edited{background:rgba(14,124,102,.20)}
+.tool-pdf-text-editor .pte-pagenav{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin:.75rem 0}
+.tool-pdf-text-editor .pte-select{min-width:7rem}
+.tool-pdf-text-editor .pte-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin:.75rem 0}
+.tool-pdf-text-editor .pte-editor{position:absolute;z-index:6;background:#fff;border:2px solid var(--accent);border-radius:8px;padding:.6rem;box-shadow:0 8px 24px rgba(0,0,0,.20);max-width:calc(100% - 12px)}
+.tool-pdf-text-editor .pte-editor textarea{width:100%;min-width:200px;min-height:44px;resize:vertical}
+.tool-pdf-text-editor .pte-ed-actions{display:flex;gap:.5rem;margin-top:.5rem;flex-wrap:wrap}
+.tool-pdf-text-editor .pte-ed-actions .btn{min-height:44px}
+.tool-pdf-text-editor .pte-count{font-weight:700;color:var(--accent)}
+@media (prefers-reduced-motion:reduce){.tool-pdf-text-editor .tl-span{transition:none}}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li aria-current="page">PDF Text Editor</li></ol></nav>
+<h1>PDF Text Editor</h1>
+<div class="tool-body-intro">
+<p><strong>PDF Text Editor</strong> lets you click on text inside a PDF and replace it in place — fix a typo, update a name or change a date without rebuilding the document.</p><p>Each page is rendered in your browser; click any selectable text, type the replacement, and download a new PDF with your edits applied. Edited text is redrawn with Helvetica — original fonts can't be preserved.</p>
+</div>
+<section class="tool-section tool-pdf-text-editor" aria-label="PDF Text Editor">
+    <div class="card tool-panel">
+      <div class="dropzone" id="pte-drop" tabindex="0" role="button" aria-label="Drop a PDF file here, or press Enter to browse for a file">
+        <svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#pencil"/></svg>
+        <p><strong>Drag &amp; drop a PDF file here</strong></p>
+        <p><button type="button" class="btn btn-ghost" id="pte-browse">Browse files</button></p>
+        <p class="hint">One PDF at a time. Works with text-based PDFs (not scanned images).</p>
+        <input type="file" id="pte-file" class="visually-hidden" accept="application/pdf,.pdf" aria-label="Choose a PDF file">
+      </div>
+      <div id="pte-work" hidden>
+        <p><strong id="pte-name"></strong> <span class="hint" id="pte-meta"></span></p>
+        <div class="pte-pagenav">
+          <button type="button" class="btn btn-ghost" id="pte-prev">← Prev</button>
+          <label class="visually-hidden" for="pte-select">Page</label>
+          <select class="select pte-select" id="pte-select" aria-label="Choose page"></select>
+          <button type="button" class="btn btn-ghost" id="pte-next">Next →</button>
+          <span class="hint">Edits so far: <span class="pte-count" id="pte-count">0</span></span>
+        </div>
+        <div class="pte-stage" id="pte-stage">
+          <div class="pte-page" id="pte-page">
+            <canvas id="pte-canvas"></canvas>
+            <div class="pte-layer" id="pte-layer" aria-label="Clickable text layer"></div>
+          </div>
+        </div>
+        <p class="hint">Click any text on the page to edit it. Edited text is highlighted in green. Leave the box empty to delete text.</p>
+        <div class="pte-actions">
+          <button type="button" class="btn btn-primary" id="pte-download" disabled>Download edited PDF</button>
+          <button type="button" class="btn btn-ghost" id="pte-clear">Start over</button>
+        </div>
+      </div>
+      <progress class="progress" id="pte-progress" max="100" value="0" hidden></progress>
+      <div class="result" id="pte-status" aria-live="polite"></div>
+      <p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+      <p class="hint">Edited text uses Helvetica — original fonts can't be preserved. Layout, images and annotations are untouched.</p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Drop your PDF into the upload area, or click Browse files to choose one.</li>
+<li>Wait for the page to render, then click any text on the page to open the editor.</li>
+<li>Type your replacement in the box and click Save — edited text is highlighted in green.</li>
+<li>Move between pages with the page selector, then click Download edited PDF.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>What can I edit with the PDF Text Editor?</summary><div class="faq-a"><p>You can click on any selectable text in your PDF and replace it in place. The tool renders each page and lets you change the wording while keeping the text in its original position.</p></div></details>
+<details><summary>Will the edited text keep the original font?</summary><div class="faq-a"><p>No. Edited text is redrawn with the Helvetica typeface, so the original fonts can't be preserved. The replacement is matched to the original size and position as closely as possible.</p></div></details>
+<details><summary>Does it work on scanned PDFs?</summary><div class="faq-a"><p>No. Scanned pages are images without selectable text, so there is nothing to click and edit. The tool will tell you when a page has no selectable text.</p></div></details>
+<details><summary>Can I edit images, tables or the layout?</summary><div class="faq-a"><p>No. This tool only replaces text strings. Images, tables, drawings and the page layout are left untouched.</p></div></details>
+<details><summary>Can I edit multiple pages?</summary><div class="faq-a"><p>Yes. Use the page selector or the previous/next buttons to move between pages. All your edits are saved into one downloaded PDF.</p></div></details>
+<details><summary>Are my files uploaded to a server?</summary><div class="faq-a"><p>No. Your PDF never leaves your device — rendering and editing happen entirely in your browser.</p></div></details>
+<details><summary>Why does my replacement text look slightly different?</summary><div class="faq-a"><p>Because the replacement uses Helvetica with standard spacing, character widths and line breaks can differ slightly from the original font. Keep replacements close to the original length for the cleanest result.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../pdf-editor/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#pencil"></use></svg><span class="tl-name">PDF Editor</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../split-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#scissors"></use></svg><span class="tl-name">Split PDF</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../compress-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#minimize-2"></use></svg><span class="tl-name">Compress PDF</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../merge-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#layers"></use></svg><span class="tl-name">Merge PDF</span><span class="tl-desc">PDF Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"PDF Text Editor","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/pdf-text-editor/","description":"Click-to-edit text inside your PDFs. Replace text in place on any page, then download the updated PDF — 100% in your browser, nothing uploaded.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What can I edit with the PDF Text Editor?","acceptedAnswer":{"@type":"Answer","text":"You can click on any selectable text in your PDF and replace it in place. The tool renders each page and lets you change the wording while keeping the text in its original position."}},{"@type":"Question","name":"Will the edited text keep the original font?","acceptedAnswer":{"@type":"Answer","text":"No. Edited text is redrawn with the Helvetica typeface, so the original fonts can't be preserved. The replacement is matched to the original size and position as closely as possible."}},{"@type":"Question","name":"Does it work on scanned PDFs?","acceptedAnswer":{"@type":"Answer","text":"No. Scanned pages are images without selectable text, so there is nothing to click and edit. The tool will tell you when a page has no selectable text."}},{"@type":"Question","name":"Can I edit images, tables or the layout?","acceptedAnswer":{"@type":"Answer","text":"No. This tool only replaces text strings. Images, tables, drawings and the page layout are left untouched."}},{"@type":"Question","name":"Can I edit multiple pages?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use the page selector or the previous/next buttons to move between pages. All your edits are saved into one downloaded PDF."}},{"@type":"Question","name":"Are my files uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Your PDF never leaves your device — rendering and editing happen entirely in your browser."}},{"@type":"Question","name":"Why does my replacement text look slightly different?","acceptedAnswer":{"@type":"Answer","text":"Because the replacement uses Helvetica with standard spacing, character widths and line breaks can differ slightly from the original font. Keep replacements close to the original length for the cleanest result."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-pdf-tools"},{"@type":"ListItem","position":3,"name":"PDF Text Editor","item":"https://mohit99mj.github.io/Quicktools/tools/pdf-text-editor/"}]}</script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
+<script>
+    (function(){
+      'use strict';
+      var WORKER = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.worker.min.js';
+      function $(id){ return document.getElementById(id); }
+      function setStatus(msg, isError){
+        var el = $('pte-status');
+        if(!el){ return; }
+        el.textContent = msg || '';
+        el.className = isError ? 'result error' : 'result';
+      }
+      function fmtSize(bytes){
+        if(bytes < 1024){ return bytes + ' B'; }
+        var kb = bytes / 1024;
+        if(kb < 1024){ return kb.toFixed(1) + ' KB'; }
+        return (kb / 1024).toFixed(2) + ' MB';
+      }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
+      function downloadBlob(blob, name){
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = name;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 10000);
+      }
+      function waitForLibs(names, ready, onMissing){
+        var tries = 0;
+        (function check(){
+          var ok = true;
+          for(var k = 0; k < names.length; k++){
+            if(!window[names[k]]){ ok = false; break; }
+          }
+          if(ok){ ready(); return; }
+          if(tries++ > 100){ onMissing(); return; }
+          setTimeout(check, 100);
+        })();
+      }
+      function baseName(name){
+        var n = name.replace(/\.pdf$/i, '').replace(/[\\/]/g, '');
+        return n || 'document';
+      }
+
+      var drop = $('pte-drop'), input = $('pte-file'), browse = $('pte-browse');
+      var work = $('pte-work'), nameEl = $('pte-name'), metaEl = $('pte-meta');
+      var stage = $('pte-stage'), pageBox = $('pte-page'), canvas = $('pte-canvas'), layer = $('pte-layer');
+      var prevBtn = $('pte-prev'), nextBtn = $('pte-next'), selectEl = $('pte-select');
+      var countEl = $('pte-count'), dlBtn = $('pte-download'), clearBtn = $('pte-clear');
+      var progress = $('pte-progress');
+      if(!drop || !input || !canvas || !layer){ return; }
+
+      var pdfDoc = null, pdfBytes = null, pdfName = '';
+      var numPages = 0, curPage = 1, curScale = 1, rendering = false;
+      /* edits: { pageNum: { key: { text, geom:{left,top,width,fontHeight,baseline}, scale } } } */
+      var edits = {};
+
+      function editCount(){
+        var n = 0, p;
+        for(p in edits){
+          if(Object.prototype.hasOwnProperty.call(edits, p)){ n += Object.keys(edits[p]).length; }
+        }
+        return n;
+      }
+      function updateChrome(){
+        if(countEl){ countEl.textContent = String(editCount()); }
+        if(dlBtn){ dlBtn.disabled = editCount() === 0; }
+        if(prevBtn){ prevBtn.disabled = curPage <= 1; }
+        if(nextBtn){ nextBtn.disabled = curPage >= numPages; }
+        if(selectEl){ selectEl.value = String(curPage); }
+      }
+      function getEdit(pageNum, key){
+        var pg = edits[pageNum];
+        return (pg && pg[key]) ? pg[key].text : null;
+      }
+
+      function closeEditor(){
+        var old = $('pte-editor');
+        if(old && old.parentNode){ old.parentNode.removeChild(old); }
+      }
+
+      function openEditor(rec, span, pageNum){
+        closeEditor();
+        var box = document.createElement('div');
+        box.className = 'pte-editor';
+        box.id = 'pte-editor';
+        var layerW = layer.clientWidth || layer.offsetWidth || 300;
+        var left = Math.max(0, Math.min(rec.left - 4, Math.max(0, layerW - 280)));
+        box.style.left = left + 'px';
+        box.style.top = Math.max(0, rec.top - 4) + 'px';
+        var ta = document.createElement('textarea');
+        ta.className = 'textarea';
+        ta.setAttribute('aria-label', 'Replacement text');
+        var existing = getEdit(pageNum, rec.key);
+        ta.value = existing === null ? rec.str : existing;
+        ta.style.fontSize = Math.min(28, Math.max(12, rec.fontHeight)) + 'px';
+        ta.style.width = Math.max(220, Math.min(layerW - 24, rec.width + 90)) + 'px';
+        ta.rows = ta.value.length > 60 ? 3 : 2;
+        var actions = document.createElement('div');
+        actions.className = 'pte-ed-actions';
+        var save = document.createElement('button');
+        save.type = 'button';
+        save.className = 'btn btn-primary';
+        save.textContent = 'Save';
+        var cancel = document.createElement('button');
+        cancel.type = 'button';
+        cancel.className = 'btn btn-ghost';
+        cancel.textContent = 'Cancel';
+        actions.appendChild(save);
+        actions.appendChild(cancel);
+        var delHint = document.createElement('p');
+        delHint.className = 'hint';
+        delHint.textContent = 'Leave empty to delete this text.';
+        box.appendChild(ta);
+        box.appendChild(actions);
+        box.appendChild(delHint);
+        layer.appendChild(box);
+        ta.focus();
+        if(ta.setSelectionRange){
+          try{ ta.setSelectionRange(ta.value.length, ta.value.length); }catch(e){}
+        }
+        save.addEventListener('click', function(){
+          var val = ta.value;
+          if(!edits[pageNum]){ edits[pageNum] = {}; }
+          if(val === rec.str){
+            delete edits[pageNum][rec.key];
+          } else {
+            edits[pageNum][rec.key] = {
+              text: val,
+              geom: { left: rec.left, top: rec.top, width: rec.width, fontHeight: rec.fontHeight, baseline: rec.baseline },
+              scale: curScale
+            };
+          }
+          if(Object.keys(edits[pageNum]).length === 0){ delete edits[pageNum]; }
+          var stored = getEdit(pageNum, rec.key);
+          if(stored === null){
+            span.classList.remove('edited');
+            span.setAttribute('aria-label', 'Edit text: ' + rec.str);
+          } else {
+            span.classList.add('edited');
+            span.setAttribute('aria-label', 'Edited text: ' + stored + ' (original: ' + rec.str + ')');
+          }
+          closeEditor();
+          updateChrome();
+          setStatus(editCount() ? 'Saved. ' + editCount() + ' edit(s) so far — click Download edited PDF when finished.' : 'Edit removed. Click text on the page to start editing.');
+        });
+        cancel.addEventListener('click', closeEditor);
+        ta.addEventListener('keydown', function(e){
+          if(e.key === 'Escape'){ e.preventDefault(); closeEditor(); }
+          if((e.ctrlKey || e.metaKey) && e.key === 'Enter'){ e.preventDefault(); save.click(); }
+        });
+      }
+
+      function renderPage(n){
+        if(!pdfDoc || rendering){ return; }
+        rendering = true;
+        closeEditor();
+        pShow({ title: 'Rendering page…', stage: 'Rendering page ' + n + ' of ' + numPages + '…', percent: 5 });
+        setStatus('Rendering page ' + n + ' of ' + numPages + '…');
+        (async function(){
+          try{
+            var page = await pdfDoc.getPage(n);
+            var v1 = page.getViewport({ scale: 1 });
+            var stageW = stage.clientWidth ? (stage.clientWidth - 32) : 560;
+            var scale = Math.min(2, Math.max(0.6, stageW / v1.width));
+            curScale = scale;
+            var viewport = page.getViewport({ scale: scale });
+            var w = Math.floor(viewport.width), h = Math.floor(viewport.height);
+            canvas.width = w;
+            canvas.height = h;
+            canvas.style.width = w + 'px';
+            canvas.style.height = h + 'px';
+            pageBox.style.width = w + 'px';
+            pageBox.style.height = h + 'px';
+            layer.style.width = w + 'px';
+            layer.style.height = h + 'px';
+            var ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, w, h);
+            await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+            pUpd(60, 'Reading text on page ' + n + '…');
+            var tc = await page.getTextContent();
+            layer.textContent = '';
+            var items = (tc.items || []).filter(function(it){
+              return it && it.str && it.str.trim().length > 0 && it.transform;
+            });
+            if(items.length === 0){
+              pHide();
+              rendering = false;
+              curPage = n;
+              updateChrome();
+              setStatus('This page has no selectable text — it may be a scanned document. Try another page, or use a text-based PDF.', true);
+              return;
+            }
+            items.forEach(function(it, idx){
+              var tx;
+              try{
+                tx = pdfjsLib.Util.transform(viewport.transform, it.transform);
+              }catch(e){ return; }
+              var fontHeight = Math.sqrt(tx[2] * tx[2] + tx[3] * tx[3]);
+              if(!fontHeight || fontHeight < 2 || fontHeight > h){ return; }
+              var left = tx[4];
+              var baseline = tx[5];
+              var top = baseline - fontHeight;
+              var width = (typeof it.width === 'number' ? it.width : 0) * scale;
+              var span = document.createElement('span');
+              span.className = 'tl-span';
+              span.style.left = left + 'px';
+              span.style.top = top + 'px';
+              span.style.fontSize = fontHeight + 'px';
+              span.style.height = fontHeight + 'px';
+              if(width > 1){ span.style.width = width + 'px'; }
+              span.textContent = it.str;
+              span.setAttribute('role', 'button');
+              span.setAttribute('tabindex', '0');
+              var key = 'i' + idx;
+              var rec = { key: key, str: it.str, left: left, top: top, width: width, fontHeight: fontHeight, baseline: baseline };
+              var stored = getEdit(n, key);
+              if(stored === null){
+                span.setAttribute('aria-label', 'Edit text: ' + it.str);
+              } else {
+                span.classList.add('edited');
+                span.setAttribute('aria-label', 'Edited text: ' + stored + ' (original: ' + it.str + ')');
+              }
+              span.addEventListener('click', function(){ openEditor(rec, span, n); });
+              span.addEventListener('keydown', function(e){
+                if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openEditor(rec, span, n); }
+              });
+              layer.appendChild(span);
+            });
+            if(!layer.children.length){
+              setStatus('This page has no selectable text — it may be a scanned document. Try another page, or use a text-based PDF.', true);
+            } else {
+              setStatus('Page ' + n + ' of ' + numPages + ' — click any text to edit it.' + (editCount() ? ' (' + editCount() + ' edit(s) so far)' : ''));
+            }
+            curPage = n;
+            updateChrome();
+            pUpd(100, 'Page ready');
+            pHide();
+          }catch(err){
+            pHide();
+            setStatus('Could not render page ' + n + ': ' + (err && err.message ? err.message : 'unknown error'), true);
+          }
+          rendering = false;
+        })();
+      }
+
+      function buildPageSelect(){
+        if(!selectEl){ return; }
+        selectEl.textContent = '';
+        for(var i = 1; i <= numPages; i++){
+          var o = document.createElement('option');
+          o.value = String(i);
+          o.textContent = 'Page ' + i + ' of ' + numPages;
+          selectEl.appendChild(o);
+        }
+        selectEl.value = '1';
+      }
+
+      function loadFile(f){
+        var t = (f.type || '').toLowerCase();
+        if(!(t === 'application/pdf' || /\.pdf$/i.test(f.name))){
+          setStatus('"' + f.name + '" does not look like a PDF. Please choose a .pdf file.', true);
+          return;
+        }
+        setStatus('Loading libraries…');
+        pShow({ title: 'Opening PDF…', stage: 'Loading libraries…' });
+        waitForLibs(['pdfjsLib', 'PDFLib'], function(){
+          pUpd(10, 'Opening "' + f.name + '"…');
+          setStatus('Opening "' + f.name + '"…');
+          (async function(){
+            try{
+              pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER;
+              var buf = await f.arrayBuffer();
+              pdfBytes = new Uint8Array(buf);
+              pdfDoc = await pdfjsLib.getDocument({ data: pdfBytes.slice() }).promise;
+              pdfName = f.name;
+              numPages = pdfDoc.numPages;
+              edits = {};
+              curPage = 1;
+              if(nameEl){ nameEl.textContent = f.name; }
+              if(metaEl){ metaEl.textContent = numPages + ' page' + (numPages === 1 ? '' : 's') + ' • ' + fmtSize(f.size); }
+              if(work){ work.hidden = false; }
+              buildPageSelect();
+              updateChrome();
+              pUpd(30, 'Rendering page 1…');
+              renderPage(1);
+            }catch(err){
+              pHide();
+              setStatus('Could not open this PDF: ' + (err && err.message ? err.message : 'the file may be corrupted or password-protected.'), true);
+            }
+          })();
+        }, function(){
+          pHide();
+          setStatus('The required libraries (pdf.js / pdf-lib) failed to load. Check your connection and reload the page.', true);
+        });
+      }
+
+      function resetAll(){
+        closeEditor();
+        pdfDoc = null; pdfBytes = null; pdfName = '';
+        numPages = 0; curPage = 1; edits = {};
+        if(work){ work.hidden = true; }
+        if(nameEl){ nameEl.textContent = ''; }
+        if(metaEl){ metaEl.textContent = ''; }
+        setStatus('');
+        updateChrome();
+      }
+
+      if(drop && input){
+        drop.addEventListener('click', function(e){
+          if(e.target === input){ return; }
+          input.click();
+        });
+        drop.addEventListener('keydown', function(e){
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            input.click();
+          }
+        });
+        drop.addEventListener('dragover', function(e){
+          e.preventDefault();
+          drop.classList.add('drag-over');
+        });
+        drop.addEventListener('dragleave', function(){
+          drop.classList.remove('drag-over');
+        });
+        drop.addEventListener('drop', function(e){
+          e.preventDefault();
+          drop.classList.remove('drag-over');
+          if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length){
+            loadFile(e.dataTransfer.files[0]);
+          }
+        });
+        input.addEventListener('change', function(){
+          if(input.files && input.files.length){ loadFile(input.files[0]); }
+          input.value = '';
+        });
+      }
+      if(browse && input){
+        browse.addEventListener('click', function(e){
+          e.stopPropagation();
+          input.click();
+        });
+      }
+      if(prevBtn){ prevBtn.addEventListener('click', function(){ if(curPage > 1){ renderPage(curPage - 1); } }); }
+      if(nextBtn){ nextBtn.addEventListener('click', function(){ if(curPage < numPages){ renderPage(curPage + 1); } }); }
+      if(selectEl){ selectEl.addEventListener('change', function(){
+        var v = parseInt(selectEl.value, 10);
+        if(v >= 1 && v <= numPages && v !== curPage){ renderPage(v); }
+      }); }
+      if(clearBtn){ clearBtn.addEventListener('click', resetAll); }
+
+      if(dlBtn){
+        dlBtn.addEventListener('click', function(){
+          var total = editCount();
+          if(!pdfBytes || total === 0){ return; }
+          dlBtn.disabled = true;
+          setStatus('Building your edited PDF…');
+          pShow({ title: 'Building edited PDF…', stage: 'Preparing download…', percent: 5 });
+          if(progress){ progress.hidden = false; progress.value = 5; }
+          (async function(){
+            try{
+              var src;
+              try{
+                src = await PDFLib.PDFDocument.load(pdfBytes.slice(), { ignoreEncryption: true });
+              }catch(loadErr){
+                throw new Error('Could not load the PDF for editing (' + (loadErr && loadErr.message ? loadErr.message : 'the file may be corrupted or password-protected') + ').');
+              }
+              var helv;
+              try{
+                helv = await src.embedFont(PDFLib.StandardFonts.Helvetica);
+              }catch(fontErr){
+                throw new Error('Could not load the Helvetica font needed for edited text. Check your connection and try again.');
+              }
+              var editedPages = Object.keys(edits).map(Number).sort(function(a, b){ return a - b; });
+              for(var i = 0; i < editedPages.length; i++){
+                var p = editedPages[i];
+                var pgEdits = edits[p];
+                var keys = Object.keys(pgEdits);
+                if(!keys.length){ continue; }
+                pUpd(Math.round(10 + (i / editedPages.length) * 75), 'Writing edits on page ' + p + ' of ' + numPages + '…');
+                setStatus('Writing edits on page ' + p + ' of ' + numPages + '…');
+                var page = src.getPage(p - 1);
+                var ph = page.getHeight();
+                keys.forEach(function(k){
+                  var e = pgEdits[k];
+                  var g = e.geom;
+                  var scale = e.scale || 1;
+                  var size = g.fontHeight / scale;
+                  if(size < 1){ size = 1; }
+                  if(size > 200){ size = 200; }
+                  var x = g.left / scale;
+                  /* PDF y-origin is bottom-left: convert screen (top-left) baseline. */
+                  var baselinePdf = ph - (g.baseline / scale);
+                  var rectY = baselinePdf - size * 1.05;
+                  var rectH = size * 1.5;
+                  var textW = (g.width > 1 ? g.width : size * 0.6 * Math.max(1, e.text.length)) / scale;
+                  page.drawRectangle({
+                    x: x - 1, y: rectY,
+                    width: textW + 3, height: rectH,
+                    color: PDFLib.rgb(1, 1, 1), borderWidth: 0, opacity: 1
+                  });
+                  var lines = String(e.text).split(/\r?\n/);
+                  for(var li = 0; li < lines.length; li++){
+                    page.drawText(lines[li], {
+                      x: x, y: baselinePdf - li * size * 1.25,
+                      size: size, font: helv, color: PDFLib.rgb(0, 0, 0)
+                    });
+                  }
+                });
+              }
+              pUpd(90, 'Building download…');
+              setStatus('Building download…');
+              var bytes = await src.save();
+              if(progress){ progress.value = 100; }
+              pUpd(100, 'Building download…');
+              var outName = baseName(pdfName) + '-text-edited.pdf';
+              downloadBlob(new Blob([bytes], { type: 'application/pdf' }), outName);
+              pSum($('pte-status'), '<strong>Edited PDF ready</strong> — ' + total + ' text edit' + (total === 1 ? '' : 's') + ' on ' + editedPages.length + ' page' + (editedPages.length === 1 ? '' : 's') + ' • ' + fmtSize(bytes.length));
+              pHide();
+              setStatus('Done — "' + outName + '" downloaded with ' + total + ' text edit' + (total === 1 ? '' : 's') + '.');
+            }catch(err){
+              pHide();
+              setStatus('Could not build the edited PDF: ' + (err && err.message ? err.message : 'unknown error. Try reloading the page and editing again.'), true);
+            }
+            if(progress){ progress.hidden = true; }
+            updateChrome();
+          })();
+        });
+      }
+      updateChrome();
+    })();
+</script>
+</body>
+</html>
