@@ -6,11 +6,11 @@
 <title>Word Counter &amp; Character Counter — Free</title>
 <meta name="description" content="Count words, characters (with and without spaces), sentences and paragraphs as you type. Free word counter with reading and speaking time.">
 <meta name="keywords" content="word counter, character counter, count characters, word count tool, reading time calculator">
-<link rel="canonical" href="https://www.example.com/tools/word-counter/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/word-counter/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Word Counter &amp; Character Counter — Free">
 <meta property="og:description" content="Count words, characters (with and without spaces), sentences and paragraphs as you type. Free word counter with reading and speaking time.">
-<meta property="og:url" content="https://www.example.com/tools/word-counter/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/word-counter/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Word Counter &amp; Character Counter — Free">
 <meta name="twitter:description" content="Count words, characters (with and without spaces), sentences and paragraphs as you type. Free word counter with reading and speaking time.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 .tool-word-counter .tool-word-counter-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;}
 .tool-word-counter .tool-word-counter-stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 12px;display:flex;flex-direction:column;gap:4px;}
@@ -113,9 +115,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Word Counter","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/word-counter/","description":"Count words, characters (with and without spaces), sentences and paragraphs as you type. Free word counter with reading and speaking time.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Word Counter","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/word-counter/","description":"Count words, characters (with and without spaces), sentences and paragraphs as you type. Free word counter with reading and speaking time.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this also a character counter?","acceptedAnswer":{"@type":"Answer","text":"Yes. It shows total characters and characters excluding spaces, updating live as you type — so it works as a character counter too."}},{"@type":"Question","name":"How are reading and speaking times calculated?","acceptedAnswer":{"@type":"Answer","text":"Reading time assumes about 200 words per minute and speaking time about 150 words per minute. Both are rough estimates; actual speed varies by reader and text difficulty."}},{"@type":"Question","name":"How are sentences counted?","acceptedAnswer":{"@type":"Answer","text":"Text is split at sentence-ending punctuation (. ! ? …). Abbreviations like \"e.g.\" can inflate the count slightly, so treat it as approximate."}},{"@type":"Question","name":"Is my text uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Counting happens entirely in your browser; your text never leaves the page."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Text Tools","item":"https://www.example.com/#cat-text-tools"},{"@type":"ListItem","position":3,"name":"Word Counter","item":"https://www.example.com/tools/word-counter/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Text Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-text-tools"},{"@type":"ListItem","position":3,"name":"Word Counter","item":"https://mohit99mj.github.io/Quicktools/tools/word-counter/"}]}</script>
 <script>
 var LOGIC={wordStats:(text) => {
     var t = text == null ? '' : String(text);
