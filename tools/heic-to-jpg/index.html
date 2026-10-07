@@ -36,7 +36,7 @@
 <a href="../../index.html#all-tools">All Tools</a>
 <a href="../../index.html#categories">Categories</a>
 </nav>
-<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
 <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
 </div>
 <nav class="nav-panel" data-nav-panel aria-label="Mobile">
@@ -128,7 +128,11 @@
       var meta = document.getElementById('heic-meta');
       var dl = document.getElementById('heic-dl');
       var lastUrl = null;
-      function qp(){ return (typeof window !== 'undefined' && window.QTProgress && typeof window.QTProgress.show === 'function') ? window.QTProgress : null; }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       function fmtBytes(b){
         if(!(b > 0)) return '';
         var u = ['B', 'KB', 'MB', 'GB'], i = 0, n = b;
@@ -154,8 +158,7 @@
           setStatus('<p class="error">Converter library failed to load. Check your connection and reload the page.</p>');
           return;
         }
-        var P = qp();
-        if (P) P.show({ title: 'HEIC to JPG', stage: 'Decoding HEIC…', percent: 15 });
+        pShow({ title: 'HEIC to JPG', stage: 'Decoding HEIC…', percent: 15 });
         setStatus('<p>Converting… this may take a few seconds.</p>');
         heic2any({ blob: file, toType: 'image/jpeg', quality: 0.9 })
           .then(function(result){
@@ -176,10 +179,10 @@
                 a.remove();
               };
             }
-            if (P) P.update(85, 'Reading result…');
+            pUpd(85, 'Reading result…');
             var probe = new Image();
             function finish(w, h){
-              if (P) P.hide();
+              pHide();
               if (meta) meta.textContent = 'JPG · ' + (w ? w + ' × ' + h + ' px · ' : '') + fmtBytes(blob.size);
               setStatus('<p>Done — your JPG is ready.</p>');
             }
@@ -188,7 +191,7 @@
             probe.src = lastUrl;
           })
           .catch(function(){
-            if (P) P.hide();
+            pHide();
             setStatus('<p class="error">Could not convert this file. It may be corrupt or an unsupported HEIC variant.</p>');
           });
       });

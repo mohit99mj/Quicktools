@@ -35,7 +35,7 @@
 <a href="../../index.html#all-tools">All Tools</a>
 <a href="../../index.html#categories">Categories</a>
 </nav>
-<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
 <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
 </div>
 <nav class="nav-panel" data-nav-panel aria-label="Mobile">
@@ -219,7 +219,9 @@ var LOGIC={csvToJson:(text) => {
       function setStatus(html){ if (out) out.innerHTML = html; }
       /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
       function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
       function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       function cell(v){
         var td = document.createElement('td');
         td.textContent = v === null || v === undefined ? '' : String(v);
@@ -247,9 +249,10 @@ var LOGIC={csvToJson:(text) => {
         setTimeout(function(){
         try {
           var parsed = LOGIC.csvToJson(text);
-          if(window.QTProgress){ QTProgress.update(70, 'Building preview…'); }
+          pUpd(70, 'Building preview…');
           lastJson = JSON.stringify(parsed.rows, null, 2);
           if (!parsed.rows.length){
+            pHide();
             setStatus('<p class="error">No data rows found. Make sure the first row is a header row.</p>');
             if (actions) actions.hidden = true;
             return;
@@ -283,6 +286,7 @@ var LOGIC={csvToJson:(text) => {
             parsed.headers.length + ' columns.';
           out.appendChild(note);
           if (actions) actions.hidden = false;
+          pSum(out, '<strong>CSV converted</strong> — ' + parsed.rows.length + ' rows • ' + parsed.headers.length + ' columns');
           pHide();
         } catch (e) {
           pHide();

@@ -35,7 +35,7 @@
 <a href="../../index.html#all-tools">All Tools</a>
 <a href="../../index.html#categories">Categories</a>
 </nav>
-<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
 <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
 </div>
 <nav class="nav-panel" data-nav-panel aria-label="Mobile">
@@ -156,14 +156,18 @@ var LOGIC={idSize:function(preset) {
       var MAX = 4000;
       var img = null, srcURL = null, fileName = 'photo';
       var zoomLevel = 1, offX = 0, offY = 0, dragging = false, dragSX = 0, dragSY = 0, dragOX = 0, dragOY = 0;
-      function qp(){ return (typeof window !== 'undefined' && window.QTProgress && typeof window.QTProgress.show === 'function') ? window.QTProgress : null; }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
 
       function setUploadStatus(msg, isError){
         uploadStatus.textContent = msg || '';
         uploadStatus.className = 'result' + (isError ? ' error' : '');
       }
-      function setStatus(msg){
-        if(statusEl) statusEl.textContent = msg || '';
+      function setStatus(msg, isError){
+        if(statusEl){ statusEl.textContent = msg || ''; statusEl.className = isError ? 'result error' : 'result'; }
       }
       function safeName(s){
         return String(s).replace(/\.[a-zA-Z0-9]+$/, '').replace(/[^a-zA-Z0-9._-]+/g, '_').slice(0, 80) || 'photo';
@@ -227,8 +231,7 @@ var LOGIC={idSize:function(preset) {
         if(srcURL) URL.revokeObjectURL(srcURL);
         srcURL = URL.createObjectURL(f);
         fileName = safeName(f.name);
-        var P = qp();
-        if(P) P.show({ title: 'Passport Photo', stage: 'Reading photo…', percent: 10 });
+        pShow({ title: 'Passport Photo', stage: 'Reading photo…', percent: 10 });
         var probe = new Image();
         probe.onload = function(){
           if(Math.max(probe.naturalWidth, probe.naturalHeight) > MAX){
@@ -241,12 +244,12 @@ var LOGIC={idSize:function(preset) {
           offX = 0; offY = 0;
           editor.hidden = false;
           canvas.style.touchAction = 'none';
-          if(P) P.update(85, 'Preparing preview…');
+          pUpd(85, 'Preparing preview…');
           draw();
-          if(P) P.hide();
+          pHide();
         };
         probe.onerror = function(){
-          if(P) P.hide();
+          pHide();
           setUploadStatus('Could not read that image. Try another file.', true);
         };
         probe.src = srcURL;
@@ -264,12 +267,14 @@ var LOGIC={idSize:function(preset) {
       });
       dl.addEventListener('click', function(){
         if(!img) return;
+        dl.disabled = true;
         var s = size();
         var out = document.createElement('canvas');
         out.width = s.w; out.height = s.h;
         out.getContext('2d').drawImage(canvas, 0, 0);
         out.toBlob(function(blob){
-          if(!blob){ setStatus('Could not encode the photo.'); return; }
+          dl.disabled = false;
+          if(!blob){ setStatus('Could not encode the photo. Try a different image file.', true); return; }
           var url = URL.createObjectURL(blob);
           var a = document.createElement('a');
           a.href = url;
