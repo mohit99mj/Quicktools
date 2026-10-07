@@ -6,11 +6,11 @@
 <title>MB to GB Converter — Data Storage Units</title>
 <meta name="description" content="MB to GB converter: convert bytes, KB, MB, GB, TB and binary KiB, MiB, GiB, TiB instantly. Free data storage converter in your browser.">
 <meta name="keywords" content="mb to gb, data converter, kb to mb, gb to tb, kib to kb, storage converter">
-<link rel="canonical" href="https://www.example.com/tools/data-converter/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/data-converter/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="MB to GB Converter — Data Storage Units">
 <meta property="og:description" content="MB to GB converter: convert bytes, KB, MB, GB, TB and binary KiB, MiB, GiB, TiB instantly. Free data storage converter in your browser.">
-<meta property="og:url" content="https://www.example.com/tools/data-converter/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/data-converter/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MB to GB Converter — Data Storage Units">
 <meta name="twitter:description" content="MB to GB converter: convert bytes, KB, MB, GB, TB and binary KiB, MiB, GiB, TiB instantly. Free data storage converter in your browser.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 
     .tool-data-converter .conv-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
@@ -124,9 +126,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Data Storage Converter","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/data-converter/","description":"MB to GB converter: convert bytes, KB, MB, GB, TB and binary KiB, MiB, GiB, TiB instantly. Free data storage converter in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Data Storage Converter","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/data-converter/","description":"MB to GB converter: convert bytes, KB, MB, GB, TB and binary KiB, MiB, GiB, TiB instantly. Free data storage converter in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many MB are in a GB?","acceptedAnswer":{"@type":"Answer","text":"It depends on the unit system: 1 GB = 1,000 MB in decimal (SI) units, but 1 GiB = 1,024 MiB in binary (IEC) units. This converter handles both."}},{"@type":"Question","name":"What is the difference between MB and MiB?","acceptedAnswer":{"@type":"Answer","text":"MB (megabyte) is 1,000,000 bytes (10^6), while MiB (mebibyte) is 1,048,576 bytes (2^20). Storage manufacturers advertise decimal GB; Windows reports binary GiB, which is why a \"1 TB\" drive shows as ~931 GiB."}},{"@type":"Question","name":"Why does my hard drive show less space than advertised?","acceptedAnswer":{"@type":"Answer","text":"Drive makers use decimal gigabytes (1 GB = 1,000,000,000 bytes) while most operating systems display binary gibibytes (1 GiB = 1,073,741,824 bytes), so the number looks smaller even though the bytes are the same."}},{"@type":"Question","name":"Is this data converter free?","acceptedAnswer":{"@type":"Answer","text":"Yes — free, no sign-up, and every conversion runs locally in your browser."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Unit Converters","item":"https://www.example.com/#cat-unit-converters"},{"@type":"ListItem","position":3,"name":"Data Storage Converter","item":"https://www.example.com/tools/data-converter/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Unit Converters","item":"https://mohit99mj.github.io/Quicktools/#cat-unit-converters"},{"@type":"ListItem","position":3,"name":"Data Storage Converter","item":"https://mohit99mj.github.io/Quicktools/tools/data-converter/"}]}</script>
 <script>
 var LOGIC={units:() => ['B', 'KB', 'MB', 'GB', 'TB', 'KiB', 'MiB', 'GiB', 'TiB'],convert:(v, from, to) => {
     // Decimal (SI) units use ×1000, binary (IEC) units use ×1024. Base unit: bytes.

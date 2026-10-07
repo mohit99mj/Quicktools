@@ -6,11 +6,11 @@
 <title>JSON Formatter — Validate, Format &amp; Minify</title>
 <meta name="description" content="Free JSON formatter: validate, pretty-print and minify JSON with line-and-column error hints. Your data never leaves your browser.">
 <meta name="keywords" content="json formatter, json validator, json minify, pretty print json, json beautifier">
-<link rel="canonical" href="https://www.example.com/tools/json-formatter/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/json-formatter/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="JSON Formatter — Validate, Format &amp; Minify">
 <meta property="og:description" content="Free JSON formatter: validate, pretty-print and minify JSON with line-and-column error hints. Your data never leaves your browser.">
-<meta property="og:url" content="https://www.example.com/tools/json-formatter/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/json-formatter/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JSON Formatter — Validate, Format &amp; Minify">
 <meta name="twitter:description" content="Free JSON formatter: validate, pretty-print and minify JSON with line-and-column error hints. Your data never leaves your browser.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 
     .tool-json-formatter .jf-area{ min-height:180px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; }
@@ -112,9 +114,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JSON Formatter","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/json-formatter/","description":"Free JSON formatter: validate, pretty-print and minify JSON with line-and-column error hints. Your data never leaves your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"JSON Formatter","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/json-formatter/","description":"Free JSON formatter: validate, pretty-print and minify JSON with line-and-column error hints. Your data never leaves your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I find the error in my JSON?","acceptedAnswer":{"@type":"Answer","text":"Click Validate. The tool reports the parser error with the exact line and column, e.g. \"Unexpected token } in JSON at position 42 (line 3, column 5)\"."}},{"@type":"Question","name":"What is the difference between Format and Minify?","acceptedAnswer":{"@type":"Answer","text":"Format adds indentation and line breaks for humans to read. Minify removes all unnecessary whitespace so the JSON is as small as possible for sending over the network."}},{"@type":"Question","name":"Is my JSON data uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. All validation and formatting runs locally in your browser with the built-in JSON parser — your data never leaves your device."}},{"@type":"Question","name":"Does it support large JSON files?","acceptedAnswer":{"@type":"Answer","text":"Yes, it uses the browser’s native JSON parser, so even multi-megabyte payloads format quickly. Extremely large inputs may take a moment to render."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://www.example.com/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"JSON Formatter","item":"https://www.example.com/tools/json-formatter/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"JSON Formatter","item":"https://mohit99mj.github.io/Quicktools/tools/json-formatter/"}]}</script>
 <script>
 var LOGIC={formatJson:(text, indent) => {
     var ind = typeof indent === 'number' && isFinite(indent) ? Math.max(0, Math.min(8, Math.floor(indent))) : 2;

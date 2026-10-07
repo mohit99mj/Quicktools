@@ -6,11 +6,11 @@
 <title>Speed Converter — km/h, mph, m/s &amp; Knots</title>
 <meta name="description" content="Free speed converter: convert m/s, km/h, mph, ft/s and knots instantly, with exact formulas. Runs entirely in your browser.">
 <meta name="keywords" content="speed converter, kmh to mph, mph to kmh, knots to kmh, ms to kmh">
-<link rel="canonical" href="https://www.example.com/tools/speed-converter/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/speed-converter/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Speed Converter — km/h, mph, m/s &amp; Knots">
 <meta property="og:description" content="Free speed converter: convert m/s, km/h, mph, ft/s and knots instantly, with exact formulas. Runs entirely in your browser.">
-<meta property="og:url" content="https://www.example.com/tools/speed-converter/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/speed-converter/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Speed Converter — km/h, mph, m/s &amp; Knots">
 <meta name="twitter:description" content="Free speed converter: convert m/s, km/h, mph, ft/s and knots instantly, with exact formulas. Runs entirely in your browser.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 
     .tool-speed-converter .conv-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
@@ -123,9 +125,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Speed Converter","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/speed-converter/","description":"Free speed converter: convert m/s, km/h, mph, ft/s and knots instantly, with exact formulas. Runs entirely in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Speed Converter","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/speed-converter/","description":"Free speed converter: convert m/s, km/h, mph, ft/s and knots instantly, with exact formulas. Runs entirely in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I convert km/h to mph?","acceptedAnswer":{"@type":"Answer","text":"Multiply km/h by 0.621371. So 100 km/h = 62.1371 mph. Select km/h → mph in the converter to do it instantly."}},{"@type":"Question","name":"How fast is 1 knot in km/h?","acceptedAnswer":{"@type":"Answer","text":"One knot equals exactly 1.852 km/h (one nautical mile per hour). It is the standard speed unit in aviation and maritime navigation."}},{"@type":"Question","name":"What is the speed of sound in km/h?","acceptedAnswer":{"@type":"Answer","text":"About 1,235 km/h at sea level (343 m/s), though it varies with temperature and altitude."}},{"@type":"Question","name":"Is this speed converter free?","acceptedAnswer":{"@type":"Answer","text":"Yes — free, no sign-up, and every conversion runs locally in your browser."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Unit Converters","item":"https://www.example.com/#cat-unit-converters"},{"@type":"ListItem","position":3,"name":"Speed Converter","item":"https://www.example.com/tools/speed-converter/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Unit Converters","item":"https://mohit99mj.github.io/Quicktools/#cat-unit-converters"},{"@type":"ListItem","position":3,"name":"Speed Converter","item":"https://mohit99mj.github.io/Quicktools/tools/speed-converter/"}]}</script>
 <script>
 var LOGIC={units:() => ['m/s', 'km/h', 'mph', 'ft/s', 'kn'],convert:(v, from, to) => {
     // Base unit: meters per second.

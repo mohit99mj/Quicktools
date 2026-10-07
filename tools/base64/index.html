@@ -6,11 +6,11 @@
 <title>Base64 Encode &amp; Decode — Free Online Tool</title>
 <meta name="description" content="Free Base64 encoder and decoder: encode or decode any text with full UTF-8 support. Runs 100% in your browser — nothing is uploaded.">
 <meta name="keywords" content="base64 encode, base64 decode, base64 encoder, base64 decoder, utf-8 base64">
-<link rel="canonical" href="https://www.example.com/tools/base64/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/base64/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Base64 Encode &amp; Decode — Free Online Tool">
 <meta property="og:description" content="Free Base64 encoder and decoder: encode or decode any text with full UTF-8 support. Runs 100% in your browser — nothing is uploaded.">
-<meta property="og:url" content="https://www.example.com/tools/base64/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/base64/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Base64 Encode &amp; Decode — Free Online Tool">
 <meta name="twitter:description" content="Free Base64 encoder and decoder: encode or decode any text with full UTF-8 support. Runs 100% in your browser — nothing is uploaded.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 
     .tool-base64 .b64-area{ min-height:140px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px; }
@@ -113,9 +115,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Base64 Encoder","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/base64/","description":"Free Base64 encoder and decoder: encode or decode any text with full UTF-8 support. Runs 100% in your browser — nothing is uploaded.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Base64 Encoder","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/base64/","description":"Free Base64 encoder and decoder: encode or decode any text with full UTF-8 support. Runs 100% in your browser — nothing is uploaded.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Base64 encoding used for?","acceptedAnswer":{"@type":"Answer","text":"Base64 represents binary data as plain ASCII text, commonly used for embedding images in HTML/CSS, encoding credentials in Authorization headers, and passing binary data through JSON or URLs."}},{"@type":"Question","name":"Why do some Base64 strings end with = signs?","acceptedAnswer":{"@type":"Answer","text":"The = characters are padding. Base64 works in 3-byte groups, so inputs whose length is not a multiple of 3 get one or two = characters to complete the final 4-character block."}},{"@type":"Question","name":"Is Base64 encryption?","acceptedAnswer":{"@type":"Answer","text":"No. Base64 is just an encoding — anyone can decode it instantly. Never use it to hide passwords or secrets."}},{"@type":"Question","name":"Does it handle emoji and non-English text?","acceptedAnswer":{"@type":"Answer","text":"Yes. The encoder converts text to UTF-8 bytes first, so emoji, Hindi, Chinese and any Unicode text encode and decode correctly."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://www.example.com/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"Base64 Encoder","item":"https://www.example.com/tools/base64/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-developer-tools"},{"@type":"ListItem","position":3,"name":"Base64 Encoder","item":"https://mohit99mj.github.io/Quicktools/tools/base64/"}]}</script>
 <script>
 var LOGIC={b64encode:(str) => {
     // UTF-8 safe without Buffer: TextEncoder -> bytes -> manual base64.

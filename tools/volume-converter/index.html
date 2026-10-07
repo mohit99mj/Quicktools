@@ -6,11 +6,11 @@
 <title>Volume Converter — Liters, Gallons, Cups &amp; ml</title>
 <meta name="description" content="Free volume converter: convert ml, liters, m³, tsp, tbsp, fl oz, cups, pints, quarts and gallons instantly. Runs in your browser.">
 <meta name="keywords" content="volume converter, liters to gallons, cups to ml, fl oz to ml, gallon to liter">
-<link rel="canonical" href="https://www.example.com/tools/volume-converter/">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/volume-converter/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Volume Converter — Liters, Gallons, Cups &amp; ml">
 <meta property="og:description" content="Free volume converter: convert ml, liters, m³, tsp, tbsp, fl oz, cups, pints, quarts and gallons instantly. Runs in your browser.">
-<meta property="og:url" content="https://www.example.com/tools/volume-converter/">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/volume-converter/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Volume Converter — Liters, Gallons, Cups &amp; ml">
 <meta name="twitter:description" content="Free volume converter: convert ml, liters, m³, tsp, tbsp, fl oz, cups, pints, quarts and gallons instantly. Runs in your browser.">
@@ -19,6 +19,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
 <style>
 
     .tool-volume-converter .conv-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
@@ -124,9 +126,11 @@
 </footer>
 <script src="../../assets/js/tools-index.js"></script>
 <script src="../../assets/js/main.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Volume Converter","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/volume-converter/","description":"Free volume converter: convert ml, liters, m³, tsp, tbsp, fl oz, cups, pints, quarts and gallons instantly. Runs in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Volume Converter","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/volume-converter/","description":"Free volume converter: convert ml, liters, m³, tsp, tbsp, fl oz, cups, pints, quarts and gallons instantly. Runs in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many liters are in a gallon?","acceptedAnswer":{"@type":"Answer","text":"One US gallon equals 3.78541 liters. (The UK imperial gallon is larger at 4.54609 liters — this converter uses US gallons.)"}},{"@type":"Question","name":"How many cups are in a liter?","acceptedAnswer":{"@type":"Answer","text":"One liter equals 4.22675 US cups. One US cup is 236.588 ml."}},{"@type":"Question","name":"How many tablespoons are in a cup?","acceptedAnswer":{"@type":"Answer","text":"There are 16 US tablespoons in one US cup, and 3 teaspoons in one tablespoon."}},{"@type":"Question","name":"Are these US or imperial units?","acceptedAnswer":{"@type":"Answer","text":"US customary units: the teaspoon (4.92892 ml), tablespoon, fluid ounce, cup, pint, quart and gallon used here are the US definitions common in American recipes."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Unit Converters","item":"https://www.example.com/#cat-unit-converters"},{"@type":"ListItem","position":3,"name":"Volume Converter","item":"https://www.example.com/tools/volume-converter/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Unit Converters","item":"https://mohit99mj.github.io/Quicktools/#cat-unit-converters"},{"@type":"ListItem","position":3,"name":"Volume Converter","item":"https://mohit99mj.github.io/Quicktools/tools/volume-converter/"}]}</script>
 <script>
 var LOGIC={units:() => ['ml', 'l', 'm³', 'tsp', 'tbsp', 'fl oz', 'cup', 'pt', 'qt', 'gal'],convert:(v, from, to) => {
     // Base unit: liters. US customary: tsp=4.92892ml, tbsp=14.7868ml, fl oz=29.5735ml,
