@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speed Test — Internet Speed Test Online</title>
+<meta name="description" content="Free internet speed test: measure ping, jitter and download speed to our CDN in your browser. Honest estimates — no upload test.">
+<meta name="keywords" content="speed test, internet speed test, check internet speed, download speed test">
+<link rel="canonical" href="https://www.example.com/tools/speed-test/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Speed Test — Internet Speed Test Online">
+<meta property="og:description" content="Free internet speed test: measure ping, jitter and download speed to our CDN in your browser. Honest estimates — no upload test.">
+<meta property="og:url" content="https://www.example.com/tools/speed-test/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Speed Test — Internet Speed Test Online">
+<meta name="twitter:description" content="Free internet speed test: measure ping, jitter and download speed to our CDN in your browser. Honest estimates — no upload test.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-speed-test .tool-speed-test-honest{border-left:4px solid var(--warn);padding:.75rem 1rem;background:var(--surface);}.tool-speed-test .tool-speed-test-progress{height:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:1rem 0;}.tool-speed-test .progress-bar{height:100%;background:var(--accent);transition:width .2s;}.tool-speed-test .result-big{font-size:1.5rem;}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li aria-current="page">Internet Speed Test</li></ol></nav>
+<h1>Internet Speed Test</h1>
+<div class="tool-body-intro">
+<p>Run a quick <strong>speed test</strong>: we measure round-trip ping and jitter to this site and to our CDN, then download a real file to estimate your download throughput. Results appear in seconds.</p><p>This is a browser-based estimate of your connection to our CDN (jsDelivr), not a lab-grade test — other servers may be faster or slower.</p>
+</div>
+<section class="tool-section tool-speed-test" aria-label="Internet Speed Test">
+
+    <div class="card tool-panel">
+      <p class="alert tool-speed-test-honest"><strong>Browser-based estimate</strong> of your connection to our CDN (jsDelivr). Not a lab-grade test. Upload speed is <strong>not measured</strong> — there is no server to upload to.</p>
+      <button class="btn btn-primary" id="st-go">Start test</button>
+      <div class="progress tool-speed-test-progress" id="st-progress" hidden>
+        <div class="progress-bar" id="st-bar" style="width:0%"></div>
+      </div>
+      <p class="hint" id="st-phase" aria-live="polite"></p>
+      <div class="result" id="st-out" aria-live="polite"></div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Close heavy downloads or streams for a cleaner result.</li>
+<li>Click &quot;Start test&quot;.</li>
+<li>Wait for the ping, jitter, and download phases to finish.</li>
+<li>Compare runs: repeat the test to spot variability on your connection.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>What does this speed test measure?</summary><div class="faq-a"><p>Ping (median round-trip latency over 10 samples), jitter (average variation between consecutive samples), and download throughput measured by fetching a real CDN file three times and taking the median.</p></div></details>
+<details><summary>Why is there no upload speed test?</summary><div class="faq-a"><p>Upload speed requires a server to receive the data, and this site has no backend — everything runs in your browser. The test honestly reports download and latency only.</p></div></details>
+<details><summary>Why is my download speed lower than my plan advertises?</summary><div class="faq-a"><p>Browser-based tests add overhead from encryption, the JavaScript runtime, and shared network paths. It is an estimate of real-world CDN throughput, not a lab measurement. Wi-Fi and other devices on the network also affect it.</p></div></details>
+<details><summary>Should I trust a single result?</summary><div class="faq-a"><p>Run the test two or three times and compare. Speed varies with network congestion, time of day, and what else is using your connection.</p></div></details>
+<details><summary>Does the test use my data allowance?</summary><div class="faq-a"><p>Yes, a little: the download phase fetches a library file three times. Each run uses only a few megabytes.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../ping-test/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#wifi"></use></svg><span class="tl-name">Ping Test</span><span class="tl-desc">Internet Tools</span></a>
+<a class="tool-card" href="../ip-lookup/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#globe"></use></svg><span class="tl-name">What&#39;s My IP</span><span class="tl-desc">Internet Tools</span></a>
+<a class="tool-card" href="../dns-lookup/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#network"></use></svg><span class="tl-name">DNS Lookup</span><span class="tl-desc">Internet Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Internet Speed Test","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/speed-test/","description":"Free internet speed test: measure ping, jitter and download speed to our CDN in your browser. Honest estimates — no upload test.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does this speed test measure?","acceptedAnswer":{"@type":"Answer","text":"Ping (median round-trip latency over 10 samples), jitter (average variation between consecutive samples), and download throughput measured by fetching a real CDN file three times and taking the median."}},{"@type":"Question","name":"Why is there no upload speed test?","acceptedAnswer":{"@type":"Answer","text":"Upload speed requires a server to receive the data, and this site has no backend — everything runs in your browser. The test honestly reports download and latency only."}},{"@type":"Question","name":"Why is my download speed lower than my plan advertises?","acceptedAnswer":{"@type":"Answer","text":"Browser-based tests add overhead from encryption, the JavaScript runtime, and shared network paths. It is an estimate of real-world CDN throughput, not a lab measurement. Wi-Fi and other devices on the network also affect it."}},{"@type":"Question","name":"Should I trust a single result?","acceptedAnswer":{"@type":"Answer","text":"Run the test two or three times and compare. Speed varies with network congestion, time of day, and what else is using your connection."}},{"@type":"Question","name":"Does the test use my data allowance?","acceptedAnswer":{"@type":"Answer","text":"Yes, a little: the download phase fetches a library file three times. Each run uses only a few megabytes."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Internet Tools","item":"https://www.example.com/#cat-internet-tools"},{"@type":"ListItem","position":3,"name":"Internet Speed Test","item":"https://www.example.com/tools/speed-test/"}]}</script>
+<script>
+
+    (function(){
+      'use strict';
+      var go = document.getElementById('st-go');
+      var out = document.getElementById('st-out');
+      var phase = document.getElementById('st-phase');
+      var progress = document.getElementById('st-progress');
+      var bar = document.getElementById('st-bar');
+      function setPhase(t){ if (phase) phase.textContent = t; }
+      function setBar(p){ if (bar) bar.style.width = Math.round(p) + '%'; if (progress) progress.hidden = false; }
+      function median(a){
+        var s = a.slice().sort(function(x, y){ return x - y; });
+        var m = s.length >> 1;
+        return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+      }
+      function jitter(a){
+        if (a.length < 2) return 0;
+        var sum = 0;
+        for (var i = 1; i < a.length; i += 1) sum += Math.abs(a[i] - a[i - 1]);
+        return sum / (a.length - 1);
+      }
+      function pingOnce(url){
+        return new Promise(function(resolve){
+          var t0 = performance.now();
+          fetch(url, { cache: 'no-store' }).then(function(){ resolve(performance.now() - t0); })
+            .catch(function(){ resolve(null); });
+        });
+      }
+      function render(pingMs, jitMs, downMbps){
+        if (!out) return;
+        out.innerHTML = '';
+        var items = [
+          ['Ping', pingMs === null ? '—' : pingMs.toFixed(0) + ' ms'],
+          ['Jitter', jitMs === null ? '—' : jitMs.toFixed(0) + ' ms'],
+          ['Download', downMbps === null ? '—' : downMbps.toFixed(1) + ' Mbps']
+        ];
+        for (var i = 0; i < items.length; i += 1){
+          var p = document.createElement('p');
+          var label = document.createElement('span');
+          label.className = 'hint';
+          label.textContent = items[i][0] + ': ';
+          var val = document.createElement('strong');
+          val.className = 'result-big';
+          val.textContent = items[i][1];
+          p.appendChild(label);
+          p.appendChild(val);
+          out.appendChild(p);
+        }
+        var note = document.createElement('p');
+        note.className = 'hint';
+        note.textContent = 'Median of samples; download measured against jsDelivr CDN files. Upload speed is not measured.';
+        out.appendChild(note);
+      }
+      function downloadRun(runIdx, totalRuns){
+        var url = 'https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js?dl=' + Math.random().toString(36).slice(2);
+        var t0 = performance.now();
+        return fetch(url, { cache: 'no-store' }).then(function(res){
+          if (!res.ok || !res.body) throw new Error('bad response');
+          var reader = res.body.getReader();
+          var total = Number(res.headers.get('content-length')) || 0;
+          var received = 0;
+          function pump(){
+            return reader.read().then(function(r){
+              if (r.done){
+                var secs = (performance.now() - t0) / 1000;
+                return { bytes: received, secs: secs };
+              }
+              received += (r.value ? r.value.length : 0);
+              var frac = total ? Math.min(received / total, 1) : 0.5;
+              setBar(50 + ((runIdx + frac) / totalRuns) * 50);
+              return pump();
+            });
+          }
+          return pump();
+        });
+      }
+      if (!go) return;
+      go.addEventListener('click', function(){
+        go.disabled = true;
+        setBar(0);
+        setPhase('Measuring ping…');
+        if (out) out.innerHTML = '';
+        var urls = [
+          '../../assets/css/main.css?ping=' + Math.random().toString(36).slice(2),
+          'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1/package.json?ping=' + Math.random().toString(36).slice(2)
+        ];
+        var samples = [];
+        var seq = Promise.resolve();
+        urls.forEach(function(u){
+          for (var i = 0; i < 5; i += 1){
+            (function(url){
+              seq = seq.then(function(){
+                return pingOnce(url).then(function(ms){
+                  if (ms !== null) samples.push(ms);
+                  setBar((samples.length / 10) * 50);
+                });
+              });
+            })(u);
+          }
+        });
+        seq.then(function(){
+          if (samples.length < 3) throw new Error('ping failed');
+          var pingMs = median(samples);
+          var jitMs = jitter(samples);
+          setPhase('Measuring download speed (3 runs)…');
+          var runs = [];
+          var chain = Promise.resolve();
+          for (var r = 0; r < 3; r += 1){
+            (function(idx){
+              chain = chain.then(function(){
+                setPhase('Measuring download speed (run ' + (idx + 1) + ' of 3)…');
+                return downloadRun(idx, 3).then(function(res){
+                  var mbps = (res.bytes * 8) / (res.secs * 1000000);
+                  runs.push(mbps);
+                  setBar(50 + ((idx + 1) / 3) * 50);
+                });
+              });
+            })(r);
+          }
+          return chain.then(function(){
+            go.disabled = false;
+            if (progress) progress.hidden = true;
+            setPhase('Done.');
+            render(pingMs, jitMs, median(runs));
+          });
+        }).catch(function(){
+          go.disabled = false;
+          if (progress) progress.hidden = true;
+          setPhase('');
+          if (out) out.innerHTML = '<p class="error">Network test failed. Check your connection and try again.</p>';
+        });
+      });
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DNS Lookup — Check DNS Records Online</title>
+<meta name="description" content="Free DNS lookup: query A, AAAA, MX, TXT, NS and CNAME records for any domain using Google DNS over HTTPS.">
+<meta name="keywords" content="dns lookup, check dns records, dns query online, mx record lookup">
+<link rel="canonical" href="https://www.example.com/tools/dns-lookup/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DNS Lookup — Check DNS Records Online">
+<meta property="og:description" content="Free DNS lookup: query A, AAAA, MX, TXT, NS and CNAME records for any domain using Google DNS over HTTPS.">
+<meta property="og:url" content="https://www.example.com/tools/dns-lookup/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DNS Lookup — Check DNS Records Online">
+<meta name="twitter:description" content="Free DNS lookup: query A, AAAA, MX, TXT, NS and CNAME records for any domain using Google DNS over HTTPS.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-dns-lookup .tool-dns-lookup-heading{font-size:1.1rem;margin:1rem 0 .5rem;}.tool-dns-lookup .table td{word-break:break-all;}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li aria-current="page">DNS Lookup</li></ol></nav>
+<h1>DNS Lookup</h1>
+<div class="tool-body-intro">
+<p>Run a <strong>DNS lookup</strong> on any domain: enter a domain name, pick a record type, and see the live answer returned by Google’s public DNS-over-HTTPS resolver.</p><p>Handy for checking A and AAAA records when moving hosts, verifying MX records for email setup, or inspecting TXT records such as SPF and DKIM.</p>
+</div>
+<section class="tool-section tool-dns-lookup" aria-label="DNS Lookup">
+
+    <div class="card tool-panel">
+      <div class="field">
+        <label class="label" for="dns-domain">Domain name</label>
+        <input class="input" id="dns-domain" type="text" inputmode="url" placeholder="example.com" autocapitalize="off" spellcheck="false" />
+      </div>
+      <div class="field">
+        <label class="label" for="dns-type">Record type</label>
+        <select class="select" id="dns-type">
+          <option value="A">A</option>
+          <option value="AAAA">AAAA</option>
+          <option value="MX">MX</option>
+          <option value="TXT">TXT</option>
+          <option value="NS">NS</option>
+          <option value="CNAME">CNAME</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" id="dns-go">Look up</button>
+      <div class="result" id="dns-out" aria-live="polite"></div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Enter a domain name, e.g. example.com (no https:// or slashes).</li>
+<li>Choose the record type: A, AAAA, MX, TXT, NS, or CNAME.</li>
+<li>Click &quot;Look up&quot; to query the DNS.</li>
+<li>Read the answer table — TTL and record data are shown for each result.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>What DNS records can I look up?</summary><div class="faq-a"><p>A (IPv4 address), AAAA (IPv6 address), MX (mail servers), TXT (text records like SPF/DKIM), NS (name servers), and CNAME (aliases).</p></div></details>
+<details><summary>What does &quot;NXDOMAIN&quot; mean?</summary><div class="faq-a"><p>It means the domain name does not exist in DNS. Check the spelling, or the domain may not be registered.</p></div></details>
+<details><summary>Why do I see different results than my computer shows?</summary><div class="faq-a"><p>This tool queries Google’s public resolver, while your device may use your ISP’s resolver with different caching. Results can differ for a short time after DNS changes.</p></div></details>
+<details><summary>Is there a limit on lookups?</summary><div class="faq-a"><p>Google’s DNS-over-HTTPS endpoint is free and generously rate-limited. Normal manual use will not hit any limit.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../ip-lookup/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#globe"></use></svg><span class="tl-name">What&#39;s My IP</span><span class="tl-desc">Internet Tools</span></a>
+<a class="tool-card" href="../ping-test/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#wifi"></use></svg><span class="tl-name">Ping Test</span><span class="tl-desc">Internet Tools</span></a>
+<a class="tool-card" href="../user-agent/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#monitor"></use></svg><span class="tl-name">User Agent Info</span><span class="tl-desc">Internet Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"DNS Lookup","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/dns-lookup/","description":"Free DNS lookup: query A, AAAA, MX, TXT, NS and CNAME records for any domain using Google DNS over HTTPS.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What DNS records can I look up?","acceptedAnswer":{"@type":"Answer","text":"A (IPv4 address), AAAA (IPv6 address), MX (mail servers), TXT (text records like SPF/DKIM), NS (name servers), and CNAME (aliases)."}},{"@type":"Question","name":"What does \"NXDOMAIN\" mean?","acceptedAnswer":{"@type":"Answer","text":"It means the domain name does not exist in DNS. Check the spelling, or the domain may not be registered."}},{"@type":"Question","name":"Why do I see different results than my computer shows?","acceptedAnswer":{"@type":"Answer","text":"This tool queries Google’s public resolver, while your device may use your ISP’s resolver with different caching. Results can differ for a short time after DNS changes."}},{"@type":"Question","name":"Is there a limit on lookups?","acceptedAnswer":{"@type":"Answer","text":"Google’s DNS-over-HTTPS endpoint is free and generously rate-limited. Normal manual use will not hit any limit."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Internet Tools","item":"https://www.example.com/#cat-internet-tools"},{"@type":"ListItem","position":3,"name":"DNS Lookup","item":"https://www.example.com/tools/dns-lookup/"}]}</script>
+<script>
+
+    (function(){
+      'use strict';
+      var domainEl = document.getElementById('dns-domain');
+      var typeEl = document.getElementById('dns-type');
+      var go = document.getElementById('dns-go');
+      var out = document.getElementById('dns-out');
+      var STATUS_TEXT = {
+        0: 'Success',
+        1: 'Format error',
+        2: 'Server failure',
+        3: 'Non-existent domain (NXDOMAIN)',
+        4: 'Not implemented',
+        5: 'Refused'
+      };
+      function cleanDomain(v){
+        var d = String(v || '').trim().toLowerCase();
+        d = d.replace(/^https?:\/\//, '').replace(/\/.*$/, '').replace(/\.$/, '');
+        return d;
+      }
+      if (!go) return;
+      go.addEventListener('click', function(){
+        var domain = domainEl ? cleanDomain(domainEl.value) : '';
+        if (!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(domain)){
+          out.innerHTML = '<p class="error">Enter a valid domain, e.g. example.com</p>';
+          return;
+        }
+        var type = typeEl ? typeEl.value : 'A';
+        out.innerHTML = '<p>Looking up ' + type + ' records for ' + domain + '…</p>';
+        fetch('https://dns.google/resolve?name=' + encodeURIComponent(domain) + '&type=' + encodeURIComponent(type))
+          .then(function(res){
+            if (!res.ok) throw new Error('dns failed');
+            return res.json();
+          })
+          .then(function(data){
+            out.innerHTML = '';
+            if (!data || data.Status !== 0){
+              var code = data && typeof data.Status === 'number' ? data.Status : -1;
+              var msg = STATUS_TEXT[code] || 'DNS query failed';
+              var err = document.createElement('p');
+              err.className = 'error';
+              err.textContent = msg + '.';
+              out.appendChild(err);
+              return;
+            }
+            var answers = data.Answer || [];
+            var h = document.createElement('h2');
+            h.className = 'tool-dns-lookup-heading';
+            h.textContent = 'Answer: ' + domain + ' (' + type + ')';
+            out.appendChild(h);
+            if (!answers.length){
+              var p = document.createElement('p');
+              p.className = 'hint';
+              p.textContent = 'No ' + type + ' records found for this domain.';
+              out.appendChild(p);
+              return;
+            }
+            var tbl = document.createElement('table');
+            tbl.className = 'table';
+            var thead = document.createElement('thead');
+            var hr = document.createElement('tr');
+            ['Type', 'TTL', 'Data'].forEach(function(t){
+              var th = document.createElement('th');
+              th.textContent = t;
+              hr.appendChild(th);
+            });
+            thead.appendChild(hr);
+            tbl.appendChild(thead);
+            var tb = document.createElement('tbody');
+            answers.forEach(function(a){
+              var tr = document.createElement('tr');
+              [String(a.type || type), String(a.TTL), String(a.data || '')].forEach(function(v){
+                var td = document.createElement('td');
+                td.textContent = v;
+                tr.appendChild(td);
+              });
+              tb.appendChild(tr);
+            });
+            tbl.appendChild(tb);
+            out.appendChild(tbl);
+          })
+          .catch(function(){
+            out.innerHTML = '<p class="error">DNS query failed. Check your connection and try again.</p>';
+          });
+      });
+    })();
+</script>
+</body>
+</html>

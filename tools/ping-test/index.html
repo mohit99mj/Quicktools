@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ping Test — Check Host Latency</title>
+<meta name="description" content="Approximate HTTPS latency to any host: 4 attempts with min, avg and max. Browser-based — not a true ICMP ping.">
+<meta name="keywords" content="ping test, ping website, check host latency, website ping online">
+<link rel="canonical" href="https://www.example.com/tools/ping-test/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ping Test — Check Host Latency">
+<meta property="og:description" content="Approximate HTTPS latency to any host: 4 attempts with min, avg and max. Browser-based — not a true ICMP ping.">
+<meta property="og:url" content="https://www.example.com/tools/ping-test/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ping Test — Check Host Latency">
+<meta name="twitter:description" content="Approximate HTTPS latency to any host: 4 attempts with min, avg and max. Browser-based — not a true ICMP ping.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-ping-test .tool-ping-test-honest{border-left:4px solid var(--warn);padding:.75rem 1rem;background:var(--surface);}.tool-ping-test .tool-ping-test-heading{font-size:1.1rem;margin:1rem 0 .5rem;}.tool-ping-test .result-big{font-size:1.15rem;}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li aria-current="page">Ping Test</li></ol></nav>
+<h1>Ping Test</h1>
+<div class="tool-body-intro">
+<p>Run a quick <strong>ping test</strong> against any host: your browser fetches a tiny file from the host four times and reports the minimum, average, and maximum round-trip times.</p><p>Browsers cannot send real ICMP pings, so this measures approximate HTTPS fetch latency instead — still useful for comparing hosts and spotting slow or unreachable servers.</p>
+</div>
+<section class="tool-section tool-ping-test" aria-label="Ping Test">
+
+    <div class="card tool-panel">
+      <p class="alert tool-ping-test-honest"><strong>Approximate HTTPS fetch latency</strong>, not true ICMP ping. Browsers cannot send real ping packets.</p>
+      <div class="field">
+        <label class="label" for="ping-host">Host</label>
+        <input class="input" id="ping-host" type="text" inputmode="url" placeholder="example.com" autocapitalize="off" spellcheck="false" />
+      </div>
+      <button class="btn btn-primary" id="ping-go">Ping</button>
+      <p class="hint" id="ping-phase" aria-live="polite"></p>
+      <div class="result" id="ping-out" aria-live="polite"></div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Enter a host name, e.g. example.com (no https:// needed).</li>
+<li>Click &quot;Ping&quot; — four attempts run automatically.</li>
+<li>Read the min, average, and max times.</li>
+<li>Compare hosts to see which responds fastest for you.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Is this a real ping?</summary><div class="faq-a"><p>No — browsers cannot send ICMP ping packets. This measures how long a tiny HTTPS request takes, which approximates the network latency to that host.</p></div></details>
+<details><summary>Why do some hosts fail all four attempts?</summary><div class="faq-a"><p>The host may be down, may block cross-origin requests, or may not serve the tiny file we request. A failed attempt means the host did not respond to us, not necessarily that it is offline for everyone.</p></div></details>
+<details><summary>What is a good ping time?</summary><div class="faq-a"><p>Under 50 ms is excellent, under 100 ms is fine for most uses, and several hundred milliseconds will feel slow. Your distance from the host’s server matters most.</p></div></details>
+<details><summary>Why do results vary between attempts?</summary><div class="faq-a"><p>Network congestion, Wi-Fi interference, and the host’s current load all add variation. The min/avg/max summary shows that spread honestly.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../speed-test/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#gauge"></use></svg><span class="tl-name">Internet Speed Test</span><span class="tl-desc">Internet Tools</span></a>
+<a class="tool-card" href="../dns-lookup/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#network"></use></svg><span class="tl-name">DNS Lookup</span><span class="tl-desc">Internet Tools</span></a>
+<a class="tool-card" href="../ip-lookup/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#globe"></use></svg><span class="tl-name">What&#39;s My IP</span><span class="tl-desc">Internet Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Ping Test","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/ping-test/","description":"Approximate HTTPS latency to any host: 4 attempts with min, avg and max. Browser-based — not a true ICMP ping.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this a real ping?","acceptedAnswer":{"@type":"Answer","text":"No — browsers cannot send ICMP ping packets. This measures how long a tiny HTTPS request takes, which approximates the network latency to that host."}},{"@type":"Question","name":"Why do some hosts fail all four attempts?","acceptedAnswer":{"@type":"Answer","text":"The host may be down, may block cross-origin requests, or may not serve the tiny file we request. A failed attempt means the host did not respond to us, not necessarily that it is offline for everyone."}},{"@type":"Question","name":"What is a good ping time?","acceptedAnswer":{"@type":"Answer","text":"Under 50 ms is excellent, under 100 ms is fine for most uses, and several hundred milliseconds will feel slow. Your distance from the host’s server matters most."}},{"@type":"Question","name":"Why do results vary between attempts?","acceptedAnswer":{"@type":"Answer","text":"Network congestion, Wi-Fi interference, and the host’s current load all add variation. The min/avg/max summary shows that spread honestly."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Internet Tools","item":"https://www.example.com/#cat-internet-tools"},{"@type":"ListItem","position":3,"name":"Ping Test","item":"https://www.example.com/tools/ping-test/"}]}</script>
+<script>
+
+    (function(){
+      'use strict';
+      var hostEl = document.getElementById('ping-host');
+      var go = document.getElementById('ping-go');
+      var out = document.getElementById('ping-out');
+      var phase = document.getElementById('ping-phase');
+      function setPhase(t){ if (phase) phase.textContent = t; }
+      function cleanHost(v){
+        var h = String(v || '').trim().toLowerCase();
+        h = h.replace(/^https?:\/\//, '').replace(/\/.*$/, '').replace(/:.*$/, '').replace(/\.$/, '');
+        return h;
+      }
+      function attempt(host){
+        var url = 'https://' + host + '/favicon.ico?ping=' + Math.random().toString(36).slice(2);
+        var t0 = performance.now();
+        return new Promise(function(resolve){
+          fetch(url, { mode: 'no-cors', cache: 'no-store' }).then(function(){
+            resolve(performance.now() - t0);
+          }).catch(function(){
+            resolve(null);
+          });
+        });
+      }
+      function render(times){
+        out.innerHTML = '';
+        var ok = times.filter(function(t){ return t !== null; });
+        var h = document.createElement('h2');
+        h.className = 'tool-ping-test-heading';
+        h.textContent = 'Results';
+        out.appendChild(h);
+        for (var i = 0; i < times.length; i += 1){
+          var p = document.createElement('p');
+          var lab = document.createElement('span');
+          lab.className = 'hint';
+          lab.textContent = 'Attempt ' + (i + 1) + ': ';
+          var val = document.createElement('strong');
+          val.textContent = times[i] === null ? 'failed' : times[i].toFixed(0) + ' ms';
+          p.appendChild(lab);
+          p.appendChild(val);
+          out.appendChild(p);
+        }
+        if (!ok.length){
+          var e = document.createElement('p');
+          e.className = 'error';
+          e.textContent = 'All attempts failed — the host did not respond.';
+          out.appendChild(e);
+          return;
+        }
+        var min = Math.min.apply(null, ok);
+        var max = Math.max.apply(null, ok);
+        var avg = ok.reduce(function(a, b){ return a + b; }, 0) / ok.length;
+        var sum = document.createElement('p');
+        var sLab = document.createElement('span');
+        sLab.className = 'hint';
+        sLab.textContent = 'Summary: ';
+        var sVal = document.createElement('strong');
+        sVal.className = 'result-big';
+        sVal.textContent = 'min ' + min.toFixed(0) + ' ms · avg ' + avg.toFixed(0) + ' ms · max ' + max.toFixed(0) + ' ms';
+        sum.appendChild(sLab);
+        sum.appendChild(sVal);
+        out.appendChild(sum);
+      }
+      if (!go) return;
+      go.addEventListener('click', function(){
+        var host = hostEl ? cleanHost(hostEl.value) : '';
+        if (!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(host)){
+          out.innerHTML = '<p class="error">Enter a valid host, e.g. example.com</p>';
+          return;
+        }
+        go.disabled = true;
+        out.innerHTML = '';
+        var times = [];
+        var chain = Promise.resolve();
+        for (var i = 0; i < 4; i += 1){
+          (function(idx){
+            chain = chain.then(function(){
+              setPhase('Attempt ' + (idx + 1) + ' of 4…');
+              return attempt(host).then(function(ms){
+                times.push(ms);
+              });
+            });
+          })(i);
+        }
+        chain.then(function(){
+          go.disabled = false;
+          setPhase('Done.');
+          render(times);
+        });
+      });
+    })();
+</script>
+</body>
+</html>

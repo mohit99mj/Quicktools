@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSV to JSON — Convert CSV Online</title>
+<meta name="description" content="Convert CSV to JSON free online. Paste or upload CSV, auto-detects the delimiter, preview the table, then copy or download the JSON.">
+<meta name="keywords" content="csv to json, convert csv to json, csv converter, csv to json online">
+<link rel="canonical" href="https://www.example.com/tools/csv-to-json/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSV to JSON — Convert CSV Online">
+<meta property="og:description" content="Convert CSV to JSON free online. Paste or upload CSV, auto-detects the delimiter, preview the table, then copy or download the JSON.">
+<meta property="og:url" content="https://www.example.com/tools/csv-to-json/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSV to JSON — Convert CSV Online">
+<meta name="twitter:description" content="Convert CSV to JSON free online. Paste or upload CSV, auto-detects the delimiter, preview the table, then copy or download the JSON.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-csv-to-json .table{display:block;overflow-x:auto;max-width:100%;}.tool-csv-to-json .table td,.tool-csv-to-json .table th{max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.tool-csv-to-json .tool-csv-to-json-actions{margin:1rem 0;display:flex;gap:.5rem;flex-wrap:wrap;}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li aria-current="page">CSV to JSON</li></ol></nav>
+<h1>CSV to JSON</h1>
+<div class="tool-body-intro">
+<p>Convert <strong>CSV to JSON</strong> instantly: paste your spreadsheet data or upload a .csv file. The delimiter (comma, semicolon, or tab) is detected automatically, and quoted fields — including commas, escaped quotes, and line breaks inside quotes — are parsed correctly.</p><p>Your files never leave your device — everything runs in your browser. Preview the first 20 rows, then copy or download the result.</p>
+</div>
+<section class="tool-section tool-csv-to-json" aria-label="CSV to JSON">
+
+    <div class="card tool-panel">
+      <p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+      <div class="field">
+        <label class="label" for="cj-text">CSV input</label>
+        <textarea class="textarea" id="cj-text" rows="8" placeholder="name,age,city&#10;Ada,36,London&#10;&quot;Grace, H.&quot;,85,&quot;New&#10;York&quot;"></textarea>
+      </div>
+      <div class="field">
+        <label class="label" for="cj-file">Or upload a .csv file</label>
+        <input class="input" id="cj-file" type="file" accept=".csv,text/csv" />
+      </div>
+      <button class="btn btn-primary" id="cj-go">Convert</button>
+      <div class="result" id="cj-out" aria-live="polite"></div>
+      <div class="tool-csv-to-json-actions" id="cj-actions" hidden>
+        <button class="btn btn-ghost" id="cj-copy">Copy JSON</button>
+        <button class="btn btn-ghost" id="cj-dl">Download JSON</button>
+      </div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Paste CSV text below, or upload a .csv file.</li>
+<li>Click &quot;Convert&quot; — the delimiter is detected automatically.</li>
+<li>Check the preview table (first 20 rows) for correctness.</li>
+<li>Copy the JSON to your clipboard or download it as a .json file.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Which delimiters are supported?</summary><div class="faq-a"><p>Comma, semicolon and tab are detected automatically from your data, so European-style semicolon CSVs work without any setting.</p></div></details>
+<details><summary>Does it handle quotes and line breaks inside cells?</summary><div class="faq-a"><p>Yes. Standard CSV quoting is supported: quoted fields may contain commas, an escaped pair of quotes becomes one quote character, and line breaks inside quotes stay in the same cell.</p></div></details>
+<details><summary>What happens to the header row?</summary><div class="faq-a"><p>The first row becomes the JSON object keys. Empty headers are named column_1, column_2 and so on, and short rows get null for missing values.</p></div></details>
+<details><summary>How big a CSV can I convert?</summary><div class="faq-a"><p>There is no set limit — typical exports of tens of thousands of rows convert fine. Extremely large files may be slow since everything runs on your device.</p></div></details>
+<details><summary>Is my data uploaded anywhere?</summary><div class="faq-a"><p>No. Parsing and preview happen entirely in your browser, so your data never leaves your device.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../json-formatter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#braces"></use></svg><span class="tl-name">JSON Formatter</span><span class="tl-desc">Developer Tools</span></a>
+<a class="tool-card" href="../text-to-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#file-text"></use></svg><span class="tl-name">Text to PDF</span><span class="tl-desc">File Converters</span></a>
+<a class="tool-card" href="../files-to-zip/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#archive"></use></svg><span class="tl-name">ZIP Files Online</span><span class="tl-desc">File Converters</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"CSV to JSON","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/csv-to-json/","description":"Convert CSV to JSON free online. Paste or upload CSV, auto-detects the delimiter, preview the table, then copy or download the JSON.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which delimiters are supported?","acceptedAnswer":{"@type":"Answer","text":"Comma, semicolon and tab are detected automatically from your data, so European-style semicolon CSVs work without any setting."}},{"@type":"Question","name":"Does it handle quotes and line breaks inside cells?","acceptedAnswer":{"@type":"Answer","text":"Yes. Standard CSV quoting is supported: quoted fields may contain commas, an escaped pair of quotes becomes one quote character, and line breaks inside quotes stay in the same cell."}},{"@type":"Question","name":"What happens to the header row?","acceptedAnswer":{"@type":"Answer","text":"The first row becomes the JSON object keys. Empty headers are named column_1, column_2 and so on, and short rows get null for missing values."}},{"@type":"Question","name":"How big a CSV can I convert?","acceptedAnswer":{"@type":"Answer","text":"There is no set limit — typical exports of tens of thousands of rows convert fine. Extremely large files may be slow since everything runs on your device."}},{"@type":"Question","name":"Is my data uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Parsing and preview happen entirely in your browser, so your data never leaves your device."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"File Converters","item":"https://www.example.com/#cat-file-converters"},{"@type":"ListItem","position":3,"name":"CSV to JSON","item":"https://www.example.com/tools/csv-to-json/"}]}</script>
+<script>
+var LOGIC={csvToJson:(text) => {
+    const src = String(text).replace(/^\uFEFF/, '');
+    // Delimiter auto-detect: count candidates outside quotes on the first
+    // non-empty line, preferring the one that occurs most.
+    const firstLine = src.split(/\r?\n/).find((l) => l.trim().length > 0) || '';
+    const candidates = [',', ';', '\t'];
+    let delim = ',';
+    let best = 0;
+    for (let c = 0; c < candidates.length; c += 1) {
+      const d = candidates[c];
+      let count = 0;
+      let inQ = false;
+      for (let i = 0; i < firstLine.length; i += 1) {
+        const ch = firstLine[i];
+        if (ch === '"') {
+          if (inQ && firstLine[i + 1] === '"') {
+            i += 1;
+          } else {
+            inQ = !inQ;
+          }
+        } else if (!inQ && ch === d) {
+          count += 1;
+        }
+      }
+      if (count > best) {
+        best = count;
+        delim = d;
+      }
+    }
+    // State-machine parse honoring quoted fields.
+    const rawRows = [];
+    let row = [];
+    let field = '';
+    let inQuotes = false;
+    let sawData = false;
+    const endField = () => {
+      row.push(field);
+      field = '';
+    };
+    const endRow = () => {
+      endField();
+      rawRows.push(row);
+      row = [];
+      sawData = false;
+    };
+    for (let i = 0; i < src.length; i += 1) {
+      const ch = src[i];
+      if (inQuotes) {
+        if (ch === '"') {
+          if (src[i + 1] === '"') {
+            field += '"';
+            i += 1;
+          } else {
+            inQuotes = false;
+          }
+        } else {
+          field += ch;
+        }
+        sawData = true;
+      } else if (ch === '"') {
+        inQuotes = true;
+        sawData = true;
+      } else if (ch === delim) {
+        endField();
+      } else if (ch === '\r') {
+        if (src[i + 1] === '\n') i += 1;
+        if (sawData || row.length > 0) endRow();
+      } else if (ch === '\n') {
+        if (sawData || row.length > 0) endRow();
+      } else {
+        field += ch;
+        if (ch !== ' ' && ch !== '\t') sawData = true;
+      }
+    }
+    if (sawData || row.length > 0) endField(), rawRows.push(row);
+    const headers = (rawRows[0] || []).map((h, i) => (h && h.trim() ? h.trim() : 'column_' + (i + 1)));
+    const rows = rawRows.slice(1).map((r) => {
+      const obj = {};
+      for (let i = 0; i < headers.length; i += 1) {
+        obj[headers[i]] = i < r.length ? r[i] : null;
+      }
+      return obj;
+    });
+    return { headers, rows };
+  }};
+
+    (function(){
+      'use strict';
+      var textEl = document.getElementById('cj-text');
+      var fileEl = document.getElementById('cj-file');
+      var go = document.getElementById('cj-go');
+      var out = document.getElementById('cj-out');
+      var actions = document.getElementById('cj-actions');
+      var copyBtn = document.getElementById('cj-copy');
+      var dlBtn = document.getElementById('cj-dl');
+      var lastJson = '';
+      function setStatus(html){ if (out) out.innerHTML = html; }
+      function cell(v){
+        var td = document.createElement('td');
+        td.textContent = v === null || v === undefined ? '' : String(v);
+        return td;
+      }
+      if (fileEl && textEl){
+        fileEl.addEventListener('change', function(){
+          var f = fileEl.files && fileEl.files[0];
+          if (!f) return;
+          var r = new FileReader();
+          r.onload = function(){ textEl.value = String(r.result || ''); };
+          r.onerror = function(){ setStatus('<p class="error">Could not read that file.</p>'); };
+          r.readAsText(f);
+        });
+      }
+      if (!go) return;
+      go.addEventListener('click', function(){
+        var text = textEl ? textEl.value : '';
+        if (!text.trim()){
+          setStatus('<p class="error">Paste or upload some CSV first.</p>');
+          return;
+        }
+        try {
+          var parsed = LOGIC.csvToJson(text);
+          lastJson = JSON.stringify(parsed.rows, null, 2);
+          if (!parsed.rows.length){
+            setStatus('<p class="error">No data rows found. Make sure the first row is a header row.</p>');
+            if (actions) actions.hidden = true;
+            return;
+          }
+          var tbl = document.createElement('table');
+          tbl.className = 'table';
+          var thead = document.createElement('thead');
+          var hr = document.createElement('tr');
+          for (var h = 0; h < parsed.headers.length; h += 1){
+            var th = document.createElement('th');
+            th.textContent = parsed.headers[h];
+            hr.appendChild(th);
+          }
+          thead.appendChild(hr);
+          tbl.appendChild(thead);
+          var tbody = document.createElement('tbody');
+          var limit = Math.min(parsed.rows.length, 20);
+          for (var i = 0; i < limit; i += 1){
+            var tr = document.createElement('tr');
+            for (var k = 0; k < parsed.headers.length; k += 1){
+              tr.appendChild(cell(parsed.rows[i][parsed.headers[k]]));
+            }
+            tbody.appendChild(tr);
+          }
+          tbl.appendChild(tbody);
+          setStatus('');
+          out.appendChild(tbl);
+          var note = document.createElement('p');
+          note.className = 'hint';
+          note.textContent = 'Showing ' + limit + ' of ' + parsed.rows.length + ' rows. ' +
+            parsed.headers.length + ' columns.';
+          out.appendChild(note);
+          if (actions) actions.hidden = false;
+        } catch (e) {
+          if (actions) actions.hidden = true;
+          setStatus('<p class="error">Could not parse the CSV. Check the format and try again.</p>');
+        }
+      });
+      function fallbackCopy(){
+        var ta = document.createElement('textarea');
+        ta.value = lastJson;
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        ta.remove();
+      }
+      if (copyBtn){
+        copyBtn.addEventListener('click', function(){
+          if (!lastJson) return;
+          if (navigator.clipboard && navigator.clipboard.writeText){
+            navigator.clipboard.writeText(lastJson).then(function(){
+              copyBtn.textContent = 'Copied!';
+              setTimeout(function(){ copyBtn.textContent = 'Copy JSON'; }, 1500);
+            }).catch(fallbackCopy);
+          } else {
+            fallbackCopy();
+          }
+        });
+      }
+      if (dlBtn){
+        dlBtn.addEventListener('click', function(){
+          if (!lastJson) return;
+          var blob = new Blob([lastJson], { type: 'application/json' });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = 'data.json';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+        });
+      }
+    })();
+</script>
+</body>
+</html>
