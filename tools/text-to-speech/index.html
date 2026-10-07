@@ -25,6 +25,15 @@
 .tool-text-to-speech .tool-text-to-speech-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .tool-text-to-speech .tool-text-to-speech-row input[type="range"]{width:100%;accent-color:var(--accent);}
 .tool-text-to-speech .tool-text-to-speech-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;}
+.tool-text-to-speech .tts-lang-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+.tool-text-to-speech .tts-lang-row .btn{min-height:44px;}
+.tool-text-to-speech .tts-lang[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);font-weight:700;}
+.tool-text-to-speech .tts-gallery{list-style:none;margin:.5rem 0 0;padding:0;display:grid;gap:.5rem;}
+.tool-text-to-speech .tts-voice-row{display:flex;align-items:center;gap:.6rem;padding:.55rem .7rem;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);flex-wrap:wrap;}
+.tool-text-to-speech .tts-voice-name{flex:1;min-width:9rem;font-weight:600;}
+.tool-text-to-speech .tts-voice-lang{font-size:.8rem;color:var(--muted,#666);border:1px solid var(--line);border-radius:999px;padding:.1rem .55rem;white-space:nowrap;}
+.tool-text-to-speech .tts-voice-row .btn{min-height:44px;}
+.tool-text-to-speech .tts-voice-row.current{border-color:var(--accent);}
 @media (max-width:480px){.tool-text-to-speech .tool-text-to-speech-row{grid-template-columns:1fr;}}
 </style>
 </head>
@@ -38,7 +47,7 @@
 <a href="../../index.html#all-tools">All Tools</a>
 <a href="../../index.html#categories">Categories</a>
 </nav>
-<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
 <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
 </div>
 <nav class="nav-panel" data-nav-panel aria-label="Mobile">
@@ -59,11 +68,26 @@
       <div class="field">
         <label class="label" for="tts-text">Text to read aloud</label>
         <textarea class="textarea" id="tts-text" rows="6" placeholder="Type or paste your text here…"></textarea>
+        <p class="hint"><span id="tts-count">0</span> characters</p>
+      </div>
+      <div class="field">
+        <span class="label" id="tts-lang-label">Language</span>
+        <div class="tts-lang-row" role="group" aria-labelledby="tts-lang-label">
+          <button type="button" class="btn btn-ghost tts-lang" data-lang="hi" aria-pressed="false">हिन्दी</button>
+          <button type="button" class="btn btn-ghost tts-lang" data-lang="en" aria-pressed="false">English</button>
+          <button type="button" class="btn btn-ghost tts-lang" data-lang="all" aria-pressed="true">All voices</button>
+        </div>
+        <p class="hint">Quick-pick the best voice for Hindi or English.</p>
       </div>
       <div class="field">
         <label class="label" for="tts-voice">Voice</label>
         <select class="select" id="tts-voice"><option>Loading voices…</option></select>
         <p class="hint">Uses your browser’s built-in voices; availability varies by device and browser.</p>
+      </div>
+      <div class="field">
+        <span class="label" id="tts-gallery-label">Voice gallery</span>
+        <p class="hint">Preview any voice, then use it for reading.</p>
+        <ul class="tts-gallery" id="tts-gallery" aria-labelledby="tts-gallery-label"></ul>
       </div>
       <div class="tool-text-to-speech-row">
         <div class="field">
@@ -134,56 +158,195 @@
 
     (function(){
       'use strict';
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       function $(id){ return document.getElementById(id); }
       var textEl = $('tts-text'), voiceEl = $('tts-voice'), rateEl = $('tts-rate'),
           pitchEl = $('tts-pitch'), rateVal = $('tts-rate-val'), pitchVal = $('tts-pitch-val'),
           speakBtn = $('tts-speak'), pauseBtn = $('tts-pause'), stopBtn = $('tts-stop'),
-          statusEl = $('tts-status');
+          statusEl = $('tts-status'), countEl = $('tts-count'), galleryEl = $('tts-gallery');
       if(!textEl || !speakBtn || !voiceEl || !rateEl || !pitchEl) return;
       function setStatus(msg){ if(statusEl) statusEl.textContent = msg || ''; }
-      if(!('speechSynthesis' in window)){
-        setStatus('Sorry, your browser does not support speech synthesis.');
+      if(!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)){
+        setStatus('Speech synthesis is not supported in this browser. Try Chrome, Edge, Safari or Firefox on a phone or computer.');
         speakBtn.disabled = true;
         if(voiceEl) voiceEl.innerHTML = '';
+        if(galleryEl) galleryEl.innerHTML = '';
         return;
       }
       var synth = window.speechSynthesis;
+      var voices = [];
+      var langFilter = 'all';
+      /* Prefer high-quality built-in voices, then hi-IN, then en-IN/en-US. Never claims "neural/AI" — these are the browser's own voices. */
+      function scoreVoice(v){
+        var n = (v.name || '').toLowerCase(), l = (v.lang || '').toLowerCase();
+        var s = 0;
+        if(/google|microsoft|natural/.test(n)) s += 100;
+        if(l === 'hi' || l.indexOf('hi-in') === 0 || l.indexOf('hi_') === 0) s += 50;
+        else if(l.indexOf('en-in') === 0 || l.indexOf('en_in') === 0) s += 40;
+        else if(l.indexOf('en-us') === 0 || l.indexOf('en_us') === 0) s += 30;
+        else if(l.indexOf('en') === 0) s += 10;
+        if(v.default) s += 5;
+        return s;
+      }
+      function bestVoiceFor(prefix){
+        var best = -1, bestScore = -1;
+        voices.forEach(function(v, i){
+          var l = (v.lang || '').toLowerCase();
+          if(prefix && l.indexOf(prefix) !== 0) return;
+          var sc = scoreVoice(v) * 1000 - i;
+          if(sc > bestScore){ bestScore = sc; best = i; }
+        });
+        return best;
+      }
+      function voiceLabel(v){
+        return v.name + ' — ' + v.lang + (v.default ? ' (default)' : '');
+      }
+      function sampleFor(v){
+        var l = (v.lang || '').toLowerCase();
+        if(l.indexOf('hi') === 0) return 'नमस्ते! यह इस आवाज़ का नमूना है।';
+        return 'Hello! This is a sample of this voice.';
+      }
+      function markCurrent(){
+        if(!galleryEl) return;
+        var rows = galleryEl.querySelectorAll('.tts-voice-row');
+        for(var i = 0; i < rows.length; i++){
+          rows[i].classList.toggle('current', rows[i].getAttribute('data-idx') === voiceEl.value);
+        }
+      }
+      function renderGallery(){
+        if(!galleryEl) return;
+        galleryEl.innerHTML = '';
+        voices.forEach(function(v, i){
+          var li = document.createElement('li');
+          li.className = 'tts-voice-row';
+          li.setAttribute('data-idx', String(i));
+          var name = document.createElement('span');
+          name.className = 'tts-voice-name';
+          name.textContent = v.name;
+          var lang = document.createElement('span');
+          lang.className = 'tts-voice-lang';
+          lang.textContent = v.lang;
+          var preview = document.createElement('button');
+          preview.type = 'button';
+          preview.className = 'btn btn-ghost';
+          preview.textContent = 'Preview';
+          preview.setAttribute('aria-label', 'Preview voice ' + v.name);
+          preview.addEventListener('click', function(){
+            synth.cancel();
+            var u = new SpeechSynthesisUtterance(sampleFor(v));
+            u.voice = v;
+            u.rate = parseFloat(rateEl.value) || 1;
+            u.pitch = parseFloat(pitchEl.value) || 1;
+            preview.disabled = true;
+            preview.setAttribute('aria-pressed', 'true');
+            u.onend = u.onerror = function(){
+              preview.disabled = false;
+              preview.setAttribute('aria-pressed', 'false');
+              setStatus('');
+            };
+            synth.speak(u);
+            setStatus('Previewing "' + v.name + '"…');
+          });
+          var use = document.createElement('button');
+          use.type = 'button';
+          use.className = 'btn btn-ghost';
+          use.textContent = 'Use voice';
+          use.setAttribute('aria-label', 'Use voice ' + v.name);
+          use.addEventListener('click', function(){
+            voiceEl.value = String(i);
+            markCurrent();
+            setStatus('Voice set to "' + v.name + '".');
+          });
+          li.appendChild(name);
+          li.appendChild(lang);
+          li.appendChild(preview);
+          li.appendChild(use);
+          galleryEl.appendChild(li);
+        });
+        markCurrent();
+      }
       function loadVoices(){
-        var voices = synth.getVoices();
+        var prev = voiceEl.value;
+        voices = synth.getVoices() || [];
         voiceEl.innerHTML = '';
         if(!voices.length){
           var d = document.createElement('option');
           d.textContent = 'Default voice';
           voiceEl.appendChild(d);
+          if(galleryEl){
+            galleryEl.innerHTML = '';
+            var li = document.createElement('li');
+            li.className = 'hint';
+            li.textContent = 'No voices found yet — they usually appear a moment after the page loads.';
+            galleryEl.appendChild(li);
+          }
           return;
         }
         voices.forEach(function(v, i){
           var o = document.createElement('option');
           o.value = String(i);
-          o.textContent = v.name + ' — ' + v.lang + (v.default ? ' (default)' : '');
+          o.textContent = voiceLabel(v);
           voiceEl.appendChild(o);
         });
-        for(var i = 0; i < voices.length; i++){
-          if(/^en([-_]|$)/i.test(voices[i].lang)){ voiceEl.value = String(i); break; }
-        }
+        var pick = -1;
+        if(prev !== '' && voices[parseInt(prev, 10)]){ pick = parseInt(prev, 10); }
+        if(pick < 0){ pick = bestVoiceFor(langFilter === 'all' ? '' : langFilter); }
+        if(pick < 0){ pick = 0; }
+        voiceEl.value = String(pick);
+        renderGallery();
       }
       loadVoices();
-      if(typeof synth.onvoiceschanged !== 'undefined') synth.onvoiceschanged = loadVoices;
+      if(typeof synth.onvoiceschanged !== 'undefined'){ synth.onvoiceschanged = loadVoices; }
+      /* Language quick-select: auto-pick the best voice for Hindi or English. */
+      var langBtns = document.querySelectorAll('.tts-lang');
+      function setLangFilter(f){
+        langFilter = f;
+        for(var i = 0; i < langBtns.length; i++){
+          langBtns[i].setAttribute('aria-pressed', langBtns[i].getAttribute('data-lang') === f ? 'true' : 'false');
+        }
+        if(!voices.length){ return; }
+        var pick = bestVoiceFor(f === 'all' ? '' : f);
+        if(pick >= 0){
+          voiceEl.value = String(pick);
+          markCurrent();
+          setStatus(f === 'all' ? 'Showing all voices.' : 'Voice set to "' + voices[pick].name + '" for ' + (f === 'hi' ? 'Hindi' : 'English') + '.');
+        } else {
+          setStatus('No ' + (f === 'hi' ? 'Hindi' : 'English') + ' voice found on this device. Showing all voices.');
+        }
+      }
+      for(var li2 = 0; li2 < langBtns.length; li2++){
+        (function(btn){
+          btn.addEventListener('click', function(){ setLangFilter(btn.getAttribute('data-lang')); });
+        })(langBtns[li2]);
+      }
+      /* Live character count. */
+      function updateCount(){
+        if(countEl){ countEl.textContent = String(textEl.value.length); }
+      }
+      textEl.addEventListener('input', updateCount);
+      updateCount();
       function sliderLabel(el, valEl){
         if(valEl) valEl.textContent = el.value;
       }
       rateEl.addEventListener('input', function(){ sliderLabel(rateEl, rateVal); });
       pitchEl.addEventListener('input', function(){ sliderLabel(pitchEl, pitchVal); });
+      voiceEl.addEventListener('change', markCurrent);
       function setBusy(speaking){
         if(pauseBtn) pauseBtn.disabled = !speaking;
         if(stopBtn) stopBtn.disabled = !speaking;
+        speakBtn.disabled = speaking;
+        if(speaking){ speakBtn.setAttribute('aria-pressed', 'true'); }
+        else { speakBtn.removeAttribute('aria-pressed'); }
       }
       speakBtn.addEventListener('click', function(){
         var text = textEl.value.trim();
         if(!text){ setStatus('Type or paste some text first.'); return; }
         synth.cancel();
         var u = new SpeechSynthesisUtterance(text);
-        var voices = synth.getVoices();
         var vi = parseInt(voiceEl.value, 10);
         if(voices[vi]) u.voice = voices[vi];
         u.rate = parseFloat(rateEl.value) || 1;
