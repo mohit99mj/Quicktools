@@ -204,13 +204,13 @@ var LOGIC={wrapLines:(text, maxChars) => {
         pShow({ title: 'Creating PDF…', stage: 'Building PDF…' });
         go.disabled = true; go.setAttribute('aria-busy', 'true');
         /* Deferred so the overlay paints before the synchronous PDF build. */
-        setTimeout(function(){
+        setTimeout(async function(){
         pUpd(40, 'Laying out pages…');
         try {
           var doc = PDFLib.PDFDocument.create();
           var pageCount = 1;
-          var font = doc.embedStandardFont(PDFLib.StandardFonts.Helvetica);
-          var bold = doc.embedStandardFont(PDFLib.StandardFonts.HelveticaBold);
+          var font = await doc.embedStandardFont(PDFLib.StandardFonts.Helvetica);
+          var bold = await doc.embedStandardFont(PDFLib.StandardFonts.HelveticaBold);
           var pageW = 595.28, pageH = 841.89, margin = 56;
           var titleSize = 20, bodySize = 11, lineGap = 5;
           var maxChars = 88;
