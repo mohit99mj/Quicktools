@@ -611,11 +611,17 @@
                 var bytes = await out.save();
                 var newSize = bytes.length;
                 var saved = originalSize > 0 ? Math.round((1 - newSize / originalSize) * 100) : 0;
-                downloadBlob(new Blob([bytes], { type: 'application/pdf' }), baseName(fileName) + '-compressed.pdf');
                 pUpd(100, 'Building download…');
-                pSum($('cp-status'), '<strong>PDF compressed</strong> — ' + fmtSize(originalSize) + ' → ' + fmtSize(newSize) + ' (' + saved + '% smaller)');
-                pHide();
-                setStatus('Done — original ' + fmtSize(originalSize) + ' → compressed ' + fmtSize(newSize) + ' (' + saved + '% smaller). "' + baseName(fileName) + '-compressed.pdf" downloaded.');
+                if(newSize >= originalSize){
+                  pSum($('cp-status'), '<strong>Already optimized</strong> — the compressed version (' + fmtSize(newSize) + ') would be larger than your original (' + fmtSize(originalSize) + '), so nothing was downloaded. Keep your original file.');
+                  pHide();
+                  setStatus('Done — this PDF is already well optimized; compressing would make it bigger (' + fmtSize(originalSize) + ' → ' + fmtSize(newSize) + '). No file was downloaded.');
+                } else {
+                  downloadBlob(new Blob([bytes], { type: 'application/pdf' }), baseName(fileName) + '-compressed.pdf');
+                  pSum($('cp-status'), '<strong>PDF compressed</strong> — ' + fmtSize(originalSize) + ' → ' + fmtSize(newSize) + ' (' + saved + '% smaller)');
+                  pHide();
+                  setStatus('Done — original ' + fmtSize(originalSize) + ' → compressed ' + fmtSize(newSize) + ' (' + saved + '% smaller). "' + baseName(fileName) + '-compressed.pdf" downloaded.');
+                }
               } catch(err){
                 pHide();
                 setStatus('Could not compress this PDF: ' + (err && err.message ? err.message : 'the file may be corrupted or password-protected.'), true);

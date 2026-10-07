@@ -132,6 +132,7 @@
       function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
       function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
       function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function fmtSize(b){ var u=['B','KB','MB','GB'], i=0; b=+b||0; while(b>=1024 && i<u.length-1){ b/=1024; i++; } return (b>=100?Math.round(b):Math.round(b*10)/10)+' '+u[i]; }
       function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       var WORKER = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.worker.min.js';
       function $(id){ return document.getElementById(id); }
