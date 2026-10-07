@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color Picker — HEX, RGB &amp; HSL Codes</title>
+<meta name="description" content="Pick any color and get its HEX, RGB and HSL codes instantly, plus color harmonies and contrast ratios. Free online color picker.">
+<meta name="keywords" content="color picker, hex color picker, rgb to hex, hsl color, color harmonies">
+<link rel="canonical" href="https://www.example.com/tools/color-picker/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Color Picker — HEX, RGB &amp; HSL Codes">
+<meta property="og:description" content="Pick any color and get its HEX, RGB and HSL codes instantly, plus color harmonies and contrast ratios. Free online color picker.">
+<meta property="og:url" content="https://www.example.com/tools/color-picker/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Color Picker — HEX, RGB &amp; HSL Codes">
+<meta name="twitter:description" content="Pick any color and get its HEX, RGB and HSL codes instantly, plus color harmonies and contrast ratios. Free online color picker.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-color-picker .tool-color-picker-row{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:end;margin-bottom:8px;}
+.tool-color-picker .tool-color-picker-input{padding:4px;height:52px;min-width:80px;cursor:pointer;}
+.tool-color-picker .tool-color-picker-hex{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;}
+.tool-color-picker .tool-color-picker-swatch{width:52px;height:52px;border-radius:var(--radius-sm);border:1px solid var(--line);}
+.tool-color-picker .tool-color-picker-readouts{display:grid;gap:8px;margin:12px 0;}
+.tool-color-picker .tool-color-picker-readout{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:var(--radius-sm);padding:8px 12px;}
+.tool-color-picker .tool-color-picker-readout .label{margin:0;min-width:44px;}
+.tool-color-picker .tool-color-picker-readout code{flex:1;font-size:15px;}
+.tool-color-picker .tool-color-picker-h{font-size:18px;margin:20px 0 8px;}
+.tool-color-picker .tool-color-picker-groups{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));}
+.tool-color-picker .tool-color-picker-groups .label{margin:0 0 6px;}
+.tool-color-picker .tool-color-picker-swatches{display:flex;gap:8px;flex-wrap:wrap;}
+.tool-color-picker .tool-color-picker-chip{border:1px solid var(--line);border-radius:var(--radius-sm);padding:0;width:100%;max-width:120px;min-height:64px;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;}
+.tool-color-picker .tool-color-picker-chip span{background:rgba(255,255,255,.92);font-size:12px;padding:2px 6px;border-radius:4px;margin-bottom:6px;font-family:ui-monospace,Menlo,Consolas,monospace;}
+.tool-color-picker .tool-color-picker-contrast{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));}
+.tool-color-picker .tool-color-picker-contrast-sample{background:#ffffff;border:1px solid var(--line);border-radius:var(--radius-sm);padding:16px;display:flex;flex-direction:column;gap:8px;}
+.tool-color-picker .tool-color-picker-contrast-sample.tool-color-picker-dark{background:#000000;}
+.tool-color-picker .tool-color-picker-contrast-sample strong{color:var(--muted);font-weight:600;font-size:14px;}
+@media (max-width:480px){.tool-color-picker .tool-color-picker-row{grid-template-columns:1fr 1fr;}.tool-color-picker .tool-color-picker-swatch{grid-column:1/-1;width:100%;}}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li aria-current="page">Color Picker</li></ol></nav>
+<h1>Color Picker</h1>
+<div class="tool-body-intro">
+<p>A color picker that gives you the HEX, RGB and HSL codes for any color instantly. Pick visually with the color input or type a HEX code directly — every readout, harmony and contrast ratio updates live.</p><p>Explore complementary, analogous and triadic harmonies as clickable swatches, and check WCAG contrast ratios against white and black to keep your text readable.</p><p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+</div>
+<section class="tool-section tool-color-picker" aria-label="Color Picker">
+
+    <div class="card tool-panel">
+      <div class="tool-color-picker-row">
+        <div class="field">
+          <label class="label" for="cp-color">Pick a color</label>
+          <input class="input tool-color-picker-input" id="cp-color" type="color" value="#0e7c66">
+        </div>
+        <div class="field">
+          <label class="label" for="cp-hex">HEX code</label>
+          <input class="input tool-color-picker-hex" id="cp-hex" type="text" value="#0e7c66" maxlength="7" spellcheck="false" autocomplete="off">
+        </div>
+        <div class="tool-color-picker-swatch" id="cp-swatch" aria-hidden="true"></div>
+      </div>
+      <p class="hint" id="cp-hint" role="status" style="display:none"></p>
+      <div class="result" aria-live="polite">
+        <div class="tool-color-picker-readouts">
+          <div class="tool-color-picker-readout">
+            <span class="label">HEX</span>
+            <code id="cp-hex-out">#0e7c66</code>
+            <button class="btn btn-ghost tool-color-picker-copy" data-copy="hex" type="button">Copy</button>
+          </div>
+          <div class="tool-color-picker-readout">
+            <span class="label">RGB</span>
+            <code id="cp-rgb-out">rgb(14, 124, 102)</code>
+            <button class="btn btn-ghost tool-color-picker-copy" data-copy="rgb" type="button">Copy</button>
+          </div>
+          <div class="tool-color-picker-readout">
+            <span class="label">HSL</span>
+            <code id="cp-hsl-out">hsl(168, 80%, 27%)</code>
+            <button class="btn btn-ghost tool-color-picker-copy" data-copy="hsl" type="button">Copy</button>
+          </div>
+        </div>
+        <h2 class="tool-color-picker-h">Harmonies</h2>
+        <div class="tool-color-picker-groups">
+          <div>
+            <p class="label">Complementary</p>
+            <div class="tool-color-picker-swatches" id="cp-comp"></div>
+          </div>
+          <div>
+            <p class="label">Analogous</p>
+            <div class="tool-color-picker-swatches" id="cp-analog"></div>
+          </div>
+          <div>
+            <p class="label">Triadic</p>
+            <div class="tool-color-picker-swatches" id="cp-tri"></div>
+          </div>
+        </div>
+        <h2 class="tool-color-picker-h">Contrast</h2>
+        <div class="tool-color-picker-contrast">
+          <div class="tool-color-picker-contrast-sample" id="cp-on-white">
+            <span>Sample text</span>
+            <strong id="cp-ratio-white"></strong>
+          </div>
+          <div class="tool-color-picker-contrast-sample tool-color-picker-dark" id="cp-on-black">
+            <span>Sample text</span>
+            <strong id="cp-ratio-black"></strong>
+          </div>
+        </div>
+        <p class="hint">Contrast ratios follow the WCAG formula (1:1 to 21:1). Aim for 4.5:1 or higher for body text.</p>
+      </div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Pick a color with the color input, or type a HEX code like #0e7c66.</li>
+<li>Read the HEX, RGB and HSL values and copy any of them with one click.</li>
+<li>Click a harmony swatch to load a complementary, analogous or triadic color.</li>
+<li>Check the contrast ratios against white and black for readable text.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>What is a color harmony?</summary><div class="faq-a"><p>A harmony is a set of colors that work well together, derived from positions on the color wheel — complementary (opposite), analogous (neighbors) and triadic (evenly spaced in thirds).</p></div></details>
+<details><summary>What does the contrast ratio mean?</summary><div class="faq-a"><p>The WCAG contrast ratio measures how readable text in one color is on another, from 1:1 (no contrast) to 21:1 (black on white). A ratio of at least 4.5:1 is the common target for body text.</p></div></details>
+<details><summary>How do I copy a color code?</summary><div class="faq-a"><p>Click the copy button next to any HEX, RGB or HSL readout. You can also click a harmony swatch to load that color into the picker.</p></div></details>
+<details><summary>What is the difference between HEX, RGB and HSL?</summary><div class="faq-a"><p>HEX and RGB describe the same color as red, green and blue amounts. HSL describes it as hue, saturation and lightness, which is often easier when adjusting a color by hand.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../qr-generator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#qr-code"></use></svg><span class="tl-name">QR Code Generator</span><span class="tl-desc">QR &amp; Generators</span></a>
+<a class="tool-card" href="../image-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#refresh-cw"></use></svg><span class="tl-name">Image Converter</span><span class="tl-desc">Image Tools</span></a>
+<a class="tool-card" href="../password-generator/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#key"></use></svg><span class="tl-name">Password Generator</span><span class="tl-desc">QR &amp; Generators</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Color Picker","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/color-picker/","description":"Pick any color and get its HEX, RGB and HSL codes instantly, plus color harmonies and contrast ratios. Free online color picker.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a color harmony?","acceptedAnswer":{"@type":"Answer","text":"A harmony is a set of colors that work well together, derived from positions on the color wheel — complementary (opposite), analogous (neighbors) and triadic (evenly spaced in thirds)."}},{"@type":"Question","name":"What does the contrast ratio mean?","acceptedAnswer":{"@type":"Answer","text":"The WCAG contrast ratio measures how readable text in one color is on another, from 1:1 (no contrast) to 21:1 (black on white). A ratio of at least 4.5:1 is the common target for body text."}},{"@type":"Question","name":"How do I copy a color code?","acceptedAnswer":{"@type":"Answer","text":"Click the copy button next to any HEX, RGB or HSL readout. You can also click a harmony swatch to load that color into the picker."}},{"@type":"Question","name":"What is the difference between HEX, RGB and HSL?","acceptedAnswer":{"@type":"Answer","text":"HEX and RGB describe the same color as red, green and blue amounts. HSL describes it as hue, saturation and lightness, which is often easier when adjusting a color by hand."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"QR & Generators","item":"https://www.example.com/#cat-qr-generators"},{"@type":"ListItem","position":3,"name":"Color Picker","item":"https://www.example.com/tools/color-picker/"}]}</script>
+<script>
+var LOGIC={hexToRgb:(hex) => {
+    var h = String(hex == null ? '' : hex).trim().replace(/^#/, '');
+    if (/^[0-9a-fA-F]{3}$/.test(h)) h = h.charAt(0) + h.charAt(0) + h.charAt(1) + h.charAt(1) + h.charAt(2) + h.charAt(2);
+    if (!/^[0-9a-fA-F]{6}$/.test(h)) return { r: 0, g: 0, b: 0 };
+    return {
+      r: parseInt(h.slice(0, 2), 16),
+      g: parseInt(h.slice(2, 4), 16),
+      b: parseInt(h.slice(4, 6), 16),
+    };
+  },rgbToHsl:(r, g, b) => {
+    r = Number(r) / 255; g = Number(g) / 255; b = Number(b) / 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h = 0, s = 0;
+    var l = (max + min) / 2;
+    if (max !== min) {
+      var d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      if (max === r) h = (g - b) / d + (g < b ? 6 : 0);
+      else if (max === g) h = (b - r) / d + 2;
+      else h = (r - g) / d + 4;
+      h *= 60;
+    }
+    return { h: Math.round(h), s: Math.round(s * 100), l: Math.round(l * 100) };
+  },rgbToHex:(r, g, b) => {
+    function ch(x) {
+      x = Math.max(0, Math.min(255, Math.round(Number(x))));
+      var s = x.toString(16);
+      return s.length === 1 ? '0' + s : s;
+    }
+    return '#' + ch(r) + ch(g) + ch(b);
+  },harmonies:(hex) => {
+    function toRgb(hx) {
+      var h = String(hx == null ? '' : hx).trim().replace(/^#/, '');
+      if (/^[0-9a-fA-F]{3}$/.test(h)) h = h.charAt(0) + h.charAt(0) + h.charAt(1) + h.charAt(1) + h.charAt(2) + h.charAt(2);
+      if (!/^[0-9a-fA-F]{6}$/.test(h)) h = '000000';
+      return { r: parseInt(h.slice(0, 2), 16), g: parseInt(h.slice(2, 4), 16), b: parseInt(h.slice(4, 6), 16) };
+    }
+    function toHsl(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      var max = Math.max(r, g, b), min = Math.min(r, g, b);
+      var h = 0, s = 0;
+      var l = (max + min) / 2;
+      if (max !== min) {
+        var d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        if (max === r) h = (g - b) / d + (g < b ? 6 : 0);
+        else if (max === g) h = (b - r) / d + 2;
+        else h = (r - g) / d + 4;
+        h = (h * 60) % 360;
+      }
+      return { h: h, s: s * 100, l: l * 100 };
+    }
+    function hslToHex(h, s, l) {
+      h = ((h % 360) + 360) % 360; s /= 100; l /= 100;
+      var c = (1 - Math.abs(2 * l - 1)) * s;
+      var x = c * (1 - Math.abs(((h / 60) % 2) - 1));
+      var m = l - c / 2;
+      var r = 0, g = 0, b = 0;
+      if (h < 60) { r = c; g = x; }
+      else if (h < 120) { r = x; g = c; }
+      else if (h < 180) { g = c; b = x; }
+      else if (h < 240) { g = x; b = c; }
+      else if (h < 300) { r = x; b = c; }
+      else { r = c; b = x; }
+      function ch(v) {
+        var n = Math.round((v + m) * 255);
+        var s2 = n.toString(16);
+        return s2.length === 1 ? '0' + s2 : s2;
+      }
+      return '#' + ch(r) + ch(g) + ch(b);
+    }
+    var rgb = toRgb(hex);
+    var hsl = toHsl(rgb.r, rgb.g, rgb.b);
+    function shift(d) { return hslToHex(hsl.h + d, hsl.s, hsl.l); }
+    return {
+      complementary: shift(180),
+      analogous: [shift(-30), shift(30)],
+      triadic: [shift(120), shift(240)],
+    };
+  },contrast:(hex1, hex2) => {
+    function lum(hx) {
+      var h = String(hx == null ? '' : hx).trim().replace(/^#/, '');
+      if (/^[0-9a-fA-F]{3}$/.test(h)) h = h.charAt(0) + h.charAt(0) + h.charAt(1) + h.charAt(1) + h.charAt(2) + h.charAt(2);
+      if (!/^[0-9a-fA-F]{6}$/.test(h)) h = '000000';
+      function lin(v) {
+        v = v / 255;
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+      }
+      return 0.2126 * lin(parseInt(h.slice(0, 2), 16)) +
+             0.7152 * lin(parseInt(h.slice(2, 4), 16)) +
+             0.0722 * lin(parseInt(h.slice(4, 6), 16));
+    }
+    var l1 = lum(hex1), l2 = lum(hex2);
+    var hi = Math.max(l1, l2), lo = Math.min(l1, l2);
+    return Math.round(((hi + 0.05) / (lo + 0.05)) * 100) / 100;
+  }};
+
+    (function(){
+      'use strict';
+      function $(id){ return document.getElementById(id); }
+      var colorEl = $('cp-color'), hexEl = $('cp-hex'), swatch = $('cp-swatch'),
+          hexOut = $('cp-hex-out'), rgbOut = $('cp-rgb-out'), hslOut = $('cp-hsl-out'),
+          compBox = $('cp-comp'), analogBox = $('cp-analog'), triBox = $('cp-tri'),
+          onWhite = $('cp-on-white'), onBlack = $('cp-on-black'),
+          ratioWhite = $('cp-ratio-white'), ratioBlack = $('cp-ratio-black'), hint = $('cp-hint');
+      if(!colorEl || !hexEl || !hexOut) return;
+      var current = '#0e7c66';
+      function setHint(msg){
+        if(!hint) return;
+        hint.textContent = msg || '';
+        hint.style.display = msg ? '' : 'none';
+      }
+      function normalizeHex(v){
+        var h = String(v || '').trim();
+        if(h.charAt(0) !== '#') h = '#' + h;
+        if(/^#[0-9a-fA-F]{3}$/.test(h)){
+          h = '#' + h.charAt(1) + h.charAt(1) + h.charAt(2) + h.charAt(2) + h.charAt(3) + h.charAt(3);
+        }
+        return /^#[0-9a-fA-F]{6}$/.test(h) ? h.toLowerCase() : null;
+      }
+      function swatchButton(hex, label){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'tool-color-picker-chip';
+        b.style.backgroundColor = hex;
+        b.setAttribute('aria-label', label + ' ' + hex + ' — load this color');
+        b.setAttribute('data-hex', hex);
+        var t = document.createElement('span');
+        t.textContent = hex;
+        b.appendChild(t);
+        b.addEventListener('click', function(){ setColor(hex); });
+        return b;
+      }
+      function renderHarmonies(hex){
+        var groups = [
+          [compBox, [LOGIC.harmonies(hex).complementary], 'Complementary'],
+          [analogBox, LOGIC.harmonies(hex).analogous, 'Analogous'],
+          [triBox, LOGIC.harmonies(hex).triadic, 'Triadic']
+        ];
+        groups.forEach(function(g){
+          var box = g[0]; if(!box) return;
+          box.innerHTML = '';
+          g[1].forEach(function(hx){ box.appendChild(swatchButton(hx, g[2])); });
+        });
+      }
+      function setColor(hex){
+        current = hex;
+        var rgb = LOGIC.hexToRgb(hex);
+        var hsl = LOGIC.rgbToHsl(rgb.r, rgb.g, rgb.b);
+        if(colorEl.value !== hex){ try{ colorEl.value = hex; }catch(e){} }
+        if(hexEl.value !== hex) hexEl.value = hex;
+        if(swatch) swatch.style.backgroundColor = hex;
+        var hexStr = hex.toLowerCase();
+        var rgbStr = 'rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ')';
+        var hslStr = 'hsl(' + hsl.h + ', ' + hsl.s + '%, ' + hsl.l + '%)';
+        hexOut.textContent = hexStr;
+        if(rgbOut) rgbOut.textContent = rgbStr;
+        if(hslOut) hslOut.textContent = hslStr;
+        renderHarmonies(hex);
+        var cw = LOGIC.contrast(hex, '#ffffff');
+        var cb = LOGIC.contrast(hex, '#000000');
+        if(onWhite){
+          var sp = onWhite.querySelector('span');
+          if(sp) sp.style.color = hex;
+          if(ratioWhite) ratioWhite.textContent = cw.toFixed(2) + ':1 vs white';
+        }
+        if(onBlack){
+          var sp2 = onBlack.querySelector('span');
+          if(sp2) sp2.style.color = hex;
+          if(ratioBlack) ratioBlack.textContent = cb.toFixed(2) + ':1 vs black';
+        }
+      }
+      colorEl.addEventListener('input', function(){ setHint(''); setColor(colorEl.value.toLowerCase()); });
+      hexEl.addEventListener('input', function(){
+        var n = normalizeHex(hexEl.value);
+        if(n){ setHint(''); setColor(n); }
+        else { setHint('Enter a valid HEX code, e.g. #0e7c66.'); }
+      });
+      function copyText(t, btn){
+        function fallback(){
+          var ta = document.createElement('textarea');
+          ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select();
+          var ok = false;
+          try{ ok = document.execCommand('copy'); }catch(e){}
+          document.body.removeChild(ta);
+          flash(btn, ok);
+        }
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(t).then(function(){ flash(btn, true); }, fallback);
+        } else { fallback(); }
+      }
+      function flash(btn, ok){
+        if(!btn) return;
+        var orig = btn.textContent;
+        btn.textContent = ok ? 'Copied!' : 'Failed';
+        setTimeout(function(){ btn.textContent = orig; }, 1200);
+      }
+      var copyBtns = document.querySelectorAll('.tool-color-picker-copy');
+      for(var i = 0; i < copyBtns.length; i++){
+        (function(btn){
+          btn.addEventListener('click', function(){
+            var which = btn.getAttribute('data-copy');
+            var t = which === 'rgb' ? rgbOut.textContent : which === 'hsl' ? hslOut.textContent : hexOut.textContent;
+            copyText(t, btn);
+          });
+        })(copyBtns[i]);
+      }
+      setColor(current);
+    })();
+</script>
+</body>
+</html>

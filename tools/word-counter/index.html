@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Word Counter &amp; Character Counter — Free</title>
+<meta name="description" content="Count words, characters (with and without spaces), sentences and paragraphs as you type. Free word counter with reading and speaking time.">
+<meta name="keywords" content="word counter, character counter, count characters, word count tool, reading time calculator">
+<link rel="canonical" href="https://www.example.com/tools/word-counter/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Word Counter &amp; Character Counter — Free">
+<meta property="og:description" content="Count words, characters (with and without spaces), sentences and paragraphs as you type. Free word counter with reading and speaking time.">
+<meta property="og:url" content="https://www.example.com/tools/word-counter/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Word Counter &amp; Character Counter — Free">
+<meta name="twitter:description" content="Count words, characters (with and without spaces), sentences and paragraphs as you type. Free word counter with reading and speaking time.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-word-counter .tool-word-counter-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;}
+.tool-word-counter .tool-word-counter-stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 12px;display:flex;flex-direction:column;gap:4px;}
+.tool-word-counter .tool-word-counter-num{font-family:var(--font-display);font-weight:700;font-size:26px;color:var(--ink);}
+.tool-word-counter .tool-word-counter-label{font-size:13px;color:var(--muted);}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li aria-current="page">Word Counter</li></ol></nav>
+<h1>Word Counter</h1>
+<div class="tool-body-intro">
+<p>A word counter that analyzes your text live as you type. See word count, character count with and without spaces, sentence and paragraph counts, plus estimated reading and speaking time.</p><p>It doubles as a character counter for posts, bios and forms with strict limits — the "characters (no spaces)" figure is the one most platforms care about.</p><p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+</div>
+<section class="tool-section tool-word-counter" aria-label="Word Counter">
+
+    <div class="card tool-panel">
+      <div class="field">
+        <label class="label" for="wc-text">Your text</label>
+        <textarea class="textarea" id="wc-text" rows="8" placeholder="Type or paste your text here…"></textarea>
+      </div>
+      <div class="result" aria-live="polite">
+        <div class="tool-word-counter-stats">
+          <div class="tool-word-counter-stat"><span class="tool-word-counter-num" id="wc-words">0</span><span class="tool-word-counter-label">Words</span></div>
+          <div class="tool-word-counter-stat"><span class="tool-word-counter-num" id="wc-chars">0</span><span class="tool-word-counter-label">Characters</span></div>
+          <div class="tool-word-counter-stat"><span class="tool-word-counter-num" id="wc-chars-nospace">0</span><span class="tool-word-counter-label">Characters (no spaces)</span></div>
+          <div class="tool-word-counter-stat"><span class="tool-word-counter-num" id="wc-sentences">0</span><span class="tool-word-counter-label">Sentences</span></div>
+          <div class="tool-word-counter-stat"><span class="tool-word-counter-num" id="wc-paragraphs">0</span><span class="tool-word-counter-label">Paragraphs</span></div>
+          <div class="tool-word-counter-stat"><span class="tool-word-counter-num" id="wc-reading">0</span><span class="tool-word-counter-label">Reading time (min)</span></div>
+          <div class="tool-word-counter-stat"><span class="tool-word-counter-num" id="wc-speaking">0</span><span class="tool-word-counter-label">Speaking time (min)</span></div>
+        </div>
+      </div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Paste or type your text into the box.</li>
+<li>Watch all seven stats update live with every keystroke.</li>
+<li>Use the character counts to fit platform limits on posts, bios and forms.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Is this also a character counter?</summary><div class="faq-a"><p>Yes. It shows total characters and characters excluding spaces, updating live as you type — so it works as a character counter too.</p></div></details>
+<details><summary>How are reading and speaking times calculated?</summary><div class="faq-a"><p>Reading time assumes about 200 words per minute and speaking time about 150 words per minute. Both are rough estimates; actual speed varies by reader and text difficulty.</p></div></details>
+<details><summary>How are sentences counted?</summary><div class="faq-a"><p>Text is split at sentence-ending punctuation (. ! ? …). Abbreviations like &quot;e.g.&quot; can inflate the count slightly, so treat it as approximate.</p></div></details>
+<details><summary>Is my text uploaded anywhere?</summary><div class="faq-a"><p>No. Counting happens entirely in your browser; your text never leaves the page.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../case-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#text"></use></svg><span class="tl-name">Case Converter</span><span class="tl-desc">Text Tools</span></a>
+<a class="tool-card" href="../remove-duplicate-lines/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#filter"></use></svg><span class="tl-name">Remove Duplicate Lines</span><span class="tl-desc">Text Tools</span></a>
+<a class="tool-card" href="../lorem-ipsum/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#pilcrow"></use></svg><span class="tl-name">Lorem Ipsum Generator</span><span class="tl-desc">Text Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Word Counter","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/word-counter/","description":"Count words, characters (with and without spaces), sentences and paragraphs as you type. Free word counter with reading and speaking time.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this also a character counter?","acceptedAnswer":{"@type":"Answer","text":"Yes. It shows total characters and characters excluding spaces, updating live as you type — so it works as a character counter too."}},{"@type":"Question","name":"How are reading and speaking times calculated?","acceptedAnswer":{"@type":"Answer","text":"Reading time assumes about 200 words per minute and speaking time about 150 words per minute. Both are rough estimates; actual speed varies by reader and text difficulty."}},{"@type":"Question","name":"How are sentences counted?","acceptedAnswer":{"@type":"Answer","text":"Text is split at sentence-ending punctuation (. ! ? …). Abbreviations like \"e.g.\" can inflate the count slightly, so treat it as approximate."}},{"@type":"Question","name":"Is my text uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Counting happens entirely in your browser; your text never leaves the page."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Text Tools","item":"https://www.example.com/#cat-text-tools"},{"@type":"ListItem","position":3,"name":"Word Counter","item":"https://www.example.com/tools/word-counter/"}]}</script>
+<script>
+var LOGIC={wordStats:(text) => {
+    var t = text == null ? '' : String(text);
+    var words = (t.match(/\S+/g) || []).length;
+    var characters = t.length;
+    var charactersNoSpaces = t.replace(/\s/g, '').length;
+    var sentences = t.split(/[.!?…]+/).map(function (s) { return s.trim(); }).filter(function (s) { return s.length > 0; }).length;
+    var paragraphs = t.split(/\n+/).map(function (s) { return s.trim(); }).filter(function (s) { return s.length > 0; }).length;
+    var readingTimeMin = Math.round((words / 200) * 10) / 10;
+    var speakingTimeMin = Math.round((words / 150) * 10) / 10;
+    return {
+      words: words,
+      characters: characters,
+      charactersNoSpaces: charactersNoSpaces,
+      sentences: sentences,
+      paragraphs: paragraphs,
+      readingTimeMin: readingTimeMin,
+      speakingTimeMin: speakingTimeMin,
+    };
+  }};
+
+    (function(){
+      'use strict';
+      function $(id){ return document.getElementById(id); }
+      var textEl = $('wc-text');
+      if(!textEl) return;
+      var out = {
+        words: $('wc-words'), chars: $('wc-chars'), charsNoSpace: $('wc-chars-nospace'),
+        sentences: $('wc-sentences'), paragraphs: $('wc-paragraphs'),
+        reading: $('wc-reading'), speaking: $('wc-speaking')
+      };
+      function set(el, v){ if(el) el.textContent = String(v); }
+      function update(){
+        var s = LOGIC.wordStats(textEl.value);
+        set(out.words, s.words);
+        set(out.chars, s.characters);
+        set(out.charsNoSpace, s.charactersNoSpaces);
+        set(out.sentences, s.sentences);
+        set(out.paragraphs, s.paragraphs);
+        set(out.reading, s.readingTimeMin);
+        set(out.speaking, s.speakingTimeMin);
+      }
+      textEl.addEventListener('input', update);
+      update();
+    })();
+</script>
+</body>
+</html>

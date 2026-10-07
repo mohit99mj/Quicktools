@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lorem Ipsum Generator — Placeholder Text</title>
+<meta name="description" content="Generate lorem ipsum placeholder text by paragraphs, sentences or words. Optional classic &quot;Lorem ipsum dolor sit amet&quot; opening.">
+<meta name="keywords" content="lorem ipsum generator, placeholder text, dummy text generator, lorem ipsum text">
+<link rel="canonical" href="https://www.example.com/tools/lorem-ipsum/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lorem Ipsum Generator — Placeholder Text">
+<meta property="og:description" content="Generate lorem ipsum placeholder text by paragraphs, sentences or words. Optional classic &quot;Lorem ipsum dolor sit amet&quot; opening.">
+<meta property="og:url" content="https://www.example.com/tools/lorem-ipsum/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lorem Ipsum Generator — Placeholder Text">
+<meta name="twitter:description" content="Generate lorem ipsum placeholder text by paragraphs, sentences or words. Optional classic &quot;Lorem ipsum dolor sit amet&quot; opening.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-lorem-ipsum .tool-lorem-ipsum-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.tool-lorem-ipsum .tool-lorem-ipsum-check{display:flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;}
+.tool-lorem-ipsum .tool-lorem-ipsum-check input{width:20px;height:20px;accent-color:var(--accent);}
+.tool-lorem-ipsum .tool-lorem-ipsum-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li aria-current="page">Lorem Ipsum Generator</li></ol></nav>
+<h1>Lorem Ipsum Generator</h1>
+<div class="tool-body-intro">
+<p>A lorem ipsum generator that produces classic placeholder text for your mockups and layouts. Generate by paragraphs, sentences or words — with or without the traditional "Lorem ipsum dolor sit amet" opening.</p><p>The output is deterministic, so the same settings always produce the same text — handy for repeatable design mockups. Everything is generated locally in your browser.</p><p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+</div>
+<section class="tool-section tool-lorem-ipsum" aria-label="Lorem Ipsum Generator">
+
+    <div class="card tool-panel">
+      <div class="tool-lorem-ipsum-row">
+        <div class="field">
+          <label class="label" for="li-count">Amount</label>
+          <input class="input" id="li-count" type="number" min="1" max="1000" value="3" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label class="label" for="li-unit">Unit</label>
+          <select class="select" id="li-unit">
+            <option value="paragraphs" selected>Paragraphs</option>
+            <option value="sentences">Sentences</option>
+            <option value="words">Words</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label class="tool-lorem-ipsum-check"><input type="checkbox" id="li-lorem" checked> Start with “Lorem ipsum dolor sit amet…”</label>
+      </div>
+      <div class="tool-lorem-ipsum-actions">
+        <button class="btn btn-primary" id="li-generate">Generate text</button>
+        <button class="btn btn-ghost" id="li-copy">Copy</button>
+      </div>
+      <p class="hint" id="li-hint" role="status" style="display:none"></p>
+      <div class="result" aria-live="polite">
+        <label class="label" for="li-out">Generated text</label>
+        <textarea class="textarea" id="li-out" rows="10" readonly placeholder="Your placeholder text will appear here…"></textarea>
+      </div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Set how much text you need and choose paragraphs, sentences or words.</li>
+<li>Decide whether to start with the classic &quot;Lorem ipsum&quot; opening.</li>
+<li>Click &quot;Generate text&quot;.</li>
+<li>Copy the placeholder text with one click.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>What is lorem ipsum?</summary><div class="faq-a"><p>Pseudo-Latin placeholder text used in design and publishing to show how a layout looks with real-looking copy before the final text is written.</p></div></details>
+<details><summary>Is the generated text always the same?</summary><div class="faq-a"><p>Yes — generation is deterministic, so the same settings always produce the same text. This makes it reliable for repeatable mockups.</p></div></details>
+<details><summary>Can I start without &quot;Lorem ipsum dolor sit amet&quot;?</summary><div class="faq-a"><p>Yes. Turn off the opening toggle and the text begins mid-passage with &quot;sed do eiusmod…&quot; instead.</p></div></details>
+<details><summary>Can I use this text commercially?</summary><div class="faq-a"><p>Yes. Lorem ipsum is traditional placeholder text in the public domain, with no licensing restrictions on using it.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../word-counter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#type"></use></svg><span class="tl-name">Word Counter</span><span class="tl-desc">Text Tools</span></a>
+<a class="tool-card" href="../case-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#text"></use></svg><span class="tl-name">Case Converter</span><span class="tl-desc">Text Tools</span></a>
+<a class="tool-card" href="../text-to-speech/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#mic"></use></svg><span class="tl-name">Text to Speech</span><span class="tl-desc">Text Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Lorem Ipsum Generator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/lorem-ipsum/","description":"Generate lorem ipsum placeholder text by paragraphs, sentences or words. Optional classic \"Lorem ipsum dolor sit amet\" opening.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is lorem ipsum?","acceptedAnswer":{"@type":"Answer","text":"Pseudo-Latin placeholder text used in design and publishing to show how a layout looks with real-looking copy before the final text is written."}},{"@type":"Question","name":"Is the generated text always the same?","acceptedAnswer":{"@type":"Answer","text":"Yes — generation is deterministic, so the same settings always produce the same text. This makes it reliable for repeatable mockups."}},{"@type":"Question","name":"Can I start without \"Lorem ipsum dolor sit amet\"?","acceptedAnswer":{"@type":"Answer","text":"Yes. Turn off the opening toggle and the text begins mid-passage with \"sed do eiusmod…\" instead."}},{"@type":"Question","name":"Can I use this text commercially?","acceptedAnswer":{"@type":"Answer","text":"Yes. Lorem ipsum is traditional placeholder text in the public domain, with no licensing restrictions on using it."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Text Tools","item":"https://www.example.com/#cat-text-tools"},{"@type":"ListItem","position":3,"name":"Lorem Ipsum Generator","item":"https://www.example.com/tools/lorem-ipsum/"}]}</script>
+<script>
+var LOGIC={lorem:(opt) => {
+    var o = opt || {};
+    var bank = ['lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit',
+      'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore', 'magna',
+      'aliqua', 'enim', 'ad', 'minim', 'veniam', 'quis', 'nostrud', 'exercitation', 'ullamco',
+      'laboris', 'nisi', 'aliquip', 'ex', 'ea', 'commodo', 'consequat', 'duis', 'aute', 'irure',
+      'in', 'reprehenderit', 'voluptate', 'velit', 'esse', 'cillum', 'fugiat', 'nulla', 'pariatur',
+      'excepteur', 'sint', 'occaecat', 'cupidatat', 'non', 'proident', 'sunt', 'culpa', 'qui',
+      'officia', 'deserunt', 'mollit', 'anim', 'id', 'est', 'laborum'];
+    var prefix = ['Lorem', 'ipsum', 'dolor', 'sit', 'amet,', 'consectetur', 'adipiscing', 'elit.'];
+    var start = !!o.startWithLorem;
+    // Bank index 8: the classic opening words ("lorem … elit") are either emitted
+    // as the prefix or skipped entirely when the toggle is off (mid-passage start).
+    var idx = 8;
+    var sentIdx = 0;
+    var firstDone = false;
+    function cap(w) { return w.charAt(0).toUpperCase() + w.slice(1); }
+    function nextWord() {
+      var w = bank[idx % bank.length];
+      idx++;
+      return w;
+    }
+    function sentence() {
+      if (start && !firstDone) {
+        firstDone = true;
+        return prefix.join(' ');
+      }
+      var len = 8 + (sentIdx % 5);
+      sentIdx++;
+      var ws = [];
+      for (var i = 0; i < len; i++) ws.push(nextWord());
+      ws[0] = cap(ws[0]);
+      return ws.join(' ') + '.';
+    }
+    function paragraph() {
+      var ss = [];
+      for (var i = 0; i < 5; i++) ss.push(sentence());
+      return ss.join(' ');
+    }
+    if (o.paragraphs) {
+      var pc = Math.max(1, Math.min(100, Math.floor(Number(o.paragraphs) || 1)));
+      var ps = [];
+      for (var p = 0; p < pc; p++) ps.push(paragraph());
+      return ps.join('\n\n');
+    }
+    if (o.words) {
+      var wc = Math.max(1, Math.min(5000, Math.floor(Number(o.words) || 1)));
+      var words = start ? prefix.slice() : [];
+      if (!start) { words.push(cap(nextWord())); }
+      while (words.length < wc) words.push(nextWord());
+      return words.slice(0, wc).join(' ');
+    }
+    var sc = Math.max(1, Math.min(1000, Math.floor(Number(o.sentences) || 3)));
+    var ss = [];
+    for (var s = 0; s < sc; s++) ss.push(sentence());
+    return ss.join(' ');
+  }};
+
+    (function(){
+      'use strict';
+      function $(id){ return document.getElementById(id); }
+      var countEl = $('li-count'), unitEl = $('li-unit'), loremEl = $('li-lorem'),
+          genBtn = $('li-generate'), copyBtn = $('li-copy'), outEl = $('li-out'), hint = $('li-hint');
+      if(!countEl || !unitEl || !genBtn || !outEl || !loremEl) return;
+      function setHint(msg, isError){
+        if(!hint) return;
+        hint.textContent = msg || '';
+        hint.style.display = msg ? '' : 'none';
+        hint.className = isError ? 'error' : 'hint';
+      }
+      function generate(){
+        var n = parseInt(countEl.value, 10);
+        if(!(n >= 1) || !(n <= 1000)){ setHint('Enter an amount between 1 and 1000.', true); return; }
+        setHint('', false);
+        var opt = { startWithLorem: loremEl.checked };
+        opt[unitEl.value] = n;
+        outEl.value = LOGIC.lorem(opt);
+      }
+      genBtn.addEventListener('click', generate);
+      function copyText(t, done){
+        function fallback(){
+          var ta = document.createElement('textarea');
+          ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select();
+          var ok = false;
+          try{ ok = document.execCommand('copy'); }catch(e){}
+          document.body.removeChild(ta); done(ok);
+        }
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(t).then(function(){ done(true); }, fallback);
+        } else { fallback(); }
+      }
+      if(copyBtn) copyBtn.addEventListener('click', function(){
+        if(!outEl.value){ setHint('Generate some text first.', true); return; }
+        copyText(outEl.value, function(ok){
+          setHint(ok ? 'Copied to clipboard.' : 'Copy failed — select the text manually.', !ok);
+          copyBtn.textContent = ok ? 'Copied!' : 'Copy';
+          setTimeout(function(){ copyBtn.textContent = 'Copy'; }, 1500);
+        });
+      });
+      generate();
+    })();
+</script>
+</body>
+</html>
