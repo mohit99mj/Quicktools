@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MP4 to MP3 Converter — Free, In Your Browser</title>
+<meta name="description" content="Convert MP4 to MP3 in your browser — extract audio from video at 128k, 192k or 320k. Private, fast and free.">
+<meta name="keywords" content="mp4 to mp3, convert mp4 to mp3, extract audio from video, video to audio converter">
+<link rel="canonical" href="https://www.example.com/tools/mp4-to-mp3/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MP4 to MP3 Converter — Free, In Your Browser">
+<meta property="og:description" content="Convert MP4 to MP3 in your browser — extract audio from video at 128k, 192k or 320k. Private, fast and free.">
+<meta property="og:url" content="https://www.example.com/tools/mp4-to-mp3/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MP4 to MP3 Converter — Free, In Your Browser">
+<meta name="twitter:description" content="Convert MP4 to MP3 in your browser — extract audio from video at 128k, 192k or 320k. Private, fast and free.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-mp4-to-mp3 .progress{height:10px;background:var(--surface);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin:12px 0;}
+.tool-mp4-to-mp3 .progress-bar{height:100%;width:0%;background:var(--accent);transition:width .15s linear;}
+.tool-mp4-to-mp3 audio{width:100%;margin-top:8px;}
+.tool-mp4-to-mp3 #mt-result .btn{margin-top:12px;}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li aria-current="page">MP4 to MP3</li></ol></nav>
+<h1>MP4 to MP3</h1>
+<div class="tool-body-intro">
+<p>Need just the audio from a video? This free MP4 to MP3 converter extracts the soundtrack from any video file and saves it as an MP3, right in your browser. Choose between 128k, 192k and 320k bitrates depending on how much quality you need.</p><p>Your files never leave your device — everything runs in your browser. Nothing is uploaded to any server.</p>
+</div>
+<section class="tool-section tool-mp4-to-mp3" aria-label="MP4 to MP3">
+
+    <div class="card tool-panel">
+      <p class="hint privacy-note">Processing happens 100% in your browser — your files are never uploaded. The engine (~25MB) downloads once. Large files may be slow on phones.</p>
+      <div class="field">
+        <label class="label" for="mt-file">Choose a video</label>
+        <input class="input" id="mt-file" type="file" accept="video/*">
+      </div>
+      <p class="hint" id="mt-fileinfo" aria-live="polite"></p>
+      <div class="field" id="mt-loadwrap">
+        <button class="btn btn-primary" id="mt-load">Load audio engine (one-time ~25MB)</button>
+      </div>
+      <div id="mt-controls" hidden>
+        <div class="field">
+          <label class="label" for="mt-bitrate">MP3 bitrate</label>
+          <select class="select" id="mt-bitrate">
+            <option value="128k">128k — smaller file, good for voice</option>
+            <option value="192k" selected>192k — balanced</option>
+            <option value="320k">320k — best quality for music</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" id="mt-go">Convert to MP3</button>
+      </div>
+      <div class="progress" id="mt-progress" hidden><div class="progress-bar" id="mt-bar"></div></div>
+      <p class="hint" id="mt-status" aria-live="polite" hidden></p>
+      <div class="result" id="mt-result" aria-live="polite" hidden>
+        <p class="result-big" id="mt-sizes"></p>
+        <audio id="mt-preview" controls></audio>
+        <p><a class="btn btn-primary" id="mt-download" href="#">Download MP3</a></p>
+      </div>
+      <p class="error" id="mt-error" aria-live="polite" hidden></p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Choose a video file (MP4, WebM, MOV and more) from your device.</li>
+<li>Click &quot;Load audio engine&quot; — a one-time ~25MB download that enables conversion.</li>
+<li>Pick a bitrate (128k, 192k or 320k) and press &quot;Convert to MP3&quot;.</li>
+<li>Play the audio preview and download your MP3.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Is my video uploaded anywhere?</summary><div class="faq-a"><p>No. Extraction happens entirely on your device using an audio engine that runs in your browser. Your file is never sent to a server.</p></div></details>
+<details><summary>Which bitrate should I choose?</summary><div class="faq-a"><p>128k is fine for voice and small files, 192k is a good all-round choice, and 320k gives the best quality for music at the cost of a larger file.</p></div></details>
+<details><summary>What video formats are supported?</summary><div class="faq-a"><p>Any video format the engine can read — MP4, WebM, MOV, MKV, AVI and more. The output is always a standard MP3 file.</p></div></details>
+<details><summary>What if my video has no audio track?</summary><div class="faq-a"><p>The conversion will fail with a clear message. The tool can only extract audio if the video actually contains an audio stream.</p></div></details>
+<details><summary>Why does the engine need to download ~25MB first?</summary><div class="faq-a"><p>Audio extraction needs a full media codec, which downloads once and is then cached by your browser. After that, conversion runs fully offline.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../video-compressor/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#video"></use></svg><span class="tl-name">Compress Video</span><span class="tl-desc">Video &amp; Audio</span></a>
+<a class="tool-card" href="../video-trimmer/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#scissors"></use></svg><span class="tl-name">Trim Video</span><span class="tl-desc">Video &amp; Audio</span></a>
+<a class="tool-card" href="../audio-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#music"></use></svg><span class="tl-name">Audio Converter</span><span class="tl-desc">Video &amp; Audio</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"MP4 to MP3","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/mp4-to-mp3/","description":"Convert MP4 to MP3 in your browser — extract audio from video at 128k, 192k or 320k. Private, fast and free.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is my video uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Extraction happens entirely on your device using an audio engine that runs in your browser. Your file is never sent to a server."}},{"@type":"Question","name":"Which bitrate should I choose?","acceptedAnswer":{"@type":"Answer","text":"128k is fine for voice and small files, 192k is a good all-round choice, and 320k gives the best quality for music at the cost of a larger file."}},{"@type":"Question","name":"What video formats are supported?","acceptedAnswer":{"@type":"Answer","text":"Any video format the engine can read — MP4, WebM, MOV, MKV, AVI and more. The output is always a standard MP3 file."}},{"@type":"Question","name":"What if my video has no audio track?","acceptedAnswer":{"@type":"Answer","text":"The conversion will fail with a clear message. The tool can only extract audio if the video actually contains an audio stream."}},{"@type":"Question","name":"Why does the engine need to download ~25MB first?","acceptedAnswer":{"@type":"Answer","text":"Audio extraction needs a full media codec, which downloads once and is then cached by your browser. After that, conversion runs fully offline."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Video & Audio","item":"https://www.example.com/#cat-video-audio"},{"@type":"ListItem","position":3,"name":"MP4 to MP3","item":"https://www.example.com/tools/mp4-to-mp3/"}]}</script>
+<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js" defer></script>
+<script>
+
+    (function(){
+      'use strict';
+      var $ = function(id){ return document.getElementById(id); };
+      var fileInput = $('mt-file'), fileInfo = $('mt-fileinfo');
+      var loadWrap = $('mt-loadwrap'), loadBtn = $('mt-load');
+      var controls = $('mt-controls'), bitrateSel = $('mt-bitrate'), goBtn = $('mt-go');
+      var progressEl = $('mt-progress'), bar = $('mt-bar'), statusEl = $('mt-status');
+      var resultEl = $('mt-result'), sizesEl = $('mt-sizes');
+      var preview = $('mt-preview'), dl = $('mt-download'), errEl = $('mt-error');
+      if(!fileInput || !loadBtn || !goBtn) return;
+
+      var ffmpeg = null, fetchFileFn = null, lastUrl = null, file = null;
+
+      function fmtBytes(b){
+        if(!(b >= 0)) return '—';
+        var u = ['B','KB','MB','GB'], i = 0;
+        while(b >= 1024 && i < u.length - 1){ b /= 1024; i++; }
+        return (b >= 100 ? Math.round(b) : Math.round(b * 10) / 10) + ' ' + u[i];
+      }
+      function baseName(n){
+        var b = String(n || '').replace(/\.[A-Za-z0-9]{1,5}$/, '').replace(/[^a-zA-Z0-9-_]+/g, '_').replace(/^_+|_+$/g, '');
+        if(!b) b = 'output';
+        return b.slice(0, 60);
+      }
+      function extOf(n, fb){
+        var m = /\.([A-Za-z0-9]{1,5})$/.exec(String(n || ''));
+        return m ? '.' + m[1].toLowerCase() : fb;
+      }
+      function setBar(r){
+        var p = Math.max(0, Math.min(1, r || 0));
+        bar.style.width = Math.round(p * 100) + '%';
+      }
+      function status(t){ statusEl.textContent = t; statusEl.hidden = !t; }
+      function showError(t){ errEl.textContent = t; errEl.hidden = false; }
+      function hideError(){ errEl.textContent = ''; errEl.hidden = true; }
+
+      function ensureEngine(progressCb){
+        if(ffmpeg) return Promise.resolve(ffmpeg);
+        var FF = window.FFmpeg;
+        if(!FF || typeof FF.createFFmpeg !== 'function' || typeof FF.fetchFile !== 'function'){
+          return Promise.reject(new Error('Engine library did not load. Check your connection and reload the page.'));
+        }
+        fetchFileFn = FF.fetchFile;
+        ffmpeg = FF.createFFmpeg({
+          corePath: 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.11.0/dist/umd/ffmpeg-core.js',
+          logger: function(){}
+        });
+        ffmpeg.setProgress(function(p){ progressCb(p && p.ratio ? p.ratio : 0); });
+        return ffmpeg.load().then(function(){ return ffmpeg; });
+      }
+
+      fileInput.addEventListener('change', function(){
+        hideError();
+        file = (fileInput.files && fileInput.files[0]) ? fileInput.files[0] : null;
+        resultEl.hidden = true;
+        if(file){
+          fileInfo.textContent = file.name + ' — ' + fmtBytes(file.size);
+        } else {
+          fileInfo.textContent = '';
+        }
+      });
+
+      loadBtn.addEventListener('click', function(){
+        hideError();
+        loadBtn.disabled = true;
+        loadBtn.textContent = 'Loading engine…';
+        progressEl.hidden = false;
+        setBar(0);
+        status('Downloading engine (~25MB)… this is a one-time download and can take a while on slow connections.');
+        ensureEngine(setBar).then(function(){
+          loadWrap.hidden = true;
+          controls.hidden = false;
+          progressEl.hidden = true;
+          status('Engine ready — pick a bitrate and press "Convert to MP3".');
+        }).catch(function(){
+          loadBtn.disabled = false;
+          loadBtn.textContent = 'Load audio engine (one-time ~25MB)';
+          progressEl.hidden = true;
+          status('');
+          showError('Engine failed to load — check your connection and retry.');
+        });
+      });
+
+      goBtn.addEventListener('click', function(){
+        hideError();
+        if(!file){ showError('Choose a video file first.'); return; }
+        var rate = bitrateSel.value;
+        if(rate !== '128k' && rate !== '192k' && rate !== '320k') rate = '192k';
+        var inName = 'input' + extOf(file.name, '.mp4');
+        var outName = baseName(file.name) + '.mp3';
+        goBtn.disabled = true;
+        resultEl.hidden = true;
+        progressEl.hidden = false;
+        setBar(0);
+        status('Preparing…');
+        ensureEngine(setBar).then(function(){
+          status('Reading file…');
+          return fetchFileFn(file);
+        }).then(function(data){
+          ffmpeg.FS('writeFile', inName, data);
+          status('Extracting audio…');
+          setBar(0);
+          return ffmpeg.run('-i', inName, '-vn', '-ar', '44100', '-b:a', rate, outName);
+        }).then(function(){
+          var data = ffmpeg.FS('readFile', outName);
+          if(lastUrl){ URL.revokeObjectURL(lastUrl); lastUrl = null; }
+          var url = URL.createObjectURL(new Blob([data.buffer], { type: 'audio/mpeg' }));
+          lastUrl = url;
+          preview.src = url;
+          dl.href = url;
+          dl.setAttribute('download', outName);
+          sizesEl.textContent = 'MP3 ready — ' + fmtBytes(data.length) + ' at ' + rate + '.';
+          resultEl.hidden = false;
+          status('Done.');
+        }).catch(function(e){
+          var msg = (e && e.message) ? String(e.message) : '';
+          if(/memory/i.test(msg)){
+            showError('Ran out of memory while processing — try a smaller video file.');
+          } else if(/does not contain any stream/i.test(msg)){
+            showError('Could not extract audio — this video may not have an audio track.');
+          } else {
+            showError('Conversion failed — the file may be corrupt or in an unsupported format. Try a different file.');
+          }
+        }).then(function(){
+          try{ ffmpeg.FS('unlink', inName); }catch(x){}
+          try{ ffmpeg.FS('unlink', outName); }catch(x){}
+          goBtn.disabled = false;
+          progressEl.hidden = true;
+        });
+      });
+    })();
+</script>
+</body>
+</html>

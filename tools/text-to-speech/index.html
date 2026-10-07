@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text to Speech — Read Text Aloud Free</title>
+<meta name="description" content="Convert text to speech in your browser. Choose a voice, adjust rate and pitch, then listen. Uses your browser’s built-in voices.">
+<meta name="keywords" content="text to speech, tts, read text aloud, text to voice, speech synthesis">
+<link rel="canonical" href="https://www.example.com/tools/text-to-speech/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Text to Speech — Read Text Aloud Free">
+<meta property="og:description" content="Convert text to speech in your browser. Choose a voice, adjust rate and pitch, then listen. Uses your browser’s built-in voices.">
+<meta property="og:url" content="https://www.example.com/tools/text-to-speech/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Text to Speech — Read Text Aloud Free">
+<meta name="twitter:description" content="Convert text to speech in your browser. Choose a voice, adjust rate and pitch, then listen. Uses your browser’s built-in voices.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-text-to-speech .tool-text-to-speech-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.tool-text-to-speech .tool-text-to-speech-row input[type="range"]{width:100%;accent-color:var(--accent);}
+.tool-text-to-speech .tool-text-to-speech-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;}
+@media (max-width:480px){.tool-text-to-speech .tool-text-to-speech-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li aria-current="page">Text to Speech</li></ol></nav>
+<h1>Text to Speech</h1>
+<div class="tool-body-intro">
+<p>A text-to-speech tool that reads any text aloud using your browser’s built-in speech engine. Type or paste text, pick a voice, and adjust the speaking rate and pitch to your liking.</p><p>Speech is synthesized locally on your device — your text is never sent to a server. Uses your browser’s built-in voices; availability varies by device and browser.</p><p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+</div>
+<section class="tool-section tool-text-to-speech" aria-label="Text to Speech">
+
+    <div class="card tool-panel">
+      <div class="field">
+        <label class="label" for="tts-text">Text to read aloud</label>
+        <textarea class="textarea" id="tts-text" rows="6" placeholder="Type or paste your text here…"></textarea>
+      </div>
+      <div class="field">
+        <label class="label" for="tts-voice">Voice</label>
+        <select class="select" id="tts-voice"><option>Loading voices…</option></select>
+        <p class="hint">Uses your browser’s built-in voices; availability varies by device and browser.</p>
+      </div>
+      <div class="tool-text-to-speech-row">
+        <div class="field">
+          <label class="label" for="tts-rate">Rate: <output id="tts-rate-val" for="tts-rate">1</output></label>
+          <input type="range" id="tts-rate" min="0.5" max="2" step="0.1" value="1">
+        </div>
+        <div class="field">
+          <label class="label" for="tts-pitch">Pitch: <output id="tts-pitch-val" for="tts-pitch">1</output></label>
+          <input type="range" id="tts-pitch" min="0" max="2" step="0.1" value="1">
+        </div>
+      </div>
+      <div class="tool-text-to-speech-actions">
+        <button class="btn btn-primary" id="tts-speak">Speak</button>
+        <button class="btn btn-ghost" id="tts-pause" disabled>Pause</button>
+        <button class="btn btn-ghost" id="tts-stop" disabled>Stop</button>
+      </div>
+      <p class="hint" id="tts-status" role="status" aria-live="polite"></p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Type or paste the text you want to hear.</li>
+<li>Pick a voice from the list and adjust the rate and pitch sliders.</li>
+<li>Press &quot;Speak&quot; to listen. Pause, resume or stop the playback anytime.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Which voices are available?</summary><div class="faq-a"><p>The tool uses the voices built into your browser and operating system, so the list varies by device — a phone, a Windows PC and a Mac each offer different voices.</p></div></details>
+<details><summary>Does my text get sent to a server?</summary><div class="faq-a"><p>No. Speech is synthesized locally by your browser using its built-in engine; your text never leaves the device.</p></div></details>
+<details><summary>Why does it sound robotic?</summary><div class="faq-a"><p>Built-in browser voices are simpler than cloud AI voices. Quality and naturalness depend on your operating system’s speech engine.</p></div></details>
+<details><summary>Can I download the audio?</summary><div class="faq-a"><p>Not with this tool — it plays speech through your speakers in real time and does not record audio.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../word-counter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#type"></use></svg><span class="tl-name">Word Counter</span><span class="tl-desc">Text Tools</span></a>
+<a class="tool-card" href="../case-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#text"></use></svg><span class="tl-name">Case Converter</span><span class="tl-desc">Text Tools</span></a>
+<a class="tool-card" href="../lorem-ipsum/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#pilcrow"></use></svg><span class="tl-name">Lorem Ipsum Generator</span><span class="tl-desc">Text Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Text to Speech","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/text-to-speech/","description":"Convert text to speech in your browser. Choose a voice, adjust rate and pitch, then listen. Uses your browser’s built-in voices.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which voices are available?","acceptedAnswer":{"@type":"Answer","text":"The tool uses the voices built into your browser and operating system, so the list varies by device — a phone, a Windows PC and a Mac each offer different voices."}},{"@type":"Question","name":"Does my text get sent to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Speech is synthesized locally by your browser using its built-in engine; your text never leaves the device."}},{"@type":"Question","name":"Why does it sound robotic?","acceptedAnswer":{"@type":"Answer","text":"Built-in browser voices are simpler than cloud AI voices. Quality and naturalness depend on your operating system’s speech engine."}},{"@type":"Question","name":"Can I download the audio?","acceptedAnswer":{"@type":"Answer","text":"Not with this tool — it plays speech through your speakers in real time and does not record audio."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Text Tools","item":"https://www.example.com/#cat-text-tools"},{"@type":"ListItem","position":3,"name":"Text to Speech","item":"https://www.example.com/tools/text-to-speech/"}]}</script>
+<script>
+
+    (function(){
+      'use strict';
+      function $(id){ return document.getElementById(id); }
+      var textEl = $('tts-text'), voiceEl = $('tts-voice'), rateEl = $('tts-rate'),
+          pitchEl = $('tts-pitch'), rateVal = $('tts-rate-val'), pitchVal = $('tts-pitch-val'),
+          speakBtn = $('tts-speak'), pauseBtn = $('tts-pause'), stopBtn = $('tts-stop'),
+          statusEl = $('tts-status');
+      if(!textEl || !speakBtn || !voiceEl || !rateEl || !pitchEl) return;
+      function setStatus(msg){ if(statusEl) statusEl.textContent = msg || ''; }
+      if(!('speechSynthesis' in window)){
+        setStatus('Sorry, your browser does not support speech synthesis.');
+        speakBtn.disabled = true;
+        if(voiceEl) voiceEl.innerHTML = '';
+        return;
+      }
+      var synth = window.speechSynthesis;
+      function loadVoices(){
+        var voices = synth.getVoices();
+        voiceEl.innerHTML = '';
+        if(!voices.length){
+          var d = document.createElement('option');
+          d.textContent = 'Default voice';
+          voiceEl.appendChild(d);
+          return;
+        }
+        voices.forEach(function(v, i){
+          var o = document.createElement('option');
+          o.value = String(i);
+          o.textContent = v.name + ' — ' + v.lang + (v.default ? ' (default)' : '');
+          voiceEl.appendChild(o);
+        });
+        for(var i = 0; i < voices.length; i++){
+          if(/^en([-_]|$)/i.test(voices[i].lang)){ voiceEl.value = String(i); break; }
+        }
+      }
+      loadVoices();
+      if(typeof synth.onvoiceschanged !== 'undefined') synth.onvoiceschanged = loadVoices;
+      function sliderLabel(el, valEl){
+        if(valEl) valEl.textContent = el.value;
+      }
+      rateEl.addEventListener('input', function(){ sliderLabel(rateEl, rateVal); });
+      pitchEl.addEventListener('input', function(){ sliderLabel(pitchEl, pitchVal); });
+      function setBusy(speaking){
+        if(pauseBtn) pauseBtn.disabled = !speaking;
+        if(stopBtn) stopBtn.disabled = !speaking;
+      }
+      speakBtn.addEventListener('click', function(){
+        var text = textEl.value.trim();
+        if(!text){ setStatus('Type or paste some text first.'); return; }
+        synth.cancel();
+        var u = new SpeechSynthesisUtterance(text);
+        var voices = synth.getVoices();
+        var vi = parseInt(voiceEl.value, 10);
+        if(voices[vi]) u.voice = voices[vi];
+        u.rate = parseFloat(rateEl.value) || 1;
+        u.pitch = parseFloat(pitchEl.value) || 1;
+        u.onend = function(){ setStatus('Finished.'); if(pauseBtn) pauseBtn.textContent = 'Pause'; setBusy(false); };
+        u.onerror = function(){ setStatus('Playback was interrupted.'); if(pauseBtn) pauseBtn.textContent = 'Pause'; setBusy(false); };
+        synth.speak(u);
+        if(pauseBtn) pauseBtn.textContent = 'Pause';
+        setBusy(true);
+        setStatus('Speaking…');
+      });
+      if(pauseBtn) pauseBtn.addEventListener('click', function(){
+        if(synth.paused){
+          synth.resume();
+          pauseBtn.textContent = 'Pause';
+          setStatus('Speaking…');
+        } else if(synth.speaking){
+          synth.pause();
+          pauseBtn.textContent = 'Resume';
+          setStatus('Paused.');
+        }
+      });
+      if(stopBtn) stopBtn.addEventListener('click', function(){
+        synth.cancel();
+        if(pauseBtn) pauseBtn.textContent = 'Pause';
+        setBusy(false);
+        setStatus('Stopped.');
+      });
+    })();
+</script>
+</body>
+</html>
