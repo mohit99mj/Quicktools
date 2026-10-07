@@ -192,7 +192,7 @@
         for (var i = 0; i < files.length; i += 1) zip.file(files[i].name, files[i]);
         if (progress) progress.hidden = false;
         if (bar) bar.style.width = '0%';
-        go.disabled = true;
+        go.disabled = true; go.setAttribute('aria-busy', 'true');
         pShow({ title: 'Creating ZIP…', stage: 'Adding files…', percent: 0 });
         zip.generateAsync({ type: 'blob' }, function(meta){
           if (bar) bar.style.width = Math.round(meta.percent) + '%';
@@ -211,13 +211,13 @@
           setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
           pSum(out, '<strong>ZIP created</strong> — ' + files.length + (files.length === 1 ? ' file' : ' files') + ' • ' + fmtBytes(inTotal) + ' → ' + fmtBytes(blob.size));
           pHide();
-          go.disabled = false;
+          go.disabled = false; go.removeAttribute('aria-busy');
           if (progress) progress.hidden = true;
           if (out) out.innerHTML = '<p>ZIP created and downloaded.</p>';
           renderList();
         }).catch(function(){
           pHide();
-          go.disabled = false;
+          go.disabled = false; go.removeAttribute('aria-busy');
           if (progress) progress.hidden = true;
           if (out) out.innerHTML = '<p class="error">Could not create the ZIP. Try fewer or smaller files.</p>';
         });

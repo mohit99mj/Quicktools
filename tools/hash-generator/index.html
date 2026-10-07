@@ -172,15 +172,15 @@ var LOGIC={hash:async (algo, str) => {
           return;
         }
         var algo = aEl.value;
-        bGo.disabled = true; bGo.textContent = 'Hashing…';
+        bGo.disabled = true; bGo.setAttribute('aria-busy', 'true'); bGo.textContent = 'Hashing…';
         function done(hex){
           pHide();
-          bGo.disabled = false; bGo.textContent = 'Generate hash';
+          bGo.disabled = false; bGo.removeAttribute('aria-busy'); bGo.textContent = 'Generate hash';
           show(algo + '  ' + hex, false);
         }
         function fail(){
           pHide();
-          bGo.disabled = false; bGo.textContent = 'Generate hash';
+          bGo.disabled = false; bGo.removeAttribute('aria-busy'); bGo.textContent = 'Generate hash';
           show('Hashing failed. The ' + algo + ' algorithm may be unsupported in this browser — try SHA-256.', true);
         }
         if(fEl.files && fEl.files.length > 0){
@@ -194,7 +194,7 @@ var LOGIC={hash:async (algo, str) => {
           rd.onerror = fail;
           rd.readAsArrayBuffer(file);
         } else {
-          if(!tEl.value){ show('Type some text or choose a file first.', true); bGo.disabled = false; bGo.textContent = 'Generate hash'; return; }
+          if(!tEl.value){ show('Type some text or choose a file first.', true); bGo.disabled = false; bGo.removeAttribute('aria-busy'); bGo.textContent = 'Generate hash'; return; }
           LOGIC.hash(algo, tEl.value).then(done, fail);
         }
       });
