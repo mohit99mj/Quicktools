@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PDF Editor — Rearrange &amp; Rotate PDF Pages</title>
+<meta name="description" content="Free online PDF editor: delete, reorder and rotate PDF pages in your browser. No sign-up, no uploads — download the edited PDF instantly.">
+<meta name="keywords" content="pdf editor, edit pdf online, rotate pdf pages, rearrange pdf pages">
+<link rel="canonical" href="https://www.example.com/tools/pdf-editor/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PDF Editor — Rearrange &amp; Rotate PDF Pages">
+<meta property="og:description" content="Free online PDF editor: delete, reorder and rotate PDF pages in your browser. No sign-up, no uploads — download the edited PDF instantly.">
+<meta property="og:url" content="https://www.example.com/tools/pdf-editor/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PDF Editor — Rearrange &amp; Rotate PDF Pages">
+<meta name="twitter:description" content="Free online PDF editor: delete, reorder and rotate PDF pages in your browser. No sign-up, no uploads — download the edited PDF instantly.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-pdf-editor .file-name{font-weight:600;margin:1rem 0 .25rem}
+.tool-pdf-editor .dropzone.drag-over{outline:2px dashed var(--accent);outline-offset:4px}
+.tool-pdf-editor .progress{width:100%;margin-top:1rem}
+.tool-pdf-editor .thumb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;margin:1rem 0}
+.tool-pdf-editor .thumb-card{border:1px solid var(--line);border-radius:var(--radius-sm);padding:.6rem;background:var(--surface);text-align:center}
+.tool-pdf-editor .thumb-img{width:100%;height:auto;border-radius:4px;background:#fff;display:block}
+.tool-pdf-editor .thumb-label{font-weight:600;margin:.5rem 0}
+.tool-pdf-editor .thumb-actions{display:flex;flex-wrap:wrap;gap:.35rem;justify-content:center}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li aria-current="page">PDF Editor</li></ol></nav>
+<h1>PDF Editor</h1>
+<div class="tool-body-intro">
+<p><strong>PDF Editor</strong> lets you fix up a PDF's pages without installing anything: delete unwanted pages, move pages into a new order with the arrow buttons, and rotate sideways pages upright.</p><p>Work on a visual thumbnail grid, then click Save PDF to download a brand-new file with your changes applied. Your original file is never modified.</p>
+</div>
+<section class="tool-section tool-pdf-editor" aria-label="PDF Editor">
+
+    <div class="card tool-panel">
+      <div class="dropzone" id="pe-drop" tabindex="0" role="button" aria-label="Drop a PDF file here, or press Enter to browse for a file">
+        <svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#pencil"/></svg>
+        <p><strong>Drag &amp; drop your PDF here</strong></p>
+        <p><button type="button" class="btn btn-ghost" id="pe-browse">Browse files</button></p>
+        <p class="hint">One PDF file at a time.</p>
+        <input type="file" id="pe-file" class="visually-hidden" accept="application/pdf,.pdf" aria-label="Choose a PDF file">
+      </div>
+      <p class="file-name" id="pe-name" aria-live="polite"></p>
+      <div class="thumb-grid" id="pe-grid" aria-label="PDF pages — delete, move or rotate"></div>
+      <button class="btn btn-primary" id="pe-save" disabled>Save PDF</button>
+      <progress class="progress" id="pe-progress" max="100" value="0" hidden></progress>
+      <div class="result" id="pe-status" aria-live="polite"></div>
+      <p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Drop your PDF into the upload area, or click Browse files to select it.</li>
+<li>Use the thumbnails: delete pages you don&#39;t need, move pages left or right, rotate in 90° steps.</li>
+<li>Review the final page order in the grid.</li>
+<li>Click Save PDF to download the edited document.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Can I edit the text inside the PDF?</summary><div class="faq-a"><p>No. This editor works at the page level — it deletes, reorders and rotates whole pages. It cannot change text, images or other content on a page.</p></div></details>
+<details><summary>Is the rotation permanent in the saved file?</summary><div class="faq-a"><p>Yes. Rotations are written into the new PDF, so the pages open correctly rotated in any PDF reader.</p></div></details>
+<details><summary>Does editing change my original file?</summary><div class="faq-a"><p>No. Your original file stays untouched on your device; you download a separate new PDF with your changes.</p></div></details>
+<details><summary>Are my files uploaded to a server?</summary><div class="faq-a"><p>No. Your files never leave your device — all editing runs locally in your browser.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../merge-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#layers"></use></svg><span class="tl-name">Merge PDF</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../split-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#scissors"></use></svg><span class="tl-name">Split PDF</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../compress-pdf/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#minimize-2"></use></svg><span class="tl-name">Compress PDF</span><span class="tl-desc">PDF Tools</span></a>
+<a class="tool-card" href="../pdf-to-jpg/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#image"></use></svg><span class="tl-name">PDF to JPG</span><span class="tl-desc">PDF Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"PDF Editor","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/pdf-editor/","description":"Free online PDF editor: delete, reorder and rotate PDF pages in your browser. No sign-up, no uploads — download the edited PDF instantly.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I edit the text inside the PDF?","acceptedAnswer":{"@type":"Answer","text":"No. This editor works at the page level — it deletes, reorders and rotates whole pages. It cannot change text, images or other content on a page."}},{"@type":"Question","name":"Is the rotation permanent in the saved file?","acceptedAnswer":{"@type":"Answer","text":"Yes. Rotations are written into the new PDF, so the pages open correctly rotated in any PDF reader."}},{"@type":"Question","name":"Does editing change my original file?","acceptedAnswer":{"@type":"Answer","text":"No. Your original file stays untouched on your device; you download a separate new PDF with your changes."}},{"@type":"Question","name":"Are my files uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Your files never leave your device — all editing runs locally in your browser."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://www.example.com/#cat-pdf-tools"},{"@type":"ListItem","position":3,"name":"PDF Editor","item":"https://www.example.com/tools/pdf-editor/"}]}</script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
+<script>
+
+    (function(){
+      'use strict';
+      var WORKER = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.4.120/build/pdf.worker.min.js';
+      function $(id){ return document.getElementById(id); }
+      function setStatus(msg, isError){
+        var el = $('pe-status');
+        if(!el){ return; }
+        el.textContent = msg || '';
+        el.className = isError ? 'result error' : 'result';
+      }
+      function downloadBlob(blob, name){
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = name;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 10000);
+      }
+      function waitForLibs(names, ready, onMissing){
+        var tries = 0;
+        (function check(){
+          var ok = true;
+          for(var k = 0; k < names.length; k++){
+            if(!window[names[k]]){ ok = false; break; }
+          }
+          if(ok){ ready(); return; }
+          if(tries++ > 100){ onMissing(); return; }
+          setTimeout(check, 100);
+        })();
+      }
+      function baseName(name){
+        var n = name.replace(/\.pdf$/i, '').replace(/[\\/]/g, '');
+        return n || 'document';
+      }
+
+      var pdfDoc = null;
+      var pdfBytes = null;
+      var pdfName = '';
+      var pages = [];
+      var drop = $('pe-drop'), input = $('pe-file'), browse = $('pe-browse');
+      var saveBtn = $('pe-save'), progress = $('pe-progress');
+      var nameEl = $('pe-name'), grid = $('pe-grid');
+
+      function updateSave(){
+        if(saveBtn){ saveBtn.disabled = pages.length === 0; }
+      }
+
+      function renderGrid(){
+        if(!grid || !pdfDoc){ return; }
+        grid.textContent = '';
+        setStatus('Rendering ' + pages.length + ' page thumbnail' + (pages.length === 1 ? '' : 's') + '…');
+        var queue = pages.map(function(pg, i){ return { pg: pg, pos: i }; });
+        (function next(){
+          var item = queue.shift();
+          if(!item){
+            setStatus(pages.length + ' page(s). Delete, move or rotate pages, then click Save PDF.');
+            return;
+          }
+          pdfDoc.getPage(item.pg.srcIndex + 1).then(function(page){
+            var v0 = page.getViewport({ scale: 1 });
+            var scale = 170 / v0.width;
+            var viewport = page.getViewport({ scale: scale, rotation: item.pg.rot });
+            var canvas = document.createElement('canvas');
+            canvas.width = Math.floor(viewport.width);
+            canvas.height = Math.floor(viewport.height);
+            var ctx = canvas.getContext('2d');
+            return page.render({ canvasContext: ctx, viewport: viewport }).promise.then(function(){
+              var card = document.createElement('div');
+              card.className = 'thumb-card';
+              canvas.className = 'thumb-img';
+              card.appendChild(canvas);
+              var label = document.createElement('p');
+              label.className = 'thumb-label';
+              label.textContent = 'Page ' + (item.pos + 1) + (item.pg.rot ? ' · ' + item.pg.rot + '°' : '');
+              card.appendChild(label);
+              var actions = document.createElement('div');
+              actions.className = 'thumb-actions';
+              function mkBtn(text, ariaLabel, fn, disabled){
+                var b = document.createElement('button');
+                b.type = 'button';
+                b.className = 'btn btn-ghost';
+                b.textContent = text;
+                b.setAttribute('aria-label', ariaLabel + ' (page ' + (item.pos + 1) + ')');
+                b.disabled = !!disabled;
+                b.addEventListener('click', fn);
+                return b;
+              }
+              actions.appendChild(mkBtn('←', 'Move page left', function(){
+                if(item.pos > 0){
+                  var t = pages[item.pos - 1];
+                  pages[item.pos - 1] = pages[item.pos];
+                  pages[item.pos] = t;
+                  renderGrid();
+                }
+              }, item.pos === 0));
+              actions.appendChild(mkBtn('→', 'Move page right', function(){
+                if(item.pos < pages.length - 1){
+                  var t = pages[item.pos + 1];
+                  pages[item.pos + 1] = pages[item.pos];
+                  pages[item.pos] = t;
+                  renderGrid();
+                }
+              }, item.pos === pages.length - 1));
+              actions.appendChild(mkBtn('Rotate', 'Rotate page 90 degrees', function(){
+                pages[item.pos].rot = (pages[item.pos].rot + 90) % 360;
+                renderGrid();
+              }, false));
+              actions.appendChild(mkBtn('Delete', 'Delete page', function(){
+                pages.splice(item.pos, 1);
+                updateSave();
+                renderGrid();
+              }, false));
+              card.appendChild(actions);
+              grid.appendChild(card);
+              next();
+            });
+          }).catch(function(err){
+            setStatus('Could not render a page thumbnail: ' + (err && err.message ? err.message : 'unknown error'), true);
+          });
+        })();
+      }
+
+      function loadFile(f){
+        setStatus('Loading libraries…');
+        waitForLibs(['pdfjsLib', 'PDFLib'], function(){
+          if(progress){ progress.hidden = false; progress.value = 10; }
+          pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER;
+          setStatus('Opening "' + f.name + '"…');
+          (async function(){
+            try{
+              var buf = await f.arrayBuffer();
+              pdfBytes = new Uint8Array(buf);
+              pdfDoc = await pdfjsLib.getDocument({ data: pdfBytes.slice() }).promise;
+              pdfName = f.name;
+              pages = [];
+              for(var i = 0; i < pdfDoc.numPages; i++){
+                pages.push({ srcIndex: i, rot: 0 });
+              }
+              if(nameEl){
+                nameEl.textContent = '';
+                var label = document.createElement('span');
+                label.textContent = 'Editing: ' + f.name + ' (' + pdfDoc.numPages + ' pages)';
+                nameEl.appendChild(label);
+              }
+              updateSave();
+              if(progress){ progress.hidden = true; }
+              renderGrid();
+            } catch(err){
+              setStatus('Could not open this PDF: ' + (err && err.message ? err.message : 'the file may be corrupted or password-protected.'), true);
+              if(progress){ progress.hidden = true; }
+            }
+          })();
+        }, function(){
+          setStatus('The required libraries failed to load. Check your connection and reload the page.', true);
+        });
+      }
+
+      if(drop && input){
+        drop.addEventListener('click', function(e){
+          if(e.target === input){ return; }
+          input.click();
+        });
+        drop.addEventListener('keydown', function(e){
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            input.click();
+          }
+        });
+        drop.addEventListener('dragover', function(e){
+          e.preventDefault();
+          drop.classList.add('drag-over');
+        });
+        drop.addEventListener('dragleave', function(){
+          drop.classList.remove('drag-over');
+        });
+        drop.addEventListener('drop', function(e){
+          e.preventDefault();
+          drop.classList.remove('drag-over');
+          if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length){
+            loadFile(e.dataTransfer.files[0]);
+          }
+        });
+        input.addEventListener('change', function(){
+          if(input.files && input.files.length){ loadFile(input.files[0]); }
+          input.value = '';
+        });
+      }
+      if(browse && input){
+        browse.addEventListener('click', function(e){
+          e.stopPropagation();
+          input.click();
+        });
+      }
+
+      if(saveBtn){
+        saveBtn.addEventListener('click', function(){
+          if(!pages.length || !pdfBytes){ return; }
+          setStatus('Building your edited PDF…');
+          saveBtn.disabled = true;
+          if(progress){ progress.hidden = false; progress.value = 50; }
+          (async function(){
+            try{
+              var src = await PDFLib.PDFDocument.load(pdfBytes.slice(), { ignoreEncryption: true });
+              var out = await PDFLib.PDFDocument.create();
+              var indices = pages.map(function(pg){ return pg.srcIndex; });
+              var copied = await out.copyPages(src, indices);
+              copied.forEach(function(cp, i){
+                var added = pages[i].rot;
+                if(added){
+                  var current = cp.getRotation().angle;
+                  cp.setRotation(PDFLib.degrees((current + added) % 360));
+                }
+                out.addPage(cp);
+              });
+              var bytes = await out.save();
+              downloadBlob(new Blob([bytes], { type: 'application/pdf' }), baseName(pdfName) + '-edited.pdf');
+              if(progress){ progress.value = 100; }
+              setStatus('Done — "' + baseName(pdfName) + '-edited.pdf" downloaded (' + pages.length + ' page' + (pages.length === 1 ? '' : 's') + ').');
+            } catch(err){
+              setStatus('Could not save the PDF: ' + (err && err.message ? err.message : 'unknown error'), true);
+            }
+            updateSave();
+            if(progress){ progress.hidden = true; }
+          })();
+        });
+      }
+      updateSave();
+    })();
+</script>
+</body>
+</html>
