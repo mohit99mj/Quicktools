@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Background Remover — Free AI Tool Online</title>
+<meta name="description" content="Remove the background from any photo with free on-device AI. The model downloads once (~40MB), then everything runs in your browser.">
+<meta name="keywords" content="background remover, remove background, transparent background, photo background remover, free background remover">
+<link rel="canonical" href="https://www.example.com/tools/background-remover/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Background Remover — Free AI Tool Online">
+<meta property="og:description" content="Remove the background from any photo with free on-device AI. The model downloads once (~40MB), then everything runs in your browser.">
+<meta property="og:url" content="https://www.example.com/tools/background-remover/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Background Remover — Free AI Tool Online">
+<meta name="twitter:description" content="Remove the background from any photo with free on-device AI. The model downloads once (~40MB), then everything runs in your browser.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-background-remover .br-checker{background:repeating-conic-gradient(#d4d9de 0 25%, #f5f7f8 0 50%) 0 0/24px 24px;border:1px solid var(--line);border-radius:var(--radius-sm);padding:1rem;text-align:center;margin:1rem 0}.tool-background-remover .br-checker img{max-width:100%;height:auto;border-radius:var(--radius-sm)}.tool-background-remover .dropzone.drag{border-color:var(--accent);background:var(--accent-soft)}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li aria-current="page">Background Remover</li></ol></nav>
+<h1>Background Remover</h1>
+<div class="tool-body-intro">
+<p>Remove the background from any photo in seconds with a free AI model that runs entirely on your device. Upload a portrait, product shot or pet photo and get a clean transparent PNG.</p><p>The AI model (~40MB) downloads once the first time you use the tool, and is then reused for every later photo. Your images never leave your device — everything runs in your browser.</p>
+</div>
+<section class="tool-section tool-background-remover" aria-label="Background Remover">
+
+    <div class="card tool-panel">
+      <p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+      <div class="dropzone" id="br-drop" tabindex="0" role="button" aria-label="Upload an image to remove its background">
+        <svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#sparkles"/></svg>
+        <p><strong>Drop an image here</strong> or <span class="kbd">browse</span></p>
+        <p class="hint">JPG, PNG or WebP. Max working size 4000 px on the longest side.</p>
+        <input type="file" id="br-file" class="visually-hidden" accept="image/*" aria-label="Choose an image file">
+      </div>
+      <div class="field">
+        <button class="btn btn-primary" id="br-go" disabled>Remove background</button>
+      </div>
+      <p class="hint" id="br-model-hint">The AI model (~40MB) downloads once and everything runs on your device.</p>
+      <div class="progress" id="br-progress" hidden><div class="progress-bar" id="br-progress-bar"></div></div>
+      <div class="result" id="br-status" aria-live="polite"></div>
+      <div id="br-result-wrap" hidden>
+        <div class="br-checker" id="br-checker"><img id="br-result" alt="Image with background removed"></div>
+        <div class="field"><button class="btn btn-primary" id="br-download">Download PNG</button></div>
+      </div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Upload a photo using the dropzone below (JPG, PNG or WebP).</li>
+<li>Click &quot;Remove background&quot;. The AI model downloads once (~40MB) and then runs on your device.</li>
+<li>Preview the cut-out on a checkerboard transparency background.</li>
+<li>Click &quot;Download PNG&quot; to save the transparent result.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Is this background remover really free?</summary><div class="faq-a"><p>Yes. The AI model runs on your own device, so there are no servers, accounts or watermarks. Use it as often as you like.</p></div></details>
+<details><summary>Why does it download a ~40MB model first?</summary><div class="faq-a"><p>The AI needs its neural-network weights to separate foreground from background. They download once and are reused for every later photo, so subsequent removals start instantly.</p></div></details>
+<details><summary>Do my photos get uploaded anywhere?</summary><div class="faq-a"><p>No. Processing happens entirely in your browser with on-device AI. Your files never leave your device.</p></div></details>
+<details><summary>What image formats can I upload?</summary><div class="faq-a"><p>JPG, PNG, WebP and most other browser-readable formats. The result always downloads as a PNG with transparency.</p></div></details>
+<details><summary>Why did the result keep part of the background?</summary><div class="faq-a"><p>AI segmentation works best with clear contrast between subject and background. Very busy or low-contrast backgrounds can leave artifacts — try a photo with a simpler background.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../image-compressor/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#minimize-2"></use></svg><span class="tl-name">Image Compressor</span><span class="tl-desc">Image Tools</span></a>
+<a class="tool-card" href="../image-cropper/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#crop"></use></svg><span class="tl-name">Image Cropper</span><span class="tl-desc">Image Tools</span></a>
+<a class="tool-card" href="../image-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#refresh-cw"></use></svg><span class="tl-name">Image Converter</span><span class="tl-desc">Image Tools</span></a>
+<a class="tool-card" href="../passport-photo/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#camera"></use></svg><span class="tl-name">Passport Photo Maker</span><span class="tl-desc">Image Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Background Remover","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/background-remover/","description":"Remove the background from any photo with free on-device AI. The model downloads once (~40MB), then everything runs in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this background remover really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The AI model runs on your own device, so there are no servers, accounts or watermarks. Use it as often as you like."}},{"@type":"Question","name":"Why does it download a ~40MB model first?","acceptedAnswer":{"@type":"Answer","text":"The AI needs its neural-network weights to separate foreground from background. They download once and are reused for every later photo, so subsequent removals start instantly."}},{"@type":"Question","name":"Do my photos get uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No. Processing happens entirely in your browser with on-device AI. Your files never leave your device."}},{"@type":"Question","name":"What image formats can I upload?","acceptedAnswer":{"@type":"Answer","text":"JPG, PNG, WebP and most other browser-readable formats. The result always downloads as a PNG with transparency."}},{"@type":"Question","name":"Why did the result keep part of the background?","acceptedAnswer":{"@type":"Answer","text":"AI segmentation works best with clear contrast between subject and background. Very busy or low-contrast backgrounds can leave artifacts — try a photo with a simpler background."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://www.example.com/#cat-image-tools"},{"@type":"ListItem","position":3,"name":"Background Remover","item":"https://www.example.com/tools/background-remover/"}]}</script>
+<script>
+
+    (function(){
+      'use strict';
+      function $(s){ return document.querySelector(s); }
+      var drop = $('#br-drop'), fileInput = $('#br-file'), go = $('#br-go');
+      var statusEl = $('#br-status'), resultWrap = $('#br-result-wrap');
+      var resultImg = $('#br-result'), dl = $('#br-download');
+      var progress = $('#br-progress'), progressBar = $('#br-progress-bar');
+      if(!drop || !fileInput || !go || !statusEl) return;
+      var srcURL = null, resultURL = null, fileName = 'image', modelLoaded = false;
+
+      function setStatus(msg, isError){
+        statusEl.textContent = msg || '';
+        statusEl.className = 'result' + (isError ? ' error' : '');
+      }
+      function setProgress(frac){
+        if(frac == null){ progress.hidden = true; return; }
+        progress.hidden = false;
+        progressBar.style.width = Math.round(frac * 100) + '%';
+      }
+      function safeName(s){
+        return String(s).replace(/\.[a-zA-Z0-9]+$/, '').replace(/[^a-zA-Z0-9._-]+/g, '_').slice(0, 80) || 'image';
+      }
+      function clearURLs(){
+        if(srcURL){ URL.revokeObjectURL(srcURL); srcURL = null; }
+        if(resultURL){ URL.revokeObjectURL(resultURL); resultURL = null; }
+      }
+      function loadFile(f){
+        if(!f || !/^image\//.test(f.type)){ setStatus('Please choose an image file (JPG, PNG or WebP).', true); return; }
+        clearURLs();
+        resultWrap.hidden = true;
+        setProgress(null);
+        fileName = safeName(f.name);
+        srcURL = URL.createObjectURL(f);
+        go.disabled = false;
+        setStatus('Image loaded: ' + f.name + '. Click "Remove background" to start.');
+      }
+      drop.addEventListener('click', function(e){
+        if(e.target !== fileInput) fileInput.click();
+      });
+      drop.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); fileInput.click(); }
+      });
+      drop.addEventListener('dragover', function(e){ e.preventDefault(); drop.classList.add('drag'); });
+      drop.addEventListener('dragleave', function(){ drop.classList.remove('drag'); });
+      drop.addEventListener('drop', function(e){
+        e.preventDefault(); drop.classList.remove('drag');
+        if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+      });
+      fileInput.addEventListener('change', function(){
+        if(fileInput.files && fileInput.files[0]) loadFile(fileInput.files[0]);
+      });
+
+      go.addEventListener('click', async function(){
+        if(!srcURL){ setStatus('Upload an image first.', true); return; }
+        go.disabled = true;
+        try {
+          if(!modelLoaded){
+            setStatus('Downloading AI model (one-time, ~40MB)…');
+            setProgress(0);
+          } else {
+            setStatus('Processing…');
+            setProgress(null);
+          }
+          var mod = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1/+esm');
+          var removeBackground = mod.removeBackground || mod.default;
+          if(typeof removeBackground !== 'function') throw new Error('bad-module');
+          modelLoaded = true;
+          setStatus('Processing…');
+          var res = await fetch(srcURL);
+          var blob = await res.blob();
+          var out = await removeBackground(blob, {
+            progress: function(key, current, total){
+              if(total > 0) setProgress(current / total);
+            }
+          });
+          setProgress(null);
+          if(resultURL) URL.revokeObjectURL(resultURL);
+          resultURL = URL.createObjectURL(out);
+          resultImg.src = resultURL;
+          resultWrap.hidden = false;
+          setStatus('Done — background removed.');
+        } catch(err){
+          setProgress(null);
+          setStatus('Something went wrong. Check your connection (the model downloads from a CDN) and try again.', true);
+        }
+        go.disabled = false;
+      });
+
+      dl.addEventListener('click', function(){
+        if(!resultURL) return;
+        var a = document.createElement('a');
+        a.href = resultURL;
+        a.download = fileName + '-no-background.png';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      });
+      window.addEventListener('pagehide', clearURLs);
+    })();
+</script>
+</body>
+</html>

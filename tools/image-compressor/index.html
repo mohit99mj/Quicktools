@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compress Image — Free Online Image Compressor</title>
+<meta name="description" content="Compress images online for free. Adjust quality and format (JPEG, WebP, PNG) and see the live file-size estimate before you download.">
+<meta name="keywords" content="compress image, image compressor, reduce image size, compress jpeg, compress png, photo compressor">
+<link rel="canonical" href="https://www.example.com/tools/image-compressor/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Compress Image — Free Online Image Compressor">
+<meta property="og:description" content="Compress images online for free. Adjust quality and format (JPEG, WebP, PNG) and see the live file-size estimate before you download.">
+<meta property="og:url" content="https://www.example.com/tools/image-compressor/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Compress Image — Free Online Image Compressor">
+<meta name="twitter:description" content="Compress images online for free. Adjust quality and format (JPEG, WebP, PNG) and see the live file-size estimate before you download.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<style>
+.tool-image-compressor .dropzone.drag{border-color:var(--accent);background:var(--accent-soft)}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li aria-current="page">Image Compressor</li></ol></nav>
+<h1>Image Compressor</h1>
+<div class="tool-body-intro">
+<p>Shrink your photos and screenshots to a fraction of their file size without visible quality loss. Pick a format, drag the quality slider, and watch the live size estimate update as you go.</p><p>Everything runs on your device — your files never leave your browser. Perfect for speeding up websites, emails and uploads with size limits.</p>
+</div>
+<section class="tool-section tool-image-compressor" aria-label="Image Compressor">
+
+    <div class="card tool-panel">
+      <p class="privacy-note">Your files never leave your device — everything runs in your browser.</p>
+      <div class="dropzone" id="ic-drop" tabindex="0" role="button" aria-label="Upload an image to compress">
+        <svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#minimize-2"/></svg>
+        <p><strong>Drop an image here</strong> or <span class="kbd">browse</span></p>
+        <p class="hint">JPG, PNG, WebP. Images over 4000 px on the longest side are scaled down.</p>
+        <input type="file" id="ic-file" class="visually-hidden" accept="image/*" aria-label="Choose an image file">
+      </div>
+      <div class="field">
+        <label class="label" for="ic-format">Output format</label>
+        <select class="select" id="ic-format">
+          <option value="image/jpeg">JPEG — smallest, best compatibility</option>
+          <option value="image/webp">WebP — smallest size, modern browsers</option>
+          <option value="image/png">PNG — lossless, larger files</option>
+        </select>
+      </div>
+      <div class="field" id="ic-quality-field">
+        <label class="label" for="ic-quality">Quality: <output id="ic-quality-out" for="ic-quality">80%</output></label>
+        <input class="input" type="range" id="ic-quality" min="0.1" max="1" step="0.01" value="0.8">
+      </div>
+      <div class="result" id="ic-info" aria-live="polite"></div>
+      <div class="field">
+        <button class="btn btn-primary" id="ic-download" disabled>Download compressed image</button>
+      </div>
+      <p class="hint">The size estimate is the real encoded output — what you download is exactly what you see.</p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Upload an image (JPG, PNG, WebP or GIF stills).</li>
+<li>Choose an output format and drag the quality slider — the estimated output size updates live.</li>
+<li>Compare the before/after dimensions and file sizes.</li>
+<li>Click &quot;Download&quot; to save the compressed image.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>How much can image compression reduce file size?</summary><div class="faq-a"><p>It depends on the image and settings. Photos saved as JPEG or WebP at 70–80% quality are typically 60–90% smaller than the original with little visible difference.</p></div></details>
+<details><summary>Does compression reduce image dimensions?</summary><div class="faq-a"><p>No, unless your image is larger than 4000 px on its longest side — then it is scaled down to that cap so your browser stays responsive. Dimensions are shown before and after.</p></div></details>
+<details><summary>Which format gives the smallest file?</summary><div class="faq-a"><p>WebP usually wins for photos. JPEG is the most compatible choice, and PNG keeps perfect quality but stays larger — it is best for graphics with sharp edges.</p></div></details>
+<details><summary>Are my images uploaded to a server?</summary><div class="faq-a"><p>No. Compression happens entirely in your browser. Your files never leave your device.</p></div></details>
+<details><summary>Why does PNG ignore the quality slider?</summary><div class="faq-a"><p>PNG is a lossless format, so there is no quality tradeoff to adjust. The slider applies to JPEG and WebP only.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../image-resizer/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#maximize"></use></svg><span class="tl-name">Image Resizer</span><span class="tl-desc">Image Tools</span></a>
+<a class="tool-card" href="../image-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#refresh-cw"></use></svg><span class="tl-name">Image Converter</span><span class="tl-desc">Image Tools</span></a>
+<a class="tool-card" href="../background-remover/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#sparkles"></use></svg><span class="tl-name">Background Remover</span><span class="tl-desc">Image Tools</span></a>
+<a class="tool-card" href="../image-cropper/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#crop"></use></svg><span class="tl-name">Image Cropper</span><span class="tl-desc">Image Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Image Compressor","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://www.example.com/tools/image-compressor/","description":"Compress images online for free. Adjust quality and format (JPEG, WebP, PNG) and see the live file-size estimate before you download.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much can image compression reduce file size?","acceptedAnswer":{"@type":"Answer","text":"It depends on the image and settings. Photos saved as JPEG or WebP at 70–80% quality are typically 60–90% smaller than the original with little visible difference."}},{"@type":"Question","name":"Does compression reduce image dimensions?","acceptedAnswer":{"@type":"Answer","text":"No, unless your image is larger than 4000 px on its longest side — then it is scaled down to that cap so your browser stays responsive. Dimensions are shown before and after."}},{"@type":"Question","name":"Which format gives the smallest file?","acceptedAnswer":{"@type":"Answer","text":"WebP usually wins for photos. JPEG is the most compatible choice, and PNG keeps perfect quality but stays larger — it is best for graphics with sharp edges."}},{"@type":"Question","name":"Are my images uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Compression happens entirely in your browser. Your files never leave your device."}},{"@type":"Question","name":"Why does PNG ignore the quality slider?","acceptedAnswer":{"@type":"Answer","text":"PNG is a lossless format, so there is no quality tradeoff to adjust. The slider applies to JPEG and WebP only."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.example.com/"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://www.example.com/#cat-image-tools"},{"@type":"ListItem","position":3,"name":"Image Compressor","item":"https://www.example.com/tools/image-compressor/"}]}</script>
+<script>
+var LOGIC={fit:function(w, h, maxW, maxH) {
+    w = +w; h = +h; maxW = +maxW; maxH = +maxH;
+    if (!(w > 0) || !(h > 0) || !(maxW > 0) || !(maxH > 0)) return { w: 0, h: 0 };
+    var s = Math.min(1, maxW / w, maxH / h);
+    return { w: Math.max(1, Math.round(w * s)), h: Math.max(1, Math.round(h * s)) };
+  }};
+
+    (function(){
+      'use strict';
+      function $(s){ return document.querySelector(s); }
+      var drop = $('#ic-drop'), fileInput = $('#ic-file'), formatSel = $('#ic-format');
+      var quality = $('#ic-quality'), qualityOut = $('#ic-quality-out'), qualityField = $('#ic-quality-field');
+      var info = $('#ic-info'), dl = $('#ic-download');
+      if(!drop || !fileInput || !formatSel || !quality || !info || !dl) return;
+      var MAX = 4000;
+      var img = null, origSize = 0, origW = 0, origH = 0, outW = 0, outH = 0;
+      var srcURL = null, outBlob = null, outURL = null, fileName = 'image';
+      var timer = null;
+
+      function setStatus(msg, isError){
+        info.textContent = msg || '';
+        info.className = 'result' + (isError ? ' error' : '');
+      }
+      function fmtBytes(b){
+        if(!(b >= 0)) return '—';
+        if(b < 1024) return b + ' B';
+        if(b < 1048576) return (b / 1024).toFixed(1) + ' KB';
+        return (b / 1048576).toFixed(2) + ' MB';
+      }
+      function safeName(s){
+        return String(s).replace(/\.[a-zA-Z0-9]+$/, '').replace(/[^a-zA-Z0-9._-]+/g, '_').slice(0, 80) || 'image';
+      }
+      function extFor(mime){
+        return mime === 'image/png' ? 'png' : mime === 'image/webp' ? 'webp' : 'jpg';
+      }
+      function schedule(){ if(timer) clearTimeout(timer); timer = setTimeout(compress, 120); }
+      function compress(){
+        if(!img) return;
+        var mime = formatSel.value;
+        var q = parseFloat(quality.value) || 0.8;
+        var d = LOGIC.fit(origW, origH, MAX, MAX);
+        outW = d.w; outH = d.h;
+        var c = document.createElement('canvas');
+        c.width = outW; c.height = outH;
+        var ctx = c.getContext('2d');
+        if(mime === 'image/jpeg'){ ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, outW, outH); }
+        ctx.drawImage(img, 0, 0, outW, outH);
+        c.toBlob(function(blob){
+          if(!blob){ setStatus('This browser could not encode ' + mime + '. Try another format.', true); dl.disabled = true; return; }
+          outBlob = blob;
+          var saved = origSize > 0 ? Math.round((1 - blob.size / origSize) * 100) : 0;
+          setStatus('Before: ' + origW + ' × ' + origH + ' px, ' + fmtBytes(origSize) + '  →  After: ' +
+            outW + ' × ' + outH + ' px, ' + fmtBytes(blob.size) + ' (' + saved + '% smaller).');
+          dl.disabled = false;
+        }, mime, q);
+      }
+      function loadFile(f){
+        if(!f || !/^image\//.test(f.type)){ setStatus('Please choose an image file.', true); return; }
+        if(srcURL) URL.revokeObjectURL(srcURL);
+        srcURL = URL.createObjectURL(f);
+        origSize = f.size;
+        fileName = safeName(f.name);
+        var probe = new Image();
+        probe.onload = function(){
+          origW = probe.naturalWidth; origH = probe.naturalHeight;
+          img = probe;
+          if(Math.max(origW, origH) > MAX){
+            setStatus('Note: image is ' + origW + ' × ' + origH + ' px — it will be scaled to fit within ' + MAX + ' px for smooth processing.');
+          }
+          schedule();
+        };
+        probe.onerror = function(){ setStatus('Could not read that image. Try another file.', true); };
+        probe.src = srcURL;
+      }
+      drop.addEventListener('click', function(e){ if(e.target !== fileInput) fileInput.click(); });
+      drop.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); fileInput.click(); } });
+      drop.addEventListener('dragover', function(e){ e.preventDefault(); drop.classList.add('drag'); });
+      drop.addEventListener('dragleave', function(){ drop.classList.remove('drag'); });
+      drop.addEventListener('drop', function(e){
+        e.preventDefault(); drop.classList.remove('drag');
+        if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) loadFile(e.dataTransfer.files[0]);
+      });
+      fileInput.addEventListener('change', function(){
+        if(fileInput.files && fileInput.files[0]) loadFile(fileInput.files[0]);
+      });
+      formatSel.addEventListener('change', function(){
+        qualityField.style.display = formatSel.value === 'image/png' ? 'none' : '';
+        schedule();
+      });
+      quality.addEventListener('input', function(){
+        qualityOut.textContent = Math.round(parseFloat(quality.value) * 100) + '%';
+        schedule();
+      });
+      dl.addEventListener('click', function(){
+        if(!outBlob) return;
+        if(outURL) URL.revokeObjectURL(outURL);
+        outURL = URL.createObjectURL(outBlob);
+        var a = document.createElement('a');
+        a.href = outURL;
+        a.download = fileName + '-compressed.' + extFor(formatSel.value);
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      });
+      window.addEventListener('pagehide', function(){
+        if(srcURL) URL.revokeObjectURL(srcURL);
+        if(outURL) URL.revokeObjectURL(outURL);
+      });
+    })();
+</script>
+</body>
+</html>
