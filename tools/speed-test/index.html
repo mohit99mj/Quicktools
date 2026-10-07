@@ -156,17 +156,17 @@
 <ol>
 <li>Close heavy downloads or streams for a cleaner result.</li>
 <li>Click &quot;Start test&quot;.</li>
-<li>Wait for the ping, jitter, and download phases to finish.</li>
+<li>Wait about 5 seconds for the ping and 3-second download burst to finish.</li>
 <li>Compare runs: repeat the test to spot variability on your connection.</li>
 </ol>
 </div>
 <section class="faq" aria-label="Frequently asked questions">
 <h2>Frequently asked questions</h2>
-<details><summary>What does this speed test measure?</summary><div class="faq-a"><p>Ping (median round-trip latency over 10 samples), jitter (average variation between consecutive samples), and download throughput measured by fetching a real CDN file three times and taking the median.</p></div></details>
+<details><summary>What does this speed test measure?</summary><div class="faq-a"><p>Ping (median round-trip latency over 4 samples), jitter (variation between samples), and download throughput measured over a single 3-second burst from a real CDN file — a quick estimate.</p></div></details>
 <details><summary>Why is there no upload speed test?</summary><div class="faq-a"><p>Upload speed requires a server to receive the data, and this site has no backend — everything runs in your browser. The test honestly reports download and latency only.</p></div></details>
 <details><summary>Why is my download speed lower than my plan advertises?</summary><div class="faq-a"><p>Browser-based tests add overhead from encryption, the JavaScript runtime, and shared network paths. It is an estimate of real-world CDN throughput, not a lab measurement. Wi-Fi and other devices on the network also affect it.</p></div></details>
 <details><summary>Should I trust a single result?</summary><div class="faq-a"><p>Run the test two or three times and compare. Speed varies with network congestion, time of day, and what else is using your connection.</p></div></details>
-<details><summary>Does the test use my data allowance?</summary><div class="faq-a"><p>Yes, a little: the download phase fetches a library file three times. Each run uses only a few megabytes.</p></div></details>
+<details><summary>Does the test use my data allowance?</summary><div class="faq-a"><p>Yes, a little: the download phase runs a single 3-second burst (up to ~10 MB).</p></div></details>
 </section>
 <section class="related-tools" aria-label="Related tools">
 <h2>Related tools</h2>
@@ -198,7 +198,7 @@
 <script src="../../assets/js/progress.js" defer></script>
 <script src="../../assets/js/motion.js" defer></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Internet Speed Test","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/speed-test/","description":"Free internet speed test: measure ping, jitter and download speed to our CDN in your browser. Honest estimates — no upload test.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does this speed test measure?","acceptedAnswer":{"@type":"Answer","text":"Ping (median round-trip latency over 10 samples), jitter (average variation between consecutive samples), and download throughput measured by fetching a real CDN file three times and taking the median."}},{"@type":"Question","name":"Why is there no upload speed test?","acceptedAnswer":{"@type":"Answer","text":"Upload speed requires a server to receive the data, and this site has no backend — everything runs in your browser. The test honestly reports download and latency only."}},{"@type":"Question","name":"Why is my download speed lower than my plan advertises?","acceptedAnswer":{"@type":"Answer","text":"Browser-based tests add overhead from encryption, the JavaScript runtime, and shared network paths. It is an estimate of real-world CDN throughput, not a lab measurement. Wi-Fi and other devices on the network also affect it."}},{"@type":"Question","name":"Should I trust a single result?","acceptedAnswer":{"@type":"Answer","text":"Run the test two or three times and compare. Speed varies with network congestion, time of day, and what else is using your connection."}},{"@type":"Question","name":"Does the test use my data allowance?","acceptedAnswer":{"@type":"Answer","text":"Yes, a little: the download phase fetches a library file three times. Each run uses only a few megabytes."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does this speed test measure?","acceptedAnswer":{"@type":"Answer","text":"Ping (median round-trip latency over 4 samples), jitter (variation between samples), and download throughput measured over a single 3-second burst from a real CDN file — a quick estimate."}},{"@type":"Question","name":"Why is there no upload speed test?","acceptedAnswer":{"@type":"Answer","text":"Upload speed requires a server to receive the data, and this site has no backend — everything runs in your browser. The test honestly reports download and latency only."}},{"@type":"Question","name":"Why is my download speed lower than my plan advertises?","acceptedAnswer":{"@type":"Answer","text":"Browser-based tests add overhead from encryption, the JavaScript runtime, and shared network paths. It is an estimate of real-world CDN throughput, not a lab measurement. Wi-Fi and other devices on the network also affect it."}},{"@type":"Question","name":"Should I trust a single result?","acceptedAnswer":{"@type":"Answer","text":"Run the test two or three times and compare. Speed varies with network congestion, time of day, and what else is using your connection."}},{"@type":"Question","name":"Does the test use my data allowance?","acceptedAnswer":{"@type":"Answer","text":"Yes, a little: the download phase runs a single 3-second burst (up to ~10 MB)."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Internet Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-internet-tools"},{"@type":"ListItem","position":3,"name":"Internet Speed Test","item":"https://mohit99mj.github.io/Quicktools/tools/speed-test/"}]}</script>
 <script>
     (function(){
@@ -233,7 +233,7 @@
       var smooth = 0, scaleMax = 25;
       var pingSamples = [], dlRuns = [];
       var totalBytes = 0, history = [], lastSnap = 0;
-      var currentRun = 0, totalRuns = 3;
+      var currentRun = 0, totalRuns = 1;
 
       function median(a){
         var s = a.slice().sort(function(x, y){ return x - y; });
@@ -351,8 +351,9 @@
         setPhase(msg || 'Network test failed. Check your connection and try again.');
         micro.textContent = '';
       }
+      var QUICK_MS = 3000, QUICK_MAX_BYTES = 10 * 1024 * 1024;
       function downloadRun(runIdx){
-        var url = 'https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js?dl=' + Math.random().toString(36).slice(2);
+        var url = 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.11.0/dist/ffmpeg-core.wasm?dl=' + Math.random().toString(36).slice(2);
         var t0 = performance.now();
         return fetch(url, { cache: 'no-store' }).then(function(res){
           if (!res.ok || !res.body) throw new Error('bad response');
@@ -361,8 +362,10 @@
           history.push({ t: performance.now(), bytes: totalBytes });
           function pump(){
             return reader.read().then(function(r){
-              if (r.done){
-                var secs = (performance.now() - t0) / 1000;
+              var elapsed = performance.now() - t0;
+              if (r.done || elapsed >= QUICK_MS || received >= QUICK_MAX_BYTES){
+                try{ reader.cancel(); }catch(e){}
+                var secs = Math.max(elapsed, 250) / 1000;
                 return { bytes: received, secs: secs };
               }
               var chunk = r.value ? r.value.length : 0;
@@ -396,7 +399,7 @@
         go.disabled = true;
         go.textContent = 'Testing\u2026';
         setPhase('Phase 1 of 3 \u2014 Measuring ping\u2026');
-        micro.textContent = 'Ping 0/10';
+        micro.textContent = 'Ping 0/4';
         startLoop();
         var urls = [
           '../../assets/css/main.css?ping=' + Math.random().toString(36).slice(2),
@@ -404,7 +407,7 @@
         ];
         var seq = Promise.resolve();
         urls.forEach(function(u){
-          for (var i = 0; i < 5; i += 1){
+          for (var i = 0; i < 2; i += 1){
             (function(url){
               seq = seq.then(function(){
                 return pingOnce(url).then(function(ms){
@@ -418,14 +421,14 @@
           }
         });
         seq.then(function(){
-          if (pingSamples.length < 3) throw new Error('ping failed');
+          if (pingSamples.length < 2) throw new Error('ping failed');
           var pingMs = median(pingSamples);
           var jitMs = jitter(pingSamples);
           setPillState(0, 'is-done');
           setPillState(1, 'is-active');
           mode = 'download';
           smooth = 0;
-          setPhase('Phase 2 of 3 \u2014 Measuring download speed\u2026');
+          setPhase('Phase 2 of 3 \u2014 3-second speed burst\u2026');
           var chain = Promise.resolve();
           for (var r = 0; r < totalRuns; r += 1){
             (function(idx){
@@ -450,7 +453,7 @@
             bigVal.textContent = downMbps === null ? '\u2014' : downMbps.toFixed(1);
             bigUnit.textContent = 'Mbps';
             setPhase('Done.');
-            micro.textContent = fmtMB(totalBytes) + ' downloaded across ' + dlRuns.length + ' runs';
+            micro.textContent = fmtMB(totalBytes) + ' downloaded in a 3-second burst (quick estimate)';
             showResult(pingMs, jitMs, downMbps);
             go.disabled = false;
             go.textContent = 'Run again';
