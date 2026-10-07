@@ -298,9 +298,14 @@
           if(stored === null){
             span.classList.remove('edited');
             span.setAttribute('aria-label', 'Edit text: ' + rec.str);
+            span.style.color = ''; span.style.background = '';
+            span.style.fontFamily = ''; span.textContent = rec.str;
           } else {
             span.classList.add('edited');
             span.setAttribute('aria-label', 'Edited text: ' + stored + ' (original: ' + rec.str + ')');
+            span.style.color = '#000'; span.style.background = '#fff';
+            span.style.fontFamily = 'Helvetica, Arial, sans-serif';
+            span.textContent = stored;
           }
           closeEditor();
           updateChrome();
@@ -383,6 +388,12 @@
               } else {
                 span.classList.add('edited');
                 span.setAttribute('aria-label', 'Edited text: ' + stored + ' (original: ' + it.str + ')');
+                /* WYSIWYG: show the replacement as it will appear in the PDF —
+                   white background (erases old text) + black Helvetica text. */
+                span.style.color = '#000';
+                span.style.background = '#fff';
+                span.style.fontFamily = 'Helvetica, Arial, sans-serif';
+                span.textContent = stored;
               }
               span.addEventListener('click', function(){ openEditor(rec, span, n); });
               span.addEventListener('keydown', function(e){
@@ -555,12 +566,15 @@
                   var x = g.left / scale;
                   /* PDF y-origin is bottom-left: convert screen (top-left) baseline. */
                   var baselinePdf = ph - (g.baseline / scale);
-                  var rectY = baselinePdf - size * 1.05;
-                  var rectH = size * 1.5;
+                  /* White-out must cover the FULL glyph box: descenders (~0.35*size
+                     below baseline) through ascenders/caps (~1.0*size above).
+                     Generous padding so no trace of the old text shows through. */
+                  var rectY = baselinePdf - size * 0.35;
+                  var rectH = size * 1.4;
                   var textW = (g.width > 1 ? g.width : size * 0.6 * Math.max(1, e.text.length)) / scale;
                   page.drawRectangle({
-                    x: x - 1, y: rectY,
-                    width: textW + 3, height: rectH,
+                    x: x - 2, y: rectY,
+                    width: textW + 5, height: rectH,
                     color: PDFLib.rgb(1, 1, 1), borderWidth: 0, opacity: 1
                   });
                   var lines = String(e.text).split(/\r?\n/);
