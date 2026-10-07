@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audio to Text — Transcribe Audio &amp; Video to Text Free</title>
+<meta name="description" content="Free audio to text converter: transcribe MP3, WAV, MP4 and other audio or video files to text with timestamps. Runs 100% in your browser — your files are never uploaded.">
+<meta name="keywords" content="audio to text, transcribe audio, speech to text, video to text, transcribe mp3, whisper transcribe, audio transcript">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/audio-transcribe/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Audio to Text — Transcribe Audio &amp; Video to Text Free">
+<meta property="og:description" content="Free audio to text converter: transcribe MP3, WAV, MP4 and other audio or video files to text with timestamps. Runs 100% in your browser — your files are never uploaded.">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/audio-transcribe/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Audio to Text — Transcribe Audio &amp; Video to Text Free">
+<meta name="twitter:description" content="Free audio to text converter: transcribe MP3, WAV, MP4 and other audio or video files to text with timestamps. Runs 100% in your browser — your files are never uploaded.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
+<style>
+.tool-audio-transcribe .dropzone.drag-over{outline:2px dashed var(--accent);outline-offset:4px}
+.tool-audio-transcribe .progress{width:100%;margin-top:1rem}
+.at-fileinfo{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin:1rem 0;padding:.7rem .9rem;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface)}
+.at-fileinfo .file-name{font-weight:600;flex:1;min-width:10rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.at-transcript{margin-top:1rem;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--surface);padding:.75rem 1rem;max-height:22rem;overflow:auto}
+.at-seg{display:flex;gap:.75rem;padding:.45rem 0;border-bottom:1px solid var(--line)}
+.at-seg:last-child{border-bottom:0}
+.at-seg p{margin:0}
+.at-ts{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent);flex:0 0 auto;min-width:3.2rem}
+.at-actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}
+.at-words{font-weight:700;margin-top:.75rem}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li aria-current="page">Audio to Text</li></ol></nav>
+<h1>Audio to Text</h1>
+<div class="tool-body-intro">
+<p>Turn speech into text in seconds. <strong>Audio to Text</strong> transcribes your audio and video files with timestamps — perfect for video scripts, captions, meeting notes and interviews.</p><p>Drop in an MP3, WAV or MP4, click Transcribe, then copy or download your timestamped transcript. The speech model runs entirely on your device — your files never leave your browser.</p>
+</div>
+<section class="tool-section tool-audio-transcribe" aria-label="Audio to Text">
+
+    <div class="card tool-panel">
+      <div class="dropzone" id="at-drop" tabindex="0" role="button" aria-label="Drop an audio or video file here, or press Enter to browse for a file">
+        <svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#mic"/></svg>
+        <p><strong>Drag &amp; drop an audio or video file here</strong></p>
+        <p><button type="button" class="btn btn-ghost" id="at-browse">Browse files</button></p>
+        <p class="hint">MP3, WAV, M4A, OGG, MP4, WebM and more. Works best with files under 10 minutes.</p>
+        <input type="file" id="at-file" class="visually-hidden" accept="audio/*,video/*" aria-label="Choose an audio or video file">
+      </div>
+      <div class="at-fileinfo" id="at-fileinfo" hidden>
+        <svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#file-text"/></svg>
+        <span class="file-name" id="at-filename"></span>
+        <span class="hint" id="at-filesize"></span>
+      </div>
+      <p class="hint">First transcription downloads a ~40MB speech model (one-time — it is cached in your browser afterwards). Your audio and transcript never leave your device.</p>
+      <button class="btn btn-primary" id="at-go" disabled>Transcribe</button>
+      <progress class="progress" id="at-progress" max="100" value="0" hidden></progress>
+      <div class="at-output" id="at-output" hidden>
+        <div class="at-transcript" id="at-transcript" aria-label="Transcript"></div>
+        <p class="at-words" id="at-words"></p>
+        <div class="at-actions">
+          <button type="button" class="btn btn-ghost" id="at-copy">Copy transcript</button>
+          <button type="button" class="btn btn-ghost" id="at-download">Download .txt</button>
+        </div>
+      </div>
+      <div class="result" id="at-status" aria-live="polite"></div>
+      <p class="privacy-note">Your files never leave your device — transcription runs 100% in your browser.</p>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Drop an audio or video file into the upload area, or click Browse files to choose one from your device.</li>
+<li>Click Transcribe — the first run downloads a ~40MB speech model once (you will see live progress); it is cached afterwards.</li>
+<li>Watch each segment transcribe with live progress, then review the timestamped transcript.</li>
+<li>Copy the text or download it as a .txt file for your scripts and captions.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>How does Audio to Text transcribe my files?</summary><div class="faq-a"><p>It runs a speech-recognition model (Whisper) directly in your browser. Your audio is decoded, split into short segments and converted to text with timestamps — your files never leave your device.</p></div></details>
+<details><summary>Which file formats can I transcribe?</summary><div class="faq-a"><p>Most common audio formats (MP3, WAV, M4A, OGG) and video files (MP4, WebM) work — the audio track is extracted from videos automatically. If a file will not decode, convert it to MP3 or WAV and try again.</p></div></details>
+<details><summary>Are my files uploaded to a server?</summary><div class="faq-a"><p>No. Transcription runs 100% on your device. The only thing downloaded is the speech model (~40MB, one time, cached afterwards) — your audio and transcript never leave your browser.</p></div></details>
+<details><summary>Why is the first transcription slower?</summary><div class="faq-a"><p>The first time you click Transcribe, the tool downloads the speech model (about 40MB). It is cached in your browser afterwards, so later transcriptions start immediately. You will see live download progress during the one-time fetch.</p></div></details>
+<details><summary>How accurate is the transcription?</summary><div class="faq-a"><p>The built-in model is fast and lightweight, so it handles clear speech well but can struggle with heavy accents, background noise, music, or several people talking at once. Always review the transcript before publishing scripts or captions.</p></div></details>
+<details><summary>How long can my audio or video be?</summary><div class="faq-a"><p>Best results come from files under about 10 minutes. Longer files need more memory and can crash mobile browsers — files over 20 minutes are refused, and very long files may fail with an out-of-memory message. Split long recordings into shorter clips for best results.</p></div></details>
+<details><summary>Can I use it offline?</summary><div class="faq-a"><p>Not fully — the page and the speech model load from the internet. But once the model is cached, repeat transcriptions do not re-download it, and your files are processed locally either way.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../mp4-to-mp3/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#music"></use></svg><span class="tl-name">MP4 to MP3</span><span class="tl-desc">Video &amp; Audio</span></a>
+<a class="tool-card" href="../audio-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#refresh-cw"></use></svg><span class="tl-name">Audio Converter</span><span class="tl-desc">Video &amp; Audio</span></a>
+<a class="tool-card" href="../video-trimmer/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#scissors"></use></svg><span class="tl-name">Trim Video</span><span class="tl-desc">Video &amp; Audio</span></a>
+<a class="tool-card" href="../text-to-speech/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#mic"></use></svg><span class="tl-name">Text to Speech</span><span class="tl-desc">Text Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Audio to Text","applicationCategory":"BusinessApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/audio-transcribe/","description":"Free audio to text converter: transcribe MP3, WAV, MP4 and other audio or video files to text with timestamps. Runs 100% in your browser — your files are never uploaded.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does Audio to Text transcribe my files?","acceptedAnswer":{"@type":"Answer","text":"It runs a speech-recognition model (Whisper) directly in your browser. Your audio is decoded, split into short segments and converted to text with timestamps — your files never leave your device."}},{"@type":"Question","name":"Which file formats can I transcribe?","acceptedAnswer":{"@type":"Answer","text":"Most common audio formats (MP3, WAV, M4A, OGG) and video files (MP4, WebM) work — the audio track is extracted from videos automatically. If a file will not decode, convert it to MP3 or WAV and try again."}},{"@type":"Question","name":"Are my files uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Transcription runs 100% on your device. The only thing downloaded is the speech model (~40MB, one time, cached afterwards) — your audio and transcript never leave your browser."}},{"@type":"Question","name":"Why is the first transcription slower?","acceptedAnswer":{"@type":"Answer","text":"The first time you click Transcribe, the tool downloads the speech model (about 40MB). It is cached in your browser afterwards, so later transcriptions start immediately. You will see live download progress during the one-time fetch."}},{"@type":"Question","name":"How accurate is the transcription?","acceptedAnswer":{"@type":"Answer","text":"The built-in model is fast and lightweight, so it handles clear speech well but can struggle with heavy accents, background noise, music, or several people talking at once. Always review the transcript before publishing scripts or captions."}},{"@type":"Question","name":"How long can my audio or video be?","acceptedAnswer":{"@type":"Answer","text":"Best results come from files under about 10 minutes. Longer files need more memory and can crash mobile browsers — files over 20 minutes are refused, and very long files may fail with an out-of-memory message. Split long recordings into shorter clips for best results."}},{"@type":"Question","name":"Can I use it offline?","acceptedAnswer":{"@type":"Answer","text":"Not fully — the page and the speech model load from the internet. But once the model is cached, repeat transcriptions do not re-download it, and your files are processed locally either way."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Video & Audio","item":"https://mohit99mj.github.io/Quicktools/#cat-video-audio"},{"@type":"ListItem","position":3,"name":"Audio to Text","item":"https://mohit99mj.github.io/Quicktools/tools/audio-transcribe/"}]}</script>
+<script>
+    (function(){
+      'use strict';
+      /* ---- Pure audio utilities (dependency-free; also unit-tested in Node). ---- */
+      /* PURE-UTILS-START */
+      function at_formatTimestamp(totalSeconds){
+        if(!isFinite(totalSeconds) || totalSeconds < 0){ totalSeconds = 0; }
+        var s = Math.floor(totalSeconds);
+        var m = Math.floor(s / 60);
+        var sec = s % 60;
+        return (m < 10 ? '0' + m : '' + m) + ':' + (sec < 10 ? '0' + sec : '' + sec);
+      }
+      function at_mixdownMono(channels){
+        if(!channels || channels.length === 0){ return new Float32Array(0); }
+        var len = channels[0].length;
+        var out = new Float32Array(len);
+        var n = channels.length;
+        for(var i = 0; i < len; i++){
+          var sum = 0;
+          for(var c = 0; c < n; c++){ sum += channels[c][i]; }
+          out[i] = sum / n;
+        }
+        return out;
+      }
+      function at_resampleLinear(samples, sourceRate, targetRate){
+        if(!samples || samples.length === 0){ return new Float32Array(0); }
+        if(sourceRate === targetRate){ return samples.slice(); }
+        var ratio = sourceRate / targetRate;
+        var outLen = Math.floor(samples.length / ratio);
+        var out = new Float32Array(outLen);
+        for(var i = 0; i < outLen; i++){
+          var pos = i * ratio;
+          var i0 = Math.floor(pos);
+          var frac = pos - i0;
+          var a = samples[i0];
+          var b = (i0 + 1 < samples.length) ? samples[i0 + 1] : a;
+          out[i] = a + (b - a) * frac;
+        }
+        return out;
+      }
+      function at_chunkAudio(samples, sampleRate, chunkSeconds){
+        var chunkLen = Math.max(1, Math.floor(chunkSeconds * sampleRate));
+        var chunks = [];
+        for(var start = 0; start < samples.length; start += chunkLen){
+          var end = Math.min(start + chunkLen, samples.length);
+          chunks.push({ startSec: start / sampleRate, samples: samples.slice(start, end) });
+        }
+        return chunks;
+      }
+      function at_countWords(text){
+        var t = (text || '').trim();
+        if(!t){ return 0; }
+        return t.split(/\s+/).length;
+      }
+      /* PURE-UTILS-END */
+
+      function $(id){ return document.getElementById(id); }
+      function setStatus(msg, isError){
+        var el = $('at-status');
+        if(!el){ return; }
+        el.textContent = msg || '';
+        el.className = isError ? 'result error' : 'result';
+      }
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
+      function fmtSize(bytes){
+        if(bytes < 1024){ return bytes + ' B'; }
+        var kb = bytes / 1024;
+        if(kb < 1024){ return kb.toFixed(1) + ' KB'; }
+        return (kb / 1024).toFixed(2) + ' MB';
+      }
+
+      var TRANSF_URL = 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2/+esm';
+      var MODEL_ID = 'Xenova/whisper-tiny';
+      var TARGET_RATE = 16000;
+      var CHUNK_SEC = 30;
+      var MAX_SECONDS = 20 * 60;
+      var WARN_SECONDS = 10 * 60;
+
+      var file = null;
+      var transcriberPromise = null;
+      var lastResult = null;
+
+      var drop = $('at-drop'), input = $('at-file'), browse = $('at-browse');
+      var goBtn = $('at-go'), progress = $('at-progress');
+
+      function stage(pct, msg){
+        if(progress){ progress.hidden = false; progress.value = pct; }
+        pUpd(pct, msg);
+        setStatus(msg);
+      }
+
+      function selectFile(f){
+        if(!f){ return; }
+        var t = (f.type || '').toLowerCase();
+        var name = f.name || '';
+        var okType = /^(audio|video)\//.test(t) || /\.(mp3|wav|m4a|aac|ogg|oga|opus|flac|mp4|m4v|webm|mov|mkv)$/i.test(name);
+        if(!okType){
+          setStatus('That doesn\u2019t look like an audio or video file. Please choose an MP3, WAV, MP4 or similar file.', true);
+          return;
+        }
+        file = f;
+        if(goBtn){ goBtn.disabled = false; }
+        var fi = $('at-fileinfo');
+        if(fi){ fi.hidden = false; }
+        var fn = $('at-filename');
+        if(fn){ fn.textContent = f.name; fn.title = f.name; }
+        var fs = $('at-filesize');
+        if(fs){ fs.textContent = fmtSize(f.size); }
+        hideOutput();
+        setStatus('\u201C' + f.name + '\u201D is ready. Click Transcribe to start.');
+      }
+
+      if(drop && input){
+        drop.addEventListener('click', function(e){
+          if(e.target === input){ return; }
+          input.click();
+        });
+        drop.addEventListener('keydown', function(e){
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault();
+            input.click();
+          }
+        });
+        drop.addEventListener('dragover', function(e){
+          e.preventDefault();
+          drop.classList.add('drag-over');
+        });
+        drop.addEventListener('dragleave', function(){
+          drop.classList.remove('drag-over');
+        });
+        drop.addEventListener('drop', function(e){
+          e.preventDefault();
+          drop.classList.remove('drag-over');
+          if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length){
+            selectFile(e.dataTransfer.files[0]);
+          }
+        });
+        input.addEventListener('change', function(){
+          if(input.files && input.files.length){ selectFile(input.files[0]); }
+          input.value = '';
+        });
+      }
+      if(browse && input){
+        browse.addEventListener('click', function(e){
+          e.stopPropagation();
+          input.click();
+        });
+      }
+
+      function friendlyError(err){
+        var m = (err && err.message) || '';
+        switch(m){
+          case 'read-fail': return 'Could not read the file — it may be damaged. Try choosing it again.';
+          case 'unsupported-browser': return 'Your browser can\u2019t decode audio here. Please use a recent version of Chrome, Edge, Firefox or Safari.';
+          case 'no-audio': return 'This file has no audio track to transcribe — it may be a silent video or an unsupported/damaged file. Try a file with sound, or convert it to MP3 or WAV first.';
+          case 'silent': return 'The audio track is silent — there is nothing to transcribe. Check the file and try another one.';
+          case 'too-long': return 'This file is longer than 20 minutes — split it into shorter clips and transcribe them one at a time.';
+          case 'engine-fail': return 'Speech engine failed to load — check connection and reload.';
+          case 'model-fail': return 'Could not download the speech model — check your internet connection and try again.';
+          case 'no-speech': return 'No speech was detected in this audio. Try a clearer recording with less background noise.';
+          case 'transcribe-fail': return 'Transcription failed partway through — try a shorter file, or reload the page and try again.';
+          case 'oom': return 'The transcription ran out of memory — try a shorter file (under 10 minutes).';
+          default:
+            if(/memory|allocation/i.test(m)){ return 'The transcription ran out of memory — try a shorter file (under 10 minutes).'; }
+            return 'The transcription hit an unexpected error' + (m ? ' (' + m + ')' : '') + ' — reload the page and try again with a shorter, clearer file.';
+        }
+      }
+
+      async function decodeTo16kMono(buf){
+        var AC = window.AudioContext || window.webkitAudioContext;
+        if(!AC){ throw new Error('unsupported-browser'); }
+        var actx = new AC();
+        var audioBuf = null;
+        try {
+          audioBuf = await actx.decodeAudioData(buf);
+        } catch(de){
+          audioBuf = null;
+        }
+        try { if(actx.close){ await actx.close(); } } catch(e){}
+        if(!audioBuf || audioBuf.numberOfChannels < 1 || audioBuf.length < 8){
+          throw new Error('no-audio');
+        }
+        var channels = [];
+        for(var c = 0; c < audioBuf.numberOfChannels; c++){
+          channels.push(audioBuf.getChannelData(c));
+        }
+        var pcm = at_resampleLinear(at_mixdownMono(channels), audioBuf.sampleRate, TARGET_RATE);
+        var peak = 0;
+        for(var i = 0; i < pcm.length; i += 4){
+          var a = pcm[i] < 0 ? -pcm[i] : pcm[i];
+          if(a > peak){ peak = a; }
+        }
+        if(peak < 0.0005){ throw new Error('silent'); }
+        return { pcm: pcm, duration: audioBuf.duration };
+      }
+
+      var dlFiles = {};
+      function onModelProgress(d){
+        if(!d){ return; }
+        if(d.status === 'progress'){
+          if(d.file){ dlFiles[d.file] = { loaded: d.loaded || 0, total: d.total || 0 }; }
+          var loaded = 0, total = 0, k;
+          for(k in dlFiles){
+            if(Object.prototype.hasOwnProperty.call(dlFiles, k)){
+              loaded += dlFiles[k].loaded;
+              total += dlFiles[k].total;
+            }
+          }
+          if(total > 0){
+            var dpct = Math.min(99, Math.round((loaded / total) * 100));
+            stage(15 + Math.round(dpct * 0.45), 'Downloading speech model (~40MB, one-time)… ' + dpct + '%');
+          } else {
+            stage(18, 'Downloading speech model (~40MB, one-time)…');
+          }
+        } else if(d.status === 'initiate'){
+          stage(16, 'Downloading speech model (~40MB, one-time)…');
+        } else if(d.status === 'ready'){
+          stage(60, 'Speech engine ready — transcribing…');
+        }
+      }
+
+      function loadTranscriber(){
+        if(!transcriberPromise){
+          transcriberPromise = (async function(){
+            var mod;
+            try {
+              mod = await import(TRANSF_URL);
+            } catch(e){
+              throw new Error('engine-fail');
+            }
+            try {
+              return await mod.pipeline('automatic-speech-recognition', MODEL_ID, {
+                progress_callback: onModelProgress
+              });
+            } catch(e){
+              throw new Error('model-fail');
+            }
+          })();
+        }
+        return transcriberPromise;
+      }
+
+      function transcriptText(res){
+        return res.segments.map(function(sg){
+          return '[' + at_formatTimestamp(sg.start) + '] ' + sg.text;
+        }).join('\n');
+      }
+
+      function renderResult(res){
+        var wrap = $('at-output'), box = $('at-transcript'), wEl = $('at-words');
+        if(!wrap || !box){ return; }
+        box.textContent = '';
+        res.segments.forEach(function(sg){
+          var row = document.createElement('div');
+          row.className = 'at-seg';
+          var ts = document.createElement('span');
+          ts.className = 'at-ts';
+          ts.textContent = '[' + at_formatTimestamp(sg.start) + ']';
+          var tx = document.createElement('p');
+          tx.textContent = sg.text;
+          row.appendChild(ts);
+          row.appendChild(tx);
+          box.appendChild(row);
+        });
+        if(wEl){ wEl.textContent = res.words + (res.words === 1 ? ' word' : ' words'); }
+        wrap.hidden = false;
+      }
+
+      function hideOutput(){
+        var wrap = $('at-output');
+        if(wrap){ wrap.hidden = true; }
+        lastResult = null;
+      }
+
+      if(goBtn){
+        goBtn.addEventListener('click', function(){
+          if(!file){ return; }
+          goBtn.disabled = true;
+          hideOutput();
+          pShow({ title: 'Transcribing audio…', stage: 'Reading your file…', percent: 2 });
+          stage(2, 'Reading your file…');
+          (async function(){
+            try{
+              var raw;
+              try {
+                raw = await file.arrayBuffer();
+              } catch(re){
+                throw new Error('read-fail');
+              }
+              stage(8, 'Decoding audio…');
+              var decoded = await decodeTo16kMono(raw);
+              if(decoded.duration > MAX_SECONDS){ throw new Error('too-long'); }
+              if(decoded.duration > WARN_SECONDS){
+                setStatus('Note: this file is over 10 minutes long — transcription may be slow or run out of memory on some devices. Continuing…');
+              }
+              stage(12, 'Preparing audio…');
+              var chunks = at_chunkAudio(decoded.pcm, TARGET_RATE, CHUNK_SEC);
+              if(!chunks.length){ throw new Error('no-audio'); }
+              stage(14, 'Loading speech engine…');
+              var transcriber = await loadTranscriber();
+              stage(60, 'Speech engine ready — transcribing…');
+              var segments = [];
+              var totalWords = 0;
+              for(var i = 0; i < chunks.length; i++){
+                var segLabel = 'Transcribing segment ' + (i + 1) + ' of ' + chunks.length + '…';
+                stage(60 + Math.round(40 * (i / chunks.length)), segLabel);
+                var out;
+                try {
+                  out = await transcriber(chunks[i].samples, { sampling_rate: TARGET_RATE, return_timestamps: true });
+                } catch(te){
+                  var tm = (te && te.message) || '';
+                  if(/memory|allocation|RangeError/i.test(tm)){ throw new Error('oom'); }
+                  throw new Error('transcribe-fail');
+                }
+                var offset = chunks[i].startSec;
+                var chs = (out && out.chunks) ? out.chunks : [];
+                for(var j = 0; j < chs.length; j++){
+                  var ts = chs[j].timestamp || [0, 0];
+                  var txt = ((chs[j].text) || '').trim();
+                  if(!txt){ continue; }
+                  segments.push({ start: offset + (ts[0] || 0), text: txt });
+                  totalWords += at_countWords(txt);
+                }
+              }
+              stage(100, 'Finishing…');
+              if(!segments.length){ throw new Error('no-speech'); }
+              lastResult = { name: file.name, segments: segments, words: totalWords };
+              renderResult(lastResult);
+              pSum($('at-status'), '<strong>Done</strong> — ' + segments.length + ' segments • ' + totalWords + ' words');
+              pHide();
+              setStatus('Done — transcript ready (' + segments.length + ' segments, ' + totalWords + ' words).');
+            } catch(err){
+              pHide();
+              if(err && (err.message === 'engine-fail' || err.message === 'model-fail')){ transcriberPromise = null; }
+              setStatus(friendlyError(err), true);
+            }
+            pHide();
+            goBtn.disabled = false;
+            if(progress){ progress.hidden = true; }
+          })();
+        });
+      }
+
+      var copyBtn = $('at-copy');
+      if(copyBtn){
+        copyBtn.addEventListener('click', function(){
+          if(!lastResult){ return; }
+          var text = transcriptText(lastResult);
+          function doneOk(){ setStatus('Transcript copied to clipboard.'); }
+          function doneFail(){ setStatus('Could not copy automatically — select the transcript text and copy it manually.', true); }
+          if(navigator.clipboard && navigator.clipboard.writeText){
+            navigator.clipboard.writeText(text).then(doneOk, doneFail);
+          } else {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { if(document.execCommand('copy')){ doneOk(); } else { doneFail(); } }
+            catch(e){ doneFail(); }
+            ta.remove();
+          }
+        });
+      }
+
+      var dlBtn = $('at-download');
+      if(dlBtn){
+        dlBtn.addEventListener('click', function(){
+          if(!lastResult){ return; }
+          var base = ((lastResult.name || 'audio').replace(/\.[^.]*$/, '')) || 'audio';
+          var blob = new Blob(['Transcript of ' + (lastResult.name || 'audio') + '\nGenerated by QuickTools Audio to Text\n\n' + transcriptText(lastResult) + '\n'], { type: 'text/plain;charset=utf-8' });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = base + '-transcript.txt';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          setTimeout(function(){ URL.revokeObjectURL(url); }, 10000);
+          setStatus('Transcript downloaded as ' + base + '-transcript.txt.');
+        });
+      }
+    })();
+</script>
+</body>
+</html>

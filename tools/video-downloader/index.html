@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video &amp; Audio Downloader — Download Videos &amp; MP3 Free</title>
+<meta name="description" content="Free online video and audio downloader. Download videos as MP4 or extract MP3 audio from YouTube links and direct video URLs. No sign-up, works in your browser.">
+<meta name="keywords" content="video downloader, youtube video downloader, mp3 downloader, download video online, audio downloader, mp4 downloader, youtube to mp3">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/video-downloader/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Video &amp; Audio Downloader — Download Videos &amp; MP3 Free">
+<meta property="og:description" content="Free online video and audio downloader. Download videos as MP4 or extract MP3 audio from YouTube links and direct video URLs. No sign-up, works in your browser.">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/video-downloader/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Video &amp; Audio Downloader — Download Videos &amp; MP3 Free">
+<meta name="twitter:description" content="Free online video and audio downloader. Download videos as MP4 or extract MP3 audio from YouTube links and direct video URLs. No sign-up, works in your browser.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
+<style>
+.tool-video-downloader .vd-mode{display:flex;gap:8px;margin-bottom:1rem;}
+.tool-video-downloader .vd-mode-btn{flex:1;min-height:48px;padding:.625rem 1rem;border-radius:var(--radius-sm);border:2px solid var(--line);background:var(--bg);color:var(--ink);font-weight:700;font-size:1rem;cursor:pointer;transition:border-color .15s ease,background-color .15s ease,color .15s ease,transform .15s ease;}
+.tool-video-downloader .vd-mode-btn[aria-pressed="true"]{border-color:var(--accent);background:var(--accent);color:var(--accent-ink);}
+.tool-video-downloader .vd-mode-btn:active{transform:scale(.98);}
+.tool-video-downloader .vd-status{min-height:1.75em;font-weight:600;color:var(--ink);margin:.75rem 0 0;animation:vd-fade .25s ease;}
+.tool-video-downloader .vd-status.vd-error{color:var(--danger);}
+.tool-video-downloader .vd-status.vd-ok{color:var(--accent-strong);}
+.tool-video-downloader .vd-results{display:flex;flex-direction:column;gap:8px;margin-top:.75rem;}
+.tool-video-downloader .vd-results .btn{min-height:48px;justify-content:flex-start;}
+.tool-video-downloader .vd-note{font-size:.875rem;color:var(--muted);margin-top:.75rem;}
+@keyframes vd-fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+@media (prefers-reduced-motion: reduce){
+  .tool-video-downloader .vd-status{animation:none;}
+  .tool-video-downloader .vd-mode-btn{transition:none;}
+}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li aria-current="page">Video &amp; Audio Downloader</li></ol></nav>
+<h1>Video &amp; Audio Downloader</h1>
+<div class="tool-body-intro">
+<p>Paste a video link — YouTube, a direct .mp4/.mp3 file, and more — and download it as video or extract the audio as MP3. Free, no sign-up, no watermark.</p>
+<p class="privacy-note">Aapka link teesri-party download services ko bheja jata hai; hamare paas koi server nahi hai. (Your link is sent to third-party download services to resolve it — we run no servers of our own, and nothing is stored.)</p>
+</div>
+<section class="tool-section tool-video-downloader" aria-label="Video and Audio Downloader">
+    <div class="card tool-panel">
+      <div class="field">
+        <label class="label" for="vd-url">Video link</label>
+        <input class="input" id="vd-url" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="Paste a YouTube or video link… e.g. https://youtu.be/…" aria-describedby="vd-hint">
+        <p class="vd-note" id="vd-hint">YouTube (watch, youtu.be, Shorts, embed), direct .mp4 / .mp3 / .webm / .m4a links, and many other sites.</p>
+      </div>
+      <div class="field">
+        <span class="label" id="vd-mode-label">Download as</span>
+        <div class="vd-mode" id="vd-mode" role="group" aria-labelledby="vd-mode-label">
+          <button type="button" class="vd-mode-btn" data-mode="video" aria-pressed="true">Best video</button>
+          <button type="button" class="vd-mode-btn" data-mode="audio" aria-pressed="false">Audio MP3</button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary btn-block" id="vd-download">Download</button>
+      <p class="vd-status" id="vd-status" role="status" aria-live="polite"></p>
+      <div class="vd-results" id="vd-results"></div>
+    </div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Paste the video link into the box above.</li>
+<li>Choose <strong>Best video</strong> for MP4 video or <strong>Audio MP3</strong> for sound only.</li>
+<li>Tap <strong>Download</strong> and watch the live status — the tool tries several free download services one by one until one responds.</li>
+<li>When the file is ready it saves straight to your device. If your browser opens it in a new tab instead, long-press the video and choose Save.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Is this video downloader really free?</summary><div class="faq-a"><p>Yes — no sign-up, no watermark, no limits from our side. The actual downloading is done by free third-party services; we just connect you to them from your browser.</p></div></details>
+<details><summary>Which sites are supported?</summary><div class="faq-a"><p>YouTube links (watch, youtu.be, Shorts, embed) work best because we try several fallback services. Direct file links ending in .mp4, .mp3, .webm or .m4a always work. Instagram, TikTok, X and Facebook links sometimes work through one of the services, but support is unreliable.</p></div></details>
+<details><summary>Why did I get "all download services are busy"?</summary><div class="faq-a"><p>The services this tool relies on are free and run by volunteers, so they go up and down. If every service fails, wait a few minutes and try again — a different service may be online by then.</p></div></details>
+<details><summary>Do you store my links or the videos?</summary><div class="faq-a"><p>No. We run no servers of our own. Your link is sent to third-party download services to resolve it, and nothing is stored by us.</p></div></details>
+<details><summary>Is it legal to download videos?</summary><div class="faq-a"><p>Only download videos you own, have permission for, or that are explicitly free to download (for example Creative Commons). Respect copyright law and each site's terms of service.</p></div></details>
+<details><summary>Why did the video open in a new tab instead of downloading?</summary><div class="faq-a"><p>Some file hosts block direct saving from other websites (a browser security rule called CORS). When that happens we open the file in a new tab instead — long-press the video (or right-click on desktop) and choose Save to keep it.</p></div></details>
+<details><summary>Why can't it download private, login-walled or age-restricted videos?</summary><div class="faq-a"><p>The free services can't see videos that need a login or age check, and YouTube actively blocks download tools, so those videos fail. Public videos work best.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../video-compressor/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#video"></use></svg><span class="tl-name">Video Compressor</span><span class="tl-desc">Video &amp; Audio</span></a>
+<a class="tool-card" href="../mp4-to-mp3/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#music"></use></svg><span class="tl-name">MP4 to MP3</span><span class="tl-desc">Video &amp; Audio</span></a>
+<a class="tool-card" href="../audio-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#music"></use></svg><span class="tl-name">Audio Converter</span><span class="tl-desc">Video &amp; Audio</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script src="logic.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Video & Audio Downloader","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","url":"https://mohit99mj.github.io/Quicktools/tools/video-downloader/","description":"Free online video and audio downloader. Download videos as MP4 or extract MP3 audio from YouTube links and direct video URLs. No sign-up, works in your browser.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this video downloader really free?","acceptedAnswer":{"@type":"Answer","text":"Yes — no sign-up, no watermark, no limits from our side. The actual downloading is done by free third-party services; we just connect you to them from your browser."}},{"@type":"Question","name":"Which sites are supported?","acceptedAnswer":{"@type":"Answer","text":"YouTube links (watch, youtu.be, Shorts, embed) work best because we try several fallback services. Direct file links ending in .mp4, .mp3, .webm or .m4a always work. Instagram, TikTok, X and Facebook links sometimes work through one of the services, but support is unreliable."}},{"@type":"Question","name":"Why did I get \"all download services are busy\"?","acceptedAnswer":{"@type":"Answer","text":"The services this tool relies on are free and run by volunteers, so they go up and down. If every service fails, wait a few minutes and try again — a different service may be online by then."}},{"@type":"Question","name":"Do you store my links or the videos?","acceptedAnswer":{"@type":"Answer","text":"No. We run no servers of our own. Your link is sent to third-party download services to resolve it, and nothing is stored by us."}},{"@type":"Question","name":"Is it legal to download videos?","acceptedAnswer":{"@type":"Answer","text":"Only download videos you own, have permission for, or that are explicitly free to download (for example Creative Commons). Respect copyright law and each site's terms of service."}},{"@type":"Question","name":"Why did the video open in a new tab instead of downloading?","acceptedAnswer":{"@type":"Answer","text":"Some file hosts block direct saving from other websites (a browser security rule called CORS). When that happens we open the file in a new tab instead — long-press the video (or right-click on desktop) and choose Save to keep it."}},{"@type":"Question","name":"Why can't it download private, login-walled or age-restricted videos?","acceptedAnswer":{"@type":"Answer","text":"The free services can't see videos that need a login or age check, and YouTube actively blocks download tools, so those videos fail. Public videos work best."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Video & Audio","item":"https://mohit99mj.github.io/Quicktools/#cat-video-audio"},{"@type":"ListItem","position":3,"name":"Video & Audio Downloader","item":"https://mohit99mj.github.io/Quicktools/tools/video-downloader/"}]}</script>
+<script>
+(function(){
+  'use strict';
+  /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+  function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+  function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+  function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+  function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
+
+  function $(id){ return document.getElementById(id); }
+  var L = window.VDLogic;
+  var urlEl = $('vd-url'), modeWrap = $('vd-mode'), btn = $('vd-download'),
+      statusEl = $('vd-status'), resultsEl = $('vd-results');
+  if(!urlEl || !btn || !statusEl || !resultsEl){ return; }
+
+  var mode = 'video';
+  var running = false;
+  var cooldowns = L ? L.makeCooldownStore() : null;
+
+  function esc(s){
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+  function setStage(text, cls){
+    statusEl.textContent = text;
+    statusEl.className = 'vd-status' + (cls ? ' ' + cls : '');
+  }
+  function clearResults(){ resultsEl.innerHTML = ''; }
+  function fail(msg){
+    setStage(msg, 'vd-error');
+    pHide();
+  }
+  function okSummary(html){
+    pSum(statusEl, html);
+    setStage('Ho gaya! (Done!)', 'vd-ok');
+  }
+  function safeHost(u){
+    try { return new URL(u).hostname; } catch(e){ return 'service'; }
+  }
+  function fmtBytes(n){
+    if(!n || n <= 0){ return ''; }
+    var u = ['B','KB','MB','GB'], i = 0;
+    while(n >= 1024 && i < u.length - 1){ n /= 1024; i++; }
+    return (Math.round(n * 10) / 10) + ' ' + u[i];
+  }
+  function guessName(url, fallback){
+    try {
+      var p = new URL(url).pathname.split('/').filter(Boolean).pop() || '';
+      p = decodeURIComponent(p);
+      if(p && p.indexOf('.') > 0){ return p; }
+    } catch(e){}
+    return fallback;
+  }
+  function isHttp(u){ return /^https?:\/\//i.test(String(u || '')); }
+
+  /* Save a same-origin/cors blob via the MANDATORY blob step:
+   * cross-origin `download` attributes are ignored by browsers. */
+  function triggerSave(blob, filename){
+    var obj = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = obj;
+    a.download = filename || 'download';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(function(){ try{ URL.revokeObjectURL(obj); }catch(e){} }, 60000);
+  }
+
+  function fetchToBlob(url, filename, onProgress){
+    return fetch(url, { mode: 'cors', credentials: 'omit' }).then(function(res){
+      if(!res || !res.ok){ throw new Error('HTTP ' + (res && res.status)); }
+      var total = parseInt(res.headers.get('content-length') || '0', 10) || 0;
+      if(!res.body || typeof res.body.getReader !== 'function'){
+        return res.blob().then(function(b){
+          triggerSave(b, filename);
+          if(onProgress){ onProgress(100); }
+          return b.size;
+        });
+      }
+      var reader = res.body.getReader(), chunks = [], received = 0;
+      function pump(){
+        return reader.read().then(function(r){
+          if(r.done){
+            var blob = new Blob(chunks);
+            triggerSave(blob, filename);
+            if(onProgress){ onProgress(100); }
+            return blob.size;
+          }
+          chunks.push(r.value);
+          received += r.value.length;
+          if(total && onProgress){ onProgress(Math.round(received / total * 100)); }
+          return pump();
+        });
+      }
+      return pump();
+    });
+  }
+
+  function openInNewTab(url){
+    if(!isHttp(url)){ fail('Service ne galat link diya — dobara try karo. (The service returned an invalid link — try again.)'); return; }
+    var w = null;
+    try { w = window.open(url, '_blank', 'noopener'); } catch(e){ w = null; }
+    if(w){
+      okSummary('Browser ne file seedha khol di — save karne ke liye video par <strong>long-press</strong> karo aur Save chuno. (The browser opened the file directly — long-press the video and choose Save.)');
+    } else {
+      fail('Popup block ho gaya. Is link ko naye tab me kholo: ' + url + ' (Popup blocked — open this link in a new tab manually.)');
+    }
+  }
+
+  function stageUpdater(title){
+    return function(i, n, host){
+      var t = 'Contacting service ' + i + ' of ' + n + ' — ' + safeHost(host) + '…';
+      setStage(t);
+      pShow({ title: title, stage: t });
+    };
+  }
+
+  function attemptStreamDownload(url, label, baseName){
+    setStage('Video mil gaya — downloading… (Found it — downloading…)');
+    pShow({ title: 'Downloading', stage: 'Starting…', percent: 0 });
+    var name = guessName(url, baseName);
+    return fetchToBlob(url, name, function(p){
+      var t = 'Downloading… ' + p + '%';
+      setStage(t);
+      pUpd(p, t);
+    }).then(function(size){
+      pHide();
+      okSummary('Download shuru ho gaya ✓' + (label ? ' • ' + esc(label) : '') + (size ? ' • ' + esc(fmtBytes(size)) : ''));
+    }).catch(function(){
+      /* Media host refused the fetch (usually CORS) — degrade honestly. */
+      pHide();
+      openInNewTab(url);
+    });
+  }
+
+  function handleServiceResult(res, pageLabel){
+    if(res.kind === 'redirect'){
+      setStage('Service ne seedha link diya — khol rahe hain… (Opening the direct link…)');
+      openInNewTab(res.url);
+      return Promise.resolve();
+    }
+    if(res.kind === 'picker'){
+      setStage('Kai options mile — ek chuno: (Multiple options found — pick one:)');
+      pHide();
+      clearResults();
+      res.items.forEach(function(it, idx){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'btn btn-ghost btn-block';
+        b.textContent = (idx + 1) + '. ' + (it.label || 'Download option');
+        b.addEventListener('click', function(){
+          var btns = resultsEl.querySelectorAll('button');
+          for(var k = 0; k < btns.length; k++){ btns[k].disabled = true; }
+          attemptStreamDownload(it.url, it.label, pageLabel).then(function(){
+            for(var k = 0; k < btns.length; k++){ btns[k].disabled = false; }
+          });
+        });
+        resultsEl.appendChild(b);
+      });
+      return Promise.resolve();
+    }
+    /* tunnel / stream */
+    return attemptStreamDownload(res.url, res.label, res.filename || pageLabel);
+  }
+
+  function handleDirect(raw){
+    setStage('File se sampark ho raha hai… (Contacting the file…)');
+    pShow({ title: 'Downloading', stage: 'Connecting…', percent: 0 });
+    var name = guessName(raw, 'video.mp4');
+    return fetchToBlob(raw, name, function(p){
+      var t = 'Downloading… ' + p + '%';
+      setStage(t);
+      pUpd(p, t);
+    }).then(function(size){
+      pHide();
+      okSummary('Download shuru ho gaya ✓' + (size ? ' • ' + esc(fmtBytes(size)) : ''));
+    }).catch(function(){
+      pHide();
+      openInNewTab(raw);
+    });
+  }
+
+  function handleYouTube(raw){
+    var id = L.extractYouTubeId(raw);
+    setStage('Video ID mil gaya — service se sampark ho raha hai… (Looking for a download service…)');
+    pShow({ title: 'Finding download link', stage: 'Contacting service…' });
+    var onStage = stageUpdater('Finding download link');
+    return L.cobaltLayer(fetch, raw, mode, { cooldowns: cooldowns, onStage: onStage })
+      .then(function(res){
+        if(res){ return handleServiceResult(res, mode === 'audio' ? 'audio.mp3' : 'video.mp4'); }
+        setStage('Cobalt services busy hain — Piped try kar rahe hain… (Trying Piped…)');
+        return L.pipedLayer(fetch, id, mode, { cooldowns: cooldowns, onStage: onStage });
+      })
+      .then(function(res){
+        if(res === undefined){ return; } /* already handled above */
+        if(res){ return handleServiceResult(res, mode === 'audio' ? 'audio.mp3' : 'video.mp4'); }
+        setStage('Piped bhi down hai — Invidious try kar rahe hain… (Trying Invidious…)');
+        return L.invidiousLayer(fetch, id, mode, { cooldowns: cooldowns, onStage: onStage });
+      })
+      .then(function(res){
+        if(res === undefined){ return; }
+        if(res){ return handleServiceResult(res, mode === 'audio' ? 'audio.mp3' : 'video.mp4'); }
+        fail('Saari download services abhi busy hain — kuch der baad try karo. (All download services are busy right now — please try again in a while.)');
+      });
+  }
+
+  function handleOther(raw){
+    setStage('Service se sampark ho raha hai… (Contacting download service…)');
+    pShow({ title: 'Finding download link', stage: 'Contacting service…' });
+    return L.cobaltLayer(fetch, raw, mode, { cooldowns: cooldowns, onStage: stageUpdater('Finding download link') })
+      .then(function(res){
+        if(res){ return handleServiceResult(res, mode === 'audio' ? 'audio.mp3' : 'video.mp4'); }
+        fail("This site isn't supported right now — try a direct video link. (Ye site abhi support nahi hoti — direct video link try karo.)");
+      });
+  }
+
+  function runDownload(){
+    if(running){ return Promise.resolve(); }
+    if(!L){
+      fail('Tool load nahi hua — page refresh karo. (The tool failed to load — refresh the page.)');
+      return Promise.resolve();
+    }
+    var raw = urlEl.value.trim();
+    clearResults();
+    if(!raw){
+      fail('Pehle ek video link paste karo. (Paste a video link first.)');
+      return Promise.resolve();
+    }
+    if(!isHttp(withSchemeLoose(raw))){
+      fail('Ye link sahi nahi lag raha — poora URL paste karo. (That doesn\'t look like a valid link — paste the full URL.)');
+      return Promise.resolve();
+    }
+    var kind = L.classifyUrl(raw);
+    running = true;
+    btn.disabled = true;
+    setStage('Shuru kar rahe hain… (Starting…)');
+    var done = function(){
+      running = false;
+      btn.disabled = false;
+      pHide();
+    };
+    var p;
+    try {
+      if(kind === 'direct'){ p = handleDirect(raw); }
+      else if(kind === 'youtube'){ p = handleYouTube(raw); }
+      else { p = handleOther(raw); }
+    } catch(e){
+      done();
+      fail('Kuch galat ho gaya — dobara try karo. (Something went wrong — try again.)');
+      return Promise.resolve();
+    }
+    return Promise.resolve(p).then(done, function(){
+      done();
+      fail('Kuch galat ho gaya — dobara try karo. (Something went wrong — try again.)');
+    });
+  }
+
+  function withSchemeLoose(s){
+    s = String(s || '').trim();
+    if(/^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(s) || s.indexOf('//') === 0){ return s; }
+    return 'https://' + s;
+  }
+
+  modeWrap.addEventListener('click', function(e){
+    var b = e.target.closest ? e.target.closest('[data-mode]') : null;
+    if(!b){ return; }
+    mode = b.getAttribute('data-mode') === 'audio' ? 'audio' : 'video';
+    var btns = modeWrap.querySelectorAll('[data-mode]');
+    for(var i = 0; i < btns.length; i++){
+      btns[i].setAttribute('aria-pressed', btns[i] === b ? 'true' : 'false');
+    }
+  });
+
+  btn.addEventListener('click', runDownload);
+  urlEl.addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){ e.preventDefault(); runDownload(); }
+  });
+
+  /* Test hook (used by jsdom tests; harmless in production). */
+  window.__vd = { run: runDownload, logic: L, setMode: function(m){ mode = (m === 'audio' ? 'audio' : 'video'); } };
+})();
+</script>
+</body>
+</html>

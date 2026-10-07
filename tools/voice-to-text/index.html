@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voice to Text — Free Speech to Text Converter</title>
+<meta name="description" content="Dictate instead of type: free voice to text converter with live transcription in Hindi and English. Works in your browser — no sign-up, no uploads.">
+<meta name="keywords" content="voice to text, speech to text, voice typing, dictate text, hindi voice typing, speech recognition online">
+<link rel="canonical" href="https://mohit99mj.github.io/Quicktools/tools/voice-to-text/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Voice to Text — Free Speech to Text Converter">
+<meta property="og:description" content="Dictate instead of type: free voice to text converter with live transcription in Hindi and English. Works in your browser — no sign-up, no uploads.">
+<meta property="og:url" content="https://mohit99mj.github.io/Quicktools/tools/voice-to-text/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Voice to Text — Free Speech to Text Converter">
+<meta name="twitter:description" content="Dictate instead of type: free voice to text converter with live transcription in Hindi and English. Works in your browser — no sign-up, no uploads.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/main.css">
+<link rel="stylesheet" href="../../assets/css/progress.css">
+<link rel="stylesheet" href="../../assets/css/motion.css">
+<style>
+.tool-voice-text .vt-mic-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;margin:1.25rem 0 .5rem;}
+.tool-voice-text .vt-mic{position:relative;width:104px;height:104px;border-radius:50%;border:none;background:var(--accent);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;box-shadow:0 8px 24px rgba(13,110,95,.30);transition:transform .18s ease,background-color .18s ease;touch-action:manipulation;}
+.tool-voice-text .vt-mic .icon{width:34px;height:34px;}
+.tool-voice-text .vt-mic .vt-mic-label{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;}
+.tool-voice-text .vt-mic:hover{background:var(--accent-strong);}
+.tool-voice-text .vt-mic:active{transform:scale(.96);}
+.tool-voice-text .vt-mic[aria-pressed="true"]{background:var(--danger);}
+.tool-voice-text .vt-mic.recording::before{content:"";position:absolute;inset:-3px;border-radius:50%;border:3px solid var(--danger);opacity:.85;animation:vt-pulse 1.6s ease-out infinite;pointer-events:none;}
+@keyframes vt-pulse{0%{transform:scale(1);opacity:.85;}70%{transform:scale(1.38);opacity:0;}100%{transform:scale(1.38);opacity:0;}}
+@media (prefers-reduced-motion: reduce){.tool-voice-text .vt-mic.recording::before{animation:none;opacity:0;}}
+.tool-voice-text .vt-status{min-height:1.5em;margin:0;color:var(--muted);font-weight:600;text-align:center;}
+.tool-voice-text .vt-output{min-height:160px;max-height:340px;overflow-y:auto;border:1px solid var(--line);border-radius:var(--radius-sm);padding:.75rem;background:var(--surface);font-size:1rem;line-height:1.65;white-space:pre-wrap;word-wrap:break-word;}
+.tool-voice-text .vt-interim{color:var(--muted);}
+.tool-voice-text .vt-placeholder{color:var(--muted);}
+.tool-voice-text .vt-meta{display:flex;align-items:center;gap:12px;margin-top:.5rem;color:var(--muted);font-size:.9375rem;}
+.tool-voice-text .vt-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:.75rem;}
+.tool-voice-text .vt-lang-row{max-width:320px;}
+</style>
+</head>
+<body>
+<a class="visually-hidden" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="container header-inner">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<nav class="site-nav" aria-label="Primary">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#categories">Categories</a>
+</nav>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
+</div>
+<nav class="nav-panel" data-nav-panel aria-label="Mobile">
+<a href="../../index.html">Home</a>
+<a href="../../index.html#all-tools">All Tools</a>
+<a href="../../index.html#cat-pdf-tools">PDF Tools</a><a href="../../index.html#cat-calculators">Calculators</a><a href="../../index.html#cat-image-tools">Image Tools</a><a href="../../index.html#cat-file-converters">File Converters</a><a href="../../index.html#cat-internet-tools">Internet Tools</a><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a><a href="../../index.html#cat-text-tools">Text Tools</a><a href="../../index.html#cat-video-audio">Video &amp; Audio</a><a href="../../index.html#cat-unit-converters">Unit Converters</a><a href="../../index.html#cat-developer-tools">Developer Tools</a>
+</nav>
+</header>
+<main id="main" class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li aria-current="page">Voice to Text</li></ol></nav>
+<h1>Voice to Text</h1>
+<div class="tool-body-intro">
+<p>Turn your speech into written text instantly. Tap the mic, speak naturally, and watch your words appear live — in Hindi or English. Copy the transcript or download it as a text file.</p><p class="privacy-note">QuickTools never stores your audio. Speech is converted to text by your browser's built-in speech service (Google's in Chrome); nothing is saved on our servers.</p>
+</div>
+<section class="tool-section tool-voice-text" aria-label="Voice to Text">
+<div class="card tool-panel">
+<div id="vt-unsupported" class="alert alert-warn" hidden>
+<svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#info"></use></svg>
+<div><strong>Voice typing isn't available in this browser.</strong><br>Voice typing needs Chrome or Edge on desktop or Android. Firefox, Safari and iPhones don't support the speech recognition this tool uses yet.</div>
+</div>
+<div id="vt-controls">
+<div class="field vt-lang-row">
+<label class="label" for="vt-lang">Language</label>
+<select class="select" id="vt-lang">
+<option value="hi-IN">Hindi (हिन्दी)</option>
+<option value="en-IN" selected>English (India)</option>
+<option value="en-US">English (US)</option>
+</select>
+</div>
+<div class="vt-mic-wrap">
+<button class="vt-mic" id="vt-mic" type="button" aria-pressed="false" aria-label="Start voice typing">
+<svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#mic"></use></svg>
+<span class="vt-mic-label" id="vt-mic-label">Start</span>
+</button>
+<p class="vt-status" id="vt-status" role="status">Tap the mic and start speaking.</p>
+</div>
+<div class="field">
+<label class="label" for="vt-out">Transcript</label>
+<div class="vt-output" id="vt-out" aria-live="polite"><span class="vt-final" id="vt-final"></span><span class="vt-interim" id="vt-interim"></span><span class="vt-placeholder" id="vt-ph">Your words will appear here…</span></div>
+</div>
+<div class="vt-meta"><span id="vt-words" aria-live="polite">0 words</span></div>
+<div class="vt-actions">
+<button class="btn btn-primary" id="vt-copy" type="button"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#text"></use></svg>Copy</button>
+<button class="btn btn-ghost" id="vt-dl" type="button"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#download"></use></svg>Download .txt</button>
+<button class="btn btn-ghost" id="vt-clear" type="button"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#x"></use></svg>Clear</button>
+</div>
+</div>
+</div>
+</section>
+<div class="steps">
+<h2>How to use</h2>
+<ol>
+<li>Pick your language: Hindi, English (India) or English (US).</li>
+<li>Tap the mic button and allow microphone access when your browser asks.</li>
+<li>Speak naturally — confirmed words appear in black, words still being processed appear in grey.</li>
+<li>Tap the mic again to stop, then copy or download your transcript.</li>
+</ol>
+</div>
+<section class="faq" aria-label="Frequently asked questions">
+<h2>Frequently asked questions</h2>
+<details><summary>Which browsers support voice typing?</summary><div class="faq-a"><p>Voice typing needs the Web Speech API, which works in Chrome and Edge on desktop and Android. Firefox, Safari and iPhones don't support it yet, so the tool shows a notice there instead of a broken mic button.</p></div></details>
+<details><summary>Is my voice recording uploaded or stored?</summary><div class="faq-a"><p>QuickTools doesn't record or store your audio. Your browser converts speech to text using its built-in speech service (Google's in Chrome), which needs an internet connection. Nothing is saved on QuickTools servers.</p></div></details>
+<details><summary>Can I dictate in Hindi?</summary><div class="faq-a"><p>Yes. Choose "Hindi (हिन्दी)" from the language menu before you start, then speak naturally in Hindi — the transcript appears in Devanagari script.</p></div></details>
+<details><summary>Why did it stop listening on its own?</summary><div class="faq-a"><p>Browsers pause recognition after a few seconds of silence. This tool restarts listening automatically while the mic is on; if it stops anyway, tap the mic to stop and start a fresh session.</p></div></details>
+<details><summary>It says the microphone is blocked — what do I do?</summary><div class="faq-a"><p>Click the lock (or tune) icon in your browser's address bar, open Site settings, set Microphone to "Allow", then reload the page and tap the mic again.</p></div></details>
+<details><summary>How do I add punctuation like commas?</summary><div class="faq-a"><p>Say the punctuation word out loud — for example say "comma", "full stop" or "question mark" in English — and the recognizer inserts it for you.</p></div></details>
+<details><summary>Does voice typing work offline?</summary><div class="faq-a"><p>No. The browser's speech service processes audio on remote servers, so you need an active internet connection while dictating.</p></div></details>
+</section>
+<section class="related-tools" aria-label="Related tools">
+<h2>Related tools</h2>
+<div class="grid-tools">
+<a class="tool-card" href="../text-to-speech/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#mic"></use></svg><span class="tl-name">Text to Speech</span><span class="tl-desc">Text Tools</span></a>
+<a class="tool-card" href="../word-counter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#text"></use></svg><span class="tl-name">Word Counter</span><span class="tl-desc">Text Tools</span></a>
+<a class="tool-card" href="../case-converter/"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#pilcrow"></use></svg><span class="tl-name">Case Converter</span><span class="tl-desc">Text Tools</span></a>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-inner">
+<div class="footer-grid">
+<div class="footer-brand">
+<a class="brand" href="../../index.html" aria-label="QuickTools home"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#0e7c66"/><text x="32" y="45" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="800" font-size="36" fill="#ffffff">Q</text></svg><span class="brand-name">QuickTools</span></a>
+<p>Free online tools that run entirely in your browser. No sign-ups, no uploads, no watermarks.</p>
+</div>
+<div class="footer-col"><h3>Categories</h3><ul><li><a href="../../index.html#cat-pdf-tools">PDF Tools</a></li><li><a href="../../index.html#cat-calculators">Calculators</a></li><li><a href="../../index.html#cat-image-tools">Image Tools</a></li><li><a href="../../index.html#cat-file-converters">File Converters</a></li><li><a href="../../index.html#cat-internet-tools">Internet Tools</a></li><li><a href="../../index.html#cat-qr-generators">QR &amp; Generators</a></li><li><a href="../../index.html#cat-text-tools">Text Tools</a></li><li><a href="../../index.html#cat-video-audio">Video &amp; Audio</a></li><li><a href="../../index.html#cat-unit-converters">Unit Converters</a></li><li><a href="../../index.html#cat-developer-tools">Developer Tools</a></li></ul></div>
+<div class="footer-col"><h3>Popular tools</h3><ul><li><a href="../../tools/jpg-to-pdf/">JPG to PDF</a></li><li><a href="../../tools/qr-generator/">QR Code Generator</a></li><li><a href="../../tools/word-counter/">Word Counter</a></li><li><a href="../../tools/calculator/">Calculator</a></li><li><a href="../../tools/image-compressor/">Image Compressor</a></li><li><a href="../../tools/speed-test/">Internet Speed Test</a></li></ul></div>
+</div>
+<div class="footer-privacy">
+<p class="privacy-line"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#shield"></use></svg>Your files never leave your device — every tool runs 100% in your browser.</p>
+<p>© <span data-year>2026</span> QuickTools. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/tools-index.js"></script>
+<script src="../../assets/js/main.js"></script>
+<script src="../../assets/js/progress.js" defer></script>
+<script src="../../assets/js/motion.js" defer></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Voice to Text","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript and the Web Speech API (Chrome or Edge)","url":"https://mohit99mj.github.io/Quicktools/tools/voice-to-text/","description":"Dictate instead of type: free voice to text converter with live transcription in Hindi and English. Works in your browser — no sign-up, no uploads.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which browsers support voice typing?","acceptedAnswer":{"@type":"Answer","text":"Voice typing needs the Web Speech API, which works in Chrome and Edge on desktop and Android. Firefox, Safari and iPhones don't support it yet, so the tool shows a notice there instead of a broken mic button."}},{"@type":"Question","name":"Is my voice recording uploaded or stored?","acceptedAnswer":{"@type":"Answer","text":"QuickTools doesn't record or store your audio. Your browser converts speech to text using its built-in speech service (Google's in Chrome), which needs an internet connection. Nothing is saved on QuickTools servers."}},{"@type":"Question","name":"Can I dictate in Hindi?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose \"Hindi (हिन्दी)\" from the language menu before you start, then speak naturally in Hindi — the transcript appears in Devanagari script."}},{"@type":"Question","name":"Why did it stop listening on its own?","acceptedAnswer":{"@type":"Answer","text":"Browsers pause recognition after a few seconds of silence. This tool restarts listening automatically while the mic is on; if it stops anyway, tap the mic to stop and start a fresh session."}},{"@type":"Question","name":"It says the microphone is blocked — what do I do?","acceptedAnswer":{"@type":"Answer","text":"Click the lock (or tune) icon in your browser's address bar, open Site settings, set Microphone to \"Allow\", then reload the page and tap the mic again."}},{"@type":"Question","name":"How do I add punctuation like commas?","acceptedAnswer":{"@type":"Answer","text":"Say the punctuation word out loud — for example say \"comma\", \"full stop\" or \"question mark\" in English — and the recognizer inserts it for you."}},{"@type":"Question","name":"Does voice typing work offline?","acceptedAnswer":{"@type":"Answer","text":"No. The browser's speech service processes audio on remote servers, so you need an active internet connection while dictating."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://mohit99mj.github.io/Quicktools/"},{"@type":"ListItem","position":2,"name":"Text Tools","item":"https://mohit99mj.github.io/Quicktools/#cat-text-tools"},{"@type":"ListItem","position":3,"name":"Voice to Text","item":"https://mohit99mj.github.io/Quicktools/tools/voice-to-text/"}]}</script>
+<script>
+var LOGIC = {
+  countWords: function(text){
+    return (String(text == null ? '' : text).match(/\S+/g) || []).length;
+  },
+  mergeFinal: function(parts, segment){
+    // parts: array of confirmed final strings; segment: one new final result.
+    // Returns a NEW array (pure). Trims empties and joins with single spaces.
+    var out = [];
+    for(var i = 0; i < parts.length; i++){
+      var p = String(parts[i] == null ? '' : parts[i]).trim();
+      if(p) out.push(p);
+    }
+    var s = String(segment == null ? '' : segment).trim();
+    if(s) out.push(s);
+    return out;
+  },
+  transcriptText: function(parts, interim){
+    var base = parts.join(' ');
+    var mid = String(interim == null ? '' : interim).trim();
+    if(mid) base = base ? base + ' ' + mid : mid;
+    return base;
+  }
+};
+
+(function(){
+  'use strict';
+  function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+  function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+  function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+  function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
+
+  function $(id){ return document.getElementById(id); }
+
+  var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var unsupportedEl = $('vt-unsupported');
+  var controlsEl = $('vt-controls');
+
+  if(!SpeechRecognition){
+    // No Web Speech API (Firefox, Safari, iOS): friendly notice, no broken mic.
+    if(unsupportedEl) unsupportedEl.hidden = false;
+    if(controlsEl) controlsEl.style.display = 'none';
+    return;
+  }
+
+  var micBtn = $('vt-mic'), micLabel = $('vt-mic-label'), statusEl = $('vt-status');
+  var langSel = $('vt-lang');
+  var finalEl = $('vt-final'), interimEl = $('vt-interim'), phEl = $('vt-ph');
+  var wordsEl = $('vt-words');
+  var copyBtn = $('vt-copy'), dlBtn = $('vt-dl'), clearBtn = $('vt-clear');
+
+  var rec = null, recording = false, userStopped = false;
+  var finalParts = [], interim = '', restartTimer = null, startTime = 0;
+
+  function setStatus(t){ if(statusEl) statusEl.textContent = t; }
+
+  function currentText(){
+    return LOGIC.transcriptText(finalParts, interim);
+  }
+
+  function updateOut(){
+    var text = currentText();
+    if(finalEl) finalEl.textContent = finalParts.join(' ');
+    if(interimEl) interimEl.textContent = interim ? (finalParts.length ? ' ' + interim : interim) : '';
+    if(phEl) phEl.style.display = text ? 'none' : '';
+    var w = LOGIC.countWords(text);
+    if(wordsEl) wordsEl.textContent = w + (w === 1 ? ' word' : ' words');
+  }
+
+  function uiRecording(on){
+    recording = on;
+    if(micBtn){
+      micBtn.classList.toggle('recording', on);
+      micBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      micBtn.setAttribute('aria-label', on ? 'Stop voice typing' : 'Start voice typing');
+    }
+    if(micLabel) micLabel.textContent = on ? 'Stop' : 'Start';
+    if(langSel) langSel.disabled = on;
+  }
+
+  function fail(msg){
+    pHide();
+    uiRecording(false);
+    setStatus(msg);
+  }
+
+  function startRec(){
+    if(recording) return;
+    finalParts = []; interim = '';
+    updateOut();
+    pShow({ title: 'Voice to Text', stage: 'Requesting microphone access…', percent: 10 });
+    setStatus('Requesting microphone access…');
+    try{
+      rec = new SpeechRecognition();
+    }catch(e){
+      fail('Couldn\'t start voice typing — your browser blocked the speech recognizer. Try reloading the page.');
+      return;
+    }
+    rec.lang = langSel ? langSel.value : 'en-IN';
+    rec.continuous = true;
+    rec.interimResults = true;
+    rec.maxAlternatives = 1;
+    userStopped = false;
+    if(restartTimer){ clearTimeout(restartTimer); restartTimer = null; }
+
+    rec.onstart = function(){
+      startTime = Date.now();
+      uiRecording(true);
+      pUpd(80, 'Listening… speak now');
+      pHide();
+      setStatus('Listening… speak now.');
+    };
+
+    rec.onresult = function(ev){
+      var interimText = '';
+      for(var i = ev.resultIndex; i < ev.results.length; i++){
+        var r = ev.results[i];
+        var t = r[0] && r[0].transcript ? r[0].transcript : '';
+        if(r.isFinal){
+          finalParts = LOGIC.mergeFinal(finalParts, t);
+        }else{
+          interimText += t;
+        }
+      }
+      interim = interimText.trim();
+      updateOut();
+    };
+
+    rec.onerror = function(ev){
+      var code = ev && ev.error ? ev.error : '';
+      if(code === 'not-allowed' || code === 'service-not-allowed'){
+        userStopped = true;
+        fail('Microphone access was blocked. Click the lock (or tune) icon in your browser\'s address bar → Site settings → Microphone → "Allow", then reload this page and try again.');
+      }else if(code === 'audio-capture'){
+        userStopped = true;
+        fail('No microphone was found. Connect a mic (or enable your device mic) and tap Start again.');
+      }else if(code === 'network'){
+        userStopped = true;
+        fail('Couldn\'t reach the speech service — check your internet connection and try again.');
+      }else if(code === 'no-speech'){
+        if(recording) setStatus('Didn\'t catch that — keep speaking…');
+      }else if(code === 'aborted' || code === 'language-not-supported'){
+        if(code === 'language-not-supported'){
+          userStopped = true;
+          fail('This language isn\'t supported by your browser\'s speech service. Try a different language.');
+        }
+        // 'aborted' happens on manual stop — ignore.
+      }else{
+        userStopped = true;
+        fail('Voice typing stopped unexpectedly (' + code + '). Tap Start to try again.');
+      }
+    };
+
+    rec.onend = function(){
+      // Auto-restart on silence/timeout while the user still wants to record.
+      if(recording && !userStopped){
+        pUpd(60, 'Listening… speak now');
+        restartTimer = setTimeout(function(){
+          try{ rec.start(); }catch(e){ /* will retry via next onend or user */ }
+        }, 250);
+      }
+    };
+
+    try{
+      rec.start();
+    }catch(e){
+      fail('Couldn\'t start voice typing (' + (e && e.message ? e.message : 'unknown error') + '). Tap Start to try again.');
+    }
+  }
+
+  function stopRec(){
+    userStopped = true;
+    if(restartTimer){ clearTimeout(restartTimer); restartTimer = null; }
+    try{ if(rec) rec.stop(); }catch(e){}
+    var secs = startTime ? Math.max(1, Math.round((Date.now() - startTime) / 1000)) : 0;
+    var words = LOGIC.countWords(currentText());
+    pHide();
+    uiRecording(false);
+    interim = '';
+    updateOut();
+    setStatus(words > 0 ? 'Stopped — transcript ready.' : 'Stopped.');
+    if(words > 0 && statusEl){
+      pSum(statusEl, '<strong>Session complete</strong> — ' + words + (words === 1 ? ' word' : ' words') + ' captured in ~' + secs + 's');
+    }
+  }
+
+  if(micBtn) micBtn.addEventListener('click', function(){
+    if(recording){ stopRec(); }else{ startRec(); }
+  });
+
+  function copyText(done){
+    var text = currentText();
+    if(!text){ setStatus('Nothing to copy yet — tap the mic and speak first.'); if(done) done(false); return; }
+    function ok(){ if(done) done(true); }
+    function legacy(){
+      try{
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'absolute';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        var okd = false;
+        try{ okd = document.execCommand('copy'); }catch(e){}
+        document.body.removeChild(ta);
+        if(done) done(okd);
+      }catch(e){ if(done) done(false); }
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(ok, legacy);
+    }else{
+      legacy();
+    }
+  }
+
+  function flash(btn, label){
+    var old = btn.textContent;
+    btn.textContent = label;
+    setTimeout(function(){ btn.textContent = old; }, 1600);
+  }
+
+  if(copyBtn) copyBtn.addEventListener('click', function(){
+    copyText(function(done){
+      if(done){ flash(copyBtn, 'Copied ✓'); }
+      else{ setStatus('Copy failed — select the transcript text and copy it manually.'); }
+    });
+  });
+
+  if(dlBtn) dlBtn.addEventListener('click', function(){
+    var text = currentText();
+    if(!text){ setStatus('Nothing to download yet — tap the mic and speak first.'); return; }
+    try{
+      var blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'voice-transcript.txt';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function(){
+        try{ URL.revokeObjectURL(a.href); }catch(e){}
+        if(a.parentNode) a.parentNode.removeChild(a);
+      }, 500);
+      flash(dlBtn, 'Downloaded ✓');
+    }catch(e){
+      setStatus('Download failed in this browser — copy the text instead.');
+    }
+  });
+
+  if(clearBtn) clearBtn.addEventListener('click', function(){
+    finalParts = []; interim = '';
+    updateOut();
+    setStatus('Cleared. Tap the mic to start a new session.');
+  });
+
+  updateOut();
+})();
+</script>
+</body>
+</html>
