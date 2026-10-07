@@ -35,7 +35,7 @@
 <a href="../../index.html#all-tools">All Tools</a>
 <a href="../../index.html#categories">Categories</a>
 </nav>
-<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
 <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
 </div>
 <nav class="nav-panel" data-nav-panel aria-label="Mobile">
@@ -56,7 +56,7 @@
       <p class="alert tool-ping-test-honest"><strong>Approximate HTTPS fetch latency</strong>, not true ICMP ping. Browsers cannot send real ping packets.</p>
       <div class="field">
         <label class="label" for="ping-host">Host</label>
-        <input class="input" id="ping-host" type="text" inputmode="url" placeholder="example.com" autocapitalize="off" spellcheck="false" />
+        <input class="input" id="ping-host" type="text" inputmode="url" placeholder="example.org" autocapitalize="off" spellcheck="false" />
       </div>
       <button class="btn btn-primary" id="ping-go">Ping</button>
       <p class="hint" id="ping-phase" aria-live="polite"></p>
@@ -66,7 +66,7 @@
 <div class="steps">
 <h2>How to use</h2>
 <ol>
-<li>Enter a host name, e.g. example.com (no https:// needed).</li>
+<li>Enter a host name, e.g. example.org (no https:// needed).</li>
 <li>Click &quot;Ping&quot; — four attempts run automatically.</li>
 <li>Read the min, average, and max times.</li>
 <li>Compare hosts to see which responds fastest for you.</li>
@@ -115,6 +115,11 @@
 
     (function(){
       'use strict';
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       var hostEl = document.getElementById('ping-host');
       var go = document.getElementById('ping-go');
       var out = document.getElementById('ping-out');
@@ -157,7 +162,7 @@
         if (!ok.length){
           var e = document.createElement('p');
           e.className = 'error';
-          e.textContent = 'All attempts failed — the host did not respond.';
+          e.textContent = 'All 4 attempts failed — the host did not respond. It may be down, blocking this kind of request, or your connection dropped. Try another host.';
           out.appendChild(e);
           return;
         }
@@ -179,17 +184,20 @@
       go.addEventListener('click', function(){
         var host = hostEl ? cleanHost(hostEl.value) : '';
         if (!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(host)){
-          out.innerHTML = '<p class="error">Enter a valid host, e.g. example.com</p>';
+          out.innerHTML = '<p class="error">Enter a valid host, e.g. example.org</p>';
           return;
         }
         go.disabled = true;
         out.innerHTML = '';
+        pShow({ title: 'Ping Test', stage: 'Pinging ' + host + '…', percent: 5 });
         var times = [];
         var chain = Promise.resolve();
         for (var i = 0; i < 4; i += 1){
           (function(idx){
             chain = chain.then(function(){
-              setPhase('Attempt ' + (idx + 1) + ' of 4…');
+              var stage = 'Attempt ' + (idx + 1) + ' of 4…';
+              setPhase(stage);
+              pUpd(Math.round(((idx + 1) / 4) * 90), 'Pinging ' + host + ' — ' + stage);
               return attempt(host).then(function(ms){
                 times.push(ms);
               });
@@ -198,6 +206,7 @@
         }
         chain.then(function(){
           go.disabled = false;
+          pHide();
           setPhase('Done.');
           render(times);
         });

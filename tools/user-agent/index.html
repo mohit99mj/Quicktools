@@ -35,7 +35,7 @@
 <a href="../../index.html#all-tools">All Tools</a>
 <a href="../../index.html#categories">Categories</a>
 </nav>
-<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 59 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
+<div class="header-search"><div class="search-wrap"><label class="visually-hidden" for="site-search">Search tools</label><input class="search-input" id="site-search" type="search" placeholder="Search 64 free tools…" data-tool-search autocomplete="off" role="combobox" aria-expanded="false" aria-label="Search tools"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#search"></use></svg></div></div>
 <button class="nav-toggle" data-nav-toggle aria-expanded="false" aria-label="Open menu"><svg class="icon" aria-hidden="true"><use href="../../assets/icons.svg#menu"></use></svg></button>
 </div>
 <nav class="nav-panel" data-nav-panel aria-label="Mobile">
@@ -155,6 +155,11 @@ var LOGIC={parseUA:(uaString) => {
 
     (function(){
       'use strict';
+      /* Guarded shared progress overlay (window.QTProgress, injected site-wide). */
+      function pShow(o){ if(window.QTProgress){ QTProgress.show(o); } }
+      function pUpd(p, s){ if(window.QTProgress){ QTProgress.update(p, s); } }
+      function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
+      function pSum(el, html){ if(window.QTProgress){ QTProgress.summary(el, html); } }
       var parsedEl = document.getElementById('ua-parsed');
       var tableEl = document.getElementById('ua-table');
       var copyBtn = document.getElementById('ua-copy');
@@ -206,19 +211,26 @@ var LOGIC={parseUA:(uaString) => {
       }
       if (copyBtn){
         copyBtn.addEventListener('click', function(){
-          if (!ua) return;
+          if (!ua){
+            copyBtn.textContent = 'Nothing to copy';
+            setTimeout(function(){ copyBtn.textContent = 'Copy user agent string'; }, 1500);
+            return;
+          }
+          function flash(ok){
+            copyBtn.textContent = ok ? 'Copied!' : 'Copy failed — select the text manually';
+            setTimeout(function(){ copyBtn.textContent = 'Copy user agent string'; }, 1600);
+          }
           if (navigator.clipboard && navigator.clipboard.writeText){
-            navigator.clipboard.writeText(ua).then(function(){
-              copyBtn.textContent = 'Copied!';
-              setTimeout(function(){ copyBtn.textContent = 'Copy user agent string'; }, 1500);
-            }).catch(function(){});
+            navigator.clipboard.writeText(ua).then(function(){ flash(true); }, function(){ flash(false); });
           } else {
             var ta = document.createElement('textarea');
             ta.value = ua;
             document.body.appendChild(ta);
             ta.select();
-            try { document.execCommand('copy'); } catch (e) {}
+            var ok = false;
+            try { ok = document.execCommand('copy'); } catch (e) {}
             ta.remove();
+            flash(ok);
           }
         });
       }
