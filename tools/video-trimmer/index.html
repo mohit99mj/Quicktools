@@ -203,7 +203,46 @@ function showError(t){ errEl.textContent = t; errEl.hidden = false; }
       function pHide(){ if(window.QTProgress){ QTProgress.hide(); } }
       function pShim(on){ if(window.QTProgress){ if(on){ QTProgress.shimmer(); } else { QTProgress.shimmerClear(); } } }
 
+
+      /* Robust input-file reader: prefers Blob.arrayBuffer() (more reliable
+         than FileReader on mobile), falls back to the ffmpeg wrapper's
+         fetchFile if that fails. */
+      function readInputFile(f){
+        var p;
+        if(f && typeof f.arrayBuffer === 'function'){
+          try{ p = f.arrayBuffer().then(function(b){ return new Uint8Array(b); }); }
+          catch(x){ p = null; }
+        }
+        if(!p) p = Promise.reject(new Error('no arrayBuffer'));
+        return p.catch(function(){ return fetchFileFn(f); });
+      }
+      /* Hardens ffmpeg.run against a known ffmpeg.wasm quirk: run() can
+         reject with "Program terminated with exit(0)" even though the
+         output file was written successfully. On rejection we check MEMFS
+         for the output file first and treat it as success when present.
+         (The wrapper's internal running-flag stays stuck in that case, so
+         the instance is marked stale and discarded after this conversion.) */
+      function hardenFfmpegRun(ff){
+        if(!ff || ff._qtHardened) return ff;
+        var origRun = ff.run.bind(ff);
+        ff.run = function(){
+          var args = Array.prototype.slice.call(arguments);
+          var outName = args[args.length - 1];
+          return origRun.apply(null, args).then(null, function(err){
+            var d = null;
+            try{ d = ff.FS('readFile', outName); }catch(x){}
+            if(d && d.length){
+              ff._qtStale = true;
+              return;
+            }
+            throw err;
+          });
+        };
+        ff._qtHardened = true;
+        return ff;
+      }
       function ensureEngine(progressCb){
+        if(ffmpeg && ffmpeg._qtStale) ffmpeg = null;
         if(ffmpeg && ffmpeg.isLoaded && ffmpeg.isLoaded()) return Promise.resolve(ffmpeg);
         ffmpeg = null;
         var FF = window.FFmpeg;
@@ -217,7 +256,7 @@ function showError(t){ errEl.textContent = t; errEl.hidden = false; }
           logger: function(){}
         });
         ffmpeg.setProgress(function(p){ progressCb(p && p.ratio ? p.ratio : 0); });
-        return ffmpeg.load().then(function(){ return ffmpeg; });
+        return ffmpeg.load().then(function(){ return hardenFfmpegRun(ffmpeg); });
       }
 
       function syncTimes(changed){
@@ -329,7 +368,7 @@ function showError(t){ errEl.textContent = t; errEl.hidden = false; }
           qpStage = 'Reading file…';
           status('Reading file…');
           if(window.QTProgress){ QTProgress.update(0, qpStage); }
-          return fetchFileFn(file);
+          return readInputFile(file);
         }).then(function(data){
           ffmpeg.FS('writeFile', inName, data);
           qpStage = reencode.checked ? 'Trimming (re-encoding — this is the slow, frame-exact mode)…' : 'Trimming…';
@@ -359,6 +398,7 @@ function showError(t){ errEl.textContent = t; errEl.hidden = false; }
         }).then(function(){
           pHide();
           try{ ffmpeg.FS('unlink', inName); }catch(x){}
+          if(ffmpeg && ffmpeg._qtStale){ ffmpeg = null; }
           try{ ffmpeg.FS('unlink', outName); }catch(x){}
           goBtn.disabled = false;
           progressEl.hidden = true;
